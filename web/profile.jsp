@@ -25,7 +25,7 @@
     </head>
     <body>
         <%
-            if(session.getAttribute("id")==null){
+            if(session.getAttribute("username")==null){
                response.sendRedirect("login.jsp");
             }
          %>
