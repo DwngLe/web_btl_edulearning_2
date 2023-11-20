@@ -104,4 +104,5 @@
             <a href="newblog.jsp">Bai viet moi</a>
         </div>
     </body>
+    <!--cmt-->
 </html>
