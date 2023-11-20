@@ -61,7 +61,8 @@ public class UserDepositController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserDAO dao = new UserDAO();
-        User user = null;
+        String id = (String) request.getSession().getAttribute("id");
+        User user = dao.getUserById(id);
 
         String generateUniqueCode = generateUniqueCode(user);
         request.setAttribute("generateUniqueCode", generateUniqueCode);
@@ -103,18 +104,16 @@ public class UserDepositController extends HttpServlet {
     private boolean processDeposit(HttpServletRequest request, String amount) {
         try {
             UserDAO dao = new UserDAO();
-            User user = null;
+            String id = (String) request.getSession().getAttribute("id");
+            User user = dao.getUserById(id);
 
-            // Update the user's account balance
             long currentBalance = user.getMoney();
             long depositAmount = Long.parseLong(amount);
             long newBalance = currentBalance + depositAmount;
 
-            // Update the user's account balance in the database
             dao.updateBalance(user, newBalance);
 
-            // Update the user's account balance in the session if needed
-            // user.setaBalance(newBalance);
+            user.setMoney(newBalance);
             return true;
         } catch (Exception e) {
             e.printStackTrace();

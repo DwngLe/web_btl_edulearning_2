@@ -74,22 +74,22 @@ public class UserUpdateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//        UUID userID = "103";
-//        String name = request.getParameter("name");
-//        String dob_raw = request.getParameter("dob");
-//        String email = request.getParameter("email");
-//        String pNum = request.getParameter("pNum");
-//        String aBalance_raw = request.getParameter("money");
-//        long aBalance = 0;
-//        Date dob = null;
-//        try {
-//            aBalance = Long.parseLong(aBalance_raw);
-//            dob = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(dob_raw).getTime());
-//        } catch (Exception e) {
-//        }
-//        User user = new User(userID, name, dob, email, pNum, aBalance);
-//        UserDAO dao  = new UserDAO();
-//        dao.updateUser(user);
+        String id = (String) request.getSession().getAttribute("id");
+        String name = request.getParameter("name");
+        String dob_raw = request.getParameter("dob");
+        String email = request.getParameter("email");
+        String pNum = request.getParameter("pNum");
+        String aBalance_raw = request.getParameter("money");
+        long aBalance = 0;
+        Date dob = null;
+        try {
+            aBalance = Long.parseLong(aBalance_raw);
+            dob = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(dob_raw).getTime());
+        } catch (Exception e) {
+        }
+        User user = new User(id, name, dob, email, pNum, aBalance);
+        UserDAO dao  = new UserDAO();
+        dao.updateUser(user);
         response.sendRedirect("user");
         
     }

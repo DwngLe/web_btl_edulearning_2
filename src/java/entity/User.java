@@ -5,13 +5,13 @@
 package entity;
 
 import java.sql.Date;
-import java.util.UUID;
 
 /**
  *
  * @author TGDD
  */
-public class User{
+public class User {
+
     private String userID;
     private String username;
     private String password;
@@ -22,7 +22,6 @@ public class User{
     private long money;
     private String phoneNumber;
 
-        
     public User() {
     }
 
@@ -36,9 +35,15 @@ public class User{
         this.money = money = 0;
         this.phoneNumber = phoneNumber;
     }
-    
-    
-    
+
+    public User(String userID, String name, Date dateOfBirth, String email, String phoneNumber, long money) {
+        this.userID = userID;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.name = name;
+        this.money = money = 0;
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getUserID() {
         return userID;
@@ -111,9 +116,5 @@ public class User{
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    
-    
-   
-    
-    
+
 }

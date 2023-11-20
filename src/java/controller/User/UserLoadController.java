@@ -7,6 +7,7 @@ package controller.User;
 
 import com.mysql.cj.Session;
 import dao.UserDAO;
+import entity.Course;
 import entity.User;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -17,6 +18,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -58,10 +61,17 @@ public class UserLoadController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+   @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-
+        User user;
+        List<Course> ecList = new ArrayList<>();
+        UserDAO dao = new UserDAO();
+        String id = (String) request.getSession().getAttribute("id");
+        user = dao.getUserById(id);
+        ecList = dao.getEnrolledCourses(id);
+        request.setAttribute("user", user);
+        request.setAttribute("ecList", ecList);
         RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
         rd.forward(request, response);
     } 
