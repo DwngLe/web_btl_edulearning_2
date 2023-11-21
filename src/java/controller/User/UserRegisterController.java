@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.Course;
+package controller.User;
 
-import dao.CourseDAO;
-import entity.Course;
+import com.sun.prism.Texture;
+import entity.User;
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,10 +18,12 @@ import java.util.UUID;
 
 /**
  *
- * @author Admin
+ * @author duong
  */
-@WebServlet(name = "AddCourseController", urlPatterns = {"/addCourse"})
-public class AddCourseController extends HttpServlet {
+@WebServlet(name = "RegisterController", urlPatterns = {"/register"})
+public class UserRegisterController extends HttpServlet {
+
+    UserDAO userDAO = new UserDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +42,10 @@ public class AddCourseController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddCourseController</title>");
+            out.println("<title>Servlet RegisterController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddCourseController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,24 +63,7 @@ public class AddCourseController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String id = UUID.randomUUID().toString();
-        String title = request.getParameter("title");
-        String teacherName = request.getParameter("teacherName");
-        String level = request.getParameter("level");
-        String description = request.getParameter("description");
-        String language = request.getParameter("language");
-        String duration = request.getParameter("duration");
-        String price = request.getParameter("price");
-        String imgurl = request.getParameter("imgurl");
-
-        CourseDAO dao = new CourseDAO();
-
-        Course s = new Course(id, teacherName, Integer.parseInt(price), duration, description, language, level, imgurl, title);
-        System.out.println(s.toString());
-        dao.addNewCourse(s);
-        response.sendRedirect("loadCourse");
-
+        response.sendRedirect("register.jsp");
     }
 
     /**
@@ -91,7 +77,20 @@ public class AddCourseController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        User user = new User();
+        user.setUserID(UUID.randomUUID().toString());
+        user.setUsername(request.getParameter("username"));
+        user.setPassword(request.getParameter("password"));
+        user.setEmail(request.getParameter("email"));
+        user.setName(request.getParameter("name"));
+        user.setPhoneNumber(request.getParameter("phoneNumber"));
+
+        int isInserted = userDAO.addUser(user);
+        if(isInserted !=0){
+            response.sendRedirect("login");
+        }else{
+            response.sendRedirect("register");
+        }
     }
 
     /**

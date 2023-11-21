@@ -12,6 +12,14 @@
             <label>Password</label><input type="password" name="password"/>
             <button>Sign In</button>
         </form>
-          
+         
+        <form action="register" method="get">
+            <button style="submit">Sign Up</button>
+        </form>
+        
+        <form action="forgetpassword" method="get">
+            <button style="submit">Forget Password</button>
+        </form>
+        
     </body>
 </html>

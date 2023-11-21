@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.Course;
+package controller.User;
 
-import dao.CourseDAO;
-import entity.Course;
+import dao.UserDAO;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,10 +16,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Admin
+ * @author TGDD
  */
-@WebServlet(name = "UpdateCourseController", urlPatterns = {"/updateCourse"})
-public class UpdateCourseController extends HttpServlet {
+@WebServlet(name = "ChangePasswordController", urlPatterns = {"/user-change-password"})
+public class UserChangePasswordController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +38,10 @@ public class UpdateCourseController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateCourseController</title>");            
+            out.println("<title>Servlet ChangePasswordController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UpdateCourseController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ChangePasswordController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,11 +59,7 @@ public class UpdateCourseController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        CourseDAO dao = new CourseDAO();
-        Course p = dao.getCourseByID(id);
-        request.setAttribute("p", p);
-        request.getRequestDispatcher("updateCourse.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -77,21 +73,26 @@ public class UpdateCourseController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        String title = request.getParameter("title");
-        String teacherName = request.getParameter("teacherName");
-        String level = request.getParameter("level");
-        String description = request.getParameter("description");
-        String language = request.getParameter("language");
-        String duration = request.getParameter("duration");
-        String price = request.getParameter("price");
-        String imgurl = request.getParameter("imgurl");
-        
-        CourseDAO dao = new CourseDAO();
-        Course p = new Course(id, teacherName, Integer.parseInt(price), duration, description, language, level, imgurl, title);
-        
-        dao.updateCourse(p);
-        response.sendRedirect("loadCourse");
+        String oldPass = request.getParameter("password");
+        String newPass = request.getParameter("new-password");
+        boolean res = processChangePassword(request,oldPass, newPass);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        if(res){
+            out.println("<script>alert('Đổi mật khẩu thành công!'); window.location='user';</script>");
+        }else{
+            out.println("<script>alert('Mật khẩu không chính xác!');</script>");
+        }
+    }
+    
+    private boolean processChangePassword(HttpServletRequest request,String oldPass, String newPass){
+        UserDAO dao = new UserDAO();
+        String id = (String) request.getSession().getAttribute("id");
+        User user = dao.getUserById(id);
+        if(dao.changePassword(user, oldPass,newPass)){
+            return true;
+        }
+        return false;
     }
 
     /**
