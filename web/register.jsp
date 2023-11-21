@@ -10,8 +10,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="./css/form.css"/>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form action="register" method="post">
+            <label>Username</label><input type="text" name="username"/>
+            <label>Password</label><input type="password" name="password"/>
+            <label>Confirm Password</label><input type="password" name="confirmPassword"/>
+            <label>Name</label><input type="text" name="name"/>
+            <label>Email</label><input type="text" name="email"/>
+            <label>Phone Number</label><input type="text" name="phoneNumber"/>
+            <button type="submit">Sign Up</button>
+        </form>
     </body>
 </html>

@@ -6,7 +6,7 @@ package entity;
 
 /**
  *
- * @author Admin
+ * @author TGDD
  */
 public class Course {
     private String courseID,teacherName;
@@ -15,6 +15,16 @@ public class Course {
 
     public Course() {
     }
+    
+    public Course(String courseID, String title, String imageUrl){
+        this.courseID = courseID;
+        this.title = title;
+        this.imageUrl = imageUrl;
+    }
+
+//    public Course(String string, String string0, String string1) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
 
     public String getCourseID() {
         return courseID;
@@ -99,14 +109,4 @@ public class Course {
         this.imageUrl = imageUrl;
         this.title = title;
     }
-
-    @Override
-    public String toString() {
-        return "Course{" + "courseID=" + courseID + ", teacherName=" + teacherName + ", price=" + price + ", duration=" + duration + ", descriptionCourse=" + descriptionCourse + ", languageCourse=" + languageCourse + ", levelCourse=" + levelCourse + ", imageUrl=" + imageUrl + ", title=" + title + '}';
-    }
-
-
-    
-    
-    
 }
