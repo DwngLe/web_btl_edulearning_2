@@ -6,7 +6,7 @@ package entity;
 
 /**
  *
- * @author TGDD
+ * @author Admin
  */
 public class Course {
     private String courseID,teacherName;
@@ -14,12 +14,6 @@ public class Course {
     private String duration,descriptionCourse,languageCourse,levelCourse,imageUrl,title;
 
     public Course() {
-    }
-    
-    public Course(String courseID, String title, String imageUrl){
-        this.courseID = courseID;
-        this.title = title;
-        this.imageUrl = imageUrl;
     }
 
     public String getCourseID() {
@@ -105,4 +99,14 @@ public class Course {
         this.imageUrl = imageUrl;
         this.title = title;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" + "courseID=" + courseID + ", teacherName=" + teacherName + ", price=" + price + ", duration=" + duration + ", descriptionCourse=" + descriptionCourse + ", languageCourse=" + languageCourse + ", levelCourse=" + levelCourse + ", imageUrl=" + imageUrl + ", title=" + title + '}';
+    }
+
+
+    
+    
+    
 }
