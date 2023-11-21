@@ -4,12 +4,10 @@
  */
 
 package controller.User;
-//
-//import com.mysql.cj.Session;
-import dao.UserDAO;
-import entity.Course;
+
 import entity.User;
-import jakarta.servlet.RequestDispatcher;
+import security.RandomStringExmple;
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,17 +15,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
- * @author TGDD
+ * @author duong
  */
-@WebServlet(name="LoadUser", urlPatterns={"/user"})
-public class UserLoadController extends HttpServlet {
+@WebServlet(name="UserResetPassController", urlPatterns={"/forgetpassword/resetpass"})
+public class UserResetPassController extends HttpServlet {
     UserDAO userDAO = new UserDAO();
+    int numberOfCharactor = 6;
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -44,12 +40,13 @@ public class UserLoadController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoadUser</title>");  
+            out.println("<title>Servlet UserResetPassController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoadUser at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet UserResetPassController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
+            System.out.println(request.getParameter("userID"));
         }
     } 
 
@@ -61,19 +58,19 @@ public class UserLoadController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   @Override
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        User user;
-        List<Course> ecList = new ArrayList<>();
-        UserDAO dao = new UserDAO();
-        String id = (String) request.getSession().getAttribute("id");
-        user = dao.getUserById(id);
-        ecList = dao.getEnrolledCourses(id);
-        request.setAttribute("user", user);
-        request.setAttribute("ecList", ecList);
-        RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
-        rd.forward(request, response);
+//        RandomStringExmple rand = new RandomStringExmple();
+//        String id = request.getParameter("userID");
+//        String newPass = rand.randomPassword(numberOfCharactor);
+//        userDAO.changePassword(id, newPass);
+//        User user = new User();
+//        user.setUserID(id);
+//        user.setPassword(newPass);
+//        request.setAttribute("account", user);
+//        request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 

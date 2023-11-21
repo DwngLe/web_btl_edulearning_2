@@ -26,7 +26,13 @@
         <c:forEach items="${listAccount}" var="account">
             <tr>
                 <td>${account.username}</td>
-                 <td>${account.password}</td>
+                <td>${account.userID}</td>
+                <td>
+                    <form action="/elearning/forgetpassword/resetpass" method="get"> <!-- Sửa action thành "/update" -->
+                        <input type="hidden" name="userID" value="${acccount.userID}" /> 
+                        <button type="submit" >Reset pass</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
     </table>
