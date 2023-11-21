@@ -5,7 +5,7 @@
 package dao;
 
 import context.DBContext;
-import encryptor.Encryptor;
+import security.Encryptor;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -39,7 +39,9 @@ public class UserDAO {
             String encryptedPassword = encryptor.encrypt(user.getPassword(), encryptionKey);
             User u = null;
             String query = "select * from user where username=? and password = ?";
+             System.out.println("sss");
             conn = new DBContext().getConnection();
+           
             ps = conn.prepareStatement(query);
             ps.setString(1, user.getUsername());
             ps.setString(2, encryptedPassword);
