@@ -2,10 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.User;
+package controller.Course;
 
-import dao.UserDAO;
-import entity.User;
+import dao.CourseDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,14 +12,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author TGDD
+ * @author Admin
  */
-@WebServlet(name = "DepositController", urlPatterns = {"/user-deposit"})
-public class UserDepositController extends HttpServlet {
+@WebServlet(name = "DeleteCourseController", urlPatterns = {"/deleteCourse"})
+public class DeleteCourseController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +37,10 @@ public class UserDepositController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DepositController</title>");
+            out.println("<title>Servlet DeleteCourseController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DepositController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteCourseController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,19 +58,10 @@ public class UserDepositController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDAO dao = new UserDAO();
-        String id = (String) request.getSession().getAttribute("id");
-        User user = dao.getUserById(id);
-
-        String generateUniqueCode = generateUniqueCode(user);
-        request.setAttribute("generateUniqueCode", generateUniqueCode);
-
-        request.getRequestDispatcher("deposit.jsp").forward(request, response);
-    }
-
-    private String generateUniqueCode(User user) {
-        long currentTime = System.currentTimeMillis();
-        return "CODE-" + currentTime + "-" + user.getUserID();
+        CourseDAO dao = new CourseDAO();
+        String id = request.getParameter("id");
+        dao.deleteCourse(id);
+        response.sendRedirect("loadCourse");
     }
 
     /**
@@ -86,39 +75,7 @@ public class UserDepositController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String amount = request.getParameter("amount");
-
-        // Validate and process the deposit
-        boolean depositSuccessful = processDeposit(request, amount);
-
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-
-        if (depositSuccessful) {
-            out.println("<script>alert('Nạp tiền thành công!'); window.location='user';</script>");
-        } else {
-            out.println("<script>alert('Nạp tiền thất bại!'); window.location='deposit.jsp';</script>");
-        }
-    }
-
-    private boolean processDeposit(HttpServletRequest request, String amount) {
-        try {
-            UserDAO dao = new UserDAO();
-            String id = (String) request.getSession().getAttribute("id");
-            User user = dao.getUserById(id);
-
-            long currentBalance = user.getMoney();
-            long depositAmount = Long.parseLong(amount);
-            long newBalance = currentBalance + depositAmount;
-
-            dao.updateBalance(user, newBalance);
-
-            user.setMoney(newBalance);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        processRequest(request, response);
     }
 
     /**
