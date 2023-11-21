@@ -5,7 +5,7 @@
 package dao;
 
 import context.DBContext;
-import encryptor.Encryptor;
+import security.Encryptor;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import entity.User;
+import entity.Course;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +39,9 @@ public class UserDAO {
             String encryptedPassword = encryptor.encrypt(user.getPassword(), encryptionKey);
             User u = null;
             String query = "select * from user where username=? and password = ?";
+             System.out.println("sss");
             conn = new DBContext().getConnection();
+           
             ps = conn.prepareStatement(query);
             ps.setString(1, user.getUsername());
             ps.setString(2, encryptedPassword);
@@ -52,7 +55,7 @@ public class UserDAO {
     }
 
     public void updateUser(User user) {
-        String sqlString = "UPDATE user SET name=?,dob=?,email=?, pNum=? WHERE userID = ?";
+        String sqlString = "UPDATE user SET username=?,date_of_birth=?,email=?, phone_number=? WHERE userID = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
@@ -60,14 +63,28 @@ public class UserDAO {
             ps.setDate(2, user.getDateOfBirth());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getPhoneNumber());
-            ps.setString(5, user.getUserID().toString());
+            ps.setString(5, user.getUserID());
             ps.executeUpdate();
         } catch (Exception e) {
         }
     }
-
-    public void changePassword(User user, String newPassword) {
-
+    
+    public boolean changePassword(User user, String oldPassword, String newPassword) {
+        String sqlString = "UPDATE user SET password=? WHERE userID = ?";
+        try {
+            String password = encryptor.decrypt(user.getPassword(), encryptionKey);
+            if (password.equals(oldPassword)) {
+                String encryptedPassword = encryptor.encrypt(newPassword, encryptionKey);
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(sqlString);
+                ps.setString(1, encryptedPassword);
+                ps.setString(2, user.getUserID());
+                ps.executeUpdate();
+                return true;
+            }
+        } catch (Exception e) {
+        }
+        return false;
     }
 
     public void updateBalance(User user, Long newBalance) {
@@ -76,7 +93,7 @@ public class UserDAO {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
             ps.setLong(1, newBalance);
-            ps.setString(2, user.getUserID().toString());
+            ps.setString(2, user.getUserID());
             ps.executeUpdate();
         } catch (Exception e) {
         }
@@ -117,6 +134,24 @@ public class UserDAO {
         } catch (Exception e) {
         }
         return numRowChange;
+    }
+    
+    public List<Course> getEnrolledCourses(String id) {
+        List<Course> ecList = null;
+        String sqlString = "Select course.id,course.title,course.image_url from enrolledcourse join course on enrolledcourse.id_course = course.id where enrolledcourse.id_user = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sqlString);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Course c = new Course(rs.getString(1), rs.getString(2), rs.getString(3));
+                ecList.add(c);
+            }
+            return ecList;
+        } catch (Exception e) {
+        }
+        return null;
     }
 
     public List<User> findUserByPhone(String phoneNumber) {

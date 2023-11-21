@@ -6,7 +6,7 @@ package controller.User;
 
 import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import dao.UserDAO;
-import encryptor.Encryptor;
+import security.Encryptor;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
