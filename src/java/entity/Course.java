@@ -16,6 +16,10 @@ public class Course {
     public Course() {
     }
 
+    public Course(String string, String string0, String string1) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public String getCourseID() {
         return courseID;
     }
