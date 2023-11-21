@@ -64,17 +64,17 @@
                         <input type="text" id="name" name="name" value="${user.name}"/>
 
                         <label for="dob">Ngày sinh:</label>
-                        <input type="text" id="dob" name="dob" value="${user.dob}"/>
+                        <input type="text" id="dob" name="dob" value="${user.dateOfBirth}"/>
 
 
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" value="${user.email}"/>
 
                         <label for="pNum">SĐT:</label>
-                        <input type="text" id="pNum" name="pNum" value="${user.pNum}"/>
+                        <input type="text" id="pNum" name="pNum" value="${user.phoneNumber}"/>
 
                         <label for="money">Số dư khả dụng:</label>
-                        <input type="text" id="money" readonly="true" name="money" value="${user.aBalance}"/>
+                        <input type="text" id="money" readonly="true" name="money" value="${user.money}"/>
                         <div class="btn-container">
                             <input
                                 type="submit"
