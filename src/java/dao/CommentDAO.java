@@ -6,7 +6,6 @@ package dao;
 
 import context.DBContext;
 import entity.Comment;
-import entity.Comment1;
 import entity.Course;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +23,7 @@ public class CommentDAO {
     ResultSet rs = null;
     
     
-    public List<Comment1> getAllCmtById(String id){
+    public List<Comment> getAllCmtById(String id){
         try {
             String query = "SELECT * FROM web.comment where elseID=?";
             conn = new DBContext().getConnection();
@@ -33,11 +32,11 @@ public class CommentDAO {
             ps.setString(1, id);
             rs = ps.executeQuery();
         
-            List<Comment1> list = new ArrayList<>();
+            List<Comment> list = new ArrayList<>();
             
             while (rs.next()) {
-                Comment1 a;
-                a = new Comment1(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5));
+                Comment a;
+                a = new Comment(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5));
                 list.add(a);
             }
             
@@ -51,7 +50,7 @@ public class CommentDAO {
         return null;
     }
     
-    public void addNewComment(Comment1 s){
+    public void addNewComment(Comment s){
         try {
             String sqlString = "INSERT INTO web.comment (CommentID, Descriprion, CreateDate, UserID, ElseID) VALUES (?,?,?,?,?)";
             conn = new DBContext().getConnection();

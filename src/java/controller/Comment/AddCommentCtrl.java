@@ -2,14 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.Course;
+package controller.Comment;
 
 import dao.CommentDAO;
-import dao.CourseDAO;
 import entity.Comment;
-//import entity.Comment1;
-import entity.Course;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,14 +13,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+//import java.sql.Date;
+import java.util.UUID;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "CourseInfoController", urlPatterns = {"/courseinfoctl"})
-public class CourseInfoController extends HttpServlet {
+@WebServlet(name = "AddCommentCtrl", urlPatterns = {"/addcmt"})
+public class AddCommentCtrl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +43,10 @@ public class CourseInfoController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CourseInfoController</title>");            
+            out.println("<title>Servlet AddCommentCtrl</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CourseInfoController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddCommentCtrl at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,18 +64,19 @@ public class CourseInfoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String id = UUID.randomUUID().toString();
+        String desc = request.getParameter("description");
+        String id_else = request.getParameter("elseID");
+        Date created_date = new Date();
         
-        String id = request.getParameter("id");
-        List<Comment> c;
-        CommentDAO cdao = new CommentDAO();
-        c = cdao.getAllCmtById(id);
-        request.setAttribute("cmtList", c);
-//        RequestDispatcher rd = request.getRequestDispatcher("courseInfo.jsp");
-//        rd.forward(request, response);
-        CourseDAO dao = new CourseDAO();
-        Course p = dao.getCourseByID(id);
-        request.setAttribute("p", p);
-        request.getRequestDispatcher("courseInfo.jsp").forward(request, response);
+        java.util.Date utilDate = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        Comment c = new Comment(id, desc, sqlDate, "userID", id_else);
+        System.out.println(c);
+        CommentDAO cmdao = new CommentDAO();
+        cmdao.addNewComment(c);
+        response.sendRedirect("courseinfoctl?id="+id_else);
     }
 
     /**

@@ -28,8 +28,8 @@
             if(session.getAttribute("username")==null){
                response.sendRedirect("login.jsp");
             }
-        %>
-
+         %>
+        
         <div class="container">
             <aside>
                 <div class="top">
@@ -66,7 +66,7 @@
                         <label for="dob">Ngày sinh:</label>
                         <input type="text" id="dob" name="dob" value="${user.dob}"/>
 
-
+                        
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" value="${user.email}"/>
 
@@ -90,22 +90,65 @@
                     <div class="title">
                         <h3>Khóa Học</h3>
                     </div>
-                    <c:forEach var="eCourse" items="${ecList}">
-                        <div class="course-cards">
-                            <div class="course-card">
-                                <div class="course-img">
-                                    <img src=${eCourse.imageUrl} alt="" />
-                                </div>
-                                <div class="course-detail">
-                                    <span>${eCourse.title}</span>
-                                    <a href="courses?id=${eCourse.courseID}" class="detail">Xem chi tiết</a>
-                                </div>
+                    <div class="course-cards">
+                        <div class="course-card">
+                            <div class="course-img">
+                                <img src="./img/react-logo@3x.svg" alt="" />
+                            </div>
+                            <div class="course-detail">
+                                <span>React JS cơ bản</span>
+                                <a href="#" class="detail">Xem chi tiết</a>
                             </div>
                         </div>
-                    </c:forEach>
+                        <div class="course-card">
+                            <div class="course-img">
+                                <img src="./img/react-logo@3x.svg" alt="" />
+                            </div>
+                            <div class="course-detail">
+                                <span>React JS cơ bản</span>
+                                <a href="#" class="detail">Xem chi tiết</a>
+                            </div>
+                        </div>
+                        <div class="course-card">
+                            <div class="course-img">
+                                <img src="./img/react-logo@3x.svg" alt="" />
+                            </div>
+                            <div class="course-detail">
+                                <span>React JS cơ bản</span>
+                                <a href="#" class="detail">Xem chi tiết</a>
+                            </div>
+                        </div>
+                        <div class="course-card">
+                            <div class="course-img">
+                                <img src="./img/react-logo@3x.svg" alt="" />
+                            </div>
+                            <div class="course-detail">
+                                <span>React JS cơ bản</span>
+                                <a href="#" class="detail">Xem chi tiết</a>
+                            </div>
+                        </div>
+                        <div class="course-card">
+                            <div class="course-img">
+                                <img src="./img/react-logo@3x.svg" alt="" />
+                            </div>
+                            <div class="course-detail">
+                                <span>React JS cơ bản</span>
+                                <a href="#" class="detail">Xem chi tiết</a>
+                            </div>
+                        </div>
+                        <div class="course-card">
+                            <div class="course-img">
+                                <img src="./img/react-logo@3x.svg" alt="" />
+                            </div>
+                            <div class="course-detail">
+                                <span>React JS cơ bản</span>
+                                <a href="#" class="detail">Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="security">
-                    <form action="changePass" class="main" onsubmit="return validateChangePasswordForm()">
+                    <form th:action="changePass" class="main">
                         <div class="title">
                             <h3>Đổi Mật Khẩu</h3>
                         </div>
@@ -168,7 +211,7 @@
                     }
                 });
             });
-
+            
             divElement.addEventListener('click', function () {
                 linkElement.click();
             });
@@ -180,26 +223,6 @@
                 containerArr.forEach((container) => {
                     container.classList.remove("active");
                 });
-            }
-
-            function validateChangePasswordForm() {
-                var password = document.getElementById("password").value;
-                var newPassword = document.getElementById("nPassword").value;
-                var confirmNewPassword = document.getElementById("rnPassword").value;
-
-                
-                if (password === "" || newPassword === "" || confirmNewPassword === "") {
-                    alert("Please fill in all fields.");
-                    return false;
-                }
-
-           
-                if (newPassword !== confirmNewPassword) {
-                    alert("New password and confirm new password do not match.");
-                    return false;
-                }
-
-                return true;
             }
         </script>
     </body>

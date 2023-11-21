@@ -10,47 +10,18 @@ import java.sql.Date;
  *
  * @author TGDD
  */
-public class User {
-
-    private String userID;
+public class User{
+    private int userID;
+    private String name;
+    private Date dob;
+    private String email;
+    private String pNum;
+    private long aBalance;
     private String username;
     private String password;
-    private Date dateOfBirth;
-    private String email;
     private String role = "GUEST";
-    private String name;
-    private long money;
-    private String phoneNumber;
-
+        
     public User() {
-    }
-
-    public User(String userID, String username, String password, Date dateOfBirth, String email, String name, long money, String phoneNumber) {
-        this.userID = userID;
-        this.username = username;
-        this.password = password;
-        this.dateOfBirth = dateOfBirth;
-        this.email = email;
-        this.name = name;
-        this.money = money = 0;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public User(String userID, String name, Date dateOfBirth, String email, String phoneNumber, long money) {
-        this.userID = userID;
-        this.dateOfBirth = dateOfBirth;
-        this.email = email;
-        this.name = name;
-        this.money = money = 0;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
     }
 
     public String getUsername() {
@@ -69,28 +40,31 @@ public class User {
         this.password = password;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
+    }
+    
+    
+    
+    public User(int userID, String name, Date dob, String email, String pNum, long aBalance) {
+        this.userID = userID;
+        this.name = name;
+        this.dob = dob;
+        this.email = email;
+        this.pNum = pNum;
+        this.aBalance = aBalance;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getName() {
@@ -101,20 +75,43 @@ public class User {
         this.name = name;
     }
 
-    public long getMoney() {
-        return money;
+    public Date getDob() {
+        return dob;
     }
 
-    public void setMoney(long money) {
-        this.money = money;
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
+    public String getpNum() {
+        return pNum;
+    }
+
+    public void setpNum(String pNum) {
+        this.pNum = pNum;
+    }
+
+    public long getaBalance() {
+        return aBalance;
+    }
+
+    public void setaBalance(long aBalance) {
+        this.aBalance = aBalance;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "userID=" + userID + ", name=" + name + ", dob=" + dob + ", email=" + email + ", pNum=" + pNum + ", aBalance=" + aBalance + '}';
+    }
+    
+    
+    
 }

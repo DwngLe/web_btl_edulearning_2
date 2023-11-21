@@ -2,14 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.Course;
+package controller.Comment;
 
-import dao.CommentDAO;
 import dao.CourseDAO;
-import entity.Comment;
-//import entity.Comment1;
 import entity.Course;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,14 +13,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "CourseInfoController", urlPatterns = {"/courseinfoctl"})
-public class CourseInfoController extends HttpServlet {
+@WebServlet(name = "UpdateCourseController", urlPatterns = {"/updateCourse"})
+public class UpdateCourseController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +38,10 @@ public class CourseInfoController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CourseInfoController</title>");            
+            out.println("<title>Servlet UpdateCourseController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CourseInfoController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateCourseController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,18 +59,11 @@ public class CourseInfoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         String id = request.getParameter("id");
-        List<Comment> c;
-        CommentDAO cdao = new CommentDAO();
-        c = cdao.getAllCmtById(id);
-        request.setAttribute("cmtList", c);
-//        RequestDispatcher rd = request.getRequestDispatcher("courseInfo.jsp");
-//        rd.forward(request, response);
         CourseDAO dao = new CourseDAO();
         Course p = dao.getCourseByID(id);
         request.setAttribute("p", p);
-        request.getRequestDispatcher("courseInfo.jsp").forward(request, response);
+        request.getRequestDispatcher("updateCourse.jsp").forward(request, response);
     }
 
     /**
@@ -89,7 +77,21 @@ public class CourseInfoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id = request.getParameter("id");
+        String title = request.getParameter("title");
+        String teacherName = request.getParameter("teacherName");
+        String level = request.getParameter("level");
+        String description = request.getParameter("description");
+        String language = request.getParameter("language");
+        String duration = request.getParameter("duration");
+        String price = request.getParameter("price");
+        String imgurl = request.getParameter("imgurl");
+        
+        CourseDAO dao = new CourseDAO();
+        Course p = new Course(id, teacherName, Integer.parseInt(price), duration, description, language, level, imgurl, title);
+        
+        dao.updateCourse(p);
+        response.sendRedirect("loadCourse");
     }
 
     /**

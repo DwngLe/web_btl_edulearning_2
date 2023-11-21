@@ -2,14 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.Course;
+package controller.Comment;
 
-import dao.CommentDAO;
-import dao.CourseDAO;
-import entity.Comment;
-//import entity.Comment1;
-import entity.Course;
-import jakarta.servlet.RequestDispatcher;
+import dao.UserDAO;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,14 +13,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author TGDD
  */
-@WebServlet(name = "CourseInfoController", urlPatterns = {"/courseinfoctl"})
-public class CourseInfoController extends HttpServlet {
+@WebServlet(name = "DepositController", urlPatterns = {"/user-deposit"})
+public class DepositController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +39,10 @@ public class CourseInfoController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CourseInfoController</title>");            
+            out.println("<title>Servlet DepositController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CourseInfoController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DepositController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,18 +60,19 @@ public class CourseInfoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String id = request.getParameter("id");
-        List<Comment> c;
-        CommentDAO cdao = new CommentDAO();
-        c = cdao.getAllCmtById(id);
-        request.setAttribute("cmtList", c);
-//        RequestDispatcher rd = request.getRequestDispatcher("courseInfo.jsp");
-//        rd.forward(request, response);
-        CourseDAO dao = new CourseDAO();
-        Course p = dao.getCourseByID(id);
-        request.setAttribute("p", p);
-        request.getRequestDispatcher("courseInfo.jsp").forward(request, response);
+        UserDAO dao = new UserDAO();
+        User user = dao.getUserById(103);
+
+        // Set the unique code in the request scope
+        String generateUniqueCode = generateUniqueCode(user);
+        request.setAttribute("generateUniqueCode", generateUniqueCode);
+
+        request.getRequestDispatcher("deposit.jsp").forward(request, response);
+    }
+
+    private String generateUniqueCode(User user) {
+        long currentTime = System.currentTimeMillis();
+        return "CODE-" + currentTime + "-" + user.getUserID();
     }
 
     /**
@@ -89,7 +86,41 @@ public class CourseInfoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String amount = request.getParameter("amount");
+
+        // Validate and process the deposit
+        boolean depositSuccessful = processDeposit(request, amount);
+
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        if (depositSuccessful) {
+            out.println("<script>alert('Nạp tiền thành công!'); window.location='user';</script>");
+        } else {
+            out.println("<script>alert('Nạp tiền thất bại!'); window.location='deposit.jsp';</script>");
+        }
+    }
+
+    private boolean processDeposit(HttpServletRequest request, String amount) {
+        try {
+            UserDAO dao = new UserDAO();
+            User user = dao.getUserById(103);
+
+            // Update the user's account balance
+            long currentBalance = user.getaBalance();
+            long depositAmount = Long.parseLong(amount);
+            long newBalance = currentBalance + depositAmount;
+
+            // Update the user's account balance in the database
+            dao.updateBalance(user, newBalance);
+
+            // Update the user's account balance in the session if needed
+            // user.setaBalance(newBalance);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**

@@ -17,9 +17,9 @@ public class NewClass {
     public static void main(String[] args) {
         CommentDAO c = new CommentDAO();
 //        c.getAllCmt();
-//       for(Comment cm : c.getAllCmtById("2d2c1c4c-f8a2-49d7-af64-289e0d0a361f")){
-//           System.out.println(cm.toString());
-//       }
+       for(Comment cm : c.getAllCmtById("2d2c1c4c-f8a2-49d7-af64-289e0d0a361f")){
+           System.out.println(cm.toString());
+       }
     }
    
 }
