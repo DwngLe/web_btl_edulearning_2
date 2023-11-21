@@ -39,7 +39,9 @@ public class UserDAO {
             String encryptedPassword = encryptor.encrypt(user.getPassword(), encryptionKey);
             User u = null;
             String query = "select * from user where username=? and password = ?";
+             System.out.println("sss");
             conn = new DBContext().getConnection();
+           
             ps = conn.prepareStatement(query);
             ps.setString(1, user.getUsername());
             ps.setString(2, encryptedPassword);
