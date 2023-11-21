@@ -19,7 +19,7 @@ public class User {
     private String email;
     private String role = "GUEST";
     private String name;
-    private long money;
+    private long money =0;
     private String phoneNumber;
 
     public User() {
@@ -32,7 +32,7 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.name = name;
-        this.money = money = 0;
+        this.money = money;
         this.phoneNumber = phoneNumber;
     }
 

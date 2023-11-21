@@ -72,6 +72,9 @@ public class UserLoadController extends HttpServlet {
         ecList = dao.getEnrolledCourses(id);
         request.setAttribute("user", user);
         request.setAttribute("ecList", ecList);
+//        for(Course c:ecList){
+//            System.out.println("name2: " + c.getTitle());
+//        }
         RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
         rd.forward(request, response);
     } 

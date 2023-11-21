@@ -74,9 +74,11 @@ public class UserUpdateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        System.out.println("go to post");
         String id = (String) request.getSession().getAttribute("id");
         String name = request.getParameter("name");
         String dob_raw = request.getParameter("dob");
+        System.out.println("dob_raw: " + dob_raw);
         String email = request.getParameter("email");
         String pNum = request.getParameter("pNum");
         String aBalance_raw = request.getParameter("money");
@@ -85,6 +87,7 @@ public class UserUpdateController extends HttpServlet {
         try {
             aBalance = Long.parseLong(aBalance_raw);
             dob = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(dob_raw).getTime());
+            System.out.println("dob: " + dob);
         } catch (Exception e) {
         }
         User user = new User(id, name, dob, email, pNum, aBalance);

@@ -25,7 +25,7 @@
     </head>
     <body>
         <%
-            if(session.getAttribute("username")==null){
+            if(session.getAttribute("id")==null){
                response.sendRedirect("login.jsp");
             }
         %>
@@ -105,7 +105,7 @@
                     </c:forEach>
                 </div>
                 <div class="security">
-                    <form action="changePass" class="main" onsubmit="return validateChangePasswordForm()">
+                    <form action="user-change-password" method="post" class="main" onsubmit="return validateChangePasswordForm()">
                         <div class="title">
                             <h3>Đổi Mật Khẩu</h3>
                         </div>

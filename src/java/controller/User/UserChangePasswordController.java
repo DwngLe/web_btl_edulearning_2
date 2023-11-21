@@ -78,7 +78,9 @@ public class UserChangePasswordController extends HttpServlet {
         boolean res = processChangePassword(request,oldPass, newPass);
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        System.out.println("res: " + res);
         if(res){
+            
             out.println("<script>alert('Đổi mật khẩu thành công!'); window.location='user';</script>");
         }else{
             out.println("<script>alert('Mật khẩu không chính xác!');</script>");

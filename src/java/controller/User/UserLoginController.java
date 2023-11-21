@@ -45,7 +45,7 @@ public class UserLoginController extends HttpServlet {
         if (id !=null) {
             HttpSession session = request.getSession();
             session.setAttribute("id", id);
-            response.sendRedirect("listblog");
+            response.sendRedirect("user");
         } else {
             response.sendRedirect("login");
         }
