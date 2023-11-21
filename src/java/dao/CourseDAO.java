@@ -50,7 +50,7 @@ public class CourseDAO {
     
     public void addNewCourse(Course s){
         try {
-            String sqlString = "INSERT INTO course (courseID, teacherName, price, duration, descriptionCourse,languageCourse, levelCourse, imageUrl,title) VALUES (?,?, ?,?,?,?,?,?,?)";
+            String sqlString = "INSERT INTO course (id, teacherName, price, duration, descriptionCourse,languageCourse, levelCourse, imageUrl,title) VALUES (?,?, ?,?,?,?,?,?,?)";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, s.getCourseID());
