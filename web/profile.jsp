@@ -49,7 +49,7 @@
                         <a href="user-deposit"> Nạp tiền </a>
                     </div>
                     <div class="s-logout s">
-                        <a href="#"> Đăng Xuất </a>
+                        <a href="logout"> Đăng Xuất </a>
                     </div>
                 </div>
             </aside>
@@ -90,19 +90,21 @@
                     <div class="title">
                         <h3>Khóa Học</h3>
                     </div>
-                    <c:forEach var="eCourse" items="${ecList}">
-                        <div class="course-cards">
+                    <div class="course-cards">
+                        <c:forEach var="eCourse" items="${ecList}">
                             <div class="course-card">
                                 <div class="course-img">
                                     <img src=${eCourse.imageUrl} alt="" />
                                 </div>
                                 <div class="course-detail">
                                     <span>${eCourse.title}</span>
+                                    <h3 style="font-size: 20px; font-weight: normal; margin-bottom: 10px">${eCourse.price} vnd</h3>
                                     <a href="courses?id=${eCourse.courseID}" class="detail">Xem chi tiết</a>
                                 </div>
                             </div>
-                        </div>
-                    </c:forEach>
+                        </c:forEach>
+                    </div>
+
                 </div>
                 <div class="security">
                     <form action="user-change-password" method="post" class="main" onsubmit="return validateChangePasswordForm()">
@@ -187,13 +189,13 @@
                 var newPassword = document.getElementById("nPassword").value;
                 var confirmNewPassword = document.getElementById("rnPassword").value;
 
-                
+
                 if (password === "" || newPassword === "" || confirmNewPassword === "") {
                     alert("Please fill in all fields.");
                     return false;
                 }
 
-           
+
                 if (newPassword !== confirmNewPassword) {
                     alert("New password and confirm new password do not match.");
                     return false;
