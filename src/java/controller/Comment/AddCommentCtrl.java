@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.User;
+package controller.Comment;
 
-import dao.UserDAO;
-import entity.User;
+import dao.CommentDAO;
+import entity.Comment;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,14 +13,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+//import java.sql.Date;
+import java.util.UUID;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
- * @author TGDD
+ * @author Admin
  */
-@WebServlet(name = "DepositController", urlPatterns = {"/user-deposit"})
-public class UserDepositController extends HttpServlet {
+@WebServlet(name = "AddCommentCtrl", urlPatterns = {"/addcmt"})
+public class AddCommentCtrl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +43,10 @@ public class UserDepositController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DepositController</title>");
+            out.println("<title>Servlet AddCommentCtrl</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DepositController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddCommentCtrl at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,19 +64,19 @@ public class UserDepositController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDAO dao = new UserDAO();
-        String id = (String) request.getSession().getAttribute("id");
-        User user = dao.getUserById(id);
+        String id = UUID.randomUUID().toString();
+        String desc = request.getParameter("description");
+        String id_else = request.getParameter("elseID");
+        Date created_date = new Date();
+        
+        java.util.Date utilDate = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
-        String generateUniqueCode = generateUniqueCode(user);
-        request.setAttribute("generateUniqueCode", generateUniqueCode);
-
-        request.getRequestDispatcher("deposit.jsp").forward(request, response);
-    }
-
-    private String generateUniqueCode(User user) {
-        long currentTime = System.currentTimeMillis();
-        return "CODE-" + currentTime + "-" + user.getUserID();
+        Comment c = new Comment("userID",desc,sqlDate,id,id_else);
+        System.out.println(c);
+        CommentDAO cmdao = new CommentDAO();
+        cmdao.addNewComment(c);
+        response.sendRedirect("courseinfoctl?id="+id_else);
     }
 
     /**
@@ -86,39 +90,7 @@ public class UserDepositController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String amount = request.getParameter("amount");
-
-        // Validate and process the deposit
-        boolean depositSuccessful = processDeposit(request, amount);
-
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-
-        if (depositSuccessful) {
-            out.println("<script>alert('Nạp tiền thành công!'); window.location='user';</script>");
-        } else {
-            out.println("<script>alert('Nạp tiền thất bại!'); window.location='deposit.jsp';</script>");
-        }
-    }
-
-    private boolean processDeposit(HttpServletRequest request, String amount) {
-        try {
-            UserDAO dao = new UserDAO();
-            String id = (String) request.getSession().getAttribute("id");
-            User user = dao.getUserById(id);
-
-            long currentBalance = user.getMoney();
-            long depositAmount = Long.parseLong(amount);
-            long newBalance = currentBalance + depositAmount;
-
-            dao.updateBalance(user, newBalance);
-
-            user.setMoney(newBalance);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        processRequest(request, response);
     }
 
     /**

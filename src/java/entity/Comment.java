@@ -8,30 +8,33 @@ import java.sql.Date;
 
 /**
  *
- * @author Admin
+ * @author duong
  */
 public class Comment {
-    private String commentID,description;
-    private Date createdDate;
-    private String userID,elseID;
-
+    private String id_user;
+    private String description;
+    private Date created_at;
+    private String id;
+    private String id_else;
+    
     public Comment() {
     }
 
-    public Comment(String commentID, String description, Date createdDate, String userID, String elseID) {
-        this.commentID = commentID;
+    public Comment(String id_user, String description, Date created_at, String id, String id_else) {
+        this.id_user = id_user;
         this.description = description;
-        this.createdDate = createdDate;
-        this.userID = userID;
-        this.elseID = elseID;
+        this.created_at = created_at;
+        this.id = id;
+        this.id_else = id_else;
     }
 
-    public String getCommentID() {
-        return commentID;
+   
+    public String getId_user() {
+        return id_user;
     }
 
-    public void setCommentID(String commentID) {
-        this.commentID = commentID;
+    public void setId_user(String id_user) {
+        this.id_user = id_user;
     }
 
     public String getDescription() {
@@ -42,34 +45,37 @@ public class Comment {
         this.description = description;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public Date getCreated_at() {
+        return created_at;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getId() {
+        return id;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getElseID() {
-        return elseID;
+    public String getId_else() {
+        return id_else;
     }
 
-    public void setElseID(String elseID) {
-        this.elseID = elseID;
+    public void setId_else(String id_else) {
+        this.id_else = id_else;
     }
 
     @Override
     public String toString() {
-        return "Comment{" + "commentID=" + commentID + ", description=" + description + ", createdDate=" + createdDate + ", userID=" + userID + ", elseID=" + elseID + '}';
+        return "Comment{" + "id_user=" + id_user + ", description=" + description + ", created_at=" + created_at + ", id=" + id + ", id_else=" + id_else + '}';
     }
 
+   
+
+    
     
 }

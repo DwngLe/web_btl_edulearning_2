@@ -14,7 +14,8 @@ public class DBContext {
          System.out.println("Connected!");
         return DriverManager.getConnection(url, userID, password);
     }   
-
+     //Hehe thay doi file config nhe ae
+     //HEHE111111
     private final String serverName = "localhost";
     private final String dbName = "web";
     private final String portNumber = "3306";
