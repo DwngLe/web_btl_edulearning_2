@@ -123,7 +123,7 @@ public class UserDAO {
     }
 
     public int addUser(User user) {
-        String sqlString = "INSERT INTO `web`.`user` (`id`, `username`, `password`, `role`, `email`, `name`, `money`, `phone_number`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sqlString = "INSERT INTO user (`id`, `username`, `password`, `role`, `email`, `name`, `money`, `phone_number`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         int numRowChange = 0;
         try {
             conn = new DBContext().getConnection();
@@ -145,14 +145,14 @@ public class UserDAO {
 
     public List<Course> getEnrolledCourses(String id) {
         List<Course> ecList = new ArrayList<>();
-        String sqlString = "Select course.id,course.title,course.image_url from enrolled_course join course on enrolled_course.id_course = course.id where enrolled_course.id_user = ?";
+        String sqlString = "Select course.id,course.title,course.image_url,course.price from enrolled_course join course on enrolled_course.id_course = course.id where enrolled_course.id_user = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Course c = new Course(rs.getString(1), rs.getString(2), rs.getString(3));
+                Course c = new Course(rs.getString(1), rs.getString(2), rs.getString(3),rs.getInt(4));
                 System.out.println("cname:"+c.getTitle());
                 ecList.add(c);
             }

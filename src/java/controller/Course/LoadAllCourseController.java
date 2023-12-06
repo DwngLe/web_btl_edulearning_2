@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.User;
+package controller.Course;
 
-import com.sun.prism.Texture;
-import entity.User;
-import dao.UserDAO;
+import dao.CourseDAO;
+import entity.Course;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,16 +14,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.UUID;
+import java.util.List;
 
 /**
  *
- * @author duong
+ * @author Admin
  */
-@WebServlet(name = "RegisterController", urlPatterns = {"/register"})
-public class UserRegisterController extends HttpServlet {
-
-    UserDAO userDAO = new UserDAO();
+@WebServlet(name = "LoadAllCourseController", urlPatterns = {"/loadallcourse"})
+public class LoadAllCourseController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +40,10 @@ public class UserRegisterController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");
+            out.println("<title>Servlet LoadAllCourseController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoadAllCourseController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,7 +61,16 @@ public class UserRegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("register.jsp");
+        List<Course> c;
+        CourseDAO cdao = new CourseDAO();
+        c = cdao.getAllCourse();
+//        for(Course co: c){
+//            System.out.println(co.toString());
+//        }
+        request.setAttribute("cList", c);
+        RequestDispatcher rd = request.getRequestDispatcher("allCourse.jsp");
+        rd.forward(request, response);
+        
     }
 
     /**
@@ -77,21 +84,7 @@ public class UserRegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = new User();
-        user.setUserID(UUID.randomUUID().toString());
-        user.setUsername(request.getParameter("username"));
-        user.setPassword(request.getParameter("password"));
-        user.setEmail(request.getParameter("email"));
-        user.setName(request.getParameter("name"));
-        user.setPhoneNumber(request.getParameter("phoneNumber"));
-
-        int isInserted = userDAO.addUser(user);
-        System.out.println("is inserted"+isInserted);
-        if(isInserted !=0){
-            response.sendRedirect("login");
-        }else{
-            response.sendRedirect("register");
-        }
+        processRequest(request, response);
     }
 
     /**

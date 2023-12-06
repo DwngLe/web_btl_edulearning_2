@@ -16,10 +16,11 @@ public class Course {
     public Course() {
     }
     
-    public Course(String courseID, String title, String imageUrl){
+    public Course(String courseID, String title, String imageUrl,int price){
         this.courseID = courseID;
         this.title = title;
         this.imageUrl = imageUrl;
+        this.price = price;
     }
 
 //    public Course(String string, String string0, String string1) {

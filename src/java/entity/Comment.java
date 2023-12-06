@@ -11,66 +11,71 @@ import java.sql.Date;
  * @author duong
  */
 public class Comment {
-    private String CommentIDl;
-    private String UserID;
-    private String ElseID;
-    private String Desciption;
-    private Date CreatedDate;
+    private String id_user;
+    private String description;
+    private Date created_at;
+    private String id;
+    private String id_else;
     
     public Comment() {
     }
 
-
-    public Comment(String CommentIDl, String UserID, String ElseID, String Desciption, Date CreatedDate) {
-        this.CommentIDl = CommentIDl;
-        this.UserID = UserID;
-        this.ElseID = ElseID;
-        this.Desciption = Desciption;
-        this.CreatedDate = CreatedDate;
+    public Comment(String id_user, String description, Date created_at, String id, String id_else) {
+        this.id_user = id_user;
+        this.description = description;
+        this.created_at = created_at;
+        this.id = id;
+        this.id_else = id_else;
     }
 
-    public String getCommentIDl() {
-        return CommentIDl;
+   
+    public String getId_user() {
+        return id_user;
     }
 
-    public void setCommentIDl(String CommentIDl) {
-        this.CommentIDl = CommentIDl;
+    public void setId_user(String id_user) {
+        this.id_user = id_user;
     }
 
-    public String getUserID() {
-        return UserID;
+    public String getDescription() {
+        return description;
     }
 
-    public void setUserID(String UserID) {
-        this.UserID = UserID;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getElseID() {
-        return ElseID;
+    public Date getCreated_at() {
+        return created_at;
     }
 
-    public void setElseID(String ElseID) {
-        this.ElseID = ElseID;
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 
-    public String getDesciption() {
-        return Desciption;
+    public String getId() {
+        return id;
     }
 
-    public void setDesciption(String Desciption) {
-        this.Desciption = Desciption;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public Date getCreatedDate() {
-        return CreatedDate;
+    public String getId_else() {
+        return id_else;
     }
 
-    public void setCreatedDate(Date CreatedDate) {
-        this.CreatedDate = CreatedDate;
+    public void setId_else(String id_else) {
+        this.id_else = id_else;
     }
 
     @Override
     public String toString() {
-        return "Comment{" + "CommentIDl=" + CommentIDl + ", UserID=" + UserID + ", ElseID=" + ElseID + ", Desciption=" + Desciption + ", CreatedDate=" + CreatedDate + '}';
+        return "Comment{" + "id_user=" + id_user + ", description=" + description + ", created_at=" + created_at + ", id=" + id + ", id_else=" + id_else + '}';
     }
+
+   
+
+    
+    
 }

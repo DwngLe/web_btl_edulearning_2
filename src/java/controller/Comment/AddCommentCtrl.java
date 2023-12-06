@@ -2,11 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.User;
+package controller.Comment;
 
-import com.sun.prism.Texture;
-import entity.User;
-import dao.UserDAO;
+import dao.CommentDAO;
+import entity.Comment;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,16 +13,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+//import java.sql.Date;
 import java.util.UUID;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
- * @author duong
+ * @author Admin
  */
-@WebServlet(name = "RegisterController", urlPatterns = {"/register"})
-public class UserRegisterController extends HttpServlet {
-
-    UserDAO userDAO = new UserDAO();
+@WebServlet(name = "AddCommentCtrl", urlPatterns = {"/addcmt"})
+public class AddCommentCtrl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +43,10 @@ public class UserRegisterController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");
+            out.println("<title>Servlet AddCommentCtrl</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddCommentCtrl at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,7 +64,19 @@ public class UserRegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("register.jsp");
+        String id = UUID.randomUUID().toString();
+        String desc = request.getParameter("description");
+        String id_else = request.getParameter("elseID");
+        Date created_date = new Date();
+        
+        java.util.Date utilDate = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        Comment c = new Comment("userID",desc,sqlDate,id,id_else);
+        System.out.println(c);
+        CommentDAO cmdao = new CommentDAO();
+        cmdao.addNewComment(c);
+        response.sendRedirect("courseinfoctl?id="+id_else);
     }
 
     /**
@@ -77,21 +90,7 @@ public class UserRegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = new User();
-        user.setUserID(UUID.randomUUID().toString());
-        user.setUsername(request.getParameter("username"));
-        user.setPassword(request.getParameter("password"));
-        user.setEmail(request.getParameter("email"));
-        user.setName(request.getParameter("name"));
-        user.setPhoneNumber(request.getParameter("phoneNumber"));
-
-        int isInserted = userDAO.addUser(user);
-        System.out.println("is inserted"+isInserted);
-        if(isInserted !=0){
-            response.sendRedirect("login");
-        }else{
-            response.sendRedirect("register");
-        }
+        processRequest(request, response);
     }
 
     /**
