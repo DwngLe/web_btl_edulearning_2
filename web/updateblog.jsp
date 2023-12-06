@@ -32,10 +32,10 @@
     <body>
         <h1>Thong tin bai viet</h1>
             <form action="updateblog" method="post">
-                <input type="hidden" name="id" value="${b.blogID}">
-                <input type="hidden" name="createdDate" value="${b.createdDate}">
-                Tieu De: <input type="text" name="title" value="${b.title}"> <br/><br/>
-                Noi Dung: <input type="text" name="content" value="${b.content}"> <br/><br/>
+                <input type="hidden" name="id" value="${b.getID()}">
+                <input type="hidden" name="createdDate" value="${b.getCreatedDate()}">
+                Tieu De: <input type="text" name="title" value="${b.getTitle()}"> <br/><br/>
+                Noi Dung: <input type="text" name="content" value="${b.getContent()}"> <br/><br/>
                 <input type="submit" value="Submit" class="btn">
             </form>
     </body>

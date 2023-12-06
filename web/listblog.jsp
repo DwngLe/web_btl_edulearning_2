@@ -69,7 +69,9 @@
         
         <script type="text/javascript">
             function deleteblog(id) {
-                window.location = "deleteblog?id=" + id;
+                if (confirm("Confirm deletion of this post?")) {
+                    window.location = "deleteblog?id=" + id;
+                }
             }
         </script>
     </head>
@@ -84,16 +86,16 @@
             </tr>
             <c:forEach var="p" items="${listBlog}">
                 <tr>
-                    <td><a href="/elearning/blog?id=${p.blogID}">${p.title}</a></td>
-                    <td>${p.content}</td>
-                    <td>${p.createdDate}</td>
+                    <td><a href="/elearning/blog?id=${p.getID()}">${p.getTitle()}</a></td>
+                    <td>${p.getContent()}</td>
+                    <td>${p.getCreatedDate()}</td>
                     <td>
                         <div class="btnContainer">
                             <div class="btn">
-                                <a href="#" onclick="deleteblog(`${p.blogID}`)">Xoa</a>&nbsp;&nbsp;
+                                <a href="#" onclick="deleteblog(`${p.getID()}`)">Xoa</a>&nbsp;&nbsp;
                             </div>
                             <div class="btn">
-                                <a href="/elearning/updateblog?id=${p.blogID}">Sua</a>
+                                <a href="/elearning/updateblog?id=${p.getID()}">Sua</a>
                             </div>
                         </div>
                     </td>
