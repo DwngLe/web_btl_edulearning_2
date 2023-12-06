@@ -16,15 +16,20 @@ public class Course {
     public Course() {
     }
     
-    public Course(String courseID, String title, String imageUrl){
+    public Course(String courseID, String title, String imageUrl,int price){
         this.courseID = courseID;
         this.title = title;
         this.imageUrl = imageUrl;
+        this.price = price;
     }
 
 //    public Course(String string, String string0, String string1) {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 //    }
+
+    public Course(String string, String string0, String string1) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     public String getCourseID() {
         return courseID;

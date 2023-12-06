@@ -16,9 +16,11 @@ public class DBContext {
     }   
      //Hehe thay doi file config nhe ae
      //HEHE111111
-    private final String serverName = "localhost";
+    private final String serverName = "web.c8zceuhcull3.ap-southeast-1.rds.amazonaws.com";
     private final String dbName = "web";
     private final String portNumber = "3306";
+    private final String userID = "admin";
+    private final String password = "12345678";
     private final String userID = "root";
     private final String password = "123456";
 }
