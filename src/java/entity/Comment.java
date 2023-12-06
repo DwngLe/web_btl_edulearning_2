@@ -11,30 +11,29 @@ import java.sql.Date;
  * @author duong
  */
 public class Comment {
-    private String id_user;
-    private String description;
-    private Date created_at;
     private String id;
+    private String description;
+    private Date created_date;
+    private String id_user;
     private String id_else;
     
     public Comment() {
     }
 
-    public Comment(String id_user, String description, Date created_at, String id, String id_else) {
-        this.id_user = id_user;
-        this.description = description;
-        this.created_at = created_at;
+    public Comment(String id, String description, Date created_date, String id_user, String id_else) {
         this.id = id;
+        this.description = description;
+        this.created_date = created_date;
+        this.id_user = id_user;
         this.id_else = id_else;
     }
 
-   
-    public String getId_user() {
-        return id_user;
+    public String getId() {
+        return id;
     }
 
-    public void setId_user(String id_user) {
-        this.id_user = id_user;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -45,20 +44,20 @@ public class Comment {
         this.description = description;
     }
 
-    public Date getCreated_at() {
-        return created_at;
+    public Date getCreated_date() {
+        return created_date;
     }
 
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setCreated_date(Date created_date) {
+        this.created_date = created_date;
     }
 
-    public String getId() {
-        return id;
+    public String getId_user() {
+        return id_user;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId_user(String id_user) {
+        this.id_user = id_user;
     }
 
     public String getId_else() {
@@ -71,10 +70,10 @@ public class Comment {
 
     @Override
     public String toString() {
-        return "Comment{" + "id_user=" + id_user + ", description=" + description + ", created_at=" + created_at + ", id=" + id + ", id_else=" + id_else + '}';
+        return "Comment{" + "id=" + id + ", description=" + description + ", created_date=" + created_date + ", id_user=" + id_user + ", id_else=" + id_else + '}';
     }
 
-   
+    
 
     
     

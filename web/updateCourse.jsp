@@ -125,7 +125,7 @@
                 <form action="/elearning/updateCourse" method="post">
                     <input name="id" hidden="true" value="${p.courseID}"/>
                     <input name="title" value="${p.title}" placeholder="Title"/>   
-                    <input name="teacherName" value="Tung"/>
+                    <!--<input name="teacherName" value="Tung"/>-->
                     <input name="level" value="${p.levelCourse}" placeholder="Level"/>
                     <input name="description" value="${p.descriptionCourse}" placeholder="Description"/>
                     <input name="language" value="${p.languageCourse}" placeholder="Language"/>

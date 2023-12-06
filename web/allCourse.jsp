@@ -17,6 +17,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     </head>
 
     <style>
@@ -83,7 +85,8 @@
         }
 
         #course-info img{
-            width: 80%;
+            width: 200px;
+            height: 100px;
             border-radius: 10px;
         }
 
@@ -135,15 +138,20 @@
             width: 1400px;
             margin: auto;
         }
+
     </style>
 
     <body>
         <div class="nav">
             <a href="loadallcourse">Home</a>     
-            <a href="loadCourse">Course</a>
+            <a href="loadCourse">Course</a>            
+            <a href="loadenrollcourse">Enroll Course</a>
 
         </div>
         <div id="container">
+            
+   
+            
             <div>
                 <div id="list-courses">
 

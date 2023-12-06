@@ -5,7 +5,9 @@
 package controller.Course;
 
 import dao.CourseDAO;
+import dao.UserDAO;
 import entity.Course;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -77,9 +79,13 @@ public class UpdateCourseController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        User user;
+        UserDAO udao = new UserDAO();
+        String idUser = (String) request.getSession().getAttribute("id");
+        user = udao.getUserById(idUser);
         String id = request.getParameter("id");
         String title = request.getParameter("title");
-        String teacherName = request.getParameter("teacherName");
+        String teacherName = user.getName();
         String level = request.getParameter("level");
         String description = request.getParameter("description");
         String language = request.getParameter("language");

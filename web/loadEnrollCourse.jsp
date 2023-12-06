@@ -16,6 +16,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     </head>
 
     <style>
@@ -66,6 +69,7 @@
         }
 
         #course-info{
+            height: 250px;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
@@ -81,7 +85,7 @@
         }
 
         #course-info img{
-           width: 200px;
+            width: 200px;
             height: 100px;
             border-radius: 10px;
         }
@@ -100,6 +104,7 @@
         }
 
         #desc-price{
+            margin: 4px 0;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
@@ -122,46 +127,60 @@
             grid-gap: 30px;
         }
         
+        .btn-price{
+            background-color: greenyellow;
+            text-align: center;
+            padding: 6px 0;
+            border-radius: 8px;
+        }
         .nav{
             padding: 8px 0;
             width: 1400px;
             margin: auto;
         }
+
     </style>
 
     <body>
-        
         <div class="nav">
             <a href="loadallcourse">Home</a>     
             <a href="loadCourse">Course</a>            
+            <a href="loadenrollcourse">Enroll Course</a>
 
 
         </div>
         <div id="container">
-            <div id="header">
-                <a id="btn" href="/elearning/addNewCourse.jsp" >New Course</a>
-            </div>
-
+            
+   
+            
             <div>
-                <h2 id="title" >My course</h2>
-
                 <div id="list-courses">
 
                     <c:forEach var="p" items="${cList}">
-                        <a href="/elearning/updateCourse?id=${p.courseID}" id="course">
+                        <a href="/elearning/courseinfoctl?id=${p.courseId}" id="course">
                             <div id="course-info">
                                 <div id="img">
                                     <img src=${p.imageUrl} alt="alt"/>
                                 </div>
                                 <div>
+                                        <p id="price">${p.teacherName}</p>
                                     <div id="desc-price">
                                         <h3 >${p.title}</h3>
-                                        <p id="price">${p.teacherName}</p>
                                     </div>
                                     <div id="desc-price">
-                                        <p id="desc">${p.descriptionCourse}</p>
-                                        <p id="price">${p.price}</p>    
+                                        <p id="desc">${p.courseDesc}</p>
+                                        
                                     </div>
+                                    <div id="desc-price">
+                                        <p id="desc">
+                                            <i class="fa-regular fa-clock"></i>
+                                            ${p.duration}</p>
+                                        <p id="price">10 Lectures</p>    
+                                    </div>
+                                        
+                                        <div class="btn-price">
+                                            <p class="price">$${p.price}</p>
+                                        </div>
                                 </div>
                             </div>
                         </a>
