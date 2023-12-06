@@ -22,7 +22,7 @@ public class BlogDAO {
     public Blog getBlogByID(String id) {
         Blog b = null;
         try {
-            String query = "select * from web.blog where BlogID=?";
+            String query = "select * from web.blog where id=?";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
@@ -63,7 +63,7 @@ public class BlogDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         try {
-            String query = "INSERT INTO web.blog (BlogID,Title,Content,CreatedDate) VALUES(?,?,?,?)";
+            String query = "INSERT INTO web.blog (id,title, content, created_date) VALUES(?,?,?,?)";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, b.getBlogID());
@@ -77,7 +77,7 @@ public class BlogDAO {
     }
 
     public void deleteBlog(String id) {
-        String query = "DELETE FROM web.blog WHERE BlogID = ?";
+        String query = "DELETE FROM web.blog WHERE id = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -89,7 +89,7 @@ public class BlogDAO {
     }
 
     public void updateBlog(Blog b) {
-        String sqlString = "UPDATE web.blog SET Title=?, Content=?, CreatedDate=? WHERE BlogID = ?";
+        String sqlString = "UPDATE web.blog SET title=?, content=?, created_date=? WHERE id = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);

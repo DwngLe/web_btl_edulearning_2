@@ -50,7 +50,7 @@ public class CourseDAO {
     
     public void addNewCourse(Course s){
         try {
-            String sqlString = "INSERT INTO course (courseID, teacherName, price, duration, descriptionCourse,languageCourse, levelCourse, imageUrl,title) VALUES (?,?, ?,?,?,?,?,?,?)";
+            String sqlString = "INSERT INTO course (id, teacher_name, price, duration, course_description,course_language, course_level, image_url,title) VALUES (?,?, ?,?,?,?,?,?,?)";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, s.getCourseID());
@@ -68,7 +68,7 @@ public class CourseDAO {
     }
     public Course getCourseByID(String id) {
         try {
-            String query = "select * from web.course where courseID=?";
+            String query = "select * from web.course where id=?";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
@@ -86,7 +86,7 @@ public class CourseDAO {
     }
     
     public void updateCourse(Course s){
-        String sqlString = "UPDATE web.course SET teacherName = ?, price = ?, duration = ?, descriptionCourse = ?, languageCourse = ?, levelCourse = ?, imageUrl = ?, title=? WHERE (courseID = ?)";
+        String sqlString = "UPDATE web.course SET teacher_name = ?, price = ?, duration = ?, course_description = ?, course_language = ?, course_level = ?, image_url = ?, title=? WHERE (id = ?)";
         try {
              
             conn = new DBContext().getConnection();
@@ -106,7 +106,7 @@ public class CourseDAO {
     }
     
      public void deleteCourse(String courseID){
-        String sqlString = "Delete from Course where (courseID = ?)";
+        String sqlString = "Delete from Course where (id = ?)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);

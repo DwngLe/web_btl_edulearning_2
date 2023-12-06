@@ -25,7 +25,7 @@
     </head>
     <body>
         <%
-            if(session.getAttribute("username")==null){
+            if(session.getAttribute("id")==null){
                response.sendRedirect("login.jsp");
             }
         %>
@@ -49,7 +49,7 @@
                         <a href="user-deposit"> Nạp tiền </a>
                     </div>
                     <div class="s-logout s">
-                        <a href="#"> Đăng Xuất </a>
+                        <a href="logout"> Đăng Xuất </a>
                     </div>
                 </div>
             </aside>
@@ -64,17 +64,17 @@
                         <input type="text" id="name" name="name" value="${user.name}"/>
 
                         <label for="dob">Ngày sinh:</label>
-                        <input type="text" id="dob" name="dob" value="${user.dob}"/>
+                        <input type="text" id="dob" name="dob" value="${user.dateOfBirth}"/>
 
 
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" value="${user.email}"/>
 
                         <label for="pNum">SĐT:</label>
-                        <input type="text" id="pNum" name="pNum" value="${user.pNum}"/>
+                        <input type="text" id="pNum" name="pNum" value="${user.phoneNumber}"/>
 
                         <label for="money">Số dư khả dụng:</label>
-                        <input type="text" id="money" readonly="true" name="money" value="${user.aBalance}"/>
+                        <input type="text" id="money" readonly="true" name="money" value="${user.money}"/>
                         <div class="btn-container">
                             <input
                                 type="submit"
@@ -90,22 +90,24 @@
                     <div class="title">
                         <h3>Khóa Học</h3>
                     </div>
-                    <c:forEach var="eCourse" items="${ecList}">
-                        <div class="course-cards">
+                    <div class="course-cards">
+                        <c:forEach var="eCourse" items="${ecList}">
                             <div class="course-card">
                                 <div class="course-img">
                                     <img src=${eCourse.imageUrl} alt="" />
                                 </div>
                                 <div class="course-detail">
                                     <span>${eCourse.title}</span>
+                                    <h3 style="font-size: 20px; font-weight: normal; margin-bottom: 10px">${eCourse.price} vnd</h3>
                                     <a href="courses?id=${eCourse.courseID}" class="detail">Xem chi tiết</a>
                                 </div>
                             </div>
-                        </div>
-                    </c:forEach>
+                        </c:forEach>
+                    </div>
+
                 </div>
                 <div class="security">
-                    <form action="changePass" class="main" onsubmit="return validateChangePasswordForm()">
+                    <form action="user-change-password" method="post" class="main" onsubmit="return validateChangePasswordForm()">
                         <div class="title">
                             <h3>Đổi Mật Khẩu</h3>
                         </div>
@@ -187,13 +189,13 @@
                 var newPassword = document.getElementById("nPassword").value;
                 var confirmNewPassword = document.getElementById("rnPassword").value;
 
-                
+
                 if (password === "" || newPassword === "" || confirmNewPassword === "") {
                     alert("Please fill in all fields.");
                     return false;
                 }
 
-           
+
                 if (newPassword !== confirmNewPassword) {
                     alert("New password and confirm new password do not match.");
                     return false;

@@ -86,6 +86,7 @@ public class UserRegisterController extends HttpServlet {
         user.setPhoneNumber(request.getParameter("phoneNumber"));
 
         int isInserted = userDAO.addUser(user);
+        System.out.println("is inserted"+isInserted);
         if(isInserted !=0){
             response.sendRedirect("login");
         }else{
