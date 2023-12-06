@@ -123,7 +123,7 @@ public class UserDAO {
     }
 
     public int addUser(User user) {
-        String sqlString = "INSERT INTO `web`.`user` (`id`, `username`, `password`, `role`, `email`, `name`, `money`, `phone_number`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sqlString = "INSERT INTO user (`id`, `username`, `password`, `role`, `email`, `name`, `money`, `phone_number`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         int numRowChange = 0;
         try {
             conn = new DBContext().getConnection();
