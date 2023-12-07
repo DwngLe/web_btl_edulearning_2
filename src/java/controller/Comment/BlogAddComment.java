@@ -3,12 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.Blog;
+package controller.Comment;
 
-import dao.BlogDAO;
 import dao.CommentDAO;
-import entity.Blog;
-import entity.CommentUser;
+import dao.UserDAO;
+import entity.BlogComment;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,14 +16,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  *
  * @author duong
  */
-@WebServlet(name="blog", urlPatterns={"/blog"})
-public class BlogView extends HttpServlet {
+@WebServlet(name="BlogAddComment", urlPatterns={"/blogaddcomment"})
+public class BlogAddComment extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +41,10 @@ public class BlogView extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BlogView</title>");  
+            out.println("<title>Servlet BlogAddComment</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BlogView at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet BlogAddComment at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,17 +61,19 @@ public class BlogView extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String id = request.getParameter("id");
-        List<CommentUser> c;
-        CommentDAO cdao = new CommentDAO();
-        c = cdao.getAllCommentBlog(id);
-        request.setAttribute("cmtList", c);
-        Blog b = new Blog();
-        BlogDAO dao = new BlogDAO();
-        b = dao.getBlogByID(id);
-        dao.updateTotal(b);
-        request.setAttribute("b", b);
-        request.getRequestDispatcher("blog.jsp").forward(request, response);
+        User user;
+        UserDAO udao = new UserDAO();
+        String idUser = (String) request.getSession().getAttribute("id");
+        user = udao.getUserById(idUser);
+        String id = UUID.randomUUID().toString();
+        String desc = request.getParameter("description");
+        String idBlog = request.getParameter("elseID");
+
+        BlogComment c = new BlogComment(id,desc,idUser,idBlog);
+        System.out.println(c);
+        CommentDAO cmdao = new CommentDAO();
+        cmdao.addBlogNewComment(c);
+        response.sendRedirect("blog?id="+idBlog);
     } 
 
     /** 

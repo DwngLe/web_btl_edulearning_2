@@ -146,6 +146,7 @@
             <a href="loadallcourse">Home</a>     
             <a href="loadCourse">Course</a>            
             <a href="loadenrollcourse">Enroll Course</a>
+            <a href="listblog">Blog</a>
 
         </div>
         <div id="container">
