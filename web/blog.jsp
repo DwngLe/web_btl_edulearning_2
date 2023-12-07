@@ -42,21 +42,23 @@
         </style>
         <script type="text/javascript">
             function deleteblog(id) {
-                window.location = "deleteblog?id=" + id;
+                if (confirm("Confirm deletion of this post?")) {
+                    window.location = "deleteblog?id=" + id;
+                }
             }
         </script>
     </head>
     <body>
         <div class="btnContainer">
             <div class="btn">
-                <a href="#" onclick="deleteblog(`${b.blogID}`)">Delete</a>&nbsp;&nbsp;
+                <a href="#" onclick="deleteblog(`${b.getID()}`)">Delete</a>&nbsp;&nbsp;
             </div>
             <div class="btn">
-                <a href="/elearning/updateblog?id=${b.blogID}">Update</a>
+                <a href="/elearning/updateblog?id=${b.getID()}">Update</a>
             </div>
         </div>
-        <h1>${b.title}</h1>
-        <p>${b.content}</p>
+        <h1>${b.getTitle()}</h1>
+        <p>${b.getContent()}</p>
 
     </body>
 </html>
