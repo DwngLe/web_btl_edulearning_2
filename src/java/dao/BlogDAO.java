@@ -66,7 +66,7 @@ public class BlogDAO {
             String query = "INSERT INTO web.blog (id,title, content, created_date) VALUES(?,?,?,?)";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-            ps.setString(1, b.getBlogID());
+            ps.setString(1, b.getID());
             ps.setString(2, b.getTitle());
             ps.setString(3, b.getContent());
             ps.setDate(4, b.getCreatedDate());
@@ -96,7 +96,7 @@ public class BlogDAO {
             ps.setString(1, b.getTitle());
             ps.setString(2, b.getContent());
             ps.setDate(3, b.getCreatedDate());
-            ps.setString(4, b.getBlogID());
+            ps.setString(4, b.getID());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

@@ -64,11 +64,11 @@ public class Encryptor {
 
         byte[] key = encryptor.stringToByteArray(stringKey);
 
-        String input = "a";
+        String input = "4mmx/39+4MAIjIQtjKBBeQ==";
 
-        System.out.println(encryptor.encrypt(input,key));
+//        System.out.println(encryptor.encrypt(input,key));
         //output: VyEcl0pLeqQLemGONcik0w==
 
-//        System.out.println(encryptor.decrypt("VyEcl0pLeqQLemGONcik0w==",key));
+        System.out.println(encryptor.decrypt("mOTP8SE0yDLu6p3g5hVsWQ==",key));
     }
 }

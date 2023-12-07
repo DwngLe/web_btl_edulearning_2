@@ -12,69 +12,69 @@ import java.time.LocalDate;
  * @author duong
  */
 public class Blog {
-    private String BlogID;
-    private String Title;
-    private String Content;
-    private Date CreatedDate;
+    private String id;
+    private String title;
+    private String content;
+    private Date createdDate;
 
     public Blog() {
     }
 
-    public Blog(String BlogID, String Title, String Content) {
-        this.BlogID = BlogID;
-        this.Title = Title;
-        this.Content = Content;
+    public Blog(String id, String title, String content) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
         setDateNow();
     }
 
-    public Blog(String BlogID, String Title, String Content, Date CreatedDate) {
-        this.BlogID = BlogID;
-        this.Title = Title;
-        this.Content = Content;
-        this.CreatedDate = CreatedDate;
+    public Blog(String id, String title, String content, Date createdDate) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.createdDate = createdDate;
+    }
+    
+    
+    public String getID() {
+        return id;
     }
 
-    public String getBlogID() {
-        return BlogID;
-    }
-
-    public void setBlogID(String BlogID) {
-        this.BlogID = BlogID;
+    public void setBlogID(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
-    public void setTitle(String Title) {
-        this.Title = Title;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
-        return Content;
+        return content;
     }
 
-    public void setContent(String Content) {
-        this.Content = Content;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Date getCreatedDate() {
-        return CreatedDate;
+        return createdDate;
     }
 
-    public void setCreatedDate(Date CreatedDate) {
-        this.CreatedDate = CreatedDate;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
     
     private void setDateNow() {
         LocalDate currentDate = LocalDate.now();
-        this.CreatedDate = Date.valueOf(currentDate);
+        this.createdDate = Date.valueOf(currentDate);
     }
 
     @Override
     public String toString() {
-        return "Blog{" + "BlogID=" + BlogID + ", Title=" + Title + ", Content=" + Content + ", CreatedDate=" + CreatedDate + '}';
+        return "Blog{" + "id=" + id + ", title=" + title + ", content=" + content + ", createdDate=" + createdDate + '}';
     }
-
     
 }

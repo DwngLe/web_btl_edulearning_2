@@ -60,8 +60,9 @@ public class BlogView extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String id = request.getParameter("id");
+        Blog b = new Blog();
         BlogDAO dao = new BlogDAO();
-        Blog b = dao.getBlogByID(id);
+        b = dao.getBlogByID(id);
         request.setAttribute("b", b);
         request.getRequestDispatcher("blog.jsp").forward(request, response);
     } 
