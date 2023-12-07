@@ -32,26 +32,24 @@ public class UserDAO {
 
     byte[] encryptionKey = {65, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12};
 
-    public String checkUser(User user) {
-        boolean isValid = false;
-        String id = null;
+    public User checkUser(User user) {
+        User u = new User();
         try {
+   
             String encryptedPassword = encryptor.encrypt(user.getPassword(), encryptionKey);
-            User u = null;
             String query = "select * from user where username=? and password = ?";
-            System.out.println("sss");
             conn = new DBContext().getConnection();
-
             ps = conn.prepareStatement(query);
             ps.setString(1, user.getUsername());
             ps.setString(2, encryptedPassword);
             rs = ps.executeQuery();
             if (rs.next()) {
-                id = rs.getString("id");
+               u.setUserID(rs.getString("id"));
+               u.setRole(rs.getString("role"));
             }
         } catch (Exception e) {
         }
-        return id;
+        return u;
     }
 
     public void updateUser(User user) {
@@ -135,13 +133,13 @@ public class UserDAO {
             ps.setString(3, encryptedPassword);
             ps.setString(4, user.getRole());
             ps.setString(5, user.getEmail());
-            
+
             ps.setString(6, user.getName());
             ps.setLong(7, user.getMoney());
             ps.setString(8, user.getPhoneNumber());
             System.out.println("8");
             numRowChange = ps.executeUpdate();
-            System.out.println("Num of row has changed:"+ numRowChange);
+            System.out.println("Num of row has changed:" + numRowChange);
         } catch (Exception e) {
         }
         return numRowChange;
@@ -156,8 +154,8 @@ public class UserDAO {
             ps.setString(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Course c = new Course(rs.getString(1), rs.getString(2), rs.getString(3),rs.getInt(4));
-                System.out.println("cname:"+c.getTitle());
+                Course c = new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+                System.out.println("cname:" + c.getTitle());
                 ecList.add(c);
             }
             for (Course c : ecList) {
@@ -226,6 +224,23 @@ public class UserDAO {
         } catch (Exception e) {
         }
         return kq;
+    }
+    
+    public List<User> getAllUser(){
+        List<User> listUser = new ArrayList<>();
+        try {
+            String query = "select * from user";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                User user = new User(rs.getString("id"), rs.getString("username"), rs.getString("password"), rs.getDate("date_of_birth"), rs.getString("email"), rs.getString("name"), rs.getLong("money"), rs.getString("phone_number"));
+                listUser.add(user);
+            }
+        } catch (Exception e) {
+        }
+        
+        return listUser;
     }
 
 }
