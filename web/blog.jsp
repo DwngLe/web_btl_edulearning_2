@@ -39,6 +39,29 @@
                 text-decoration: none;
                 color: white;
             }
+            .itemReview .title .imgUser img{
+                width: 50px;
+            }
+
+            .itemReview .title{
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+            .nav{
+                padding: 8px 0;
+                width: 1400px;
+                margin: auto;
+            }
+
+            .btn a{
+                text-decoration: none;
+                color: white;
+            }
+            
+            .name {
+                font-weight: 700;
+            }
         </style>
         <script type="text/javascript">
             function deleteblog(id) {
@@ -60,5 +83,22 @@
         <h1>${b.getTitle()}</h1>
         <p>${b.getContent()}</p>
 
+
+        <form action="/elearning/blogaddcomment">
+            Nhập bình luận: <input name="description" placeholder="Description" type="text"/>
+            <input name="elseID" hidden="true" value="${b.getID()}"/>
+            <button type="submit">Comment</button>
+        </form>
+
+        <c:forEach var="m" items="${cmtList}">
+            <div class="itemReview">
+                <div class="title">
+                    <div class="name"> ${m.userName} </div>
+                </div>
+                <div class="descUser">
+                    ${m.description}
+                </div>
+            </div>
+        </c:forEach>
     </body>
 </html>

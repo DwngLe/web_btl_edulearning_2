@@ -15,7 +15,8 @@ public class Blog {
     private String id;
     private String title;
     private String content;
-    private Date createdDate;
+    private Date createdDate, updateAt;
+    private int totalView = 0;
 
     public Blog() {
     }
@@ -24,14 +25,26 @@ public class Blog {
         this.id = id;
         this.title = title;
         this.content = content;
-        setDateNow();
+        this.createdDate = dateNow();
+        this.updateAt = this.createdDate;
     }
 
-    public Blog(String id, String title, String content, Date createdDate) {
+    public Blog(String id, String title, String content, Date createdDate, int totalView) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.createdDate = createdDate;
+        this.totalView = totalView;
+        this.updateAt = dateNow();
+    }
+
+    public Blog(String id, String title, String content, Date createdDate, Date updateAt, int totalView) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.createdDate = createdDate;
+        this.updateAt = updateAt;
+        this.totalView = totalView;
     }
     
     
@@ -66,15 +79,34 @@ public class Blog {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public int getTotalView() {
+        return totalView;
+    }
+
+    public void setTotalView(int totalView) {
+        this.totalView = totalView;
+    }
+
+    public void increaseTotalView() {
+        this.totalView++;
+    }
     
-    private void setDateNow() {
+    public Date dateNow() {
         LocalDate currentDate = LocalDate.now();
-        this.createdDate = Date.valueOf(currentDate);
+        return Date.valueOf(currentDate);
     }
 
     @Override
     public String toString() {
-        return "Blog{" + "id=" + id + ", title=" + title + ", content=" + content + ", createdDate=" + createdDate + '}';
+        return "Blog{" + "id=" + id + ", title=" + title + ", content=" + content + ", createdDate=" + createdDate + ", updateAt=" + updateAt + ", totalView=" + totalView + '}';
     }
-    
 }
