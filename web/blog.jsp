@@ -60,5 +60,25 @@
         <h1>${b.getTitle()}</h1>
         <p>${b.getContent()}</p>
 
+
+        <form action="/elearning/addcmt">
+            Nhập bình luận: <input name="description" placeholder="Description" type="text"/>
+            <input name="elseID" hidden="true" value="${b.getID()}"/>
+            <button type="submit">Comment</button>
+        </form>
+
+        <c:forEach var="m" items="${cmtList}">
+            <div class="itemReview">
+                <div class="title">
+                    <div class="imgUser">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png"/>
+                    </div>
+                    <div class="name">${m.userName}</div>
+                </div>
+                <div class="descUser">
+                    ${m.description}
+                </div>
+            </div>
+        </c:forEach>
     </body>
 </html>

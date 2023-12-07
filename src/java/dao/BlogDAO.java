@@ -29,7 +29,7 @@ public class BlogDAO {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
+                b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), rs.getInt(6));
                 return b;
             }
         } catch (Exception e) {
@@ -46,11 +46,7 @@ public class BlogDAO {
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Blog b = new Blog(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDate(4));
+                Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), rs.getInt(6));
                 listBlog.add(b);
             }
         } catch (Exception e) {
@@ -63,13 +59,15 @@ public class BlogDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         try {
-            String query = "INSERT INTO web.blog (id,title, content, created_date) VALUES(?,?,?,?)";
+            String query = "INSERT INTO web.blog (id,title, content, created_date, update_at, total_view) VALUES(?,?,?,?,?,?)";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, b.getID());
             ps.setString(2, b.getTitle());
             ps.setString(3, b.getContent());
             ps.setDate(4, b.getCreatedDate());
+            ps.setDate(5, b.getUpdateAt());
+            ps.setInt(6, b.getTotalView());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,17 +87,35 @@ public class BlogDAO {
     }
 
     public void updateBlog(Blog b) {
-        String sqlString = "UPDATE web.blog SET title=?, content=?, created_date=? WHERE id = ?";
+        String sqlString = "UPDATE web.blog SET title=?, content=?, created_date=?, update_at=?, total_view=? WHERE id = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, b.getTitle());
             ps.setString(2, b.getContent());
             ps.setDate(3, b.getCreatedDate());
-            ps.setString(4, b.getID());
+            ps.setDate(4, b.getUpdateAt());
+            ps.setInt(5, b.getTotalView());
+            ps.setString(6, b.getID());
             ps.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Loi truy van");
+            System.out.println(e);
+        }
+    }
+    
+    public void updateTotal(Blog b) {
+        String sqlString = "UPDATE web.blog SET total_view=? WHERE id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sqlString);
+            b.increaseTotalView();
+            ps.setInt(1, b.getTotalView());
+            ps.setString(2, b.getID());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Loi truy van");
+            System.out.println(e);
         }
     }
 }
