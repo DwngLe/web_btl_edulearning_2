@@ -5,7 +5,9 @@
 package controller.Comment;
 
 import dao.CommentDAO;
+import dao.UserDAO;
 import entity.Comment;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -64,6 +66,10 @@ public class AddCommentCtrl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        User user;
+        UserDAO udao = new UserDAO();
+        String idUser = (String) request.getSession().getAttribute("id");
+        user = udao.getUserById(idUser);
         String id = UUID.randomUUID().toString();
         String desc = request.getParameter("description");
         String id_else = request.getParameter("elseID");
@@ -72,7 +78,7 @@ public class AddCommentCtrl extends HttpServlet {
         java.util.Date utilDate = new java.util.Date();
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
-        Comment c = new Comment("userID",desc,sqlDate,id,id_else);
+        Comment c = new Comment(id,desc,sqlDate,idUser,id_else);
         System.out.println(c);
         CommentDAO cmdao = new CommentDAO();
         cmdao.addNewComment(c);

@@ -7,6 +7,7 @@ package controller.Course;
 import dao.CommentDAO;
 import dao.CourseDAO;
 import entity.Comment;
+import entity.CommentUser;
 import entity.Course;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -65,7 +66,7 @@ public class CourseInfoController extends HttpServlet {
             throws ServletException, IOException {
         
         String id = request.getParameter("id");
-        List<Comment> c;
+        List<CommentUser> c;
         CommentDAO cdao = new CommentDAO();
         c = cdao.getAllCmtById(id);
         request.setAttribute("cmtList", c);
@@ -73,6 +74,7 @@ public class CourseInfoController extends HttpServlet {
 //        rd.forward(request, response);
         CourseDAO dao = new CourseDAO();
         Course p = dao.getCourseByID(id);
+        dao.updateTotalViewCourse(p);
         request.setAttribute("p", p);
         request.getRequestDispatcher("courseInfo.jsp").forward(request, response);
     }

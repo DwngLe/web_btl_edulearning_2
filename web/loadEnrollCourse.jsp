@@ -146,7 +146,7 @@
             <a href="loadallcourse">Home</a>     
             <a href="loadCourse">Course</a>            
             <a href="loadenrollcourse">Enroll Course</a>
-            <a href="listblog">Blog</a>
+
 
         </div>
         <div id="container">
@@ -157,7 +157,7 @@
                 <div id="list-courses">
 
                     <c:forEach var="p" items="${cList}">
-                        <a href="/elearning/courseinfoctl?id=${p.courseID}" id="course">
+                        <a href="/elearning/courseinfoctl?id=${p.courseId}" id="course">
                             <div id="course-info">
                                 <div id="img">
                                     <img src=${p.imageUrl} alt="alt"/>
@@ -168,7 +168,7 @@
                                         <h3 >${p.title}</h3>
                                     </div>
                                     <div id="desc-price">
-                                        <p id="desc">${p.descriptionCourse}</p>
+                                        <p id="desc">${p.courseDesc}</p>
                                         
                                     </div>
                                     <div id="desc-price">

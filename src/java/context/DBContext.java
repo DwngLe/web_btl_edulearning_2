@@ -18,4 +18,14 @@ public class DBContext {
     private final String portNumber = "3306";
     private final String userID = "admin";
     private final String password = "12345678";
+//    private final String userID = "root";
+//    private final String password = "123456";
+    
+    
+    
+//    private final String serverName = "localhost";
+//    private final String dbName = "web";
+//    private final String portNumber = "3306";
+//    private final String userID = "root";
+//    private final String password = "123456";
 }

@@ -13,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -77,14 +79,16 @@ public class BlogUpdate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         String id = request.getParameter("id");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-        String createdDate = request.getParameter("createdDate");
-
+        String dateStr = request.getParameter("createdDate");
+        LocalDate localDate = LocalDate.parse(dateStr);
+        java.sql.Date createdDate = java.sql.Date.valueOf(localDate);
+        String strTotalView = request.getParameter("totalView");
+        int totalView = Integer.parseInt(strTotalView);
         BlogDAO dao = new BlogDAO();
-        Blog b = new Blog(id, title, content);
+        Blog b = new Blog(id, title, content, createdDate, totalView); 
 //        System.out.println("Blog: " + b.toString());
         dao.updateBlog(b);
         response.sendRedirect("listblog");

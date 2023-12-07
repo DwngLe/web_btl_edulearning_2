@@ -81,7 +81,8 @@
         }
 
         #course-info img{
-            width: 80%;
+           width: 200px;
+            height: 100px;
             border-radius: 10px;
         }
 
@@ -132,7 +133,8 @@
         
         <div class="nav">
             <a href="loadallcourse">Home</a>     
-            <a href="loadCourse">Course</a>
+            <a href="loadCourse">Course</a>            
+
 
         </div>
         <div id="container">
