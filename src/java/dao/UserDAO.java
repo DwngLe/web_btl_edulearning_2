@@ -228,4 +228,16 @@ public class UserDAO {
         return kq;
     }
 
+    public void changeMoney(User u, Course s){
+        String sqlString = "UPDATE user SET money=? WHERE id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sqlString);
+            ps.setLong(1, u.getMoney()-s.getPrice());
+            ps.setString(2, u.getUserID());
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
 }

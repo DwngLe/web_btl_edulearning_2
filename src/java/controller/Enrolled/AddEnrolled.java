@@ -5,8 +5,10 @@
 package controller.Enrolled;
 
 import com.sun.java.swing.plaf.windows.resources.windows;
+import dao.CourseDAO;
 import dao.EnrollDAO;
 import dao.UserDAO;
+import entity.Course;
 import entity.EnrolledCourse;
 import entity.User;
 import java.io.IOException;
@@ -69,10 +71,18 @@ public class AddEnrolled extends HttpServlet {
             throws ServletException, IOException {
         String id = UUID.randomUUID().toString();
         User user;
+        Course c;
         UserDAO udao = new UserDAO();
         String idUser = (String) request.getSession().getAttribute("id");
+        
         user = udao.getUserById(idUser);
+        CourseDAO cdao = new CourseDAO();
         String id_course = request.getParameter("id");
+        
+        c = cdao.getCourseByID(id_course);
+        
+        udao.changeMoney(user, c);
+        
         
         Date created_date = new Date();
         
