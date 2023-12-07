@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,32 +17,45 @@ import java.util.List;
  *
  * @author duong
  */
-@WebServlet(name="ForgetPassword", urlPatterns={"/forgetpassword/*"})
+@WebServlet(name = "ForgetPassword", urlPatterns = {"/forgetpassword/*"})
 public class UserForgetPassword extends HttpServlet {
+
     UserDAO userDAO = new UserDAO();
-   
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        request.getRequestDispatcher("forgetPassword.jsp").forward(request, response);
-    } 
+            throws ServletException, IOException {
+//        request.getRequestDispatcher("forgetPassword.jsp").forward(request, response);
+        response.sendRedirect("forgetPassword.jsp");
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        if ("true".equals(request.getParameter("formSubmitted"))) {
+
             List<User> listUser = new ArrayList<>();
             String phoneNumber = request.getParameter("phoneNumber");
             System.out.println("PhoneNum:" + phoneNumber);
             listUser = userDAO.findUserByPhone(phoneNumber);
             request.setAttribute("listAccount", listUser);
-        }
+       
         request.getRequestDispatcher("forgetPassword.jsp").forward(request, response);
     }
+//    @Override
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        List<User> listUser = new ArrayList<>();
+//        String phoneNumber = request.getParameter("phoneNumber");
+//        System.out.println("PhoneNum:" + phoneNumber);
+//        listUser = userDAO.findUserByPhone(phoneNumber);
+//        // Gắn listUser vào session
+//        HttpSession session = request.getSession();
+//        session.setAttribute("listAccount", listUser);
+//
+//        // Chuyển hướng trang và truyền dữ liệu qua tham số URL
+//        response.sendRedirect("/elearning/forgetPassword.jsp?submitted=true");
+//    }
 
-
-    
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -123,8 +123,9 @@ public class UserDAO {
     }
 
     public int addUser(User user) {
-        String sqlString = "INSERT INTO user (`id`, `username`, `password`, `role`, `email`, `name`, `money`, `phone_number`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sqlString = "INSERT INTO `user` (`id`, `username`, `password`, `role`, `email`, `name`, `money`, `phone_number`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         int numRowChange = 0;
+        System.out.println(user.getName());
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
@@ -134,10 +135,13 @@ public class UserDAO {
             ps.setString(3, encryptedPassword);
             ps.setString(4, user.getRole());
             ps.setString(5, user.getEmail());
+            
             ps.setString(6, user.getName());
             ps.setLong(7, user.getMoney());
             ps.setString(8, user.getPhoneNumber());
+            System.out.println("8");
             numRowChange = ps.executeUpdate();
+            System.out.println("Num of row has changed:"+ numRowChange);
         } catch (Exception e) {
         }
         return numRowChange;
@@ -168,19 +172,19 @@ public class UserDAO {
     public List<User> findUserByPhone(String phoneNumber) {
         List<User> listUser = new ArrayList<>();
         try {
-            User user = new User();
-            String query = "select * from user where phone_number= ?";
+
+            String query = "select id, username from user where phone_number= ?";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, phoneNumber);
             rs = ps.executeQuery();
             while (rs.next()) {
-                System.out.println("1");
-                String encrytedPassword = rs.getString("password");
-                String password = encryptor.decrypt(encrytedPassword, encryptionKey);
-                user = new User(rs.getString("id"), rs.getString("username"), password, rs.getDate("date_of_birth"), rs.getString("email"), rs.getString("name"), rs.getLong("money"), rs.getString("phone_number"));
-                System.out.println("pass " + user.getPassword());
+                User user = new User();
+                user.setUserID(rs.getString("id"));
+                System.out.println(rs.getString("id"));
+                user.setUsername(rs.getString("username"));
                 listUser.add(user);
+                System.out.println(user.getUserID() + " " + user.getUsername());
             }
         } catch (Exception e) {
         }
@@ -205,6 +209,23 @@ public class UserDAO {
         } catch (Exception e) {
         }
         return password;
+    }
+
+    public int resetPassword(String id, String newPass) {
+        int kq = 0;
+        try {
+            System.out.println(id);
+            String encryptedPass = encryptor.encrypt(newPass, encryptionKey);
+            String query = "UPDATE `user` SET `password` = ? WHERE (`id` = ?);";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, encryptedPass);
+            ps.setString(2, id);
+            kq = ps.executeUpdate();
+            System.out.println(kq);
+        } catch (Exception e) {
+        }
+        return kq;
     }
 
 }

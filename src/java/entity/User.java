@@ -117,4 +117,11 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    @Override
+    public String toString() {
+        return "User{" + "userID=" + userID + ", username=" + username + ", password=" + password + ", dateOfBirth=" + dateOfBirth + ", email=" + email + ", role=" + role + ", name=" + name + ", money=" + money + ", phoneNumber=" + phoneNumber + '}';
+    }
+    
+    
+
 }
