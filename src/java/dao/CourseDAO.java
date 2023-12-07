@@ -119,6 +119,7 @@ public class CourseDAO {
     }
     
      public void deleteCourse(String courseID){
+         System.out.println(courseID);
         String sqlString = "Delete from course where (id = ?)";
         try {
             conn = new DBContext().getConnection();

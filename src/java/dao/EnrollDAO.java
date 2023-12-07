@@ -74,5 +74,17 @@ public class EnrollDAO {
         }
         return null;
     }
+    
+     public void deleteEnrollCourse(String courseID, String idUser){
+         System.out.println(courseID);
+        String sqlString = "DELETE FROM enrolled_course WHERE id_course = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sqlString);
+            ps.setString(1, courseID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 
 }
