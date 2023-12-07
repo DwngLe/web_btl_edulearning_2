@@ -81,6 +81,8 @@ public class BlogUpdate extends HttpServlet {
         String id = request.getParameter("id");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
+        String createdDate = request.getParameter("createdDate");
+
         BlogDAO dao = new BlogDAO();
         Blog b = new Blog(id, title, content);
 //        System.out.println("Blog: " + b.toString());
