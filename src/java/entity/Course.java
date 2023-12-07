@@ -12,6 +12,7 @@ public class Course {
     private String courseID,teacherName;
     private int price;
     private String duration,descriptionCourse,languageCourse,levelCourse,imageUrl,title;
+    private int totalView;
 
     public Course() {
     }
@@ -103,7 +104,7 @@ public class Course {
         this.title = title;
     }
 
-    public Course(String courseID, String teacherName, int price, String duration, String descriptionCourse, String languageCourse, String levelCourse, String imageUrl, String title) {
+    public Course(String courseID, String teacherName, int price, String duration, String descriptionCourse, String languageCourse, String levelCourse, String imageUrl, String title, int totalView) {
         this.courseID = courseID;
         this.teacherName = teacherName;
         this.price = price;
@@ -113,5 +114,16 @@ public class Course {
         this.levelCourse = levelCourse;
         this.imageUrl = imageUrl;
         this.title = title;
+        this.totalView = totalView;
     }
+
+    public int getTotalView() {
+        return totalView;
+    }
+
+    public void setTotalView(int totalView) {
+        this.totalView = totalView;
+    }
+
+    
 }

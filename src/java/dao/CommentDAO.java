@@ -53,13 +53,13 @@ public class CommentDAO {
                     + "    comment.created_date,\n"
                     + "    user.id AS user_id,\n"
                     + "    user.name AS user_name,\n"
-                    + "    comment.id_else\n"
+                    + "    comment.id_course\n"
                     + "FROM \n"
                     + "    comment\n"
                     + "JOIN \n"
                     + "    user ON comment.id_user = user.id\n"
                     + "WHERE \n"
-                    + "    comment.id_else = ?";
+                    + "    comment.id_course = ?";
             conn = new DBContext().getConnection();
 
             ps = conn.prepareStatement(query);
@@ -86,15 +86,17 @@ public class CommentDAO {
 
     public void addNewComment(Comment s) {
         try {
+            
+            System.out.println(s.toString());
             System.out.println(s);
-            String sqlString = "INSERT INTO web.comment (id, description, created_date, id_user, id_else) VALUES (?,?,?,?,?)";
+            String sqlString = "INSERT INTO web.comment (id, description, created_date, id_user, id_course) VALUES (?,?,?,?,?)";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, s.getId());
             ps.setString(2, s.getDescription());
             ps.setDate(3, s.getCreated_date());
             ps.setString(4, s.getId_user());
-            ps.setString(5, s.getId_else());
+            ps.setString(5, s.getId_course());
 
             ps.executeUpdate();
         } catch (Exception e) {

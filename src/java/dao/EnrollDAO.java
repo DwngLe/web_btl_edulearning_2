@@ -26,11 +26,16 @@ public class EnrollDAO {
 
     public void addNewEnroll(EnrolledCourse s) {
         try {
-            String sqlString = "INSERT INTO enrolled_course (id_course, id_user) VALUES (?,?)";
+            
+            System.out.println(s.toString());
+            
+            String sqlString = "INSERT INTO enrolled_course (id, id_user,id_course,sub_date) VALUES (?,?,?,?)";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
-            ps.setString(1, s.getId_course());
+            ps.setString(1, s.getId());
             ps.setString(2, s.getId_user());
+            ps.setString(3, s.getId_course());
+            ps.setDate(4, s.getSubDate());
 
             ps.executeUpdate();
         } catch (Exception e) {

@@ -74,6 +74,7 @@ public class CourseInfoController extends HttpServlet {
 //        rd.forward(request, response);
         CourseDAO dao = new CourseDAO();
         Course p = dao.getCourseByID(id);
+        dao.updateTotalViewCourse(p);
         request.setAttribute("p", p);
         request.getRequestDispatcher("courseInfo.jsp").forward(request, response);
     }

@@ -4,19 +4,41 @@
  */
 package entity;
 
+import java.sql.Date;
+
 /**
  *
  * @author Admin
  */
 public class EnrolledCourse {
-    private String id_course;
+    private String id;
     private String id_user;
+    private String id_course;
+    private Date subDate;
 
     public EnrolledCourse() {
     }
 
-    public EnrolledCourse(String id_course, String id_user) {
+    public EnrolledCourse(String id, String id_user, String id_course, Date subDate) {
+        this.id = id;
+        this.id_user = id_user;
         this.id_course = id_course;
+        this.subDate = subDate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(String id_user) {
         this.id_user = id_user;
     }
 
@@ -28,17 +50,21 @@ public class EnrolledCourse {
         this.id_course = id_course;
     }
 
-    public String getId_user() {
-        return id_user;
+    public Date getSubDate() {
+        return subDate;
     }
 
-    public void setId_user(String id_user) {
-        this.id_user = id_user;
+    public void setSubDate(Date subDate) {
+        this.subDate = subDate;
     }
 
     @Override
     public String toString() {
-        return "EnrolledCourse{" + "id_course=" + id_course + ", id_user=" + id_user + '}';
+        return "EnrolledCourse{" + "id=" + id + ", id_user=" + id_user + ", id_course=" + id_course + ", subDate=" + subDate + '}';
     }
+
+    
+
+    
     
 }

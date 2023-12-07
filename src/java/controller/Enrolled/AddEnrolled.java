@@ -16,6 +16,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.util.UUID;
 import javafx.scene.control.Alert;
 
 /**
@@ -65,13 +67,19 @@ public class AddEnrolled extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String id = UUID.randomUUID().toString();
         User user;
         UserDAO udao = new UserDAO();
         String idUser = (String) request.getSession().getAttribute("id");
         user = udao.getUserById(idUser);
         String id_course = request.getParameter("id");
         
-        EnrolledCourse e = new EnrolledCourse(id_course, idUser);
+        Date created_date = new Date();
+        
+        java.util.Date utilDate = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        
+        EnrolledCourse e = new EnrolledCourse(id, idUser,id_course,sqlDate);
         
         EnrollDAO dao = new EnrollDAO();
         dao.addNewEnroll(e);

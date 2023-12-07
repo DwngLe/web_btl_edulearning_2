@@ -79,7 +79,7 @@ public class AddCourseController extends HttpServlet {
 
         CourseDAO dao = new CourseDAO();
 
-        Course s = new Course(id, teacherName, Integer.parseInt(price), duration, description, language, level, imgurl, title);
+        Course s = new Course(id, teacherName, Integer.parseInt(price), duration, description, language, level, imgurl, title,0);
         System.out.println(s.toString());
         dao.addNewCourse(s);
         response.sendRedirect("loadCourse");

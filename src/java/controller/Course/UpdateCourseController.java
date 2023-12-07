@@ -92,9 +92,10 @@ public class UpdateCourseController extends HttpServlet {
         String duration = request.getParameter("duration");
         String price = request.getParameter("price");
         String imgurl = request.getParameter("imgurl");
+        String totalView = request.getParameter("totalView");
         
         CourseDAO dao = new CourseDAO();
-        Course p = new Course(id, teacherName, Integer.parseInt(price), duration, description, language, level, imgurl, title);
+        Course p = new Course(id, teacherName, Integer.parseInt(price), duration, description, language, level, imgurl, title,Integer.parseInt(totalView));
         
         dao.updateCourse(p);
         response.sendRedirect("loadCourse");

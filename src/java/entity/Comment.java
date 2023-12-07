@@ -15,18 +15,20 @@ public class Comment {
     private String description;
     private Date created_date;
     private String id_user;
-    private String id_else;
+    private String id_course;
     
     public Comment() {
     }
 
-    public Comment(String id, String description, Date created_date, String id_user, String id_else) {
+    public Comment(String id, String description, Date created_date, String id_user, String id_course) {
         this.id = id;
         this.description = description;
         this.created_date = created_date;
         this.id_user = id_user;
-        this.id_else = id_else;
+        this.id_course = id_course;
     }
+
+    
 
     public String getId() {
         return id;
@@ -60,19 +62,22 @@ public class Comment {
         this.id_user = id_user;
     }
 
-    public String getId_else() {
-        return id_else;
+    public String getId_course() {
+        return id_course;
     }
 
-    public void setId_else(String id_else) {
-        this.id_else = id_else;
+    public void setId_course(String id_course) {
+        this.id_course = id_course;
     }
 
     @Override
     public String toString() {
-        return "Comment{" + "id=" + id + ", description=" + description + ", created_date=" + created_date + ", id_user=" + id_user + ", id_else=" + id_else + '}';
+        return "Comment{" + "id=" + id + ", description=" + description + ", created_date=" + created_date + ", id_user=" + id_user + ", id_course=" + id_course + '}';
     }
 
+    
+
+   
     
 
     

@@ -123,6 +123,7 @@
                 <a href="/elearning/deleteCourse?id=${p.courseID}" id="btn">Delte course</a>
                 <h2 id="title" >Edit course</h2>
                 <form action="/elearning/updateCourse" method="post">
+                    <input name="totalView" hidden="true" value="${p.totalView}"/>
                     <input name="id" hidden="true" value="${p.courseID}"/>
                     <input name="title" value="${p.title}" placeholder="Title"/>   
                     <!--<input name="teacherName" value="Tung"/>-->
