@@ -211,16 +211,16 @@ public class UserDAO {
         return password;
     }
 
-    public int resetPassword(String id, String newPass) {
+    public int resetPassword(String username, String newPass) {
         int kq = 0;
         try {
-            System.out.println(id);
+            System.out.println(username);
             String encryptedPass = encryptor.encrypt(newPass, encryptionKey);
-            String query = "UPDATE `user` SET `password` = ? WHERE (`id` = ?);";
+            String query = "UPDATE `user` SET `password` = ? WHERE (`username` = ?);";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, encryptedPass);
-            ps.setString(2, id);
+            ps.setString(2, username);
             kq = ps.executeUpdate();
             System.out.println(kq);
         } catch (Exception e) {
