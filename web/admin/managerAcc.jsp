@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,37 +15,44 @@
     </head>
     <body>
         <h1>Quản lý tài khoản</h1>
-        <table>
-            <tr>
-                <th>Mã Nhà cung cấp</th>
-                <th>Tên</th>
-                <th>Địa chỉ</th>
-                <th>Số điện thoại</th>
-                <th>Thao Tác</th>
-            </tr>
-            <c:forEach var="p" items="${sList}">
+        <div>
+            <table>
                 <tr>
-                    <td>${p.maNhaCC}</td>
-                    <td>${p.tenNhaCC}</td>
-                    <td>${p.diaChi}</td>
-                    <td>
-                        ${p.dienThoai}
-                    </td>
-                    <td>
-                        <div class="btnContainer">
-
-                            <div class="btnD">
-                                <a href="#" onclick="doDelete(`${p.maNhaCC}`)">Delete</a>&nbsp;&nbsp;
-                            </div>
-                            <div class="btnL">
-                                <a href="/th3/update?id=${p.maNhaCC}">Update</a>
-                            </div>
-                        </div>
-
-                    </td>
+                    <th>Tên tài khoản</th>
+                    <th>Họ và tên</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th>Ngay sinh</th>
+                    <th>Ngày tạo tài khoản</th>
+                    <th>Thao Tác</th>
                 </tr>
-            </c:forEach>
-        </table>
+                <c:forEach var="u" items="${listUser}">
+                    <tr>
+                        <td>${u.username}</td>
+                        <td>${u.name}</td>
+                        <td>${u.email}</td>
+                        <td>${u.phoneNumber}</td>
+                        <td>${u.dateOfBirth}</td>
+                        <td>${u.createdDate}</td>
+                        <td>
+                            <div class="btnContainer">
+
+                                <div class="btnD">
+                                    <a href="#" onclick="doDelete(`${u.username}`)">Delete</a>&nbsp;&nbsp;
+                                </div>
+                                <div class="btnL">
+                                    <form action="/elearning/admin/managerAcc/user">
+                                        <input type="hidden" name="userID" value="${account.getUserID()}" />
+                                        <button type="submit" >View</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
         <div class="btnContainer">
             <div class="btnL">
                 <a href="add.jsp">Thêm Nhà cung cấp mới</a>

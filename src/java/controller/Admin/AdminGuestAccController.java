@@ -5,8 +5,6 @@
 
 package controller.Admin;
 
-import dao.UserDAO;
-import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,16 +12,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author duong
  */
-@WebServlet(name="AdminManagerAccountController", urlPatterns={"/admin/managerAcc"})
-public class AdminManagerAccountController extends HttpServlet {
-    
+@WebServlet(name="AdminGuestAccController", urlPatterns={"/admin/managerAcc/user"})
+public class AdminGuestAccController extends HttpServlet {
+   
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -39,10 +35,10 @@ public class AdminManagerAccountController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminManagerAccountController</title>");  
+            out.println("<title>Servlet AdminGuestAccController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminManagerAccountController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AdminGuestAccController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,15 +55,9 @@ public class AdminManagerAccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        List<User> listUser = new ArrayList<>();
-        UserDAO userDAO = new UserDAO();
-        
-        listUser = userDAO.getAllUser();
-        request.setAttribute("listUser", listUser);
-        System.out.println("Do dai danh sach tai khoan la: " + listUser.size());
-        request.getRequestDispatcher("managerAcc.jsp").forward(request, response);
-//        response.sendRedirect("managerAcc.jsp");
-        
+        String id = request.getParameter("userID");
+        System.out.println("id: " + id);
+        processRequest(request, response);
     } 
 
     /** 

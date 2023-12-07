@@ -112,7 +112,7 @@ public class UserDAO {
             ps.setString(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                user = new User(id, rs.getString("username"), rs.getString("password"), rs.getDate("date_of_birth"), rs.getString("email"), rs.getString("name"), rs.getLong("money"), rs.getString("phone_number"));
+                user = new User(id, rs.getString("username"), rs.getString("password"), rs.getDate("date_of_birth"), rs.getString("email"), rs.getString("name"), rs.getLong("money"), rs.getString("phone_number"), rs.getDate("created_date"));
                 System.out.println(user.getName());
             }
         } catch (Exception e) {
@@ -121,7 +121,7 @@ public class UserDAO {
     }
 
     public int addUser(User user) {
-        String sqlString = "INSERT INTO `user` (`id`, `username`, `password`, `role`, `email`, `name`, `money`, `phone_number`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sqlString = "INSERT INTO `user` (`id`, `username`, `password`, `role`, `email`, `name`, `money`, `phone_number`, `created_date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         int numRowChange = 0;
         System.out.println(user.getName());
         try {
@@ -137,9 +137,10 @@ public class UserDAO {
             ps.setString(6, user.getName());
             ps.setLong(7, user.getMoney());
             ps.setString(8, user.getPhoneNumber());
-            System.out.println("8");
+            ps.setDate(9, user.getCreatedDate());
+            System.out.println(user.getCreatedDate());
             numRowChange = ps.executeUpdate();
-            System.out.println("Num of row has changed:" + numRowChange);
+    
         } catch (Exception e) {
         }
         return numRowChange;
@@ -229,14 +230,15 @@ public class UserDAO {
     public List<User> getAllUser(){
         List<User> listUser = new ArrayList<>();
         try {
-            String query = "select * from user";
+            String query = "SELECT * FROM web.user where role != 'ADMIN';";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
-            if (rs.next()) {
-                User user = new User(rs.getString("id"), rs.getString("username"), rs.getString("password"), rs.getDate("date_of_birth"), rs.getString("email"), rs.getString("name"), rs.getLong("money"), rs.getString("phone_number"));
+            while (rs.next()) {
+                User user = new User(rs.getString("id"), rs.getString("username"), rs.getString("password"), rs.getDate("date_of_birth"), rs.getString("email"), rs.getString("name"), rs.getLong("money"), rs.getString("phone_number"), rs.getDate("created_date"));
                 listUser.add(user);
             }
+            System.out.println("list size: " +listUser.size());
         } catch (Exception e) {
         }
         
