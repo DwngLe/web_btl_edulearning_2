@@ -120,7 +120,7 @@
                 <h2 id="title" >Add new course</h2>
                 <form action="/elearning/addCourse" >
                     <input name="title" placeholder="Title"/>   
-                    <input name="teacherName" value="Tung"/>
+                    <!--<input name="teacherName" value="Tung"/>-->
                     <input name="level" placeholder="Level"/>
                     <input name="description" placeholder="Description"/>
                     <input name="language" placeholder="Language"/>

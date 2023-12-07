@@ -34,7 +34,7 @@ public class CourseDAO {
             
             while (rs.next()) {
                 Course a;
-                a = new Course(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                a = new Course(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),rs.getInt(10));
                 list.add(a);
             }
             
@@ -76,7 +76,7 @@ public class CourseDAO {
             
             if (rs.next()) {
                 Course a;
-                a = new Course(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                a = new Course(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),rs.getInt(10));
 
                 return a;
             }
@@ -105,8 +105,21 @@ public class CourseDAO {
         }
     }
     
+    public void updateTotalViewCourse(Course s){
+        String sqlString = "UPDATE web.course SET totalView = ? WHERE (id = ?)";
+        try {
+             
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sqlString);
+            ps.setInt(1, s.getTotalView()+1);
+            ps.setString(2, s.getCourseID());
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
      public void deleteCourse(String courseID){
-        String sqlString = "Delete from Course where (id = ?)";
+        String sqlString = "Delete from course where (id = ?)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);

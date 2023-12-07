@@ -93,12 +93,19 @@
             margin: auto;
         }
 
+        .btn a{
+            text-decoration: none;
+            color: white;
+        }
+       
     </style>
 
     <body>
         <div class="nav">
             <a href="loadallcourse">Home</a>     
-            <a href="loadCourse">Course</a>
+            <a href="loadCourse">Course</a>            
+            <a href="loadenrollcourse">Enroll Course</a>
+
 
         </div>
         <div class="container">
@@ -130,7 +137,7 @@
                             <div class="imgUser">
                                 <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png"/>
                             </div>
-                            <div class="name">Tung</div>
+                            <div class="name">${m.userName}</div>
                         </div>
                         <div class="descUser">
                             ${m.description}
@@ -198,7 +205,13 @@
                     </div>
                     <hr/>
 
-                    <button class="btn">Checkout</button>
+                    <button class="btn " >
+                        
+                        <a href="/elearning/addenrolled?id=${p.courseID}">
+                            
+                        Checkout
+                        </a>
+                    </button>
                 </div>
             </div>
         </div>

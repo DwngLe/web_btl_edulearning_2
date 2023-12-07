@@ -8,27 +8,23 @@ import java.sql.Date;
 
 /**
  *
- * @author duong
+ * @author Admin
  */
-public class Comment {
+public class EnrolledCourse {
     private String id;
-    private String description;
-    private Date created_date;
     private String id_user;
     private String id_course;
-    
-    public Comment() {
+    private Date subDate;
+
+    public EnrolledCourse() {
     }
 
-    public Comment(String id, String description, Date created_date, String id_user, String id_course) {
+    public EnrolledCourse(String id, String id_user, String id_course, Date subDate) {
         this.id = id;
-        this.description = description;
-        this.created_date = created_date;
         this.id_user = id_user;
         this.id_course = id_course;
+        this.subDate = subDate;
     }
-
-    
 
     public String getId() {
         return id;
@@ -36,22 +32,6 @@ public class Comment {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getCreated_date() {
-        return created_date;
-    }
-
-    public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
     }
 
     public String getId_user() {
@@ -70,14 +50,19 @@ public class Comment {
         this.id_course = id_course;
     }
 
-    @Override
-    public String toString() {
-        return "Comment{" + "id=" + id + ", description=" + description + ", created_date=" + created_date + ", id_user=" + id_user + ", id_course=" + id_course + '}';
+    public Date getSubDate() {
+        return subDate;
     }
 
-    
+    public void setSubDate(Date subDate) {
+        this.subDate = subDate;
+    }
 
-   
+    @Override
+    public String toString() {
+        return "EnrolledCourse{" + "id=" + id + ", id_user=" + id_user + ", id_course=" + id_course + ", subDate=" + subDate + '}';
+    }
+
     
 
     

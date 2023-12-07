@@ -4,10 +4,11 @@
  */
 package controller.Course;
 
-import dao.CourseDAO;
+import dao.EnrollDAO;
 import dao.UserDAO;
-import entity.Course;
+import entity.EnrolledCourseUser;
 import entity.User;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,14 +16,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "AddCourseController", urlPatterns = {"/addCourse"})
-public class AddCourseController extends HttpServlet {
+@WebServlet(name = "LoadEnrollCourse", urlPatterns = {"/loadenrollcourse"})
+public class LoadEnrollCourse extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +43,10 @@ public class AddCourseController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddCourseController</title>");
+            out.println("<title>Servlet LoadEnrollCourse</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddCourseController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoadEnrollCourse at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,28 +64,21 @@ public class AddCourseController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         User user;
         UserDAO udao = new UserDAO();
         String idUser = (String) request.getSession().getAttribute("id");
         user = udao.getUserById(idUser);
         
-        String id = UUID.randomUUID().toString();
-        String title = request.getParameter("title");
-        String teacherName = user.getName();
-        String level = request.getParameter("level");
-        String description = request.getParameter("description");
-        String language = request.getParameter("language");
-        String duration = request.getParameter("duration");
-        String price = request.getParameter("price");
-        String imgurl = request.getParameter("imgurl");
-
-        CourseDAO dao = new CourseDAO();
-
-        Course s = new Course(id, teacherName, Integer.parseInt(price), duration, description, language, level, imgurl, title,0);
-        System.out.println(s.toString());
-        dao.addNewCourse(s);
-        response.sendRedirect("loadCourse");
-
+        EnrollDAO ed = new EnrollDAO();
+        List<EnrolledCourseUser> list = new ArrayList<>();
+        list = ed.getAllCourse(idUser);
+        
+        System.out.println(list.size());
+        
+        request.setAttribute("cList", list);
+        RequestDispatcher rd = request.getRequestDispatcher("loadEnrollCourse.jsp");
+        rd.forward(request, response);
     }
 
     /**
