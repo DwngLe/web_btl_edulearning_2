@@ -1,9 +1,3 @@
-<%-- 
-    Document   : resetPassword
-    Created on : Nov 19, 2023, 11:22:41 PM
-    Author     : duong
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,12 +10,21 @@
         <table>
             <tr>
                 <td>
-                    ${account.username}
+                    <!--<c:out value="${sessionScope.username}"/>-->
                 </td>
                 <td>
-                    ${account.password}
+<!--                     <c:out value="${sessionScope.NewPass}"/>-->
+                    ${sessionScope.NewPass}
                 </td>
             </tr>
         </table>
-    </body>
+        <form action = "login" method = "post">
+            <input type="hidden" value ="${sessionScope.NewPass}" name="password"/>
+            <input type="hidden" value ="${sessionScope.UserName}" name="username"/>
+            <button type="submit">Login</button>
+            
+        </form>
+
+    <c:remove var="NewPass" scope="session" />
+</body>
 </html>
