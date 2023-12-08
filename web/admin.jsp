@@ -14,8 +14,8 @@
     <body>
         <h1>Hello ADMIN!</h1>
         <button><a href="admin/managerAcc">Danh sách các tài khoản trong hệ thống</a></button>
-        <button><a href="admin/viewBlog">Thống kê tổng số lượt xem của blog</a></button>
-        <button><a href="admin/viewBlog">Thống kê tổng số lượt xem của course</a></button>
+        <button><a href="admin/blog">Quan ly blog</a></button>
+        <button><a href="admin/course">Quan ly course</a></button>
         <button><a href="admin/viewBlog">Thống kê lượng người đăng ký</a></button>
     </body>
 </html>

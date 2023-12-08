@@ -12,7 +12,7 @@ import java.time.LocalDate;
  * @author duong
  */
 public class Blog {
-    private String id;
+    private String blogID;
     private String title;
     private String content;
     private Date createdDate, updateAt;
@@ -22,7 +22,7 @@ public class Blog {
     }
 
     public Blog(String id, String title, String content) {
-        this.id = id;
+        this.blogID = id;
         this.title = title;
         this.content = content;
         this.createdDate = dateNow();
@@ -30,7 +30,7 @@ public class Blog {
     }
 
     public Blog(String id, String title, String content, Date createdDate, int totalView) {
-        this.id = id;
+        this.blogID = id;
         this.title = title;
         this.content = content;
         this.createdDate = createdDate;
@@ -39,7 +39,7 @@ public class Blog {
     }
 
     public Blog(String id, String title, String content, Date createdDate, Date updateAt, int totalView) {
-        this.id = id;
+        this.blogID = id;
         this.title = title;
         this.content = content;
         this.createdDate = createdDate;
@@ -49,11 +49,11 @@ public class Blog {
     
     
     public String getID() {
-        return id;
+        return blogID;
     }
 
     public void setBlogID(String id) {
-        this.id = id;
+        this.blogID = id;
     }
 
     public String getTitle() {
@@ -107,6 +107,6 @@ public class Blog {
 
     @Override
     public String toString() {
-        return "Blog{" + "id=" + id + ", title=" + title + ", content=" + content + ", createdDate=" + createdDate + ", updateAt=" + updateAt + ", totalView=" + totalView + '}';
+        return "Blog{" + "id=" + blogID + ", title=" + title + ", content=" + content + ", createdDate=" + createdDate + ", updateAt=" + updateAt + ", totalView=" + totalView + '}';
     }
 }

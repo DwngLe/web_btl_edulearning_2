@@ -31,7 +31,7 @@
     </head>
     <body>
         <h1>Thong tin bai viet</h1>
-            <form action="updateblog" method="post">
+            <form action="/elearning/admin/blog/update" method="post">
                 <input type="hidden" name="id" value="${b.getID()}">
                 <input type="hidden" name="createdDate" value="${b.getCreatedDate()}">
                 <input type="hidden" name="totalView" value="${b.getTotalView()}">

@@ -47,6 +47,7 @@ public class BlogDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), rs.getInt(6));
+                System.out.println("ID cua Blog: " + b.getID());
                 listBlog.add(b);
             }
         } catch (Exception e) {
@@ -77,6 +78,7 @@ public class BlogDAO {
     public void deleteBlog(String id) {
         String query = "DELETE FROM web.blog WHERE id = ?";
         try {
+            System.out.println("Xoa Blog co ID: " + id);
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, id);

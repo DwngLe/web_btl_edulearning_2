@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="btnL">
                                     <form action="/elearning/admin/managerAcc/user">
-                                        <input type="hidden" name="userID" value="${account.getUserID()}" />
+                                        <input type="hidden" name="userID" value="${u.userID}" />
                                         <button type="submit" >View</button>
                                     </form>
                                 </div>

@@ -11,9 +11,11 @@ import java.sql.Date;
  * @author Admin
  */
 public class EnrolledCourse {
+
     private String id;
     private String id_user;
     private String id_course;
+    private Course course;
     private Date subDate;
 
     public EnrolledCourse() {
@@ -58,13 +60,17 @@ public class EnrolledCourse {
         this.subDate = subDate;
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
     @Override
     public String toString() {
         return "EnrolledCourse{" + "id=" + id + ", id_user=" + id_user + ", id_course=" + id_course + ", subDate=" + subDate + '}';
     }
 
-    
-
-    
-    
 }

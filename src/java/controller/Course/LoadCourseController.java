@@ -5,6 +5,7 @@
 package controller.Course;
 
 import dao.CourseDAO;
+import stat.CourseStat;
 import entity.Course;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -14,13 +15,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "LoadCourseController", urlPatterns = {"/loadCourse"})
+@WebServlet(name = "LoadCourseController", urlPatterns = {"/admin/course"})
 public class LoadCourseController extends HttpServlet {
 
     /**
@@ -40,7 +42,7 @@ public class LoadCourseController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoadCourseController</title>");            
+            out.println("<title>Servlet LoadCourseController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet LoadCourseController at " + request.getContextPath() + "</h1>");
@@ -61,11 +63,12 @@ public class LoadCourseController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Course> c;
+        List<CourseStat> courStat = new ArrayList<>();
         CourseDAO cdao = new CourseDAO();
-        c = cdao.getAllCourse();
-        request.setAttribute("cList", c);
-        RequestDispatcher rd = request.getRequestDispatcher("listCourse.jsp");
+        courStat = cdao.getStatOfCourse();
+        
+        request.setAttribute("cList", courStat);
+        RequestDispatcher rd = request.getRequestDispatcher("managerCourse.jsp");
         rd.forward(request, response);
     }
 
