@@ -5,10 +5,10 @@
 
 package controller.Blog;
 
+import dao.BlogCommentDAO;
 import dao.BlogDAO;
-import dao.CommentDAO;
 import entity.Blog;
-import entity.CommentUser;
+import entity.BlogComment;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -61,8 +61,8 @@ public class BlogView extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String id = request.getParameter("id");
-        List<CommentUser> c;
-        CommentDAO cdao = new CommentDAO();
+        List<BlogComment> c;
+        BlogCommentDAO cdao = new BlogCommentDAO();
         c = cdao.getAllCommentBlog(id);
         request.setAttribute("cmtList", c);
         Blog b = new Blog();
