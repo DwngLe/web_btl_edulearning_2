@@ -49,12 +49,12 @@
                             <td>${blog.totalView}</td>
                             <td>
                                 <form action="/elearning/admin/blog/delete" method="post">
-                                    <input type="hidden" name="blogID" value="${blog.getID()}"/>
+                                    <input type="hidden" name="blogID" value="${blog.getBlogID()}"/>
                                     <button type ="submit">Xoa Blog</button>
                                 </form>
                                 <br/>
                                 <form action="/elearning/admin/blog/update" method="get">
-                                    <input type="hidden" name="blogID" value="${blog.getID()}"/>
+                                    <input type="hidden" name="blogID" value="${blog.getBlogID()}"/>
                                     <button type ="submit">Cap nhat Blog</button>
                                 </form>
                             </td>

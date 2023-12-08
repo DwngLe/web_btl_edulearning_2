@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="../css/admin_temp.css"/>
+        <link rel="stylesheet" href="../../css/admin_temp.css"/>
     </head>
     <body>
         <h1>Quản lý khoá học</h1>

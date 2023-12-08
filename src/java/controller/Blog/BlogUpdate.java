@@ -65,7 +65,7 @@ public class BlogUpdate extends HttpServlet {
         
         BlogDAO dao = new BlogDAO();
         Blog b = dao.getBlogByID(id);
-        System.out.println("Blog co id: " + b.getID() + "Co title la: " + b.getTitle());
+        System.out.println("Blog co id: " + b.getBlogID()+ "Co title la: " + b.getTitle());
         request.setAttribute("b", b);
         request.getRequestDispatcher("updateblog.jsp").forward(request, response);
     }

@@ -47,7 +47,7 @@ public class BlogDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), rs.getInt(6));
-                System.out.println("ID cua Blog: " + b.getID());
+                System.out.println("ID cua Blog: " + b.getBlogID());
                 listBlog.add(b);
             }
         } catch (Exception e) {

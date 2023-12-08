@@ -79,7 +79,7 @@ public class EnrollDAO {
         return null;
     }
 
-    public void deleteEnrollCourse(String courseID, String idUser) {
+    public void deleteEnrollCourse(String courseID) {
         System.out.println(courseID);
         String sqlString = "DELETE FROM enrolled_course WHERE id_course = ?";
         try {
@@ -87,7 +87,6 @@ public class EnrollDAO {
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, courseID);
             ps.executeUpdate();
-            System.out.println("Da xoa thanh cong course co id trong enroll: " + courseID);
         } catch (Exception e) {
         }
     }

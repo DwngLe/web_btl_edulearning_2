@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-@WebServlet(name = "UpdateCourseController", urlPatterns = {"/updateCourse"})
+@WebServlet(name = "UpdateCourseController", urlPatterns = {"/admin/course/update"})
 public class UpdateCourseController extends HttpServlet {
 
     /**
@@ -61,7 +61,7 @@ public class UpdateCourseController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
+        String id = request.getParameter("courseID");
         CourseDAO dao = new CourseDAO();
         Course p = dao.getCourseByID(id);
         request.setAttribute("p", p);
