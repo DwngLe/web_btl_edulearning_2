@@ -7,7 +7,7 @@ package dao;
 import context.DBContext;
 import entity.Course;
 import entity.EnrolledCourse;
-import entity.EnrolledCourseUser;
+import entity.User;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -34,8 +34,8 @@ public class EnrollDAO {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, s.getId());
-            ps.setString(2, s.getId_user());
-            ps.setString(3, s.getId_course());
+            ps.setString(2, s.getUser().getUserID());
+            ps.setString(3, s.getCourse().getCourseID());
             ps.setDate(4, s.getSubDate());
 
             ps.executeUpdate();
@@ -43,26 +43,30 @@ public class EnrollDAO {
         }
     }
 
-    public List<EnrolledCourseUser> getAllCourse(String idUser) {
+    public List<EnrolledCourse> getAllCourse(String idUser) {
         try {
 
-            String query = "SELECT course.*\n"
-                    + "FROM enrolled_course\n"
-                    + "JOIN course ON enrolled_course.id_course = course.id\n"
-                    + "WHERE enrolled_course.id_user = ?";
+            String query = "SELECT * FROM web.enrolled_course\n"
+                    + "where id_user=?";
             conn = new DBContext().getConnection();
-
+            UserDAO udao = new UserDAO();
+            CourseDAO cdao = new CourseDAO();
             ps = conn.prepareStatement(query);
             ps.setString(1, idUser);
 
             rs = ps.executeQuery();
 
-            List<EnrolledCourseUser> list = new ArrayList<>();
+            List<EnrolledCourse> list = new ArrayList<>();
 
             while (rs.next()) {
-                EnrolledCourseUser a;
-                a = new EnrolledCourseUser(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
-                list.add(a);
+                EnrolledCourse ec = new EnrolledCourse();
+                ec.setId(rs.getString("id"));
+                User u = udao.getUserById(rs.getString("id_user"));
+                ec.setUser(u);
+                Course course = cdao.getCourseByID(rs.getString("id_course"));
+                ec.setCourse(course);
+                ec.setSubDate(rs.getDate("sub_date"));
+                list.add(ec);
             }
 
             if (list.isEmpty()) {
@@ -75,7 +79,8 @@ public class EnrollDAO {
         return null;
     }
 
-    public void deleteEnrollCourse(String courseID) {
+    public void deleteEnrollCourse(String courseID, String idUser) {
+        System.out.println(courseID);
         String sqlString = "DELETE FROM enrolled_course WHERE id_course = ?";
         try {
             conn = new DBContext().getConnection();

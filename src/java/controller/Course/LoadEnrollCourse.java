@@ -6,7 +6,7 @@ package controller.Course;
 
 import dao.EnrollDAO;
 import dao.UserDAO;
-import entity.EnrolledCourseUser;
+import entity.EnrolledCourse;
 import entity.User;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -71,7 +71,7 @@ public class LoadEnrollCourse extends HttpServlet {
         user = udao.getUserById(idUser);
         
         EnrollDAO ed = new EnrollDAO();
-        List<EnrolledCourseUser> list = new ArrayList<>();
+        List<EnrolledCourse> list = new ArrayList<>();
         list = ed.getAllCourse(idUser);
         
         System.out.println(list.size());

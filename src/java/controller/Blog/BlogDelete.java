@@ -4,6 +4,7 @@
  */
 package controller.Blog;
 
+import dao.BlogCommentDAO;
 import dao.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -58,7 +59,12 @@ public class BlogDelete extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        String id = request.getParameter("id");
+        BlogDAO bdao = new BlogDAO();
+        bdao.deleteBlog(id);
+        BlogCommentDAO cdao = new BlogCommentDAO();
+        cdao.deleteAllCommentBlogByID(id);
+        response.sendRedirect("listblog");
     }
 
     /**

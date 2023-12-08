@@ -58,7 +58,7 @@
                 text-decoration: none;
                 color: white;
             }
-            
+
             .name {
                 font-weight: 700;
             }
@@ -74,29 +74,27 @@
     <body>
         <div class="btnContainer">
             <div class="btn">
-                <a href="#" onclick="deleteblog(`${b.getID()}`)">Delete</a>&nbsp;&nbsp;
+                <a href="#" onclick="deleteblog(`${b.getBlogID()}`)">Delete</a>&nbsp;&nbsp;
             </div>
             <div class="btn">
-                <a href="/elearning/updateblog?id=${b.getID()}">Update</a>
+                <a href="/elearning/updateblog?id=${b.getBlogID()}">Update</a>
             </div>
         </div>
         <h1>${b.getTitle()}</h1>
         <p>${b.getContent()}</p>
 
 
-        <form action="/elearning/blogaddcomment">
+        <form action="/elearning/blogaddcomment" method="post">
             Nhập bình luận: <input name="description" placeholder="Description" type="text"/>
-            <input name="elseID" hidden="true" value="${b.getID()}"/>
+            <input name="elseID" hidden="true" value="${b.getBlogID()}"/>
             <button type="submit">Comment</button>
         </form>
 
         <c:forEach var="m" items="${cmtList}">
             <div class="itemReview">
-                <div class="title">
-                    <div class="name"> ${m.userName} </div>
-                </div>
+                <div class="name"> ${m.user.getName()} </div>
                 <div class="descUser">
-                    ${m.description}
+                    ${m.getDescription()}
                 </div>
             </div>
         </c:forEach>

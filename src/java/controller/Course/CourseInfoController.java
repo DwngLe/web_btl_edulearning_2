@@ -7,7 +7,6 @@ package controller.Course;
 import dao.CommentDAO;
 import dao.CourseDAO;
 import entity.Comment;
-import entity.CommentUser;
 import entity.Course;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -66,7 +65,7 @@ public class CourseInfoController extends HttpServlet {
             throws ServletException, IOException {
         
         String id = request.getParameter("id");
-        List<CommentUser> c;
+        List<Comment> c;
         CommentDAO cdao = new CommentDAO();
         c = cdao.getAllCmtById(id);
         request.setAttribute("cmtList", c);

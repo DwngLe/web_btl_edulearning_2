@@ -137,17 +137,13 @@
                             <div class="imgUser">
                                 <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png"/>
                             </div>
-                            <div class="name">${m.userName}</div>
+                            <div class="name">${m.user.name}</div>
                         </div>
                         <div class="descUser">
                             ${m.description}
                         </div>
                     </div>
                 </c:forEach>
-
-
-
-
 
             </div>
             <div class="right">
