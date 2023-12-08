@@ -5,7 +5,7 @@
 
 package controller.Comment;
 
-import dao.CommentDAO;
+import dao.BlogCommentDAO;
 import dao.UserDAO;
 import entity.BlogComment;
 import entity.User;
@@ -16,7 +16,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -68,11 +67,12 @@ public class BlogAddComment extends HttpServlet {
         String id = UUID.randomUUID().toString();
         String desc = request.getParameter("description");
         String idBlog = request.getParameter("elseID");
+        
 
-        BlogComment c = new BlogComment(id,desc,idUser,idBlog);
+        BlogComment c = new BlogComment(id,desc,user);
         System.out.println(c);
-        CommentDAO cmdao = new CommentDAO();
-        cmdao.addBlogNewComment(c);
+        BlogCommentDAO cmdao = new BlogCommentDAO();
+        cmdao.addBlogNewComment(c, idBlog);
         response.sendRedirect("blog?id="+idBlog);
     } 
 

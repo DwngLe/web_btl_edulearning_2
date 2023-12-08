@@ -104,56 +104,5 @@ public class CommentDAO {
         }
     }
     
-    public void addBlogNewComment(BlogComment s) {
-        try {
-            
-            System.out.println(s.toString());
-            System.out.println(s);
-            String sqlString = "INSERT INTO web.blogcomment (id, description, created_date, id_user, id_blog) VALUES (?,?,?,?,?)";
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sqlString);
-            ps.setString(1, s.getId());
-            ps.setString(2, s.getDescription());
-            ps.setDate(3, s.getCreatedDate());
-            ps.setString(4, s.getIdUser());
-            ps.setString(5, s.getIdBlog());
-            ps.executeUpdate();
-        } catch (Exception e) {
-        }
-    }
     
-    public List<CommentUser> getAllCommentBlog(String id) {
-        List<CommentUser> listComment = new ArrayList<>();
-        try {
-            String query = "SELECT " +
-               "    blogcomment.id AS comment_id, " +
-               "    blogcomment.description, " +
-               "    blogcomment.created_date, " +
-               "    user.id AS user_id, " +
-               "    user.name AS user_name, " +
-               "    blogcomment.id_blog " +
-               "FROM " +
-               "    blogcomment " +
-               "JOIN " +
-               "    user ON blogcomment.id_user = user.id " +
-               "WHERE " +
-               "    blogcomment.id_blog = ?";
-           conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setString(1, id);
-            rs = ps.executeQuery();
-            List<CommentUser> list = new ArrayList<>();
-            while (rs.next()) {
-                CommentUser a;
-                a = new CommentUser(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5),rs.getString(6));
-                list.add(a);
-            }
-            if (list.isEmpty()) {
-                System.out.println("khong the ket noi duoc");
-            }
-            return list;
-        } catch (Exception e) {
-        }
-        return null;
-    }
 }

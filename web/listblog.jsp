@@ -86,16 +86,16 @@
             </tr>
             <c:forEach var="p" items="${listBlog}">
                 <tr>
-                    <td><a href="/elearning/blog?id=${p.getID()}">${p.getTitle()}</a></td>
+                    <td><a href="/elearning/blog?id=${p.getBlogID()}">${p.getTitle()}</a></td>
                     <td>${p.getContent()}</td>
                     <td>${p.getCreatedDate()}</td>
                     <td>
                         <div class="btnContainer">
                             <div class="btn">
-                                <a href="#" onclick="deleteblog(`${p.getID()}`)">Xoa</a>&nbsp;&nbsp;
+                                <a href="#" onclick="deleteblog(`${p.getBlogID()}`)">Xoa</a>&nbsp;&nbsp;
                             </div>
                             <div class="btn">
-                                <a href="/elearning/updateblog?id=${p.getID()}">Sua</a>
+                                <a href="/elearning/updateblog?id=${p.getBlogID()}">Sua</a>
                             </div>
                         </div>
                     </td>
