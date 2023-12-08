@@ -84,7 +84,7 @@
         <p>${b.getContent()}</p>
 
 
-        <form action="/elearning/blogaddcomment">
+        <form action="/elearning/blogaddcomment" method="post">
             Nhập bình luận: <input name="description" placeholder="Description" type="text"/>
             <input name="elseID" hidden="true" value="${b.getBlogID()}"/>
             <button type="submit">Comment</button>

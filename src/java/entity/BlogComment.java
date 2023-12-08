@@ -19,11 +19,11 @@ public class BlogComment {
 
     public BlogComment() {
     }
+    
 
-    public BlogComment(String commentID, String description, User user) {
+    public BlogComment(String commentID, String description) {
         this.commentID = commentID;
         this.description = description;
-        this.user = user;
         this.createdDate = dateNow();
     }
 

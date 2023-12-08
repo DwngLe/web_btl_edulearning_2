@@ -63,7 +63,7 @@ public class BlogView extends HttpServlet {
         String id = request.getParameter("id");
         List<BlogComment> c;
         BlogCommentDAO cdao = new BlogCommentDAO();
-        c = cdao.getAllCommentBlog(id);
+        c = cdao.getAllCommentBlogByID(id);
         request.setAttribute("cmtList", c);
         Blog b = new Blog();
         BlogDAO dao = new BlogDAO();

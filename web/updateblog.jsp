@@ -32,7 +32,7 @@
     <body>
         <h1>Thong tin bai viet</h1>
             <form action="updateblog" method="post">
-                <input type="hidden" name="id" value="${b.getID()}">
+                <input type="hidden" name="id" value="${b.getBlogID()}">
                 <input type="hidden" name="createdDate" value="${b.getCreatedDate()}">
                 <input type="hidden" name="totalView" value="${b.getTotalView()}">
                 Tieu De: <input type="text" name="title" value="${b.getTitle()}"> <br/><br/>
