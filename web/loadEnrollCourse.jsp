@@ -157,29 +157,29 @@
                 <div id="list-courses">
 
                     <c:forEach var="p" items="${cList}">
-                        <a href="/elearning/courseinfoctl?id=${p.courseId}" id="course">
+                        <a href="/elearning/courseinfoctl?id=${p.course.courseID}" id="course">
                             <div id="course-info">
                                 <div id="img">
-                                    <img src=${p.imageUrl} alt="alt"/>
+                                    <img src=${p.course.imageUrl} alt="alt"/>
                                 </div>
                                 <div>
-                                        <p id="price">${p.teacherName}</p>
+                                        <p id="price">${p.course.teacherName}</p>
                                     <div id="desc-price">
-                                        <h3 >${p.title}</h3>
+                                        <h3 >${p.course.title}</h3>
                                     </div>
                                     <div id="desc-price">
-                                        <p id="desc">${p.courseDesc}</p>
+                                        <p id="desc">${p.course.descriptionCourse}</p>
                                         
                                     </div>
                                     <div id="desc-price">
                                         <p id="desc">
                                             <i class="fa-regular fa-clock"></i>
-                                            ${p.duration}</p>
+                                            ${p.course.duration}</p>
                                         <p id="price">10 Lectures</p>    
                                     </div>
                                         
                                         <div class="btn-price">
-                                            <p class="price">$${p.price}</p>
+                                            <p class="price">$${p.course.price}</p>
                                         </div>
                                 </div>
                             </div>
