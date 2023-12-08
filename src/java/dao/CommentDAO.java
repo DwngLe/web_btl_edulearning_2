@@ -6,8 +6,8 @@ package dao;
 
 import context.DBContext;
 import entity.Comment;
-import entity.CommentUser;
 import entity.Course;
+import entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,54 +24,31 @@ public class CommentDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-//    public List<CommentUser> getCommentUsersForCourse(String courseId) {
-//        try {
-//            List<CommentUser> commentUsers = new ArrayList<>();
-//            String query = "SELECT user.name\n"
-//                    + "FROM user\n"
-//                    + "JOIN comment ON user.id = comment.id_user\n"
-//                    + "WHERE comment.id_else = ?";
-//            conn = new DBContext().getConnection();
-//            ps = conn.prepareStatement(query);
-//            ps.setString(1, courseId);
-//            rs = ps.executeQuery();
-//            ArrayList<CommentUser> list = new ArrayList<>();
-//            while (rs.next()){
-//                CommentUser a;
-//                a = new CommentUser(rs.getString(1));
-//                list.add(a);
-//            }
-//        } catch (Exception e) {
-//        }
-//        return null;
-//    }
-    public List<CommentUser> getAllCmtById(String id) {
+    public List<Comment> getAllCmtById(String id) {
         try {
-            String query = "SELECT \n"
-                    + "    comment.id AS comment_id,\n"
-                    + "    comment.description,\n"
-                    + "    comment.created_date,\n"
-                    + "    user.id AS user_id,\n"
-                    + "    user.name AS user_name,\n"
-                    + "    comment.id_course\n"
-                    + "FROM \n"
-                    + "    comment\n"
-                    + "JOIN \n"
-                    + "    user ON comment.id_user = user.id\n"
-                    + "WHERE \n"
-                    + "    comment.id_course = ?";
+            String query = "SELECT * FROM web.coursecomment\n"
+                    + "where id_course = ?";
             conn = new DBContext().getConnection();
 
+            UserDAO udao = new UserDAO();
+            CourseDAO cdao = new CourseDAO();
+            
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
             rs = ps.executeQuery();
 
-            List<CommentUser> list = new ArrayList<>();
+            List<Comment> list = new ArrayList<>();
 
             while (rs.next()) {
-                CommentUser a;
-                a = new CommentUser(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getString(4), rs.getString(5),rs.getString(6));
-                list.add(a);
+                Comment c = new Comment();
+                c.setId(rs.getString("id"));
+                c.setDescription(rs.getString("description"));
+                c.setCreated_date(rs.getDate("created_date"));
+                User u = udao.getUserById(rs.getString("id_user"));
+                c.setUser(u);
+                Course course = cdao.getCourseByID(rs.getString("id_course"));
+                c.setCourse(course);
+                list.add(c);
             }
 
             if (list.isEmpty()) {
@@ -86,17 +63,17 @@ public class CommentDAO {
 
     public void addNewComment(Comment s) {
         try {
-            
+
             System.out.println(s.toString());
             System.out.println(s);
-            String sqlString = "INSERT INTO web.comment (id, description, created_date, id_user, id_course) VALUES (?,?,?,?,?)";
+            String sqlString = "INSERT INTO web.coursecomment (id, description, created_date, id_user, id_course) VALUES (?,?,?,?,?)";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, s.getId());
             ps.setString(2, s.getDescription());
             ps.setDate(3, s.getCreated_date());
-            ps.setString(4, s.getId_user());
-            ps.setString(5, s.getId_course());
+            ps.setString(4, s.getUser().getUserID());
+            ps.setString(5, s.getCourse().getCourseID());
 
             ps.executeUpdate();
         } catch (Exception e) {

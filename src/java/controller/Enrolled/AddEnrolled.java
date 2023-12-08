@@ -89,7 +89,7 @@ public class AddEnrolled extends HttpServlet {
         java.util.Date utilDate = new java.util.Date();
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
         
-        EnrolledCourse e = new EnrolledCourse(id, idUser,id_course,sqlDate);
+        EnrolledCourse e = new EnrolledCourse(id, user,c,sqlDate);
         
         EnrollDAO dao = new EnrollDAO();
         dao.addNewEnroll(e);
