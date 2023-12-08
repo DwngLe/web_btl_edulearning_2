@@ -60,20 +60,6 @@ public class BlogAddComment extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        User user;
-        UserDAO udao = new UserDAO();
-        String idUser = (String) request.getSession().getAttribute("id");
-        user = udao.getUserById(idUser);
-        String id = UUID.randomUUID().toString();
-        String desc = request.getParameter("description");
-        String idBlog = request.getParameter("elseID");
-        
-
-        BlogComment c = new BlogComment(id,desc,user);
-        System.out.println(c);
-        BlogCommentDAO cmdao = new BlogCommentDAO();
-        cmdao.addBlogNewComment(c, idBlog);
-        response.sendRedirect("blog?id="+idBlog);
     } 
 
     /** 
@@ -86,7 +72,15 @@ public class BlogAddComment extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String idUser = (String) request.getSession().getAttribute("id");
+        String id = UUID.randomUUID().toString();
+        String desc = request.getParameter("description");
+        String idBlog = request.getParameter("elseID");
+        BlogComment c = new BlogComment(id,desc);
+        System.out.println(c);
+        BlogCommentDAO cmdao = new BlogCommentDAO();
+        cmdao.addBlogNewComment(c, idUser, idBlog);
+        response.sendRedirect("blog?id="+idBlog);
     }
 
     /** 
