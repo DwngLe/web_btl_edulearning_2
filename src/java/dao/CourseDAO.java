@@ -123,13 +123,12 @@ public class CourseDAO {
 
     public void deleteCourse(String courseID) {
         System.out.println(courseID);
-        String sqlString = "DELETE FROM `web`.`course` WHERE (`id` = ?);";
+        String sqlString = "Delete from course where (id = ?)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, courseID);
             ps.executeUpdate();
-            System.out.println("Da xoa thanh cong course co id: " + courseID);
         } catch (Exception e) {
         }
     }
