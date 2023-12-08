@@ -34,6 +34,7 @@
             <form action="updateblog" method="post">
                 <input type="hidden" name="id" value="${b.getID()}">
                 <input type="hidden" name="createdDate" value="${b.getCreatedDate()}">
+                <input type="hidden" name="totalView" value="${b.getTotalView()}">
                 Tieu De: <input type="text" name="title" value="${b.getTitle()}"> <br/><br/>
                 Noi Dung: <input type="text" name="content" value="${b.getContent()}"> <br/><br/>
                 <input type="submit" value="Submit" class="btn">
