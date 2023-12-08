@@ -5,8 +5,10 @@
 package controller.Comment;
 
 import dao.CommentDAO;
+import dao.CourseDAO;
 import dao.UserDAO;
 import entity.Comment;
+import entity.Course;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -72,17 +74,19 @@ public class AddCommentCtrl extends HttpServlet {
         user = udao.getUserById(idUser);
         String id = UUID.randomUUID().toString();
         String desc = request.getParameter("description");
-        String id_else = request.getParameter("elseID");
+        String id_course = request.getParameter("elseID");
+        CourseDAO cdao = new CourseDAO();
+        Course course = cdao.getCourseByID(id_course);
         Date created_date = new Date();
         
         java.util.Date utilDate = new java.util.Date();
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
-        Comment c = new Comment(id,desc,sqlDate,idUser,id_else);
+        Comment c = new Comment(id,desc,sqlDate,user,course);
         System.out.println(c);
         CommentDAO cmdao = new CommentDAO();
         cmdao.addNewComment(c);
-        response.sendRedirect("courseinfoctl?id="+id_else);
+        response.sendRedirect("courseinfoctl?id="+id_course);
     }
 
     /**

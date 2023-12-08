@@ -12,17 +12,17 @@ import java.sql.Date;
  */
 public class EnrolledCourse {
     private String id;
-    private String id_user;
-    private String id_course;
+    private User user;
+    private Course course;
     private Date subDate;
 
     public EnrolledCourse() {
     }
 
-    public EnrolledCourse(String id, String id_user, String id_course, Date subDate) {
+    public EnrolledCourse(String id, User user, Course course, Date subDate) {
         this.id = id;
-        this.id_user = id_user;
-        this.id_course = id_course;
+        this.user = user;
+        this.course = course;
         this.subDate = subDate;
     }
 
@@ -34,20 +34,20 @@ public class EnrolledCourse {
         this.id = id;
     }
 
-    public String getId_user() {
-        return id_user;
+    public User getUser() {
+        return user;
     }
 
-    public void setId_user(String id_user) {
-        this.id_user = id_user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getId_course() {
-        return id_course;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setId_course(String id_course) {
-        this.id_course = id_course;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public Date getSubDate() {
@@ -58,13 +58,5 @@ public class EnrolledCourse {
         this.subDate = subDate;
     }
 
-    @Override
-    public String toString() {
-        return "EnrolledCourse{" + "id=" + id + ", id_user=" + id_user + ", id_course=" + id_course + ", subDate=" + subDate + '}';
-    }
-
-    
-
-    
     
 }
