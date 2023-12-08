@@ -58,7 +58,7 @@
                 text-decoration: none;
                 color: white;
             }
-            
+
             .name {
                 font-weight: 700;
             }
@@ -92,9 +92,7 @@
 
         <c:forEach var="m" items="${cmtList}">
             <div class="itemReview">
-                <div class="title">
-                    <div class="name"> ${m.user.getName()} </div>
-                </div>
+                <div class="name"> ${m.user.getName()} </div>
                 <div class="descUser">
                     ${m.getDescription()}
                 </div>
