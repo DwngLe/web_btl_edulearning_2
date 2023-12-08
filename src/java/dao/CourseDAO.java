@@ -11,33 +11,35 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import stat.CourseStat;
 
 /**
  *
  * @author Admin
  */
 public class CourseDAO {
+
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-    
-    public List<Course> getAllCourse(){
+
+    public List<Course> getAllCourse() {
         try {
             String query = "SELECT * FROM web.course";
             conn = new DBContext().getConnection();
- 
+
             ps = conn.prepareStatement(query);
-       
+
             rs = ps.executeQuery();
-        
+
             List<Course> list = new ArrayList<>();
-            
+
             while (rs.next()) {
                 Course a;
-                a = new Course(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),rs.getInt(10));
+                a = new Course(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10));
                 list.add(a);
             }
-            
+
             if (list.isEmpty()) {
                 System.out.println("khong the ket noi duoc");
             }
@@ -47,8 +49,8 @@ public class CourseDAO {
         }
         return null;
     }
-    
-    public void addNewCourse(Course s){
+
+    public void addNewCourse(Course s) {
         try {
             String sqlString = "INSERT INTO course (id, teacher_name, price, duration, course_description,course_language, course_level, image_url,title) VALUES (?,?, ?,?,?,?,?,?,?)";
             conn = new DBContext().getConnection();
@@ -66,6 +68,7 @@ public class CourseDAO {
         } catch (Exception e) {
         }
     }
+
     public Course getCourseByID(String id) {
         try {
             String query = "select * from web.course where id=?";
@@ -73,10 +76,10 @@ public class CourseDAO {
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
             rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 Course a;
-                a = new Course(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),rs.getInt(10));
+                a = new Course(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10));
 
                 return a;
             }
@@ -84,11 +87,11 @@ public class CourseDAO {
         }
         return null;
     }
-    
-    public void updateCourse(Course s){
+
+    public void updateCourse(Course s) {
         String sqlString = "UPDATE web.course SET teacher_name = ?, price = ?, duration = ?, course_description = ?, course_language = ?, course_level = ?, image_url = ?, title=? WHERE (id = ?)";
         try {
-             
+
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, s.getTeacherName());
@@ -104,30 +107,73 @@ public class CourseDAO {
         } catch (Exception e) {
         }
     }
-    
-    public void updateTotalViewCourse(Course s){
+
+    public void updateTotalViewCourse(Course s) {
         String sqlString = "UPDATE web.course SET totalView = ? WHERE (id = ?)";
         try {
-             
+
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
-            ps.setInt(1, s.getTotalView()+1);
+            ps.setInt(1, s.getTotalView() + 1);
             ps.setString(2, s.getCourseID());
             ps.executeUpdate();
         } catch (Exception e) {
         }
     }
-    
-     public void deleteCourse(String courseID){
-         System.out.println(courseID);
-        String sqlString = "Delete from course where (id = ?)";
+
+    public void deleteCourse(String courseID) {
+        System.out.println(courseID);
+        String sqlString = "DELETE FROM `web`.`course` WHERE (`id` = ?);";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, courseID);
             ps.executeUpdate();
+            System.out.println("Da xoa thanh cong course co id: " + courseID);
         } catch (Exception e) {
         }
     }
-    
+
+    public List<CourseStat> getStatOfCourse() {
+        List<CourseStat> listCourseStat = null;
+        try {
+            String query = "SELECT\n"
+                    + "    c.id AS course_id,\n"
+                    + "    c.price AS course_price,\n"
+                    + "    c.totalView AS course_total_view,\n"
+                    + "    c.teacher_name,\n"
+                    + "    c.title,\n"
+                    + "    COUNT(e.id) AS total_enrollments,\n"
+                    + "    COALESCE(SUM(c.price), 0) AS total_revenue\n"
+                    + "FROM\n"
+                    + "    course c\n"
+                    + "LEFT JOIN\n"
+                    + "    enrolled_course e ON c.id = e.id_course\n"
+                    + "GROUP BY\n"
+                    + "    c.id, c.price, c.totalView;";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                if (listCourseStat == null) {
+                    listCourseStat = new ArrayList<>();
+                }
+                CourseStat courseStat = new CourseStat();
+                courseStat.setCourseID(rs.getString("course_id"));
+                courseStat.setPrice(rs.getInt("course_price"));
+                courseStat.setTotalView(rs.getInt("course_total_view"));
+                courseStat.setTotalEnrollment(rs.getInt("total_enrollments"));
+                courseStat.setTotalRevenue(rs.getInt("total_revenue"));
+                courseStat.setTeacherName(rs.getString("teacher_name"));
+                courseStat.setTitle(rs.getString("title"));
+
+                listCourseStat.add(courseStat);
+            }
+        } catch (Exception e) {
+        }
+        System.out.println("Do dai danh sach cac khoa hoc la: " + listCourseStat.size());
+        return listCourseStat;
+    }
+
 }

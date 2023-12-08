@@ -9,6 +9,7 @@ import entity.Course;
 import entity.EnrolledCourse;
 import entity.User;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -86,8 +87,40 @@ public class EnrollDAO {
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, courseID);
             ps.executeUpdate();
+            System.out.println("Da xoa thanh cong course co id trong enroll: " + courseID);
         } catch (Exception e) {
         }
+    }
+
+    public List<EnrolledCourse> getAllEnrollCourse(String id) {
+        List<EnrolledCourse> listEnrollCourse = new ArrayList<>();
+        String sqlString = "Select course.id,course.title,course.image_url,course.price, course.teacher_name,enrolled_course.sub_date  from enrolled_course join course on enrolled_course.id_course = course.id where enrolled_course.id_user = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sqlString);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Course c = new Course();
+                c.setCourseID(rs.getString("course.id"));
+                c.setTeacherName(rs.getString("course.teacher_name"));
+                c.setTitle(rs.getString("course.title"));
+                c.setImageUrl(rs.getString("course.image_url"));
+                c.setPrice(rs.getInt("course.price"));
+                System.out.println("cname:" + c.getTitle());
+                Date subDate = rs.getDate("enrolled_course.sub_date");
+
+                EnrolledCourse enrollCourse = new EnrolledCourse();
+                enrollCourse.setCourse(c);
+                enrollCourse.setSubDate(subDate);
+                listEnrollCourse.add(enrollCourse);
+            }
+            System.out.println("Do dai danh sach cac khoa hoc da dang ky la: " + listEnrollCourse.size());
+            return listEnrollCourse;
+
+        } catch (Exception e) {
+        }
+        return null;
     }
 
 }

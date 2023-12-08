@@ -80,22 +80,21 @@ public class UserResetPassController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("userID");
+        String username = request.getParameter("username");
         RandomStringExmple randomStringExmple = new RandomStringExmple();
         String newPass = randomStringExmple.randomPassword(number);
         UserDAO userDAO = new UserDAO();
-        int kq = userDAO.resetPassword(id, newPass);
+        int kq = userDAO.resetPassword(username, newPass);
 
         if (kq != 0) {
             // Kiểm tra xem đã redirect hay chưa trước khi thực hiện
             if (!response.isCommitted()) {
                 HttpSession session = request.getSession(false);
-                session.setAttribute("NewPass", newPass);
-//                session.setAttribute("Username", user);
+                session.setAttribute("newpass", newPass);
+                session.setAttribute("username", username);
                 response.sendRedirect("/elearning/resetPassword.jsp");
             } else {
-                // Xử lý nếu response đã committed
-                // Có thể gửi một thông báo lỗi hoặc thực hiện một hành động khác tùy thuộc vào yêu cầu
+               
                 response.getWriter().println("Error: Redirect already committed.");
             }
         }

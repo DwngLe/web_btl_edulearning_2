@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.Course;
+package controller.Admin;
 
-import dao.CourseDAO;
+import dao.EnrollDAO;
 import dao.UserDAO;
 import entity.Course;
-import entity.User;
+import entity.EnrolledCourse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,14 +15,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.UUID;
+import java.util.List;
 
 /**
  *
- * @author Admin
+ * @author duong
  */
-@WebServlet(name = "AddCourseController", urlPatterns = {"/admin/course/add"})
-public class AddCourseController extends HttpServlet {
+@WebServlet(name = "AdminGuestAccController", urlPatterns = {"/admin/managerAcc/user"})
+public class AdminGuestAccController extends HttpServlet {
+
+    UserDAO userDAO = new UserDAO();
+    EnrollDAO enrollDAO = new EnrollDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +44,10 @@ public class AddCourseController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddCourseController</title>");
+            out.println("<title>Servlet AdminGuestAccController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddCourseController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminGuestAccController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +65,11 @@ public class AddCourseController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            response.sendRedirect("addNewCourse.jsp");
+        String id = request.getParameter("userID");
+        List<EnrolledCourse> listEnrolledCourse = enrollDAO.getAllEnrollCourse(id);
+        System.out.println("Do dai danh sach cac khoa hoc da dang ky la: " + listEnrolledCourse.size());
+        request.setAttribute("listEnrolledCourse", listEnrolledCourse);
+        request.getRequestDispatcher("accDetail.jsp").forward(request, response);
     }
 
     /**
@@ -76,28 +83,7 @@ public class AddCourseController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user;
-        UserDAO udao = new UserDAO();
-        String idUser = (String) request.getSession().getAttribute("id");
-        user = udao.getUserById(idUser);
-
-        String id = UUID.randomUUID().toString();
-        String title = request.getParameter("title");
-        String teacherName = user.getName();
-        String level = request.getParameter("level");
-        String description = request.getParameter("description");
-        String language = request.getParameter("language");
-        String duration = request.getParameter("duration");
-        String price = request.getParameter("price");
-        String imgurl = request.getParameter("imgurl");
-
-        CourseDAO dao = new CourseDAO();
-
-        Course s = new Course(id, teacherName, Integer.parseInt(price), duration, description, language, level, imgurl, title, 0);
-        System.out.println(s.toString());
-        dao.addNewCourse(s);
-        response.sendRedirect("/elearning/admin/course");
-
+        processRequest(request, response);
     }
 
     /**

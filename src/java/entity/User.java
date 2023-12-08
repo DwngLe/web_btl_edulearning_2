@@ -5,6 +5,7 @@
 package entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -21,11 +22,12 @@ public class User {
     private String name;
     private long money =0;
     private String phoneNumber;
+    private Date createdDate;
 
     public User() {
     }
 
-    public User(String userID, String username, String password, Date dateOfBirth, String email, String name, long money, String phoneNumber) {
+    public User(String userID, String username, String password, Date dateOfBirth, String email, String name, long money, String phoneNumber, Date createdDate) {
         this.userID = userID;
         this.username = username;
         this.password = password;
@@ -34,6 +36,7 @@ public class User {
         this.name = name;
         this.money = money;
         this.phoneNumber = phoneNumber;
+        this.createdDate = createdDate;
     }
 
     public User(String userID, String name, Date dateOfBirth, String email, String phoneNumber, long money) {
@@ -116,6 +119,16 @@ public class User {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+    
+    
 
     @Override
     public String toString() {

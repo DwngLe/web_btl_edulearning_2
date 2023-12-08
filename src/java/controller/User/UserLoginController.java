@@ -25,12 +25,15 @@ import java.util.HashMap;
 @WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class UserLoginController extends HttpServlet {
 
+    String role = null;
+    String id = null;
     UserDAO userDAO = new UserDAO();
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+//        request.getRequestDispatcher("login.jsp").forward(request, response);
+            response.sendRedirect("login.jsp");
     }
 
     @Override
@@ -41,12 +44,26 @@ public class UserLoginController extends HttpServlet {
         User u = new User();
         u.setUsername(username);
         u.setPassword(password);
-        String id = userDAO.checkUser(u);
-        if (id !=null) {
+
+        User validUser = userDAO.checkUser(u);
+        role = validUser.getRole();
+        id = validUser.getUserID();
+        System.out.println("Login with user role and ID is: " + role + " " + id);
+        if (role != null) {
+           
             HttpSession session = request.getSession();
             session.setAttribute("id", id);
-            response.sendRedirect("loadallcourse");
+        
+            if (role.equals("GUEST")) {
+  
+                response.sendRedirect("loadallcourse");
+            }
+            if(role.equals("ADMIN")){
+
+                response.sendRedirect("admin");
+            }
         } else {
+           
             response.sendRedirect("login");
         }
     }

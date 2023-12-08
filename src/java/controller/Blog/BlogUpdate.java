@@ -20,7 +20,7 @@ import java.time.LocalDate;
  *
  * @author duong
  */
-@WebServlet(name = "updateblog", urlPatterns = {"/updateblog"})
+@WebServlet(name = "updateblog", urlPatterns = {"/admin/blog/update"})
 public class BlogUpdate extends HttpServlet {
 
     /**
@@ -61,9 +61,11 @@ public class BlogUpdate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
+        String id = request.getParameter("blogID");
+        
         BlogDAO dao = new BlogDAO();
         Blog b = dao.getBlogByID(id);
+        System.out.println("Blog co id: " + b.getID() + "Co title la: " + b.getTitle());
         request.setAttribute("b", b);
         request.getRequestDispatcher("updateblog.jsp").forward(request, response);
     }
@@ -91,7 +93,7 @@ public class BlogUpdate extends HttpServlet {
         Blog b = new Blog(id, title, content, createdDate, totalView); 
 //        System.out.println("Blog: " + b.toString());
         dao.updateBlog(b);
-        response.sendRedirect("listblog");
+        response.sendRedirect("/elearning/admin/blog");
     }
 
     /**
