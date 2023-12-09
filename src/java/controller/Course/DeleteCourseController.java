@@ -67,7 +67,7 @@ public class DeleteCourseController extends HttpServlet {
         String id = request.getParameter("id");
         String idUser = (String) request.getSession().getAttribute("id");
         EnrollDAO edao = new EnrollDAO();
-        edao.deleteEnrollCourse(id, idUser);
+        edao.deleteEnrollCourse(id);
         cmtdao.deleteCommentByCourse(id);
         dao.deleteCourse(id);
         response.sendRedirect("loadCourse");
