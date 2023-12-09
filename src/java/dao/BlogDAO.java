@@ -47,6 +47,7 @@ public class BlogDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Blog b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), rs.getInt(6));
+                System.out.println("ID cua Blog: " + b.getBlogID());
                 listBlog.add(b);
             }
         } catch (Exception e) {
@@ -62,7 +63,7 @@ public class BlogDAO {
             String query = "INSERT INTO web.blog (id,title, content, created_date, update_at, total_view) VALUES(?,?,?,?,?,?)";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-            ps.setString(1, b.getID());
+            ps.setString(1, b.getBlogID());
             ps.setString(2, b.getTitle());
             ps.setString(3, b.getContent());
             ps.setDate(4, b.getCreatedDate());
@@ -77,6 +78,7 @@ public class BlogDAO {
     public void deleteBlog(String id) {
         String query = "DELETE FROM web.blog WHERE id = ?";
         try {
+            System.out.println("Xoa Blog co ID: " + id);
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
@@ -96,7 +98,7 @@ public class BlogDAO {
             ps.setDate(3, b.getCreatedDate());
             ps.setDate(4, b.getUpdateAt());
             ps.setInt(5, b.getTotalView());
-            ps.setString(6, b.getID());
+            ps.setString(6, b.getBlogID());
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Loi truy van");
@@ -111,7 +113,7 @@ public class BlogDAO {
             ps = conn.prepareStatement(sqlString);
             b.increaseTotalView();
             ps.setInt(1, b.getTotalView());
-            ps.setString(2, b.getID());
+            ps.setString(2, b.getBlogID());
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Loi truy van");

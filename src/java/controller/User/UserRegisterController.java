@@ -14,6 +14,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 /**
@@ -84,7 +86,10 @@ public class UserRegisterController extends HttpServlet {
         user.setEmail(request.getParameter("email"));
         user.setName(request.getParameter("name"));
         user.setPhoneNumber(request.getParameter("phoneNumber"));
-
+        LocalDate localDate = java.time.LocalDate.now();
+        java.sql.Date createdDate = java.sql.Date.valueOf(localDate);
+        user.setCreatedDate(createdDate);
+        
         int isInserted = userDAO.addUser(user);
         System.out.println("is inserted"+isInserted);
         if(isInserted !=0){

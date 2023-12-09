@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author duong
  */
-@WebServlet(name = "ForgetPassword", urlPatterns = {"/forgetpassword/*"})
+@WebServlet(name = "ForgetPassword", urlPatterns = {"/forgetpassword"})
 public class UserForgetPassword extends HttpServlet {
 
     UserDAO userDAO = new UserDAO();

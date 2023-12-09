@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.Blog;
+package controller.Admin;
 
 import dao.BlogDAO;
 import entity.Blog;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,15 +14,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Date;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author duong
  */
-@WebServlet(name = "updateblog", urlPatterns = {"/admin/blog/update"})
-public class BlogUpdate extends HttpServlet {
+@WebServlet(name = "loadlistblog", urlPatterns = {"/admin/blog"})
+public class AdminBlogController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +41,10 @@ public class BlogUpdate extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BlogUpdate</title>");
+            out.println("<title>Servlet LoadListBlog</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BlogUpdate at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoadListBlog at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,13 +62,13 @@ public class BlogUpdate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("blogID");
-        
+        List<Blog> listBlog = new ArrayList<>();
         BlogDAO dao = new BlogDAO();
-        Blog b = dao.getBlogByID(id);
-        System.out.println("Blog co id: " + b.getBlogID()+ "Co title la: " + b.getTitle());
-        request.setAttribute("b", b);
-        request.getRequestDispatcher("updateblog.jsp").forward(request, response);
+        listBlog = dao.getAllBlog();
+        request.setAttribute("listBlog", listBlog);
+        System.out.println("Do dai danh sach blog: " + listBlog.size());
+        RequestDispatcher rd = request.getRequestDispatcher("managerBlog.jsp");
+        rd.forward(request, response);
     }
 
     /**
@@ -81,19 +82,7 @@ public class BlogUpdate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        String title = request.getParameter("title");
-        String content = request.getParameter("content");
-        String dateStr = request.getParameter("createdDate");
-        LocalDate localDate = LocalDate.parse(dateStr);
-        java.sql.Date createdDate = java.sql.Date.valueOf(localDate);
-        String strTotalView = request.getParameter("totalView");
-        int totalView = Integer.parseInt(strTotalView);
-        BlogDAO dao = new BlogDAO();
-        Blog b = new Blog(id, title, content, createdDate, totalView); 
-//        System.out.println("Blog: " + b.toString());
-        dao.updateBlog(b);
-        response.sendRedirect("/elearning/admin/blog");
+        processRequest(request, response);
     }
 
     /**

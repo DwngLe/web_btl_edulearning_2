@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-@WebServlet(name = "DeleteCourseController", urlPatterns = {"/deleteCourse"})
+@WebServlet(name = "DeleteCourseController", urlPatterns = {"/admin/course/delete"})
 public class DeleteCourseController extends HttpServlet {
 
     /**
@@ -41,7 +41,7 @@ public class DeleteCourseController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DeleteCourseController</title>");            
+            out.println("<title>Servlet DeleteCourseController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet DeleteCourseController at " + request.getContextPath() + "</h1>");
@@ -84,7 +84,13 @@ public class DeleteCourseController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        CourseDAO dao = new CourseDAO();
+        String id = request.getParameter("courseID");
+
+        EnrollDAO edao = new EnrollDAO();
+        edao.deleteEnrollCourse(id);
+        dao.deleteCourse(id);
+        response.sendRedirect("/elearning/admin/course");
     }
 
     /**

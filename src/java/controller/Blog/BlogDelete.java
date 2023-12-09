@@ -4,6 +4,7 @@
  */
 package controller.Blog;
 
+import dao.BlogCommentDAO;
 import dao.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author duong
  */
-@WebServlet(name = "deleteblog", urlPatterns = {"/deleteblog"})
+@WebServlet(name = "deleteblog", urlPatterns = {"/admin/blog/delete"})
 public class BlogDelete extends HttpServlet {
 
     /**
@@ -58,10 +59,12 @@ public class BlogDelete extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        BlogDAO dao = new BlogDAO();
-        dao.deleteBlog(id);
-        response.sendRedirect("listblog");
+//        String id = request.getParameter("id");
+//        BlogDAO bdao = new BlogDAO();
+//        bdao.deleteBlog(id);
+//        BlogCommentDAO cdao = new BlogCommentDAO();
+//        cdao.deleteAllCommentBlogByID(id);
+//        response.sendRedirect("listblog");
     }
 
     /**
@@ -75,7 +78,11 @@ public class BlogDelete extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id = request.getParameter("blogID");
+        BlogDAO dao = new BlogDAO();
+        dao.deleteBlog(id);
+        System.out.println("Da xoa blog thanh cong");
+        response.sendRedirect("/elearning/admin/blog");
     }
 
     /**

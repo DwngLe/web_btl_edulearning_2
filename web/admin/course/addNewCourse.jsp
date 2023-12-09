@@ -118,7 +118,7 @@
         <div id="container">
             <div>
                 <h2 id="title" >Add new course</h2>
-                <form action="/elearning/addCourse" >
+                <form action="/elearning/admin/course/add" method="post" >
                     <input name="title" placeholder="Title"/>   
                     <!--<input name="teacherName" value="Tung"/>-->
                     <input name="level" placeholder="Level"/>

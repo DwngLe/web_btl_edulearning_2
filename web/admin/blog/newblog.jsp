@@ -29,7 +29,7 @@
     </head>
     <body>
         <h1>Thong tin bai viet</h1>
-        <form action="newblog" method="post">
+        <form action="/elearning/admin/blog/add" method="post">
             <!--ID bai viet: <input type="text" name="id">  <br/><br/>-->
             Tieu de bai viet: <input type="text" name="title"> <br/><br/>
             Noi dung bai viet: <input type="text" name="content"> <br/><br/>
