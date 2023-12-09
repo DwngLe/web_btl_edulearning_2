@@ -80,5 +80,16 @@ public class CommentDAO {
         } catch (Exception e) {
         }
     }
+     public void deleteCommentByCourse(String courseID){
+         System.out.println(courseID);
+        String sqlString = "Delete from coursecomment where (id_course = ?)";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sqlString);
+            ps.setString(1, courseID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
     
 }

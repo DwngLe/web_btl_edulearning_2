@@ -4,6 +4,7 @@
  */
 package controller.Course;
 
+import dao.CommentDAO;
 import dao.CourseDAO;
 import dao.EnrollDAO;
 import dao.UserDAO;
@@ -62,10 +63,12 @@ public class DeleteCourseController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CourseDAO dao = new CourseDAO();
+        CommentDAO cmtdao = new CommentDAO();
         String id = request.getParameter("id");
         String idUser = (String) request.getSession().getAttribute("id");
         EnrollDAO edao = new EnrollDAO();
         edao.deleteEnrollCourse(id, idUser);
+        cmtdao.deleteCommentByCourse(id);
         dao.deleteCourse(id);
         response.sendRedirect("loadCourse");
     }
