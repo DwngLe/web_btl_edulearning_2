@@ -139,17 +139,16 @@ public class CourseDAO {
             String query = "SELECT\n"
                     + "    c.id AS course_id,\n"
                     + "    c.price AS course_price,\n"
-                    + "    c.totalView AS course_total_view,\n"
-                    + "    c.teacher_name,\n"
                     + "    c.title,\n"
-                    + "    COUNT(e.id) AS total_enrollments,\n"
-                    + "    COALESCE(SUM(c.price), 0) AS total_revenue\n"
+                    + "    c.teacher_name,\n"
+                    + "    c.totalView,\n"
+                    + "    COUNT(DISTINCT ec.id_user) AS total_enrollments,\n"
+                    + "    IFNULL(SUM(CASE WHEN ec.id_user IS NOT NULL THEN c.price ELSE 0 END), 0) AS total_revenue\n"
                     + "FROM\n"
                     + "    course c\n"
-                    + "LEFT JOIN\n"
-                    + "    enrolled_course e ON c.id = e.id_course\n"
+                    + "LEFT JOIN enrolled_course ec ON c.id = ec.id_course\n"
                     + "GROUP BY\n"
-                    + "    c.id, c.price, c.totalView;";
+                    + "    c.id, c.price, c.title, c.teacher_name, c.totalView;";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
@@ -161,7 +160,7 @@ public class CourseDAO {
                 CourseStat courseStat = new CourseStat();
                 courseStat.setCourseID(rs.getString("course_id"));
                 courseStat.setPrice(rs.getInt("course_price"));
-                courseStat.setTotalView(rs.getInt("course_total_view"));
+                courseStat.setTotalView(rs.getInt("totalView"));
                 courseStat.setTotalEnrollment(rs.getInt("total_enrollments"));
                 courseStat.setTotalRevenue(rs.getInt("total_revenue"));
                 courseStat.setTeacherName(rs.getString("teacher_name"));

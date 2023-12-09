@@ -15,14 +15,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author duong
  */
-@WebServlet(name="loadlistblog", urlPatterns={"/user-listblog"})
+@WebServlet(name="loadblog", urlPatterns={"/user/listblog"})
 public class BlogLoadList extends HttpServlet {
    
     /** 
@@ -60,12 +59,11 @@ public class BlogLoadList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        List<Blog> listBlog = new ArrayList<>();
+        List<Blog> listBlog;
         BlogDAO dao = new BlogDAO();
         listBlog = dao.getAllBlog();
         request.setAttribute("listBlog", listBlog);
-        System.out.println("Do dai danh sach blog: " + listBlog.size());
-        RequestDispatcher rd = request.getRequestDispatcher("managerBlog.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("listblog.jsp");
         rd.forward(request, response);
     } 
 
