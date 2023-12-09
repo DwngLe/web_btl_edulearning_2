@@ -21,7 +21,7 @@ import java.util.UUID;
  *
  * @author Admin
  */
-@WebServlet(name = "AddCourseController", urlPatterns = {"/addCourse"})
+@WebServlet(name = "AddCourseController", urlPatterns = {"/admin/course/add"})
 public class AddCourseController extends HttpServlet {
 
     /**
@@ -62,28 +62,7 @@ public class AddCourseController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user;
-        UserDAO udao = new UserDAO();
-        String idUser = (String) request.getSession().getAttribute("id");
-        user = udao.getUserById(idUser);
-        
-        String id = UUID.randomUUID().toString();
-        String title = request.getParameter("title");
-        String teacherName = user.getName();
-        String level = request.getParameter("level");
-        String description = request.getParameter("description");
-        String language = request.getParameter("language");
-        String duration = request.getParameter("duration");
-        String price = request.getParameter("price");
-        String imgurl = request.getParameter("imgurl");
-
-        CourseDAO dao = new CourseDAO();
-
-        Course s = new Course(id, teacherName, Integer.parseInt(price), duration, description, language, level, imgurl, title,0);
-        System.out.println(s.toString());
-        dao.addNewCourse(s);
-        response.sendRedirect("loadCourse");
-
+            response.sendRedirect("addNewCourse.jsp");
     }
 
     /**
@@ -97,7 +76,28 @@ public class AddCourseController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        User user;
+        UserDAO udao = new UserDAO();
+        String idUser = (String) request.getSession().getAttribute("id");
+        user = udao.getUserById(idUser);
+
+        String id = UUID.randomUUID().toString();
+        String title = request.getParameter("title");
+        String teacherName = user.getName();
+        String level = request.getParameter("level");
+        String description = request.getParameter("description");
+        String language = request.getParameter("language");
+        String duration = request.getParameter("duration");
+        String price = request.getParameter("price");
+        String imgurl = request.getParameter("imgurl");
+
+        CourseDAO dao = new CourseDAO();
+
+        Course s = new Course(id, teacherName, Integer.parseInt(price), duration, description, language, level, imgurl, title, 0);
+        System.out.println(s.toString());
+        dao.addNewCourse(s);
+        response.sendRedirect("/elearning/admin/course");
+
     }
 
     /**

@@ -34,10 +34,10 @@
                 background-color: #f2f2f2;
                 font-size: 20px;
             }
-            
+
             .btnContainer{
                 display: flex;
-                
+
             }
 
             .btn{
@@ -50,30 +50,22 @@
                 margin: 0 10px;
                 border-radius: 5px;
             }
-            
+
             .btn:hover{
                 cursor: pointer;
                 background-color: green;
             }
-            
+
             .btn>a{
                 text-decoration: none;
                 color: white;
             }
-            
+
             td > a {
                 text-decoration: none;
                 color: black;
             }
         </style>
-        
-        <script type="text/javascript">
-            function deleteblog(id) {
-                if (confirm("Confirm deletion of this post?")) {
-                    window.location = "deleteblog?id=" + id;
-                }
-            }
-        </script>
     </head>
     <body>
         <table>
@@ -86,25 +78,16 @@
             </tr>
             <c:forEach var="p" items="${listBlog}">
                 <tr>
-                    <td><a href="/elearning/blog?id=${p.getID()}">${p.getTitle()}</a></td>
+                    <td>${p.getTitle()}</td>
                     <td>${p.getContent()}</td>
                     <td>${p.getCreatedDate()}</td>
                     <td>
-                        <div class="btnContainer">
-                            <div class="btn">
-                                <a href="#" onclick="deleteblog(`${p.getID()}`)">Xoa</a>&nbsp;&nbsp;
-                            </div>
-                            <div class="btn">
-                                <a href="/elearning/updateblog?id=${p.getID()}">Sua</a>
-                            </div>
+                        <div class="btn">
+                            <a href="/elearning/blog?id=${p.getBlogID()}">Read more</a>&nbsp;&nbsp;
                         </div>
                     </td>
                 </tr>
             </c:forEach>
         </table>
-        
-        <div class="btn">
-            <a href="newblog.jsp">Bai viet moi</a>
-        </div>
     </body>
 </html>

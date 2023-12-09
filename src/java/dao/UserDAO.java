@@ -32,26 +32,24 @@ public class UserDAO {
 
     byte[] encryptionKey = {65, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12};
 
-    public String checkUser(User user) {
-        boolean isValid = false;
-        String id = null;
+    public User checkUser(User user) {
+        User u = new User();
         try {
+   
             String encryptedPassword = encryptor.encrypt(user.getPassword(), encryptionKey);
-            User u = null;
             String query = "select * from user where username=? and password = ?";
-            System.out.println("sss");
             conn = new DBContext().getConnection();
-
             ps = conn.prepareStatement(query);
             ps.setString(1, user.getUsername());
             ps.setString(2, encryptedPassword);
             rs = ps.executeQuery();
             if (rs.next()) {
-                id = rs.getString("id");
+               u.setUserID(rs.getString("id"));
+               u.setRole(rs.getString("role"));
             }
         } catch (Exception e) {
         }
-        return id;
+        return u;
     }
 
     public void updateUser(User user) {
@@ -114,7 +112,7 @@ public class UserDAO {
             ps.setString(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                user = new User(id, rs.getString("username"), rs.getString("password"), rs.getDate("date_of_birth"), rs.getString("email"), rs.getString("name"), rs.getLong("money"), rs.getString("phone_number"));
+                user = new User(id, rs.getString("username"), rs.getString("password"), rs.getDate("date_of_birth"), rs.getString("email"), rs.getString("name"), rs.getLong("money"), rs.getString("phone_number"), rs.getDate("created_date"));
                 System.out.println(user.getName());
             }
         } catch (Exception e) {
@@ -123,7 +121,7 @@ public class UserDAO {
     }
 
     public int addUser(User user) {
-        String sqlString = "INSERT INTO `user` (`id`, `username`, `password`, `role`, `email`, `name`, `money`, `phone_number`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sqlString = "INSERT INTO `user` (`id`, `username`, `password`, `role`, `email`, `name`, `money`, `phone_number`, `created_date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         int numRowChange = 0;
         System.out.println(user.getName());
         try {
@@ -135,13 +133,14 @@ public class UserDAO {
             ps.setString(3, encryptedPassword);
             ps.setString(4, user.getRole());
             ps.setString(5, user.getEmail());
-            
+
             ps.setString(6, user.getName());
             ps.setLong(7, user.getMoney());
             ps.setString(8, user.getPhoneNumber());
-            System.out.println("8");
+            ps.setDate(9, user.getCreatedDate());
+            System.out.println(user.getCreatedDate());
             numRowChange = ps.executeUpdate();
-            System.out.println("Num of row has changed:"+ numRowChange);
+    
         } catch (Exception e) {
         }
         return numRowChange;
@@ -156,8 +155,8 @@ public class UserDAO {
             ps.setString(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Course c = new Course(rs.getString(1), rs.getString(2), rs.getString(3),rs.getInt(4));
-                System.out.println("cname:"+c.getTitle());
+                Course c = new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+                System.out.println("cname:" + c.getTitle());
                 ecList.add(c);
             }
             for (Course c : ecList) {
@@ -211,21 +210,39 @@ public class UserDAO {
         return password;
     }
 
-    public int resetPassword(String id, String newPass) {
+    public int resetPassword(String username, String newPass) {
         int kq = 0;
         try {
-            System.out.println(id);
+            System.out.println(username);
             String encryptedPass = encryptor.encrypt(newPass, encryptionKey);
-            String query = "UPDATE `user` SET `password` = ? WHERE (`id` = ?);";
+            String query = "UPDATE `user` SET `password` = ? WHERE (`username` = ?);";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, encryptedPass);
-            ps.setString(2, id);
+            ps.setString(2, username);
             kq = ps.executeUpdate();
             System.out.println(kq);
         } catch (Exception e) {
         }
         return kq;
+    }
+    
+    public List<User> getAllUser(){
+        List<User> listUser = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM web.user where role != 'ADMIN';";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                User user = new User(rs.getString("id"), rs.getString("username"), rs.getString("password"), rs.getDate("date_of_birth"), rs.getString("email"), rs.getString("name"), rs.getLong("money"), rs.getString("phone_number"), rs.getDate("created_date"));
+                listUser.add(user);
+            }
+            System.out.println("list size: " +listUser.size());
+        } catch (Exception e) {
+        }
+        
+        return listUser;
     }
 
     public void changeMoney(User u, Course s){

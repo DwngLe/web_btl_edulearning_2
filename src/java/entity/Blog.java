@@ -12,7 +12,7 @@ import java.time.LocalDate;
  * @author duong
  */
 public class Blog {
-    private String id;
+    private String blogID;
     private String title;
     private String content;
     private Date createdDate, updateAt;
@@ -21,16 +21,16 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(String id, String title, String content) {
-        this.id = id;
+    public Blog(String blogID, String title, String content) {
+        this.blogID = blogID;
         this.title = title;
         this.content = content;
         this.createdDate = dateNow();
         this.updateAt = this.createdDate;
     }
 
-    public Blog(String id, String title, String content, Date createdDate, int totalView) {
-        this.id = id;
+    public Blog(String blogID, String title, String content, Date createdDate, int totalView) {
+        this.blogID = blogID;
         this.title = title;
         this.content = content;
         this.createdDate = createdDate;
@@ -38,8 +38,8 @@ public class Blog {
         this.updateAt = dateNow();
     }
 
-    public Blog(String id, String title, String content, Date createdDate, Date updateAt, int totalView) {
-        this.id = id;
+    public Blog(String blogID, String title, String content, Date createdDate, Date updateAt, int totalView) {
+        this.blogID = blogID;
         this.title = title;
         this.content = content;
         this.createdDate = createdDate;
@@ -48,12 +48,12 @@ public class Blog {
     }
     
     
-    public String getID() {
-        return id;
+    public String getBlogID() {
+        return blogID;
     }
 
-    public void setBlogID(String id) {
-        this.id = id;
+    public void setBlogID(String blogID) {
+        this.blogID = blogID;
     }
 
     public String getTitle() {
@@ -107,6 +107,6 @@ public class Blog {
 
     @Override
     public String toString() {
-        return "Blog{" + "id=" + id + ", title=" + title + ", content=" + content + ", createdDate=" + createdDate + ", updateAt=" + updateAt + ", totalView=" + totalView + '}';
+        return "Blog{" + "blogID=" + blogID + ", title=" + title + ", content=" + content + ", createdDate=" + createdDate + ", updateAt=" + updateAt + ", totalView=" + totalView + '}';
     }
 }

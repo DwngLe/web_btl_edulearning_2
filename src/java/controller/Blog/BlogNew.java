@@ -19,7 +19,7 @@ import java.util.UUID;
  *
  * @author duong
  */
-@WebServlet(name = "newblog", urlPatterns = {"/newblog"})
+@WebServlet(name = "newblog", urlPatterns = {"/admin/blog/add"})
 public class BlogNew extends HttpServlet {
 
     /**
@@ -60,7 +60,8 @@ public class BlogNew extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        request.getRequestDispatcher("newblog.jsp").forward(request, response);
+            response.sendRedirect("newblog.jsp");
     }
 
     /**
@@ -82,7 +83,7 @@ public class BlogNew extends HttpServlet {
 //        System.out.println("Blogtest: " + b.toString());
         BlogDAO dao = new BlogDAO();
         dao.addNewBlog(b);
-        response.sendRedirect("listblog");
+        response.sendRedirect("/elearning/admin/blog");
     }
 
     /**

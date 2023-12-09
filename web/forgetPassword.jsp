@@ -29,7 +29,7 @@
                     <td>${account.userID}</td>
                     <td>
                         <form action="/elearning/forgetpassword/resetpass" method="post">
-                            <input type="hidden" name="userID" value="${account.userID}" />
+                            <input type="hidden" name="username" value="${account.username}" />
                             <button type="submit" >Reset pass</button>
                         </form>
                     </td>
