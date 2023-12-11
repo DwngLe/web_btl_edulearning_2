@@ -1,0 +1,11 @@
+.avatar {
+  width: var(--height-default);
+  height: var(--height-default);
+  border-radius: 50%;
+}
+
+.avatar-big {
+  width: calc(var(--height-default) * 1.4);
+  height: calc(var(--height-default) * 1.4);
+  border-radius: 50%;
+}
