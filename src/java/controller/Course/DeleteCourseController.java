@@ -63,12 +63,12 @@ public class DeleteCourseController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CourseDAO dao = new CourseDAO();
-        CommentDAO cmtdao = new CommentDAO();
+//        CommentDAO cmtdao = new CommentDAO();
         String id = request.getParameter("id");
-        String idUser = (String) request.getSession().getAttribute("id");
-        EnrollDAO edao = new EnrollDAO();
-        edao.deleteEnrollCourse(id);
-        cmtdao.deleteCommentByCourse(id);
+//        String idUser = (String) request.getSession().getAttribute("id");
+//        EnrollDAO edao = new EnrollDAO();
+//        edao.deleteEnrollCourse(id);
+//        cmtdao.deleteCommentByCourse(id);
         dao.deleteCourse(id);
         response.sendRedirect("loadCourse");
     }
@@ -87,8 +87,8 @@ public class DeleteCourseController extends HttpServlet {
         CourseDAO dao = new CourseDAO();
         String id = request.getParameter("courseID");
 
-        EnrollDAO edao = new EnrollDAO();
-        edao.deleteEnrollCourse(id);
+//        EnrollDAO edao = new EnrollDAO();
+//        edao.deleteEnrollCourse(id);
         dao.deleteCourse(id);
         response.sendRedirect("/elearning/admin/course");
     }
