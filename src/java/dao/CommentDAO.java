@@ -33,7 +33,7 @@ public class CommentDAO {
 
             UserDAO udao = new UserDAO();
             CourseDAO cdao = new CourseDAO();
-            
+
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
             rs = ps.executeQuery();
@@ -80,6 +80,17 @@ public class CommentDAO {
         } catch (Exception e) {
         }
     }
+
+    public void deleteCommentByCourse(String courseID) {
+        System.out.println(courseID);
+        String sqlString = "Delete from coursecomment where (id_course = ?)";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sqlString);
+            ps.setString(1, courseID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
 }
-    
-    

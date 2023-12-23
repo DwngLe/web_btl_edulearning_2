@@ -165,7 +165,7 @@ public class CourseDAO {
                 courseStat.setTotalRevenue(rs.getInt("total_revenue"));
                 courseStat.setTeacherName(rs.getString("teacher_name"));
                 courseStat.setTitle(rs.getString("title"));
-
+                        
                 listCourseStat.add(courseStat);
             }
         } catch (Exception e) {
