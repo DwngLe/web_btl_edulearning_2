@@ -63,23 +63,9 @@
                 font-weight: 700;
             }
         </style>
-        <script type="text/javascript">
-            function deleteblog(id) {
-                if (confirm("Confirm deletion of this post?")) {
-                    window.location = "deleteblog?id=" + id;
-                }
-            }
-        </script>
     </head>
     <body>
-        <div class="btnContainer">
-            <div class="btn">
-                <a href="#" onclick="deleteblog(`${b.getBlogID()}`)">Delete</a>&nbsp;&nbsp;
-            </div>
-            <div class="btn">
-                <a href="/elearning/updateblog?id=${b.getBlogID()}">Update</a>
-            </div>
-        </div>
+        
         <h1>${b.getTitle()}</h1>
         <p>${b.getContent()}</p>
 
