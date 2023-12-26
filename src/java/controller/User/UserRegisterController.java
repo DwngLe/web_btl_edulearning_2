@@ -93,9 +93,11 @@ public class UserRegisterController extends HttpServlet {
         int isInserted = userDAO.addUser(user);
         System.out.println("is inserted"+isInserted);
         if(isInserted !=0){
-            response.sendRedirect("login");
+            request.setAttribute("successMessage", "Tài khoản đã được tạo thành công");
+             request.getRequestDispatcher("login.jsp").forward(request, response);
         }else{
-            response.sendRedirect("register");
+            request.setAttribute("errorMessage", "Lỗi, tài khoản đã tồn tại");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
         }
     }
 

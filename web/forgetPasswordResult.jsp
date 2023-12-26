@@ -1,5 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,7 +27,7 @@
     <header>
       <div class="grid wide header">
         <a href="/">
-          <img src="./assets/logo.png" alt="Logo" />
+          <img src="assets/logo.png" alt="Logo" />
         </a>
         <nav>
           <a class="nav-active" href="/">Trang chủ</a>
@@ -57,12 +57,12 @@
             <div class="col l-6">
               <div class="register-login-form">
                 <h1 class="title" style="padding: 12px">Tìm lại tài khoản</h1>
-                <form class="col" action="/elearning/forgetpassword" method="post">
+                <form class="col">
                   <!-- <label class="register-login-form-label">Số điện thoại</label> -->
                   <div class="input-container btn-fullwidth">
                     <input
                       type="text"
-                      name="phoneNumber"
+                      name=""
                       id=""
                       placeholder="Nhập số điện thoại"
                       class="input input-fullwidth single-form"
@@ -73,7 +73,7 @@
                   </div>
 
                   <input
-                    type="submit"
+                    type="button"
                     name=""
                     id=""
                     value="Tìm kiếm"
@@ -84,6 +84,30 @@
               </div>
             </div>
           </div>
+          <table class="c-12" id="accountTable">
+            <tr>
+              <th>Tên tài khoản</th>
+              <th style="width: 300px;">Ngày lập</th>
+              <th style="width: 300px;">Chức năng</th>
+            </tr>
+           <c:forEach items="${listAccount}" var="account">
+            <tr>
+                <td>${account.username}</td>
+                <td>${account.createdDate}</td>
+                <td>
+                    <form action="/elearning/forgetpassword/resetpass" method="post">
+                        <input type="hidden" name="username" value="${account.username}" />
+                        <button type="submit"
+                      name=""
+                      id=""
+                      value=""
+                      class="btn btn-secondary single-form"
+                      style="border: 0px">Đặt lại mật khẩu</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+          </table>
         </div>
       </div>
     </bottom>
@@ -212,7 +236,8 @@
     <div class="toast" id="toast-error">
       <i class="error-icon fa-solid fa-circle-exclamation"></i>
       <div class="toast-message">
-        <span class="toast-title text-error">Lỗi!</span> Không tìm thấy tài khoản
+        <span class="toast-title text-error">Lỗi!</span> Không thể cập nhật dữ
+        liệu. Vui lòng kiểm tra lại.
       </div>
       <i class="close-icon fa-solid fa-xmark"></i>
     </div>
@@ -233,10 +258,11 @@
       <i class="close-icon fa-solid fa-xmark"></i>
     </div>
     <script src="./js/toastAndModel.js"></script>
-     <c:if test="${not empty requestScope.errorMessage}">
-        <script>
-                        openToast("toast-error");
-        </script>
-    </c:if>
+    <script>
+      function showTable() {
+        document.getElementById("accountTable").style.display = "block";
+        return true;
+      }
+    </script>
   </body>
 </html>

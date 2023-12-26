@@ -35,8 +35,10 @@
 }
 
 .single-form {
-    margin-top: 20px;
+    margin-top: 5px;
+    margin-bottom: 20px;
 }
+
 
 .register-login-images .shape-1 {
     width: 270px;
@@ -53,4 +55,12 @@
     margin-top: 10px;
     text-align: right;
     color: rgb(0, 0, 255);
+}
+
+.register-login-form-label{
+    margin-bottom: 30px;
+}
+
+.required-field {
+    color: red;
 }

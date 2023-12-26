@@ -68,6 +68,7 @@
                                     id=""
                                     placeholder="Tài khoản"
                                     class="input input-fullwidth single-form"
+                                     required="required"
                                     />
                                 <input
                                     type="password"
@@ -75,6 +76,7 @@
                                     id=""
                                     placeholder="Mật khẩu"
                                     class="input input-fullwidth single-form"
+                                    required="required"
                                     />
                                 <input
                                     type="submit"
@@ -96,7 +98,7 @@
                                     />
                             </form>
                             <div class="forget-pass">
-                                <a href="" style="color: blue; margin-right: 15px"
+                                <a href="/elearning/forgetpassword" style="color: blue; margin-right: 15px"
                                    >Quên tài khoản hoặc mật khẩu</a
                                 >
                             </div>
@@ -112,7 +114,7 @@
         <div class="grid widget wide">
             <div class="row">
                 <div class="col l-3 m-6 c-12">
-                    <a href="#"><img src="./assets/imgs/logo.png" alt="Logo" /></a>
+                    <a href="#"><img src="./assets/logo.png" alt="Logo" /></a>
 
                     <div class="widget-address">
                         <h4>Km 10, Trần Phú</h4>
@@ -224,16 +226,14 @@
     <div class="toast" id="toast-success">
         <i class="sucess-icon fa-solid fa-circle-check"></i>
         <div class="toast-message">
-            <span class="toast-title text-success">Thành công!</span> Công việc đã
-            bị xóa.
+            <span class="toast-title text-success">Thành công!</span> Tài khoản đã được tạo
         </div>
         <i class="close-icon close-icon fa-solid fa-xmark"></i>
     </div>
     <div class="toast" id="toast-error">
         <i class="error-icon fa-solid fa-circle-exclamation"></i>
         <div class="toast-message">
-            <span class="toast-title text-error">Lỗi!</span> Không thể cập nhật dữ
-            liệu. Vui lòng kiểm tra lại.
+            <span class="toast-title text-error">Lỗi!</span> Tài khoản hoặc mật khẩu không chính xác
         </div>
         <i class="close-icon fa-solid fa-xmark"></i>
     </div>
@@ -254,5 +254,19 @@
         <i class="close-icon fa-solid fa-xmark"></i>
     </div>
     <script src="./js/toastAndModel.js"></script>
+    <c:if test="${not empty requestScope.successMessage}">
+        <script>
+             <!--<p style="color: green;"><c:out value="${requestScope.successMessage}" /></p>-->
+             openToast("toast-success");
+        </script>
+    </c:if>
+        
+    <c:if test="${not empty requestScope.errorMessage}">
+        <script>
+                        openToast("toast-error");
+        </script>
+    </c:if>    
+    
+        
 </body>
 </html>
