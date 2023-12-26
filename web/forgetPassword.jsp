@@ -6,8 +6,15 @@
     <title>Forgotten Password</title>
     <script>
         function showTable() {
-            document.getElementById('accountTable').style.display = 'block';
-            return true;
+            var table = document.getElementById('accountTable');
+//            if (table && table.rows.length > 1) {
+//                table.style.display = 'table';
+//            } else {
+//                table.style.display = 'none';
+//                alert("No accounts found for the entered phone number.");
+//            }
+            table.style.display ='table';
+            return false;
         }
     </script>
 </head>
@@ -19,23 +26,22 @@
         <input type="submit" value="Submit">
     </form>
 
-        <table id="accountTable">
+    <table id="accountTable" style="display:none;">
+        <tr>
+            <td>Account</td>
+        </tr>
+        <c:forEach items="${listAccount}" var="account">
             <tr>
-                <td>Account</td>
+                <td>${account.username}</td>
+                <td>${account.userID}</td>
+                <td>
+                    <form action="/elearning/forgetpassword/resetpass" method="post">
+                        <input type="hidden" name="username" value="${account.username}" />
+                        <button type="submit" >Reset pass</button>
+                    </form>
+                </td>
             </tr>
-            <c:forEach items="${listAccount}" var="account">
-                <tr>
-                    <td>${account.username}</td>
-                    <td>${account.userID}</td>
-                    <td>
-                        <form action="/elearning/forgetpassword/resetpass" method="post">
-                            <input type="hidden" name="username" value="${account.username}" />
-                            <button type="submit" >Reset pass</button>
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-
+        </c:forEach>
+    </table>
 </body>
 </html>

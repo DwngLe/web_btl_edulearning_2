@@ -41,20 +41,7 @@ public class UserForgetPassword extends HttpServlet {
        
         request.getRequestDispatcher("forgetPassword.jsp").forward(request, response);
     }
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        List<User> listUser = new ArrayList<>();
-//        String phoneNumber = request.getParameter("phoneNumber");
-//        System.out.println("PhoneNum:" + phoneNumber);
-//        listUser = userDAO.findUserByPhone(phoneNumber);
-//        // Gắn listUser vào session
-//        HttpSession session = request.getSession();
-//        session.setAttribute("listAccount", listUser);
-//
-//        // Chuyển hướng trang và truyền dữ liệu qua tham số URL
-//        response.sendRedirect("/elearning/forgetPassword.jsp?submitted=true");
-//    }
+
 
     @Override
     public String getServletInfo() {

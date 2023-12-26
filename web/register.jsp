@@ -1,9 +1,3 @@
-<%-- 
-    Document   : register
-    Created on : Nov 14, 2023, 4:54:18 PM
-    Author     : duong
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
