@@ -50,7 +50,7 @@
                             <td>${course.totalRevenue}</td>
                             <td>
                                 <div class="btnContainer">
-                                    <form class="btnD" action="/elearning/admin/course/delete" method="post">
+                                    <form class="btnD" action="/elearning/admin/course/delete" method="get">
                                         <input type="hidden" name="courseID" value="${course.getCourseID()}"/>
                                         <button type ="submit">Xoa khoa hoc</button>
                                     </form>
