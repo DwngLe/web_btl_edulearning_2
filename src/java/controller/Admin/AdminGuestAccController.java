@@ -72,6 +72,8 @@ public class AdminGuestAccController extends HttpServlet {
         request.getRequestDispatcher("accDetail.jsp").forward(request, response);
     }
 
+    
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
