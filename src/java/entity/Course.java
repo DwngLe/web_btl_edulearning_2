@@ -125,5 +125,12 @@ public class Course {
         this.totalView = totalView;
     }
 
+    @Override
+    public String toString() {
+        return "Course{" + "courseID=" + courseID + ", teacherName=" + teacherName + ", price=" + price + ", duration=" + duration + ", descriptionCourse=" + descriptionCourse + ", languageCourse=" + languageCourse + ", levelCourse=" + levelCourse + ", imageUrl=" + imageUrl + ", title=" + title + ", totalView=" + totalView + '}';
+    }
+    
+    
+
     
 }

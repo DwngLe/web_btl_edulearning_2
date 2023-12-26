@@ -43,11 +43,38 @@ public class EnrollDAO {
         }
     }
 
+//    public EnrolledCourse findEnroll(String idUser,String idCourse){
+//        try {
+//            String query = "SELECT * FROM web.enrolled_course where id_user=? and id_course =?";
+//            conn = new DBContext().getConnection();
+//            ps = conn.prepareStatement(query);
+//            ps.setString(1, idUser);
+//            ps.setString(2, idCourse);
+//            rs = ps.executeQuery();
+//            
+//            CourseDAO cdao = new CourseDAO();
+//            UserDAO  udao = new UserDAO();
+//            
+//            User u = udao.getUserById(idUser);
+//            Course c = cdao.getCourseByID(idCourse);
+//            
+//            if (rs.next()) {
+//                EnrolledCourse a = new EnrolledCourse();
+//                a.setId(rs.getString("id"));
+//                a.setUser(u);
+//                a.setCourse(c);
+//                a.setSubDate(rs.getDate("sub_date"));
+//                return a;
+//            }
+//        } catch (Exception e) {
+//        }
+//        return null;
+//    }
+//    
     public List<EnrolledCourse> getAllCourse(String idUser) {
         try {
 
-            String query = "SELECT * FROM web.enrolled_course\n"
-                    + "where id_user=?";
+            String query = "SELECT * FROM web.enrolled_course where id_user=?";
             conn = new DBContext().getConnection();
             UserDAO udao = new UserDAO();
             CourseDAO cdao = new CourseDAO();

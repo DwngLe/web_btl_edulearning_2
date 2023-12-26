@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.UUID;
-
+import jakarta.servlet.http.HttpSession;
 /**
  *
  * @author Admin
@@ -80,7 +80,9 @@ public class AddCourseController extends HttpServlet {
         UserDAO udao = new UserDAO();
         String idUser = (String) request.getSession().getAttribute("id");
         user = udao.getUserById(idUser);
-
+        
+        System.out.println(idUser);
+        
         String id = UUID.randomUUID().toString();
         String title = request.getParameter("title");
         String teacherName = user.getName();
@@ -94,7 +96,6 @@ public class AddCourseController extends HttpServlet {
         CourseDAO dao = new CourseDAO();
 
         Course s = new Course(id, teacherName, Integer.parseInt(price), duration, description, language, level, imgurl, title, 0);
-        System.out.println(s.toString());
         dao.addNewCourse(s);
         response.sendRedirect("/elearning/admin/course");
 

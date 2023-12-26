@@ -73,9 +73,7 @@ public class LoadEnrollCourse extends HttpServlet {
         EnrollDAO ed = new EnrollDAO();
         List<EnrolledCourse> list = new ArrayList<>();
         list = ed.getAllCourse(idUser);
-        
-        System.out.println(list.size());
-        
+ 
         request.setAttribute("cList", list);
         RequestDispatcher rd = request.getRequestDispatcher("loadEnrollCourse.jsp");
         rd.forward(request, response);

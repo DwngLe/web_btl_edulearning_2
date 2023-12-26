@@ -59,11 +59,11 @@ public class EnrolledCourse {
         this.subDate = subDate;
     }
 
-   
+    @Override
+    public String toString() {
+        return "EnrolledCourse{" + "id=" + id + ", user=" + user + ", course=" + course + ", subDate=" + subDate + '}';
+    }
 
-//    @Override
-//    public String toString() {
-//        return "EnrolledCourse{" + "id=" + id + ", id_user=" + id_user + ", id_course=" + id_course + ", subDate=" + subDate + '}';
-//    }
+   
 
 }
