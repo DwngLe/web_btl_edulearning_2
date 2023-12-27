@@ -171,16 +171,16 @@ public class UserDAO {
     public List<User> findUserByPhone(String phoneNumber) {
         List<User> listUser = new ArrayList<>();
         try {
-
-            String query = "select id, username from user where phone_number= ?";
+            System.out.println("Phone number is: " + phoneNumber);
+            String query = "select username, created_date  from user where phone_number= ?";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, phoneNumber);
             rs = ps.executeQuery();
             while (rs.next()) {
                 User user = new User();
-                user.setUserID(rs.getString("id"));
-                System.out.println(rs.getString("id"));
+                user.setCreatedDate(rs.getDate("created_date"));
+                System.out.println(rs.getDate("created_date"));
                 user.setUsername(rs.getString("username"));
                 listUser.add(user);
                 System.out.println(user.getUserID() + " " + user.getUsername());

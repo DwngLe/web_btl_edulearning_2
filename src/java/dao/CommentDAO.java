@@ -33,7 +33,7 @@ public class CommentDAO {
 
             UserDAO udao = new UserDAO();
             CourseDAO cdao = new CourseDAO();
-            
+
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
             rs = ps.executeQuery();
@@ -93,5 +93,3 @@ public class CommentDAO {
     }
     
 }
-    
-    
