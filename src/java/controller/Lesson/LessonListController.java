@@ -17,12 +17,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
  * @author My Asus
  */
-@WebServlet(name="LessonListController", urlPatterns={"/lesson"})
+@WebServlet(name="LessonListController", urlPatterns={"/admin/lesson"})
 public class LessonListController extends HttpServlet {
    
     /** 
@@ -61,10 +62,11 @@ public class LessonListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         LessonPartDao dao = new LessonPartDao();
-        List<LessonPart> list = dao.getListObject();
-        System.out.println(list);
+        UUID id = UUID.fromString(request.getParameter("CourseID"));
+        List<LessonPart> list = dao.getListObject(id);
         request.setAttribute("ListLessonPart", list);
-        RequestDispatcher rd = request.getRequestDispatcher("lesson.jsp");
+        request.setAttribute("CourseID", id);
+        RequestDispatcher rd = request.getRequestDispatcher("/admin/lesson/lesson.jsp");
         rd.forward(request, response);
     } 
 
@@ -79,10 +81,11 @@ public class LessonListController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String title = request.getParameter("newLessonPart");
-        LessonPart lessonPart = new LessonPart(title);
+        UUID courseID = UUID.fromString(request.getParameter("CourseID"));
+        LessonPart lessonPart = new LessonPart(title, courseID);
         LessonPartDao dao = new LessonPartDao();
         int result = dao.createObject(lessonPart);
-        response.sendRedirect("/WebApplication1/lesson");
+        response.sendRedirect("/elearning/admin/lesson?CourseID=" + courseID);
     }
 
     /** 

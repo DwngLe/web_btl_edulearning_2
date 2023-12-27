@@ -11,6 +11,26 @@
   font-family: unset;
 }
 
+.textarea {
+    display: block;
+    padding: 16px 25px;
+    border-radius: var(--border-radius-default);
+    border: 1px solid var(--color-border);
+    outline: none;
+    font-size: unset;
+    color: var(--color-subtext);
+    transition: border var(--animation-time-default) ease;
+    font-family: unset;
+}
+
+label {
+    font-weight: 500;
+}
+
+label + .input,.textarea,.input-container {
+    margin-top: 4px;
+}
+
 .input-fullwidth {
   width: 100%;
 }

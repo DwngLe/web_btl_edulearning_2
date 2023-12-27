@@ -32,6 +32,12 @@ public class Lesson {
         this.LessonPartID = LessonPartID;
     }
     
+    public Lesson(UUID LessonID, String Name, String VideoURL) {
+        this.LessonID = LessonID;
+        this.Name = Name;
+        this.VideoURL = VideoURL;
+    }
+    
     public Lesson(UUID LessonID, String Name, String VideoURL, String Desctiption) {
         this.LessonID = LessonID;
         this.Name = Name;
