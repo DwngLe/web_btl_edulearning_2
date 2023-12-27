@@ -60,7 +60,7 @@ public class UserLoginController extends HttpServlet {
             }
             if(role.equals("ADMIN")){
 
-                response.sendRedirect("admin");
+                response.sendRedirect("admin/managerAcc");
             }
         } else {
             request.setAttribute("errorMessage", "Lỗi, không tìm thấy tài khoản");
