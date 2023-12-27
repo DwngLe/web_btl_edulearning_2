@@ -11,6 +11,8 @@
 @import url(./base/tooltip.css);
 @import url(./base/avatar.css);
 @import url(./base/breadcrumb.css);
+@import url(./base/register-login.css);
+@import url(./base/resetpass.css);
 
 @import url(./layout/grid.css);
 @import url(./layout/header.css);
