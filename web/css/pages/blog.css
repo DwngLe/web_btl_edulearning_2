@@ -15,7 +15,7 @@ body {
     color: white;
 }
 
-.overlay{
+.overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -28,7 +28,7 @@ body {
     transition: all 0.3s linear;
 }
 
-.page-banner{
+.page-banner {
     height: 450px;
     background-color: #e7f8ee;
     display: flex;
@@ -39,23 +39,23 @@ body {
     position: relative;
 }
 
-.page-banner-content .title span{
+.page-banner-content .title span {
     position: relative;
     color: #309255;
 }
 
-.container-banner{
+.container-banner {
     width: 100%;
     margin-right: auto;
     margin-left: 250px;
 }
 
-.container{
+.container {
     width: 100%;
     padding-top: 20px;
 }
 
-.page-banner-content{
+.page-banner-content {
     max-width: 570px;
 }
 
@@ -81,14 +81,14 @@ body {
     line-height: 1.6;
 }
 
-.box-badge{
+.box-badge {
     position: absolute;
     bottom: 125px;
     right: 25%;
     width: 160px;
     height: 160px;
     text-align: center;
-    border: 1px solid rgba(30,92,55,0.5);
+    border: 1px solid rgba(30, 92, 55, 0.5);
     border-radius: 50%;
     margin: 0 auto;
     padding: 10px;
@@ -104,20 +104,20 @@ body {
     height: 100%;
 }
 
-.badge{
+.badge {
     font-size: 70px;
     color: #fff;
     display: block;
     line-height: 1;
 }
 
-.shape-1{
+.shape-1 {
     position: absolute;
     top: 20%;
     left: 100px;
 }
 
-.shape-2{
+.shape-2 {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -161,19 +161,19 @@ body {
 
 .widget-post {
     padding: 35px;
-    border: 1px solid rgba(48,146,85,0.2);
+    border: 1px solid rgba(48, 146, 85, 0.2);
     border-radius: 10px;
     margin-top: 30px;
 }
 
-.post-items{
+.post-items {
     padding: 0;
     list-style: none;
     margin: 0;
 }
 
 .widget-post .post-items li {
-    border-bottom: 1px solid rgba(48,146,85,0.2);
+    border-bottom: 1px solid rgba(48, 146, 85, 0.2);
     padding: 20px 0;
 }
 
@@ -191,6 +191,14 @@ body {
     margin: 0px;
 }
 
+.title-blog {
+    color: black;
+}
+
+.title-blog:hover {
+    color: var(--color-primary);
+}
+
 .post-content span {
     display: flex;
     align-items: center;
@@ -204,7 +212,7 @@ body {
 
 .widget-tags {
     padding: 35px;
-    border: 1px solid rgba(48,146,85,0.2);
+    border: 1px solid rgba(48, 146, 85, 0.2);
     border-radius: 10px;
     margin-top: 30px;
 }
@@ -232,14 +240,14 @@ body {
     background-color: white;
     display: block;
     color: #52565b;
-    border: 1px solid rgba(48,146,85,0.2);
+    border: 1px solid rgba(48, 146, 85, 0.2);
     border-radius: 10px;
     font-size: 15px;
     font-weight: 500;
     transition: all 0.3s ease 0s;
 }
 
-.widget-tags .tags-list li:hover a{
+.widget-tags .tags-list li:hover a {
     color: var(--color-primary);
     border-color: var(--color-primary)
 }
@@ -261,7 +269,7 @@ body {
     width: 50px;
     height: 50px;
     line-height: 52px;
-    border: 1px solid rgba(48,146,85,0.25);
+    border: 1px solid rgba(48, 146, 85, 0.25);
     border-radius: 10px;
     text-align: center;
     font-size: 18px;
@@ -370,7 +378,7 @@ body {
     width: 110px;
     height: 45px;
     line-height: 43px;
-    border: 1px solid rgba(48,146,85,0.2);
+    border: 1px solid rgba(48, 146, 85, 0.2);
     border-radius: 10px;
     color: #212832;
     text-align: center;
@@ -383,6 +391,7 @@ body {
     color: white;
     border-color: var(--color-primary);
 }
+
 .blog-details-comment .title {
     font-size: 25px;
     font-weight: 500;
@@ -406,9 +415,11 @@ body {
     padding: 10px 25px 5px;
     font-size: 15px;
     color: #52565b;
-    border: 1px solid rgba(48,146,85,0.2);
+    border: 1px solid rgba(48, 146, 85, 0.2);
     border-radius: 10px;
     background-color: white;
+    resize: none;
+    overflow: auto;
 }
 
 .single-form textarea:focus {
@@ -422,7 +433,7 @@ body {
 
 .single-comment {
     padding: 15px;
-    border: 1px solid rgba(48,146,85,0.2);
+    border: 1px solid rgba(48, 146, 85, 0.2);
     border-radius: 10px;
     margin-top: 30px;
     position: relative;
@@ -435,7 +446,7 @@ body {
     flex-direction: column;
 }
 
-.comment-author .name h4{
+.comment-author .name h4 {
     font-size: 22px;
     font-weight: 500;
     color: black;
@@ -466,4 +477,3 @@ body {
 .time {
     color: #ff8a00 !important;
 }
-

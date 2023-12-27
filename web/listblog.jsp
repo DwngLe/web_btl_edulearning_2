@@ -1,8 +1,4 @@
-<%-- 
-    Document   : listblog
-    Created on : Nov 15, 2023, 11:08:34 AM
-    Author     : duong
---%>
+<%-- Document : listblog Created on : Nov 15, 2023, 11:08:34 AM Author : duong --%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html" language="java" %>
@@ -10,22 +6,21 @@
 <%@ page import="enity.*" %>
 
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>List blog</title>
         <link rel="stylesheet" href="./css/main.css" />
-        <link rel="stylesheet" href="./css/pages/listblog.css"/>
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-            />
+        <link rel="stylesheet" href="./css/pages/listblog.css" />
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+              integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
+
     <body>
         <header>
             <div class="grid wide header">
@@ -43,10 +38,7 @@
                         <img class="avatar" src="https://placehold.co/100x100" alt="image" />
                     </a>
                 </div>
-                <i
-                    class="menu-btn fa-solid fa-bars"
-                    onclick="openOverlay('header-mobile')"
-                    ></i>
+                <i class="menu-btn fa-solid fa-bars" onclick="openOverlay('header-mobile')"></i>
             </div>
         </header>
 
@@ -81,26 +73,34 @@
                 <div class="row">
                     <c:forEach var="p" items="${listBlog}">
                         <div class="col l-4 c-6">
-                            <div class ="single-blog">
+                            <div class="single-blog">
                                 <div class="blog-image">
                                     <a href="/elearning/blog?id=${p.getBlogID()}">
-                                        <img src="./assets/blog/blog-01.jpg" alt="Picture blog">
+                                        <c:choose>
+                                            <c:when test="${not empty p.urlImg}">
+                                                <img src="${p.urlImg}" alt="Picture blog">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="${pageContext.request.contextPath}${ImageUtils.getDefaultImagePath()}" alt="Default Picture blog">
+                                            </c:otherwise>
+                                        </c:choose>
                                     </a>
                                 </div>
                                 <div class="blog-conten">
                                     <h3 class="title"> ${p.getTitle()}</h3>
                                     <div class="blog-meta">
                                         <span>
-                                            <img src="./assets/icon/date.png" alt="Icon date"/>
+                                            <img src="./assets/icon/date.png" alt="Icon date" />
                                             <p>${p.getCreatedDate()}</p>
                                         </span>
                                         <span>
-                                            <img src="./assets/icon/view.png" alt="Icon date"/>
+                                            <img src="./assets/icon/view.png" alt="Icon date" />
                                             <p>${p.getTotalView()}</p>
                                         </span>
                                     </div>
-                                    <button class="btn btn-secondary" onclick="redirectToBlog(`${p.getBlogID()}`)">
-                                        Read more
+                                    <button class="btn btn-secondary"
+                                            onclick="redirectToBlog(`${p.getBlogID()}`)">
+                                        Xem thêm
                                     </button>
                                 </div>
                             </div>
@@ -110,11 +110,13 @@
             </div>
             <div class="page-pagination">
                 <ul class="pagination">
-                    <li><a href="#"> <img src="./assets/icon/left-arrow.png" alt="Left arrow"/> </a></li>
+                    <li><a href="#"> <img src="./assets/icon/left-arrow.png" alt="Left arrow" />
+                        </a></li>
                     <li><a class="active" href="#">1</a></li>
                     <li><a href="#">2</a></li>
                     <li><a href="#">3</a></li>
-                    <li><a href="#"> <img src="./assets/icon/right-arrow.png" alt="Left arrow"/> </a></li>
+                    <li><a href="#"><img src="./assets/icon/right-arrow.png" alt="Left arrow" />
+                        </a></li>
                 </ul>
             </div>
 
@@ -221,4 +223,5 @@
     <script src="./js/toastAndModel.js"></script>
     <script src="./js/blog.js"></script>
 </body>
+
 </html>

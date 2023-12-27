@@ -1,15 +1,12 @@
-<%-- 
-    Document   : blog
-    Created on : Nov 16, 2023, 5:34:02 AM
-    Author     : duong
---%>
+<%-- Document : blog Created on : Nov 16, 2023, 5:34:02 AM Author : duong --%>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="enity.*" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Blog</title>
@@ -17,14 +14,12 @@
         <link rel="stylesheet" href="./css/main.css" />
         <link rel="stylesheet" href="./css/pages/blog.css" />
         <script src="https://kit.fontawesome.com/1e40a0bb55.js" crossorigin="anonymous"></script>
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-            />
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+              integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
+
     <body>
         <div class="main-wrapper">
             <header>
@@ -43,10 +38,7 @@
                             <img class="avatar" src="https://placehold.co/100x100" alt="image" />
                         </a>
                     </div>
-                    <i
-                        class="menu-btn fa-solid fa-bars"
-                        onclick="openOverlay('header-mobile')"
-                        ></i>
+                    <i class="menu-btn fa-solid fa-bars" onclick="openOverlay('header-mobile')"></i>
                 </div>
             </header>
 
@@ -82,33 +74,45 @@
                         <div class="col l-4 c-4">
                             <div class="sidebar">
                                 <div class="input-container sidebar-widget">
-                                    <input class="input" placeholder="Tim kiem" type="text">
+                                    <input class="input" placeholder="Tìm kiếm" type="text">
                                     <button class="btn input-ic btn-icon">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </button>
                                 </div>
 
                                 <div class="sidebar-widget">
-                                    <h4 class="widget-title">Recent Post</h4>
+                                    <h4 class="widget-title">Bài đăng gần đây</h4>
                                     <div class="widget-post">
                                         <ul class="post-items">
-                                            <li>
-                                                <div class="single-post">
-                                                    <div class="post-content">
-                                                        <h5 class="title"><a href="blog-details-left-sidebar.html">Create Amazing Color Schemes Design</a></h5>
-                                                        <span>
-                                                            <img src="./assets/icon/date.png" alt="Icon date"/>
-                                                            <p>21/11/2023</p>
-                                                        </span>
-                                                    </div>
-                                                </div>  
-                                            </li>
+                                            <c:set var="count" value="0" />
+                                            <c:forEach var="p" items="${listBlog}">
+                                                <c:if test="${count lt 3}">
+                                                    <li>
+                                                        <div class="single-post">
+                                                            <div class="post-content">
+                                                                <h5 class="title">
+                                                                    <a class="title-blog"
+                                                                        href="/elearning/blog?id=${p.getBlogID()}">${p.getTitle()}</a>
+                                                                </h5>
+                                                                <span>
+                                                                    <img src="./assets/icon/date.png"
+                                                                         alt="Icon date" />
+                                                                    <p>${p.getCreatedDate()}</p>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <!-- Tăng biến đếm sau mỗi lần lặp -->
+                                                    <c:set var="count" value="${count + 1}" />
+                                                </c:if>
+                                            </c:forEach>
+
                                         </ul>
                                     </div>
                                 </div>
 
                                 <div class="sidebar-widget">
-                                    <h4 class="widget-title">Popular Tags</h4>
+                                    <h4 class="widget-title">Chủ đề phổ biến</h4>
                                     <div class="widget-tags">
                                         <ul class="tags-list">
                                             <li><a href="#">Design</a></li>
@@ -124,14 +128,19 @@
                                 </div>
 
                                 <div class="sidebar-widget">
-                                    <h4 class="widget-title">Share Blog</h4>
+                                    <h4 class="widget-title">Chia sẻ Blog</h4>
 
                                     <ul class="social">
-                                        <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
-                                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa-solid fa-envelope"></i></a></li>
-                                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                                        <li><a href="#"><i class="fa-brands fa-facebook"></i></a>
+                                        </li>
+                                        <li><a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                                        </li>
+                                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a>
+                                        </li>
+                                        <li><a href="#"><i class="fa-solid fa-envelope"></i></a>
+                                        </li>
+                                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                        </li>
                                     </ul>
                                 </div>
 
@@ -142,18 +151,18 @@
                                 <div class="blog-details-meta">
                                     <div class="blog-meta">
                                         <span>
-                                            <img src="./assets/icon/date.png" alt="Icon date"/>
+                                            <img src="./assets/icon/date.png" alt="Icon date" />
                                             <p>${b.getCreatedDate()}</p>
                                         </span>
                                         <span>
-                                            <img src="./assets/icon/view.png" alt="Icon date"/>
+                                            <img src="./assets/icon/view.png" alt="Icon date" />
                                             <p>${b.getTotalView()}</p>
                                         </span>
                                     </div>
 
                                     <div class="blog-type">
                                         <button class="btn btn-secondary btn-secondary-meta">
-                                            Khoa hoc
+                                            Khoa học
                                         </button>
                                     </div>
 
@@ -168,7 +177,7 @@
                                 </div>
 
                                 <div class="blog-details-label">
-                                    <h4 class="label">Tags:</h4>
+                                    <h4 class="label">Chủ đề:</h4>
                                     <ul class="tag-list">
                                         <li><a href="#">Design</a></li>
                                         <li><a href="#">Education</a></li>
@@ -178,13 +187,18 @@
                                 </div>
 
                                 <div class="blog-details-label">
-                                    <h4 class="label">Share:</h4>
+                                    <h4 class="label">Chia sẻ:</h4>
                                     <ul class="social">
-                                        <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
-                                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa-solid fa-envelope"></i></a></li>
-                                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                                        <li><a href="#"><i class="fa-brands fa-facebook"></i></a>
+                                        </li>
+                                        <li><a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                                        </li>
+                                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a>
+                                        </li>
+                                        <li><a href="#"><i class="fa-solid fa-envelope"></i></a>
+                                        </li>
+                                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                        </li>
                                     </ul>
                                 </div>
 
@@ -192,20 +206,25 @@
 
                             <div class="blog-details-comment">
                                 <div class="comment-form">
-                                    <h3 class="title">Comment tai day</h3>
+                                    <h3 class="title">Bình luận tại đây</h3>
                                     <div class="form-wrapper">
                                         <form action="/elearning/blogaddcomment" method="post">
-                                            <input name="elseID" hidden="true" value="${b.getBlogID()}"/>
+                                            <input name="elseID" hidden="true"
+                                                   value="${b.getBlogID()}" />
                                             <div class="row">
                                                 <div class="col l-8">
                                                     <div class="single-form">
                                                         <!--<input name="description" placeholder="Nhap binh luan cua ban" type="text"/>-->
-                                                        <textarea  name="description" rows="4" cols="50" placeholder="Nhap binh luan cua ban"></textarea>
+                                                        <textarea name="description" rows="4"
+                                                                  cols="50"
+                                                                  placeholder="Nhập bình luận của bạn"></textarea>
                                                     </div>
 
                                                     <div class="col l-8">
                                                         <div class="single-form text-center">
-                                                            <button class="btn btn-primary" type="submit">Comment</button>
+                                                            <button class="btn btn-primary"
+                                                                    style="margin-left: 150px;"
+                                                                    type="submit">Bình luận</button>
                                                         </div>
                                                     </div>
 
@@ -216,7 +235,7 @@
                                 </div>
 
                                 <div class="comment-wrapper">
-                                    <h3 class="title"> Comments </h3>
+                                    <h3 class="title"> Các bình luận </h3>
                                     <ul class="comment-item">
                                         <c:forEach var="m" items="${cmtList}">
                                             <li>
@@ -344,4 +363,5 @@
                 </div>
             </footer>
     </body>
+
 </html>
