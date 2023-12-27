@@ -119,7 +119,7 @@
                 </tr>
                 <c:forEach var="u" items="${listUser}">
                     <tr>
-                        <td>${u.username}</td>
+                        <td class="td-bold">${u.username}</td>
                         <td>${u.name}</td>
                         <td>${u.email}</td>
                         <td>${u.phoneNumber}</td>
@@ -130,7 +130,7 @@
                                 <div class="btnL">
                                     <form action="/elearning/admin/managerAcc/user">
                                         <input type="hidden" name="userID" value="${u.userID}" />
-                                        <button type="submit" >View</button>
+                                        <button class="btn-backgound" type="submit" >View</button>
                                     </form>
                                 </div>
                             </div>
