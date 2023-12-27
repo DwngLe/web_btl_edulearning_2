@@ -13,24 +13,26 @@ import java.util.UUID;
  */
 public class LessonPart {
     private UUID LessonPartID;
-    private String title;
+    private String Title;
+    private UUID CourseID;
     private List<Lesson> ListLesson;
 
     public LessonPart() {
     }
     
-    public LessonPart(String title) {
-        this.title = title;
+    public LessonPart(String title, UUID courseID) {
+        this.Title = title;
+        this.CourseID = courseID;
     }
     
     public LessonPart(UUID LessonPartID, String title) {
         this.LessonPartID = LessonPartID;
-        this.title = title;
+        this.Title = title;
     }
 
     public LessonPart(UUID LessonPartID, String title, List<Lesson> ListLesson) {
         this.LessonPartID = LessonPartID;
-        this.title = title;
+        this.Title = title;
         this.ListLesson = ListLesson;
     }
 
@@ -43,11 +45,11 @@ public class LessonPart {
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.Title = title;
     }
 
     public List<Lesson> getListLesson() {
@@ -56,6 +58,14 @@ public class LessonPart {
 
     public void setListLesson(List<Lesson> ListLesson) {
         this.ListLesson = ListLesson;
+    }
+
+    public UUID getCourseID() {
+        return CourseID;
+    }
+
+    public void setCourseID(UUID CourseID) {
+        this.CourseID = CourseID;
     }
     
     

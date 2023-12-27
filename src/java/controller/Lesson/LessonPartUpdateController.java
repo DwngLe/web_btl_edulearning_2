@@ -20,7 +20,7 @@ import java.util.UUID;
  *
  * @author My Asus
  */
-@WebServlet(name="UpdateLessonPart", urlPatterns={"/updatelessonpart"})
+@WebServlet(name="UpdateLessonPart", urlPatterns={"/admin/updatelessonpart"})
 public class LessonPartUpdateController extends HttpServlet {
    
     /** 
@@ -76,7 +76,7 @@ public class LessonPartUpdateController extends HttpServlet {
         LessonPart lessonPart = new LessonPart(id, title);
         LessonPartDao dao = new LessonPartDao();    
         dao.updateObject(lessonPart);
-        response.sendRedirect("/WebApplication1/lesson");
+        response.sendRedirect(request.getHeader("Referer"));
     }
 
     /** 

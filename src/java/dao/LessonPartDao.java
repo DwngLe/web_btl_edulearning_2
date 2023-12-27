@@ -4,6 +4,7 @@
  */
 package dao;
 
+import context.DBContext;
 import entity.Lesson;
 import entity.LessonPart;
 import java.util.ArrayList;
@@ -18,21 +19,28 @@ public class LessonPartDao extends Dao<LessonPart>{
 
     @Override
     public List<LessonPart> getListObject() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public List<LessonPart> getListObject(UUID id) {
         List<LessonPart> list = new ArrayList<>();
         try {
-            String query = "SELECT * FROM lessonpart";
-            conn = getConnection();
+            String query = "SELECT * FROM lessonpart WHERE course_id = ? ORDER BY created_time";
+            conn = new DBContext().getConnection();
             ps=conn.prepareStatement(query);
+            ps.setString(1, id.toString());
             rs=ps.executeQuery(); 
             LessonDao lessonDao = new LessonDao();
             while(rs.next()){
-              UUID id = UUID.fromString(rs.getString("LessonPartID"));
-              String title = rs.getString("Title");
-              List<Lesson> listLesson = lessonDao.getListObject(id);
-              list.add(new LessonPart(id, title, listLesson));
+              UUID LessonPartID = UUID.fromString(rs.getString("lesson_part_id"));
+              String title = rs.getString("title");
+              List<Lesson> listLesson = lessonDao.getListObject(LessonPartID);
+              list.add(new LessonPart(LessonPartID, title, listLesson));
             }      
+            if (conn != null) {
+                conn.close();
+            }
         } catch (Exception e) {
-            System.out.println("Loi truy van");
             System.out.println(e);
         }
         return list;
@@ -40,22 +48,44 @@ public class LessonPartDao extends Dao<LessonPart>{
 
     @Override
     public LessonPart getObject(UUID id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        LessonPart lessonPart = new LessonPart();
+        try {
+            String query = "SELECT * FROM lessonpart WHERE lesson_part_id = ?";
+            conn = new DBContext().getConnection();
+            ps=conn.prepareStatement(query);
+            ps.setString(1, id.toString());
+            rs=ps.executeQuery(); 
+            LessonDao lessonDao = new LessonDao();
+            while(rs.next()){
+              lessonPart.setLessonPartID(id);
+              lessonPart.setTitle(rs.getString("title"));
+              lessonPart.setListLesson(lessonDao.getListObject(id));
+            }      
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return lessonPart;
     }
 
     @Override
     public int createObject(LessonPart object) {
         try {
-            String query = "INSERT INTO lessonpart VALUES (?, ?)";
-            conn = getConnection();
+            String query = "INSERT INTO lessonpart (lesson_part_id, title, course_id) VALUES (?, ?, ?)";
+            conn = new DBContext().getConnection();
             ps=conn.prepareStatement(query);
             UUID id = UUID.randomUUID();
             ps.setString(1, id.toString());
             ps.setString(2, object.getTitle());
+            ps.setString(3, object.getCourseID().toString());
             int rowsInserted = ps.executeUpdate();
+            if (conn != null) {
+                conn.close();
+            }
             return rowsInserted;
         } catch (Exception e) {
-            System.out.println("Loi truy van");
             System.out.println(e);
         }
         return 0;
@@ -64,15 +94,17 @@ public class LessonPartDao extends Dao<LessonPart>{
     @Override
     public int updateObject(LessonPart object) {
         try {
-            String query = "UPDATE lessonpart SET Title = ? WHERE LessonPartID = ?";
-            conn = getConnection();
+            String query = "UPDATE lessonpart SET Title = ? WHERE lesson_part_id = ?";
+            conn = new DBContext().getConnection();
             ps=conn.prepareStatement(query);
             ps.setString(1, object.getTitle());
             ps.setString(2, object.getLessonPartID().toString());
             int rowUpdate = ps.executeUpdate();
+            if (conn != null) {
+                conn.close();
+            }
             return rowUpdate;
         } catch (Exception e) {
-            System.out.println("Loi truy van");
             System.out.println(e);
         }
         return 0;
@@ -81,14 +113,16 @@ public class LessonPartDao extends Dao<LessonPart>{
     @Override
     public int deleteObject(UUID id) {
         try {
-            String query = "DELETE FROM lessonpart WHERE LessonPartID = ?";
-            conn = getConnection();
+            String query = "DELETE FROM lessonpart WHERE lesson_part_id = ?";
+            conn = new DBContext().getConnection();
             ps=conn.prepareStatement(query);
             ps.setString(1, id.toString());
             int rowsDelete = ps.executeUpdate();
+            if (conn != null) {
+                conn.close();
+            }
             return rowsDelete;
         } catch (Exception e) {
-            System.out.println("Loi truy van");
             System.out.println(e);
         }
         return 0;
