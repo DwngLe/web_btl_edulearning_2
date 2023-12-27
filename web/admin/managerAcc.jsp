@@ -103,11 +103,11 @@
       <!-- End Sidebar -->
 
       <!-- Main -->
-      <main class="main-container">
+      <main class="main-container" style="width: 100%">
         <div class="main-title col">
           <h1>Danh sách các học viên</h1>
         </div>
-        <table>
+          <table style="width: 100%" >
                 <tr>
                     <th>Tên tài khoản</th>
                     <th>Họ và tên</th>
@@ -127,10 +127,6 @@
                         <td>${u.createdDate}</td>
                         <td>
                             <div class="btnContainer">
-
-                                <div class="btnD">
-                                    <a href="#" onclick="doDelete(`${u.username}`)">Delete</a>&nbsp;&nbsp;
-                                </div>
                                 <div class="btnL">
                                     <form action="/elearning/admin/managerAcc/user">
                                         <input type="hidden" name="userID" value="${u.userID}" />
