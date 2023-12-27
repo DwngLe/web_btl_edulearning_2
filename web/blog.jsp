@@ -12,60 +12,40 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <style>
-
-            .btnContainer{
-                display: flex;
-            }
-
-            .btn{
-                background-color: red;
-                width: 50px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 10px;
-                margin: 0 10px;
-                border-radius: 5px;
-            }
-
-            .btn:hover{
-                cursor: pointer;
-                background-color: green;
-            }
-
-            .btn>a{
-                text-decoration: none;
-                color: white;
-            }
-            .itemReview .title .imgUser img{
-                width: 50px;
-            }
-
-            .itemReview .title{
-                display: flex;
-                gap: 10px;
-                align-items: center;
-            }
-            .nav{
-                padding: 8px 0;
-                width: 1400px;
-                margin: auto;
-            }
-
-            .btn a{
-                text-decoration: none;
-                color: white;
-            }
-
-            .name {
-                font-weight: 700;
-            }
-        </style>
+        <title>Blog</title>
+        <link rel="stylesheet" href="./css/main.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+            />
     </head>
     <body>
-        
+        <header>
+      <div class="grid wide header">
+        <a href="/">
+          <img src="assets/imgs/logo.png" alt="Logo" />
+        </a>
+        <nav>
+          <a class="nav-active" href="/">Trang chủ</a>
+          <a href="/">Khóa học</a>
+          <a href="/">Blog</a>
+          <a href="/">Liên hệ</a>
+        </nav>
+        <div class="login-nav">
+          <a href="/">
+            <img class="avatar" src="https://placehold.co/100x100" alt="image" />
+          </a>
+        </div>
+        <i
+          class="menu-btn fa-solid fa-bars"
+          onclick="openOverlay('header-mobile')"
+        ></i>
+      </div>
+    </header>
+
         <h1>${b.getTitle()}</h1>
         <p>${b.getContent()}</p>
 
