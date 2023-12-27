@@ -49,7 +49,7 @@ public class UserLoginController extends HttpServlet {
         role = validUser.getRole();
         id = validUser.getUserID();
         System.out.println("Login with user role and ID is: " + role + " " + id);
-        if (role != null) {
+        if (id != null) {
            
             HttpSession session = request.getSession();
             session.setAttribute("id", id);
@@ -63,8 +63,8 @@ public class UserLoginController extends HttpServlet {
                 response.sendRedirect("admin");
             }
         } else {
-           
-            response.sendRedirect("login");
+            request.setAttribute("errorMessage", "Lỗi, không tìm thấy tài khoản");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 

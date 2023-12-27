@@ -32,6 +32,7 @@ public class BlogDAO {
                 b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), rs.getInt(6));
                 return b;
             }
+            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,6 +51,8 @@ public class BlogDAO {
                 System.out.println("ID cua Blog: " + b.getBlogID());
                 listBlog.add(b);
             }
+            conn.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,6 +73,8 @@ public class BlogDAO {
             ps.setDate(5, b.getUpdateAt());
             ps.setInt(6, b.getTotalView());
             ps.executeUpdate();
+            conn.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,6 +88,8 @@ public class BlogDAO {
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
             ps.executeUpdate();
+            conn.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -100,12 +107,14 @@ public class BlogDAO {
             ps.setInt(5, b.getTotalView());
             ps.setString(6, b.getBlogID());
             ps.executeUpdate();
+            conn.close();
+
         } catch (Exception e) {
             System.out.println("Loi truy van");
             System.out.println(e);
         }
     }
-    
+
     public void updateTotal(Blog b) {
         String sqlString = "UPDATE web.blog SET total_view=? WHERE id = ?";
         try {
@@ -115,6 +124,8 @@ public class BlogDAO {
             ps.setInt(1, b.getTotalView());
             ps.setString(2, b.getBlogID());
             ps.executeUpdate();
+            conn.close();
+
         } catch (Exception e) {
             System.out.println("Loi truy van");
             System.out.println(e);

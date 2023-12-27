@@ -19,6 +19,7 @@ const openOverlay = (id) => {
 }
 
 // Mở toast message
+console.log("test");
 const openToast = (id) => {
     try {
         const element = document.getElementById(id);
@@ -30,6 +31,7 @@ const openToast = (id) => {
         console.error(error);
     }
 }
+
 
 // Hàm để đóng bất cứ element nào
 const closeSomething = (elements, selector) => {
