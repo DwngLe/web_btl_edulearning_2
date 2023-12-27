@@ -14,7 +14,7 @@ import entity.EnrolledCourse;
 public class NewClass {
     public static void main(String[] args) {
         EnrollDAO edao = new EnrollDAO();
-        EnrolledCourse e = edao.findEnroll("5f36b083-10e1-4508-8bc2-85f2b3f26f75", "c02");
+        EnrolledCourse e = edao.findEnroll("f881e324-2dc8-4d5b-aaa4-3727d63885d7", "c02");
         System.out.println(e.toString());
     }
 }

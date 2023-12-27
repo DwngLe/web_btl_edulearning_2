@@ -46,15 +46,15 @@ public class AddEnrolled extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Successfully!!!</title>");            
+            out.println("<title>Successfully!!!</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Successfully!!!</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-         String referer = request.getHeader("Referer");
-         response.sendRedirect(referer);
+        String referer = request.getHeader("Referer");
+        response.sendRedirect(referer);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -74,28 +74,35 @@ public class AddEnrolled extends HttpServlet {
         Course c;
         UserDAO udao = new UserDAO();
         String idUser = (String) request.getSession().getAttribute("id");
-        
+
         user = udao.getUserById(idUser);
         CourseDAO cdao = new CourseDAO();
         String id_course = request.getParameter("id");
-        
+
         c = cdao.getCourseByID(id_course);
-        
-        udao.changeMoney(user, c);
-        
-        
-        Date created_date = new Date();
-        
-        java.util.Date utilDate = new java.util.Date();
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        
-        EnrolledCourse e = new EnrolledCourse(id, user,c,sqlDate);
-        
-        EnrollDAO dao = new EnrollDAO();
-        dao.addNewEnroll(e);
-        String referer = request.getHeader("Referer");
-        response.sendRedirect(referer);
-       
+
+        if (user.getMoney() >= c.getPrice()) {
+            udao.changeMoney(user, c);
+            Date created_date = new Date();
+
+            java.util.Date utilDate = new java.util.Date();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+            EnrolledCourse e = new EnrolledCourse(id, user, c, sqlDate);
+
+            EnrollDAO dao = new EnrollDAO();
+            dao.addNewEnroll(e);
+
+            String referer = request.getHeader("Referer");
+            response.sendRedirect(referer);
+//            
+//            request.setAttribute("toast", "Tham gia thành công!!!");
+//            request.getRequestDispatcher("courseInfo.jsp").forward(request, response);
+        } else {
+            request.setAttribute("toast", "Không đủ tiền, vui lòng nạp thêm!!!");
+            request.getRequestDispatcher("courseInfo.jsp").forward(request, response);
+        }
+
     }
 
     /**
@@ -110,7 +117,7 @@ public class AddEnrolled extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-      
+
     }
 
     /**

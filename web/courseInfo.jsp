@@ -760,14 +760,14 @@
                                                 </h3>
 
                                                 <form action="/elearning/addcmt">
-                                                   
+
                                                     <!--<input name="description" placeholder="Description" type="text"/>-->
                                                     <input style="margin: 20px 0 10px 0;" name="description" class="input" placeholder="Description"  type="text" />
                                                     <input name="elseID" hidden="true" value="${p.courseID}"/>
                                                     <button style="margin-bottom: 20px;" class="btn btn-primary" type="submit">Comment</button>
                                                 </form>
 
-                                                
+
 
                                                 <h3 class="tab-title">
                                                     Student Reviews
@@ -856,11 +856,29 @@
 
                             </ul>
                         </div>
-
                         <div class='info-btn'>
-                            <button onclick="openToast('toast-success')" class="btn btn-primary">Enroll Now</button>
+                            <%-- Kiểm tra enrolled có phải là "Enrollment not found" hay không --%>
+                            <c:if test="${enrolled eq 'Enrollment not found'}">
+                                <button class="btn btn-primary">
+                                    <a style="color: #fff;" href="/elearning/addenrolled?id=${p.courseID}">
 
+                                        Enroll Now
+                                    </a>
+                                </button>
+
+                            </c:if>
+                            <c:if test="${enrolled ne 'Enrollment not found'}">
+                                <button class="btn btn-primary">
+                                    
+                                    <a style="color: #fff;" href="#">
+
+                                        Lesson
+                                    </a>
+                                </button>
+                            </c:if>
                         </div>
+
+
                     </div>
 
                     <div style="margin-top:50px" class="sidebar-widget">

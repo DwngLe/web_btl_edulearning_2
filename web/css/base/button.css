@@ -21,6 +21,25 @@
   color: white;
 }
 
+.btn-info{
+    background-color: #45b2fc;
+    color: white;
+}
+
+.btn-info:hover{
+    background: #9cd6fe;
+}
+
+
+.btn-destructive{
+    background-color: #fd4c4c;
+    color: white;
+}
+
+.btn-destructive:hover{
+    background: #ff9191;
+}
+
 .btn-primary:hover {
   background-color: var(--color-primary-hover);
 }
