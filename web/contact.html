@@ -12,33 +12,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <style>
-      body {
-        background-color: rgb(240, 240, 240);
-      }
-      /* Cái css card này chỉ để trưng bày các component thôi chứ đừng đưa vào project */
-      .card-display-component {
-        background-color: white;
-        border-radius: var(--border-radius-default);
-        padding: 20px 32px;
-        height: 100%;
-        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-          0px 1px 1px 0px rgba(0, 0, 0, 0.14),
-          0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-      }
-
-      .card-display-component-img {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 150px;
-      }
-
-      .card-display-component-title {
-        margin-top: 28px;
-        text-align: center;
-      }
-    </style>
+    <link rel="stylesheet" href="./css/contact.css">
   </head>
   <body>
     <header>
@@ -50,10 +24,10 @@
           <a class="nav-active" href="/">Trang chủ</a>
           <a href="/">Khóa học</a>
           <a href="/">Blog</a>
-          <a href="/">Liên hệ</a>
+          <a href="/elearning/contact.html">Liên hệ</a>
         </nav>
         <div class="login-nav">
-          <a href="/">
+          <a href="/elearning/user">
             <img class="avatar" src="https://placehold.co/100x100" alt="image" />
           </a>
         </div>
@@ -77,7 +51,7 @@
             <div>
               Trần Doãn Đô
             </div>
-            <a href="/">Xem trang cá nhân</a>
+            <a href="/elearning/user">Xem trang cá nhân</a>
           </div>
         </div>
         <!-- <div class="login-nav">
@@ -94,13 +68,40 @@
           <a class="nav-active" href="/">Trang chủ</a>
           <a href="/">Khóa học</a>
           <a href="/">Blog</a>
-          <a href="/">Liên hệ</a>
+          <a href="/elearning/contact.html">Liên hệ</a>
         </nav>
       </div>
     </div>
-    <div class="container">
-        
-    </div>
+    <main>
+        <div class="title">Liên Hệ</div>
+        <div class="title-info">Chúng tôi sẽ trả lời bạn sớm nhất có thể!</div>
+
+        <form action="" method="" class="form">
+            <div class="input-group">
+                <input type="text" name="first_name" id="first-name" placeholder="Họ tên:">
+                <label for="first-name">Họ tên:</label>
+            </div>
+            
+            <div class="input-group">
+                <input type="text" name="last_name" id="last-name" placeholder="Số điện thoại:">
+                <label for="last-name">Số điện thoại:</label>
+            </div>
+
+            <div class="input-group">
+                <input type="email" name="e-mail" id="e-mail" placeholder="E-mail">
+                <label for="e-mail">E-mail</label>
+            </div>
+
+            <div class="textarea-group">
+                <textarea name="message" id="message" rows="5" placeholder="Lời nhắn:"></textarea>
+                <label for="message">Lời nhắn:</label>
+            </div>
+
+            <div class="button-div">
+                <button type="submit" class="btn btn-primary">Gửi</button>
+            </div>
+        </form>
+    </main>
     <footer>
       <div class="grid widget wide">
         <div class="row">
