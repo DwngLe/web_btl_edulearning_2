@@ -16,6 +16,35 @@ th {
     font-size: 20px;
 }
 
+.td-bold {
+    font-weight: bold;
+}
+
+.up-table{
+    display: flex;
+    justify-content: space-between;
+    margin-right: -20px;
+}
+
+.btn_flex {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.btnContainer form {
+    display: flex;
+}
+
+.btn-delete{
+    background-color: red !important;
+}
+
+.btn-backgound {
+    background-color: transparent;
+    color: white
+}
+
 .addNewBtn{
     margin-top: 10px;
     margin-left: 20px;
@@ -23,7 +52,7 @@ th {
 
 .btnContainer{
     display: flex;
-
+    margin-right: 10px;
 }
 
 .btnL{

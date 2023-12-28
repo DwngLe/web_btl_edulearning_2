@@ -12,17 +12,23 @@ import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.File;
 import java.util.UUID;
 
 /**
  *
  * @author My Asus
  */
-@WebServlet(name="LessonAddController", urlPatterns={"/addlesson"})
+@WebServlet(name="LessonAddController", urlPatterns={"/admin/addlesson"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,   // 2 MB
+                 maxFileSize = 1024 * 1024 * 500,       // 10 MB
+                 maxRequestSize = 1024 * 1024 * 550)
 public class LessonAddController extends HttpServlet {
    
     /** 
@@ -61,11 +67,12 @@ public class LessonAddController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         Lesson lesson = new Lesson();
-        lesson.setLessonPartID(UUID.fromString(request.getParameter("lessonPartID")));
+        lesson.setLessonPartID(UUID.fromString(request.getParameter("LessonPartID")));
+        request.setAttribute("CourseID", request.getParameter("CourseID"));
         request.setAttribute("lesson", lesson);
         request.setAttribute("title", "Thêm bài học");
-        request.setAttribute("link", "/WebApplication1/addlesson");
-        RequestDispatcher rd = request.getRequestDispatcher("LessonDetail.jsp");
+        request.setAttribute("link", "/elearning/admin/addlesson");
+        RequestDispatcher rd = request.getRequestDispatcher("/admin/lesson/LessonDetail.jsp");
         rd.forward(request, response);
     } 
 
@@ -80,13 +87,33 @@ public class LessonAddController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String name = request.getParameter("Name");
-        String videoURL = request.getParameter("VideoURL");
         String description = request.getParameter("Description");
+        String courseId = request.getParameter("CourseID");
+        
+        // Lấy thông tin file từ request
+        Part filePart = request.getPart("VideoURL");
+        String fileName = getSubmittedFileName(filePart);
+        
+        // Lưu trữ video trong thư mục uploads
+        String uploadPath = getServletContext().getRealPath("").replace("build" + File.separator + "web", "web");
+        String filePath = uploadPath + "assets" + File.separator + "videos" + File.separator + fileName;
+        filePart.write(filePath);
+        
         UUID lessonPartID = UUID.fromString(request.getParameter("LessonPartID"));
-        Lesson lesson = new Lesson(name, videoURL, description, lessonPartID);
+        Lesson lesson = new Lesson(name, fileName, description, lessonPartID);
         LessonDao dao = new LessonDao();
         int result = dao.createObject(lesson);
-        response.sendRedirect("/WebApplication1/lesson");
+        response.sendRedirect("/elearning/admin/lesson?CourseID=" + courseId);
+    }
+    
+    private String getSubmittedFileName(Part part) {
+        for (String cd : part.getHeader("content-disposition").split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                String fileName = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                return "video-" + UUID.randomUUID().toString() + "-" + fileName.substring(fileName.lastIndexOf('/') + 1).substring(fileName.lastIndexOf('\\') + 1);
+            }
+        }
+        return null;
     }
 
     /** 

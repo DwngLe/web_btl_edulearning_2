@@ -6,17 +6,20 @@ package entity;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Random;
 
 /**
  *
  * @author duong
  */
 public class Blog {
+
     private String blogID;
     private String title;
     private String content;
     private Date createdDate, updateAt;
     private int totalView = 0;
+    private String urlImg;
 
     public Blog() {
     }
@@ -45,9 +48,9 @@ public class Blog {
         this.createdDate = createdDate;
         this.updateAt = updateAt;
         this.totalView = totalView;
+        this.urlImg = randomUrlImage();
     }
-    
-    
+
     public String getBlogID() {
         return blogID;
     }
@@ -99,10 +102,21 @@ public class Blog {
     public void increaseTotalView() {
         this.totalView++;
     }
-    
+
     public Date dateNow() {
         LocalDate currentDate = LocalDate.now();
         return Date.valueOf(currentDate);
+    }
+
+    public String getUrlImg() {
+        return urlImg;
+    }
+
+    public String randomUrlImage() {
+        Random random = new Random();
+        int iRamdom = random.nextInt(9) + 1;
+        String url = String.format("./assets/blog/image/blog-%02d.jpg", iRamdom);
+        return url;
     }
 
     @Override

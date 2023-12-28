@@ -65,11 +65,16 @@ public class BlogView extends HttpServlet {
         BlogCommentDAO cdao = new BlogCommentDAO();
         c = cdao.getAllCommentBlogByID(id);
         request.setAttribute("cmtList", c);
+        
         Blog b = new Blog();
         BlogDAO dao = new BlogDAO();
         b = dao.getBlogByID(id);
         dao.updateTotal(b);
         request.setAttribute("b", b);
+        
+        List<Blog> listBlog;
+        listBlog = dao.getAllBlog();
+        request.setAttribute("listBlog", listBlog);
         request.getRequestDispatcher("blog.jsp").forward(request, response);
     } 
 
