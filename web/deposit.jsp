@@ -27,10 +27,10 @@
                     <a class="nav-active" href="/">Trang chủ</a>
                     <a href="/">Khóa học</a>
                     <a href="/">Blog</a>
-                    <a href="/">Liên hệ</a>
+                    <a href="/elearning/contact.html">Liên hệ</a>
                 </nav>
                 <div class="login-nav">
-                    <a href="/">
+                    <a href="/elearning/user">
                         <img class="avatar" src="https://placehold.co/100x100" alt="image" />
                     </a>
                 </div>
@@ -51,12 +51,12 @@
                 <h1>Nạp tiền</h1>
                 <form action="user-deposit" method="post">
                     <label for="amount">Nhập số tiền muốn nạp:</label>
-                    <input type="text" name="amount" required placeholder="VD:100000">
+                    <input type="text" name="amount" required placeholder="VD:100000" class="input">
                     <h2>Thực hiện chuyển khoản theo thông tin dưới đây:</h2>
                     <p> <b>Tên ngân hàng:</b>  MB Bank</p>
                     <p> <b>Số tài khoản:</b>  0388622098</p>
                     <p> <b>Chủ tài khoản:</b>  Nguyễn Nhất Vương</p>
-                    <p id="depositMessage"> <b>Mã giao dịch:${generateUniqueCode}</b> </p>
+                    <p id="depositMessage"> <b>Mã giao dịch: </b>${generateUniqueCode} </p>
                     <span style="font-style: italic">
                         Lưu ý: <br><br>
                         - Chuyển đúng số tiền đã nhập. <br><br>

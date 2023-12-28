@@ -48,6 +48,8 @@ public class UserDAO {
                u.setRole(rs.getString("role"));
             }
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         return u;
     }
@@ -64,6 +66,8 @@ public class UserDAO {
             ps.setString(5, user.getUserID());
             ps.executeUpdate();
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
     }
 
@@ -86,6 +90,8 @@ public class UserDAO {
                 return true;
             }
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         return false;
     }
@@ -99,6 +105,8 @@ public class UserDAO {
             ps.setString(2, user.getUserID());
             ps.executeUpdate();
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
     }
 
@@ -116,6 +124,8 @@ public class UserDAO {
                 System.out.println(user.getName());
             }
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         return user;
     }
@@ -142,6 +152,8 @@ public class UserDAO {
             numRowChange = ps.executeUpdate();
     
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         return numRowChange;
     }
@@ -164,6 +176,8 @@ public class UserDAO {
             }
             return ecList;
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         return null;
     }
@@ -186,6 +200,8 @@ public class UserDAO {
                 System.out.println(user.getUserID() + " " + user.getUsername());
             }
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         System.out.println("Do dai danh sach la: " + listUser.size());
         return listUser;
@@ -206,6 +222,8 @@ public class UserDAO {
             password = encryptor.decrypt(encryptedPassword, encryptionKey);
             System.out.println("pass " + password);
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         return password;
     }
@@ -223,6 +241,8 @@ public class UserDAO {
             kq = ps.executeUpdate();
             System.out.println(kq);
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         return kq;
     }
@@ -240,6 +260,8 @@ public class UserDAO {
             }
             System.out.println("list size: " +listUser.size());
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         
         return listUser;
@@ -254,6 +276,24 @@ public class UserDAO {
             ps.setString(2, u.getUserID());
             ps.executeUpdate();
         } catch (Exception e) {
+        }finally{
+            closeResources();
+        }
+    }
+    
+    private void closeResources() {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     
