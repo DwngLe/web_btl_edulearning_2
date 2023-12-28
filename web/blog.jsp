@@ -21,6 +21,11 @@
     </head>
 
     <body>
+        <%
+            if(session.getAttribute("id")==null){
+               response.sendRedirect("login.jsp");
+            }
+        %>
         <div class="main-wrapper">
             <header>
                 <div class="grid wide header">
@@ -92,7 +97,7 @@
                                                             <div class="post-content">
                                                                 <h5 class="title">
                                                                     <a class="title-blog"
-                                                                        href="/elearning/blog?id=${p.getBlogID()}">${p.getTitle()}</a>
+                                                                       href="/elearning/blog?id=${p.getBlogID()}">${p.getTitle()}</a>
                                                                 </h5>
                                                                 <span>
                                                                     <img src="./assets/icon/date.png"
