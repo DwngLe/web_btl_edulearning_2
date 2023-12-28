@@ -49,6 +49,8 @@ public class UserDAO {
             }
             conn.close();
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         return u;
     }
@@ -66,6 +68,8 @@ public class UserDAO {
             ps.executeUpdate();
             conn.close();
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
     }
 
@@ -89,6 +93,8 @@ public class UserDAO {
             }
             conn.close();
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         return false;
     }
@@ -103,6 +109,8 @@ public class UserDAO {
             ps.executeUpdate();
             conn.close();
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
     }
 
@@ -121,6 +129,8 @@ public class UserDAO {
             }
             conn.close();
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         return user;
     }
@@ -147,6 +157,8 @@ public class UserDAO {
             numRowChange = ps.executeUpdate();
             conn.close();
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         return numRowChange;
     }
@@ -170,6 +182,8 @@ public class UserDAO {
             conn.close();
             return ecList;
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         return null;
     }
@@ -193,6 +207,8 @@ public class UserDAO {
             }
             conn.close();
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         System.out.println("Do dai danh sach la: " + listUser.size());
         return listUser;
@@ -214,6 +230,8 @@ public class UserDAO {
             System.out.println("pass " + password);
             conn.close();
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         return password;
     }
@@ -232,6 +250,8 @@ public class UserDAO {
             System.out.println(kq);
             conn.close();
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
         return kq;
     }
@@ -250,6 +270,8 @@ public class UserDAO {
             System.out.println("list size: " + listUser.size());
             conn.close();
         } catch (Exception e) {
+        }finally{
+            closeResources();
         }
 
         return listUser;
@@ -265,6 +287,24 @@ public class UserDAO {
             ps.executeUpdate();
             conn.close();
         } catch (Exception e) {
+        }finally{
+            closeResources();
+        }
+    }
+    
+    private void closeResources() {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
