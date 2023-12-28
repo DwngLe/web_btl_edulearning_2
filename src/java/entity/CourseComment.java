@@ -10,17 +10,17 @@ import java.sql.Date;
  *
  * @author duong
  */
-public class Comment {
+public class CourseComment {
     private String id;
     private String description;
     private Date created_date;
     private User user;
     private Course course;
     
-    public Comment() {
+    public CourseComment() {
     }
 
-    public Comment(String id, String description, Date created_date, User user, Course course) {
+    public CourseComment(String id, String description, Date created_date, User user, Course course) {
         this.id = id;
         this.description = description;
         this.created_date = created_date;

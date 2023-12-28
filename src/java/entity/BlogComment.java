@@ -16,6 +16,7 @@ public class BlogComment {
     private String description;
     private Date createdDate;
     public User user;
+    public Blog blog;
 
     public BlogComment() {
     }
@@ -71,6 +72,16 @@ public class BlogComment {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Blog getBlog() {
+        return blog;
+    }
+
+    public void setBlog(Blog blog) {
+        this.blog = blog;
+    }
+    
+    
 
     @Override
     public String toString() {

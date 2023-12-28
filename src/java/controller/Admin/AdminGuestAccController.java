@@ -6,8 +6,15 @@ package controller.Admin;
 
 import dao.EnrollDAO;
 import dao.UserDAO;
+import dao.BlogCommentDAO;
+import dao.CourseCommentDAO;
+
+import entity.Blog;
 import entity.Course;
 import entity.EnrolledCourse;
+import entity.BlogComment;
+import entity.CourseComment;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -26,6 +33,8 @@ public class AdminGuestAccController extends HttpServlet {
 
     UserDAO userDAO = new UserDAO();
     EnrollDAO enrollDAO = new EnrollDAO();
+    BlogCommentDAO blogCommentDAO = new BlogCommentDAO();
+    CourseCommentDAO courseCommentDAO = new CourseCommentDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -66,9 +75,17 @@ public class AdminGuestAccController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("userID");
+        
         List<EnrolledCourse> listEnrolledCourse = enrollDAO.getAllEnrollCourse(id);
         System.out.println("Do dai danh sach cac khoa hoc da dang ky la: " + listEnrolledCourse.size());
         request.setAttribute("listEnrolledCourse", listEnrolledCourse);
+        
+        List<BlogComment> listBlogComment = blogCommentDAO.getAllCommentByUserID(id);
+        request.setAttribute("listCommentBlog", listBlogComment);
+        
+        List<CourseComment> listCourseComment = courseCommentDAO.getAllCommentByUserID(id);
+        request.setAttribute("listCommentCourse", listCourseComment);
+        
         request.getRequestDispatcher("accDetail.jsp").forward(request, response);
     }
 
