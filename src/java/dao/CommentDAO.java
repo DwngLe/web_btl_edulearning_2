@@ -57,7 +57,9 @@ public class CommentDAO {
             }
 
             return list;
+            
         } catch (Exception e) {
+            System.out.println(e);
         }
         return null;
     }
@@ -77,7 +79,10 @@ public class CommentDAO {
             ps.setString(5, s.getCourse().getCourseID());
 
             ps.executeUpdate();
+            conn.close();
         } catch (Exception e) {
+            System.out.println(e);
+
         }
     }
 
@@ -89,7 +94,10 @@ public class CommentDAO {
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, courseID);
             ps.executeUpdate();
+            conn.close();
         } catch (Exception e) {
+            System.out.println(e);
+
         }
     }
 

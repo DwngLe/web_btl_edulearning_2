@@ -98,7 +98,7 @@ public class UpdateCourseController extends HttpServlet {
         Course p = new Course(id, teacherName, Integer.parseInt(price), duration, description, language, level, imgurl, title,Integer.parseInt(totalView));
         
         dao.updateCourse(p);
-        response.sendRedirect("/elearning/admin/course");
+        response.sendRedirect("/elearning/admin/course/");
     }
 
     /**

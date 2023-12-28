@@ -41,14 +41,51 @@ public class EnrollDAO {
             ps.executeUpdate();
             conn.close();
         } catch (Exception e) {
+            System.out.println(e);
+
         }
+    }
+
+    public EnrolledCourse findEnroll(String idUser, String idCourse) {
+
+        try {
+            String query = "SELECT * FROM web.enrolled_course \n"
+                    + "where id_user=? \n"
+                    + "and id_course =?";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, idUser);
+            ps.setString(2, idCourse);
+            rs = ps.executeQuery();
+
+            CourseDAO cdao = new CourseDAO();
+
+            User u;
+            UserDAO udao = new UserDAO();
+            u = udao.getUserById(idUser);
+
+            Course c = cdao.getCourseByID(idCourse);
+
+            if (rs.next()) {
+                EnrolledCourse a = new EnrolledCourse();
+                a.setId(rs.getString(1));
+                a.setUser(u);
+                a.setCourse(c);
+                a.setSubDate(rs.getDate(4));
+                return a;
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
+        return null;
     }
 
     public List<EnrolledCourse> getAllCourse(String idUser) {
         try {
 
-            String query = "SELECT * FROM web.enrolled_course\n"
-                    + "where id_user=?";
+            String query = "SELECT * FROM web.enrolled_course where id_user=?";
             conn = new DBContext().getConnection();
             UserDAO udao = new UserDAO();
             CourseDAO cdao = new CourseDAO();
@@ -76,6 +113,8 @@ public class EnrollDAO {
             conn.close();
             return list;
         } catch (Exception e) {
+            System.out.println(e);
+
         }
         return null;
     }
@@ -90,6 +129,8 @@ public class EnrollDAO {
             ps.executeUpdate();
             conn.close();
         } catch (Exception e) {
+            System.out.println(e);
+
         }
     }
 
@@ -123,6 +164,8 @@ public class EnrollDAO {
             return listEnrollCourse;
 
         } catch (Exception e) {
+            System.out.println(e);
+
         }
         return null;
     }

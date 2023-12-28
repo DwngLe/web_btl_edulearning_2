@@ -46,6 +46,8 @@ public class CourseDAO {
 
             return list;
         } catch (Exception e) {
+            System.out.println(e);
+
         }
         return null;
     }
@@ -65,7 +67,10 @@ public class CourseDAO {
             ps.setString(8, s.getImageUrl());
             ps.setString(9, s.getTitle());
             ps.executeUpdate();
+            conn.close();
         } catch (Exception e) {
+            System.out.println(e);
+
         }
     }
 
@@ -83,7 +88,10 @@ public class CourseDAO {
 
                 return a;
             }
+            conn.close();
         } catch (Exception e) {
+            System.out.println(e);
+
         }
         return null;
     }
@@ -104,7 +112,10 @@ public class CourseDAO {
             ps.setString(8, s.getTitle());
             ps.setString(9, s.getCourseID());
             ps.executeUpdate();
+            conn.close();
         } catch (Exception e) {
+            System.out.println(e);
+
         }
     }
 
@@ -117,7 +128,10 @@ public class CourseDAO {
             ps.setInt(1, s.getTotalView() + 1);
             ps.setString(2, s.getCourseID());
             ps.executeUpdate();
+            conn.close();
         } catch (Exception e) {
+            System.out.println(e);
+
         }
     }
 
@@ -129,7 +143,10 @@ public class CourseDAO {
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, courseID);
             ps.executeUpdate();
+            conn.close();
         } catch (Exception e) {
+            System.out.println(e);
+
         }
     }
 
@@ -165,10 +182,13 @@ public class CourseDAO {
                 courseStat.setTotalRevenue(rs.getInt("total_revenue"));
                 courseStat.setTeacherName(rs.getString("teacher_name"));
                 courseStat.setTitle(rs.getString("title"));
-                        
+
                 listCourseStat.add(courseStat);
+                conn.close();
             }
         } catch (Exception e) {
+            System.out.println(e);
+
         }
         System.out.println("Do dai danh sach cac khoa hoc la: " + listCourseStat.size());
         return listCourseStat;

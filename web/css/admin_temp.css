@@ -23,7 +23,7 @@ th {
 
 .btnContainer{
     display: flex;
-
+    gap:4px;
 }
 
 .btnL{

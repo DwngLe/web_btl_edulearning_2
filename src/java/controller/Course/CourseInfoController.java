@@ -6,9 +6,12 @@ package controller.Course;
 
 import dao.CommentDAO;
 import dao.CourseDAO;
+import dao.EnrollDAO;
+import dao.UserDAO;
 import entity.Comment;
 import entity.Course;
-import jakarta.servlet.RequestDispatcher;
+import entity.EnrolledCourse;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,6 +20,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +46,7 @@ public class CourseInfoController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CourseInfoController</title>");            
+            out.println("<title>Servlet CourseInfoController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CourseInfoController at " + request.getContextPath() + "</h1>");
@@ -63,16 +67,28 @@ public class CourseInfoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+        User user;
+        UserDAO udao = new UserDAO();
+        String idUser = (String) request.getSession().getAttribute("id");
+        user = udao.getUserById(idUser);
+        System.out.println("User: " + user.toString());
+
         String id = request.getParameter("id");
         List<Comment> c;
         CommentDAO cdao = new CommentDAO();
         c = cdao.getAllCmtById(id);
         request.setAttribute("cmtList", c);
-//        RequestDispatcher rd = request.getRequestDispatcher("courseInfo.jsp");
-//        rd.forward(request, response);
         CourseDAO dao = new CourseDAO();
         Course p = dao.getCourseByID(id);
+
+        EnrollDAO edao = new EnrollDAO();
+        EnrolledCourse e = edao.findEnroll(idUser, id);
+        if (e != null) {
+            request.setAttribute("enrolled", e.toString());
+        } else {
+            request.setAttribute("enrolled", "Enrollment not found");
+        }
         dao.updateTotalViewCourse(p);
         request.setAttribute("p", p);
         request.getRequestDispatcher("courseInfo.jsp").forward(request, response);
