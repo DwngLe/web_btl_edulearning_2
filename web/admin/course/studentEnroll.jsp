@@ -27,7 +27,7 @@
             />
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="../css/main.css" />
+        <link rel="stylesheet" href="../../css/main.css" />
     </head>
     <body>
         <div class="grid-container">
@@ -59,15 +59,15 @@
                 </div>
 
                 <ul class="sidebar-list">
-                    <li class="sidebar-list-item" style="background-color: whitesmoke">
-                        <a href="#" target="_blank">
-                            <span class="material-icons-outlined">groups</span><span style="color: black">Học viên</span>
+                    <li class="sidebar-list-item" >
+                        <a href="/elearning/admin/managerAcc">
+                            <span class="material-icons-outlined">groups</span>Học viên
                         </a>
                     </li>   
-                    <li class="sidebar-list-item">
+                    <li class="sidebar-list-item" style="background-color: whitesmoke">
                         <a href="/elearning/admin/course/">
-                            <span class="material-icons-outlined">library_books</span> Khoá
-                            học
+                            <span class="material-icons-outlined">library_books</span> <span style="color: black">Khoá
+                                học</span>
                         </a>
                     </li>
 
@@ -105,49 +105,37 @@
             <!-- Main -->
             <main class="main-container" style="width: 100%">
                 <div class="main-title col">
-                    <h1>Danh sách các học viên</h1>
+                    <h1>Danh sách các học viên của khoá học là</h1>
                 </div>
-                <table style="width: 100%" >
-                    <tr>
-                        <th>Tên tài khoản</th>
-                        <th>Họ và tên</th>
-                        <th>Email</th>
-                        <th>Số điện thoại</th>
-                        <th>Số dư</th>
-                        <th>Ngay sinh</th>
-                        <th>Ngày tạo tài khoản</th>
-                        <!--<th>Thao Tác</th>-->
-                    </tr>
-                    <c:forEach var="u" items="${listUser}">
+                <c:if test = "${empty listEnroll or listEnroll.size() eq 0}">
+                    <p>Khoá học chưa có sinh viên nào đăng ký</p>
+                </c:if>
+                <c:if test = "${not empty listEnroll or listEnroll.size() gt 0}">
+                    <table style="width: 100%" >
                         <tr>
-                            <!--<td>${u.username}</td>-->
-                            <td class="td-bold"> <a href="/elearning/admin/managerAcc/user?userID=${u.userID}" style="color: #309255" >${u.username}</a></td>
-                            <td>${u.name}</td>
-                            <td>${u.email}</td>
-                            <td>${u.phoneNumber}</td>
-                            <td>${u.money}</td>
-                            <td>${u.dateOfBirth}</td>
-                            <td>${u.createdDate}</td>
-<!--                            <td>
-                                <div class="btnContainer" style="display: flex; justify-content:center">
-                                    <form action="/elearning/admin/managerAcc/user">
-                                        <input type="hidden" name="userID" value="${u.userID}" />
-                                        <input
-                                            type="submit"
-                                            name=""
-                                            id=""
-                                            value="Xem"
-                                            class="btn btn-primary"
-                                            style="border: 0px; height: 50px"
-
-                                            />
-                                    </form>
-                                </div>
-
-                            </td>-->
+                            <th>Số thứ tự</th>
+                            <th>Tên tài khoản</th>
+                            <th>Họ và tên</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Ngày đăng ký</th>
+                            <!--<th>Thao Tác</th>-->
                         </tr>
-                    </c:forEach>
-                </table>
+                        <c:set var="count" value="0" />
+                        <c:forEach var="u" items="${listEnroll}">
+                            <tr>
+                                <td>${count + 1}</td>
+                                <td class="td-bold"> <a href="/elearning/admin/managerAcc/user?userID=${u.user.userID}" style="color: #309255" >${u.user.username}</a></td>
+                                <td>${u.user.name}</td>
+                                <td>${u.user.email}</td>
+                                <td>${u.user.phoneNumber}</td>
+                                <td>${u.subDate}</td>
+                            </tr>
+                            <c:set var="count" value="${count + 1}" />
+                        </c:forEach>
+                    </table>
+                </c:if>
+
             </main>
             <!-- End Main -->
         </div>

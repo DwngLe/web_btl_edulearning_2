@@ -133,7 +133,8 @@
                                 <tr>
                                     <td>${count + 1}</td>
                                     <td><img src="${enrollCourse.course.imageUrl}" alt="alt" width="50px" height="50px"/></td>
-                                    <td>${enrollCourse.course.title}</td>
+                                    <!--<td>${enrollCourse.course.title}</td>-->
+                                    <td class="td-bold"> <a href="/elearning/admin/course/studentEnroll?courseID=${enrollCourse.course.getCourseID()}" style="color: #309255">${enrollCourse.course.title}</a></td>
                                     <td>${enrollCourse.course.teacherName}</td>
                                     <td>${enrollCourse.course.price}</td>
                                     <td>${enrollCourse.subDate}</td>
