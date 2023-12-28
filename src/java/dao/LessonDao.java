@@ -4,8 +4,10 @@
  */
 package dao;
 
+import context.DBContext;
 import entity.Lesson;
 import entity.LessonPart;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -27,17 +29,19 @@ public class LessonDao extends Dao<Lesson>{
     public List<Lesson> getListObject(UUID id) {
         List<Lesson> list = new ArrayList<>();
         try {
-            String query = "SELECT * FROM lesson WHERE lesson.LessonPartID = ?";
-            conn = getConnection();
+            String query = "SELECT * FROM lesson WHERE lesson_part_id = ? ORDER BY created_time";
+            conn = new DBContext().getConnection();
             ps=conn.prepareStatement(query);
             ps.setString(1, id.toString());
             rs=ps.executeQuery(); 
             while(rs.next()){
-              UUID lessonID = UUID.fromString(rs.getString("LessonID"));
-              list.add(new Lesson(lessonID, rs.getString("Name")));
-            }      
+              UUID lessonID = UUID.fromString(rs.getString("lesson_id"));
+              list.add(new Lesson(lessonID, rs.getString("name"), rs.getString("video_url")));
+            } 
+            if (conn != null) {
+                conn.close();
+            }
         } catch (Exception e) {
-            System.out.println("Loi truy van");
             System.out.println(e);
         }
         return list;
@@ -47,20 +51,22 @@ public class LessonDao extends Dao<Lesson>{
     public Lesson getObject(UUID id) {
         Lesson lesson = new Lesson();
         try {
-            String query = "SELECT * FROM lesson WHERE LessonID = ?";
-            conn = getConnection();
+            String query = "SELECT * FROM lesson WHERE lesson_id = ?";
+            conn = new DBContext().getConnection();
             ps=conn.prepareStatement(query);
             ps.setString(1, id.toString());
             rs=ps.executeQuery(); 
             while(rs.next()){
-              lesson.setLessonID(UUID.fromString(rs.getString("LessonID")));
-              lesson.setName(rs.getString("Name"));
-              lesson.setVideoURL(rs.getString("VideoURL"));
-              lesson.setDesctiption(rs.getString("Description"));
-              lesson.setLessonPartID(UUID.fromString(rs.getString("LessonPartID")));
-            }      
+              lesson.setLessonID(UUID.fromString(rs.getString("lesson_id")));
+              lesson.setName(rs.getString("name"));
+              lesson.setVideoURL(rs.getString("video_url"));
+              lesson.setDesctiption(rs.getString("description"));
+              lesson.setLessonPartID(UUID.fromString(rs.getString("lesson_part_id")));
+            }  
+            if (conn != null) {
+                conn.close();
+            }
         } catch (Exception e) {
-            System.out.println("Loi truy van");
             System.out.println(e);
         }
         return lesson;
@@ -69,8 +75,8 @@ public class LessonDao extends Dao<Lesson>{
     @Override
     public int createObject(Lesson object) {
         try {
-            String query = "INSERT INTO lesson VALUES (?, ?, ?, ?, ?)";
-            conn = getConnection();
+            String query = "INSERT INTO lesson (lesson_id, name, video_url, description, lesson_part_id) VALUES (?, ?, ?, ?, ?)";
+            conn = new DBContext().getConnection();
             ps=conn.prepareStatement(query);
             UUID id = UUID.randomUUID();
             ps.setString(1, id.toString());
@@ -78,10 +84,13 @@ public class LessonDao extends Dao<Lesson>{
             ps.setString(3, object.getVideoURL());
             ps.setString(4, object.getDesctiption());
             ps.setString(5, object.getLessonPartID().toString());
+            System.out.println(object);
             int rowsInserted = ps.executeUpdate();
+            if (conn != null) {
+                conn.close();
+            }
             return rowsInserted;
         } catch (Exception e) {
-            System.out.println("Loi truy van");
             System.out.println(e);
         }
         return 0;
@@ -90,17 +99,19 @@ public class LessonDao extends Dao<Lesson>{
     @Override
     public int updateObject(Lesson object) {
         try {
-            String query = "UPDATE lesson SET Name = ?, VideoURL = ?, Description = ? WHERE LessonID = ?";
-            conn = getConnection();
+            String query = "UPDATE lesson SET name = ?, video_url = ?, description = ? WHERE lesson_id = ?";
+            conn = new DBContext().getConnection();
             ps=conn.prepareStatement(query);
             ps.setString(1, object.getName());
             ps.setString(2, object.getVideoURL());
             ps.setString(3, object.getDesctiption());
             ps.setString(4, object.getLessonID().toString());
             int rowUpdate = ps.executeUpdate();
+            if (conn != null) {
+                conn.close();
+            }
             return rowUpdate;
         } catch (Exception e) {
-            System.out.println("Loi truy van");
             System.out.println(e);
         }
         return 0;
@@ -109,14 +120,16 @@ public class LessonDao extends Dao<Lesson>{
     @Override
     public int deleteObject(UUID id) {
         try {
-            String query = "DELETE FROM lesson WHERE LessonID = ?";
-            conn = getConnection();
+            String query = "DELETE FROM lesson WHERE lesson_id = ?";
+            conn = new DBContext().getConnection();
             ps=conn.prepareStatement(query);
             ps.setString(1, id.toString());
             int rowsDelete = ps.executeUpdate();
+            if (conn != null) {
+                conn.close();
+            }
             return rowsDelete;
         } catch (Exception e) {
-            System.out.println("Loi truy van");
             System.out.println(e);
         }
         return 0;

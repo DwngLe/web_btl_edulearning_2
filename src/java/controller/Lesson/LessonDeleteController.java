@@ -6,6 +6,7 @@
 package controller.Lesson;
 
 import dao.LessonDao;
+import entity.Lesson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,13 +14,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 /**
  *
  * @author My Asus
  */
-@WebServlet(name="LessonDeleteController", urlPatterns={"/deletelesson"})
+@WebServlet(name="LessonDeleteController", urlPatterns={"/admin/deletelesson"})
 public class LessonDeleteController extends HttpServlet {
    
     /** 
@@ -57,10 +61,17 @@ public class LessonDeleteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String id = request.getParameter("lessonID");
+        UUID id = UUID.fromString(request.getParameter("LessonID"));
+        
         LessonDao dao = new LessonDao();
-        int result = dao.deleteObject(UUID.fromString(id));
-        response.sendRedirect("/WebApplication1/lesson");
+        Lesson lesson = dao.getObject(id);
+        String videoName = lesson.getVideoURL();
+        String uploadPath = getServletContext().getRealPath("").replace("build" + File.separator + "web", "web");
+        String filePath = uploadPath + "assets" + File.separator + "videos";
+        Files.delete(Paths.get(filePath, videoName));
+            
+        int result = dao.deleteObject(id);
+        response.sendRedirect(request.getHeader("Referer"));
     } 
 
     /** 

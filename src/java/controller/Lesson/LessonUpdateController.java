@@ -11,17 +11,25 @@ import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 /**
  *
  * @author My Asus
  */
-@WebServlet(name="LessonUpdateController", urlPatterns={"/updatelesson"})
+@WebServlet(name="LessonUpdateController", urlPatterns={"/admin/updatelesson"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,   // 2 MB
+                 maxFileSize = 1024 * 1024 * 500,       // 10 MB
+                 maxRequestSize = 1024 * 1024 * 550)
 public class LessonUpdateController extends HttpServlet {
    
     /** 
@@ -59,13 +67,14 @@ public class LessonUpdateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        UUID id = UUID.fromString(request.getParameter("lessonID"));
+        UUID id = UUID.fromString(request.getParameter("LessonID"));
         LessonDao dao = new LessonDao();
         Lesson lesson = dao.getObject(id);
+        request.setAttribute("CourseID", request.getParameter("CourseID"));
         request.setAttribute("lesson", lesson);
         request.setAttribute("title", "Sửa khóa học");
-        request.setAttribute("link", "/WebApplication1/updatelesson");
-        RequestDispatcher rd = request.getRequestDispatcher("LessonDetail.jsp");
+        request.setAttribute("link", "/elearning/admin/updatelesson");
+        RequestDispatcher rd = request.getRequestDispatcher("/admin/lesson/LessonDetail.jsp");
         rd.forward(request, response);
     } 
 
@@ -80,13 +89,46 @@ public class LessonUpdateController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String name = request.getParameter("Name");
-        String videoURL = request.getParameter("VideoURL");
         String description = request.getParameter("Description");
         UUID lessonID = UUID.fromString(request.getParameter("LessonID"));
-        Lesson lesson = new Lesson(lessonID, name, videoURL, description);
+        String courseId = request.getParameter("CourseID");
+        
+        // Lấy thông tin file từ request
+        Part filePart = request.getPart("VideoURL");
+        
         LessonDao dao = new LessonDao();
+        Lesson lesson = dao.getObject(lessonID);
+        
+        if (filePart != null && filePart.getSize() > 0) {
+            String fileName = getSubmittedFileName(filePart);
+            // Xóa video cũ
+            String videoName = lesson.getVideoURL();
+            String deletePath = getServletContext().getRealPath("").replace("build" + File.separator + "web", "web");
+            String filePath = deletePath + "assets" + File.separator + "videos";
+            Files.delete(Paths.get(filePath, videoName));
+        
+            // Lưu trữ video
+            String uploadPath = getServletContext().getRealPath("").replace("build" + File.separator + "web", "web");
+            filePath = uploadPath + "assets" + File.separator + "videos" + File.separator + fileName;
+            filePart.write(filePath);
+            lesson.setVideoURL(fileName);
+        }
+        
+        lesson.setName(name);
+        lesson.setDesctiption(description);
         int result = dao.updateObject(lesson);
-            response.sendRedirect("/WebApplication1/lesson");
+        
+        response.sendRedirect("/elearning/admin/lesson?CourseID=" + courseId);
+    }
+    
+    private String getSubmittedFileName(Part part) {
+        for (String cd : part.getHeader("content-disposition").split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                String fileName = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                return "video-" + UUID.randomUUID().toString() + "-" + fileName.substring(fileName.lastIndexOf('/') + 1).substring(fileName.lastIndexOf('\\') + 1);
+            }
+        }
+        return null;
     }
 
     /** 

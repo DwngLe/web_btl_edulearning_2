@@ -35,7 +35,7 @@ public class UserDAO {
     public User checkUser(User user) {
         User u = new User();
         try {
-   
+
             String encryptedPassword = encryptor.encrypt(user.getPassword(), encryptionKey);
             String query = "select * from user where username=? and password = ?";
             conn = new DBContext().getConnection();
@@ -44,9 +44,10 @@ public class UserDAO {
             ps.setString(2, encryptedPassword);
             rs = ps.executeQuery();
             if (rs.next()) {
-               u.setUserID(rs.getString("id"));
-               u.setRole(rs.getString("role"));
+                u.setUserID(rs.getString("id"));
+                u.setRole(rs.getString("role"));
             }
+            conn.close();
         } catch (Exception e) {
         }
         return u;
@@ -63,6 +64,7 @@ public class UserDAO {
             ps.setString(4, user.getPhoneNumber());
             ps.setString(5, user.getUserID());
             ps.executeUpdate();
+            conn.close();
         } catch (Exception e) {
         }
     }
@@ -85,6 +87,7 @@ public class UserDAO {
 
                 return true;
             }
+            conn.close();
         } catch (Exception e) {
         }
         return false;
@@ -98,6 +101,7 @@ public class UserDAO {
             ps.setLong(1, newBalance);
             ps.setString(2, user.getUserID());
             ps.executeUpdate();
+            conn.close();
         } catch (Exception e) {
         }
     }
@@ -115,6 +119,7 @@ public class UserDAO {
                 user = new User(id, rs.getString("username"), rs.getString("password"), rs.getDate("date_of_birth"), rs.getString("email"), rs.getString("name"), rs.getLong("money"), rs.getString("phone_number"), rs.getDate("created_date"));
                 System.out.println(user.getName());
             }
+            conn.close();
         } catch (Exception e) {
         }
         return user;
@@ -140,7 +145,7 @@ public class UserDAO {
             ps.setDate(9, user.getCreatedDate());
             System.out.println(user.getCreatedDate());
             numRowChange = ps.executeUpdate();
-    
+            conn.close();
         } catch (Exception e) {
         }
         return numRowChange;
@@ -162,6 +167,7 @@ public class UserDAO {
             for (Course c : ecList) {
                 System.out.println("name2: " + c.getTitle());
             }
+            conn.close();
             return ecList;
         } catch (Exception e) {
         }
@@ -185,6 +191,7 @@ public class UserDAO {
                 listUser.add(user);
                 System.out.println(user.getUserID() + " " + user.getUsername());
             }
+            conn.close();
         } catch (Exception e) {
         }
         System.out.println("Do dai danh sach la: " + listUser.size());
@@ -205,6 +212,7 @@ public class UserDAO {
             }
             password = encryptor.decrypt(encryptedPassword, encryptionKey);
             System.out.println("pass " + password);
+            conn.close();
         } catch (Exception e) {
         }
         return password;
@@ -222,12 +230,13 @@ public class UserDAO {
             ps.setString(2, username);
             kq = ps.executeUpdate();
             System.out.println(kq);
+            conn.close();
         } catch (Exception e) {
         }
         return kq;
     }
-    
-    public List<User> getAllUser(){
+
+    public List<User> getAllUser() {
         List<User> listUser = new ArrayList<>();
         try {
             String query = "SELECT * FROM web.user where role != 'ADMIN';";
@@ -238,23 +247,25 @@ public class UserDAO {
                 User user = new User(rs.getString("id"), rs.getString("username"), rs.getString("password"), rs.getDate("date_of_birth"), rs.getString("email"), rs.getString("name"), rs.getLong("money"), rs.getString("phone_number"), rs.getDate("created_date"));
                 listUser.add(user);
             }
-            System.out.println("list size: " +listUser.size());
+            System.out.println("list size: " + listUser.size());
+            conn.close();
         } catch (Exception e) {
         }
-        
+
         return listUser;
     }
 
-    public void changeMoney(User u, Course s){
+    public void changeMoney(User u, Course s) {
         String sqlString = "UPDATE user SET money=? WHERE id = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
-            ps.setLong(1, u.getMoney()-s.getPrice());
+            ps.setLong(1, u.getMoney() - s.getPrice());
             ps.setString(2, u.getUserID());
             ps.executeUpdate();
+            conn.close();
         } catch (Exception e) {
         }
     }
-    
+
 }
