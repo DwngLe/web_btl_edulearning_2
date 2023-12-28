@@ -31,10 +31,10 @@
                         <a href="/elearning/loadallcourse">Trang chủ</a>
                         <a href="/">Khóa học</a>
                         <a class="nav-active" href="/elearning/listblog">Blog</a>
-                        <a href="/">Liên hệ</a>
+                        <a href="/elearning/contact.html">Liên hệ</a>
                     </nav>
                     <div class="login-nav">
-                        <a href="/">
+                        <a href="/elearning/user">
                             <img class="avatar" src="https://placehold.co/100x100" alt="image" />
                         </a>
                     </div>
