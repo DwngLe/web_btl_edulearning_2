@@ -6,6 +6,8 @@ package entity;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,7 +19,8 @@ public class Blog {
     private String content;
     private Date createdDate, updateAt;
     private int totalView = 0;
-
+    private List listComment = new ArrayList<>();
+    
     public Blog() {
     }
 
@@ -104,6 +107,16 @@ public class Blog {
         LocalDate currentDate = LocalDate.now();
         return Date.valueOf(currentDate);
     }
+
+    public List getListComment() {
+        return listComment;
+    }
+
+    public void setListComment(List listComment) {
+        this.listComment = listComment;
+    }
+    
+    
 
     @Override
     public String toString() {
