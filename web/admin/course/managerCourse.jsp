@@ -172,7 +172,7 @@
                                                         </button>
                                                     </form>
 
-                                                    <form action="#" method="get">
+                                                    <form action="/elearning/admin/course/studentEnroll" method="get">
                                                         <input type="hidden" name="courseID" value="${course.getCourseID()}"/>
                                                         <button class="btn btn-info" type ="submit">
                                                             <span style="display: flex; align-items: center; gap: 4px;">

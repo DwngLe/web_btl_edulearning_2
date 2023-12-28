@@ -132,7 +132,7 @@
                         <c:forEach var="blog" items="${listBlog}">
                             <tr>
                                 <td>${count + 1}</td>
-                                <td class="td-bold"> <a href="/elearning/blog?id=${blog.getBlogID()}" style="color: black">${blog.title} </a></td>
+                                <td class="td-bold"> <a href="/elearning/blog?id=${blog.getBlogID()}" style="color: #309255">${blog.title} </a></td>
                                 <td>${blog.createdDate}</td>
                                 <td>${blog.updateAt}</td>
                                 <td>${blog.totalView}</td>
