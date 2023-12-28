@@ -48,7 +48,7 @@
             <!-- End Header -->
 
             <!-- Sidebar -->
-            <aside id="sidebar">
+             <aside id="sidebar">
                 <div class="sidebar-title">
                     <div class="sidebar-brand">
                         <img src="../../assets/logo-icon.png" alt="" />
@@ -63,16 +63,16 @@
                         <a href="#" target="_blank">
                             <span class="material-icons-outlined">groups</span><span style="color: black">Học viên</span>
                         </a>
-                    </li>
+                    </li>   
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/admin/course/">
                             <span class="material-icons-outlined">library_books</span> Khoá
                             học
                         </a>
                     </li>
 
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/admin/blog">
                             <span class="material-icons-outlined">newspaper</span> Blog
                         </a>
                     </li>
@@ -94,7 +94,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/logout">
                             <span class="material-icons-outlined">logout</span> Đăng xuất
                         </a>
                     </li>
@@ -169,26 +169,28 @@
                                 <th>Chức năng</th>
                             </tr>
                             <c:forEach var="blogComment" items = "${listCommentBlog}">
-                                <td>${blogComment.blog.blogID}</td>
-                                <td>${blogComment.blog.title}</td>
-                                <td>${blogComment.description}</td>
-                                <td>${blogComment.createdDate}</td>
-                                <td>
-                                    <div class="btnContainer" style="display: flex; justify-content:center">
-                                        <form action="/elearning/blog">
-                                            <input type="hidden" name="id" value="${blogComment.blog.blogID}" />
-                                            <input
-                                                type="submit"
-                                                name=""
-                                                id=""
-                                                value="Xem"
-                                                class="btn btn-primary"
-                                                style="border: 0px; height: 50px"
+                                <tr>
+                                    <td>${blogComment.blog.blogID}</td>
+                                    <td>${blogComment.blog.title}</td>
+                                    <td>${blogComment.description}</td>
+                                    <td>${blogComment.createdDate}</td>
+                                    <td>
+                                        <div class="btnContainer" style="display: flex; justify-content:center">
+                                            <form action="/elearning/blog">
+                                                <input type="hidden" name="id" value="${blogComment.blog.blogID}" />
+                                                <input
+                                                    type="submit"
+                                                    name=""
+                                                    id=""
+                                                    value="Xem"
+                                                    class="btn btn-primary"
+                                                    style="border: 0px; height: 50px"
 
-                                                />
-                                        </form>
-                                    </div>
-                                </td>
+                                                    />
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
                             </c:forEach>
 
                         </table>
@@ -213,27 +215,29 @@
                                 <th>Chức năng</th>
                             </tr>
                             <c:forEach var="courseComment" items = "${listCommentCourse}">
-                                <td>${courseComment.course.courseID}</td>
-                                <td>${courseComment.course.title}</td>
-                                <td>${courseComment.course.teacherName}</td>
-                                <td>${courseComment.description}</td>
-                                <td>${courseComment.created_date}</td>
-                                <td>
-                                    <div class="btnContainer" style="display: flex; justify-content:center">
-                                        <form action="/elearning/courseinfoctl">
-                                            <input type="hidden" name="id" value="${courseComment.course.courseID}" />
-                                            <input
-                                                type="submit"
-                                                name=""
-                                                id=""
-                                                value="Xem"
-                                                class="btn btn-primary"
-                                                style="border: 0px; height: 50px"
+                                <tr>
+                                    <td>${courseComment.course.courseID}</td>
+                                    <td>${courseComment.course.title}</td>
+                                    <td>${courseComment.course.teacherName}</td>
+                                    <td>${courseComment.description}</td>
+                                    <td>${courseComment.created_date}</td>
+                                    <td>
+                                        <div class="btnContainer" style="display: flex; justify-content:center">
+                                            <form action="/elearning/courseinfoctl">
+                                                <input type="hidden" name="id" value="${courseComment.course.courseID}" />
+                                                <input
+                                                    type="submit"
+                                                    name=""
+                                                    id=""
+                                                    value="Xem"
+                                                    class="btn btn-primary"
+                                                    style="border: 0px; height: 50px"
 
-                                                />
-                                        </form>
-                                    </div>
-                                </td>
+                                                    />
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
                             </c:forEach>
 
                         </table>

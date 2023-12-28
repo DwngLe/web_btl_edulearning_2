@@ -63,16 +63,16 @@
                         <a href="#" target="_blank">
                             <span class="material-icons-outlined">groups</span><span style="color: black">Học viên</span>
                         </a>
-                    </li>
+                    </li>   
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/admin/course/">
                             <span class="material-icons-outlined">library_books</span> Khoá
                             học
                         </a>
                     </li>
 
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/admin/blog">
                             <span class="material-icons-outlined">newspaper</span> Blog
                         </a>
                     </li>
@@ -94,7 +94,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/logout">
                             <span class="material-icons-outlined">logout</span> Đăng xuất
                         </a>
                     </li>

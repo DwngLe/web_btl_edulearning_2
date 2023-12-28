@@ -48,20 +48,20 @@
 
                 <ul class="sidebar-list">
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/admin/managerAcc">
                             <span class="material-icons-outlined">groups</span> Học viên
                         </a>
                     </li>
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/admin/course/">
                             <span class="material-icons-outlined">library_books</span> Khoá
                             học
                         </a>
                     </li>
 
-                    <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
-                            <span class="material-icons-outlined">newspaper</span> Blog
+                    <li class="sidebar-list-item" style="background-color: whitesmoke">
+                        <a href="/elearning/admin/blog">
+                            <span class="material-icons-outlined">newspaper</span> <span style="color: black">Blog</span>
                         </a>
                     </li>
 
@@ -98,12 +98,12 @@
                 <c:if test="${empty listBlog or listBlog.size() eq 0}">
                     <p>Không tồn tại blog</p>
                     <div class="btnContainer">
-                            <div class="btnL">
-                                <form action="/elearning/admin/blog/add" method="get">
-                                    <button class="btn-backgound" type="submit">Thêm blog</button>
-                                </form>
-                            </div>
+                        <div class="btnL">
+                            <form action="/elearning/admin/blog/add" method="get">
+                                <button class="btn-backgound" type="submit">Thêm blog</button>
+                            </form>
                         </div>
+                    </div>
                 </c:if>
                 <c:if test="${not empty listBlog or listBlog.size() gt 0}">
                     <div class="up-table">
@@ -181,7 +181,7 @@
             </div>
             <i class="close-icon fa-solid fa-xmark"></i>
         </div>
-        
+
         <script src="../js/toastAndModel.js"></script>
 
         <c:if test="${not empty requestScope.successMessage}">
