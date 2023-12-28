@@ -7,6 +7,8 @@ package entity;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -21,6 +23,8 @@ public class Blog {
     private int totalView = 0;
     private String urlImg;
 
+    private List listComment = new ArrayList<>();
+    
     public Blog() {
     }
 
@@ -118,6 +122,15 @@ public class Blog {
         String url = String.format("./assets/blog/image/blog-%02d.jpg", iRamdom);
         return url;
     }
+    public List getListComment() {
+        return listComment;
+    }
+
+    public void setListComment(List listComment) {
+        this.listComment = listComment;
+    }
+    
+    
 
     @Override
     public String toString() {

@@ -4,7 +4,7 @@
  */
 package controller.Course;
 
-import dao.CommentDAO;
+import dao.CourseCommentDAO;
 import dao.CourseDAO;
 import dao.EnrollDAO;
 import dao.UserDAO;

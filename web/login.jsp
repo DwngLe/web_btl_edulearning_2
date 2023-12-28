@@ -256,7 +256,7 @@
     <script src="./js/toastAndModel.js"></script>
     <c:if test="${not empty requestScope.successMessage}">
         <script>
-             <!--<p style="color: green;"><c:out value="${requestScope.successMessage}" /></p>-->
+          
              openToast("toast-success");
         </script>
     </c:if>

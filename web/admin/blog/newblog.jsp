@@ -41,14 +41,14 @@
             <aside id="sidebar">
                 <div class="sidebar-title">
                     <div class="sidebar-brand">
-                        <img src="../assets/logo-icon.png" alt="" />
+                        <img src="../../assets/logo-icon.png" alt="" />
                     </div>
                     <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
                 </div>
 
                 <ul class="sidebar-list">
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/admin/managerAcc">
                             <span class="material-icons-outlined">groups</span> Học viên
                         </a>
                     </li>
@@ -59,9 +59,9 @@
                         </a>
                     </li>
 
-                    <li class="sidebar-list-item">
+                    <li class="sidebar-list-item" style="background-color: whitesmoke">
                         <a href="#" target="_blank">
-                            <span class="material-icons-outlined">newspaper</span> Blog
+                            <span class="material-icons-outlined">newspaper</span> <span style="color: black">Blog</span>
                         </a>
                     </li>
 
