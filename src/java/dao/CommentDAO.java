@@ -57,7 +57,9 @@ public class CommentDAO {
             }
 
             return list;
+            
         } catch (Exception e) {
+            System.out.println(e);
         }
         return null;
     }
@@ -77,19 +79,26 @@ public class CommentDAO {
             ps.setString(5, s.getCourse().getCourseID());
 
             ps.executeUpdate();
+            conn.close();
         } catch (Exception e) {
+            System.out.println(e);
+
         }
     }
-     public void deleteCommentByCourse(String courseID){
-         System.out.println(courseID);
+
+    public void deleteCommentByCourse(String courseID) {
+        System.out.println(courseID);
         String sqlString = "Delete from coursecomment where (id_course = ?)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, courseID);
             ps.executeUpdate();
+            conn.close();
         } catch (Exception e) {
+            System.out.println(e);
+
         }
     }
-    
+
 }

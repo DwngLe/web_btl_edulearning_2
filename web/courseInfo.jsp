@@ -870,7 +870,7 @@
                             <c:if test="${enrolled ne 'Enrollment not found'}">
                                 <button class="btn btn-primary">
                                     
-                                    <a style="color: #fff;" href="#">
+                                    <a style="color: #fff;" href="/elearning/lesson?LessonID=4ca2159d-8ec9-4fb4-ae7a-b601bf64ae7d&CourseID=${p.courseID}">
 
                                         Lesson
                                     </a>

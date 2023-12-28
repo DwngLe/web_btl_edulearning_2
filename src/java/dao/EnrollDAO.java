@@ -39,7 +39,10 @@ public class EnrollDAO {
             ps.setDate(4, s.getSubDate());
 
             ps.executeUpdate();
+            conn.close();
         } catch (Exception e) {
+            System.out.println(e);
+
         }
     }
 
@@ -71,7 +74,10 @@ public class EnrollDAO {
                 a.setSubDate(rs.getDate(4));
                 return a;
             }
+            conn.close();
         } catch (Exception e) {
+            System.out.println(e);
+
         }
         return null;
     }
@@ -107,6 +113,8 @@ public class EnrollDAO {
 
             return list;
         } catch (Exception e) {
+            System.out.println(e);
+
         }
         return null;
     }
@@ -119,7 +127,10 @@ public class EnrollDAO {
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, courseID);
             ps.executeUpdate();
+            conn.close();
         } catch (Exception e) {
+            System.out.println(e);
+
         }
     }
 
@@ -150,6 +161,8 @@ public class EnrollDAO {
             return listEnrollCourse;
 
         } catch (Exception e) {
+            System.out.println(e);
+
         }
         return null;
     }
