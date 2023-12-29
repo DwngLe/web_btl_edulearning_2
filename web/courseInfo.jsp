@@ -35,6 +35,8 @@
     </head>
 
     <style>
+        
+        
         #container {
 
             padding-top: 100px;
@@ -907,30 +909,69 @@ font-size: calc(1.275rem + 0.3vw);
 
                             </ul>
                         </div>
-                        <div class='info-btn'>
-                            <%-- Kiểm tra enrolled có phải là "Enrollment not found" hay không
-                            --%>
-                            <c:if test="${enrolled eq 'Enrollment not found'}">
-                                <button class="btn btn-primary">
+
+                        <c:if test="${not empty idUser}">
+                            <div class='info-btn'>
+                                <%-- Kiểm tra enrolled có phải là "Enrollment not found" hay không
+                                --%>
+                                <c:if test="${enrolled eq 'Enrollment not found'}">
+
+                                    <c:choose>
+                                        <c:when test="${money eq 'Nạp tiền đi con gà'}">
+                                            <button class="btn btn-primary btn-error">
+                                                <a style="color: #fff;" href="#">
+                                                    Enroll Now
+                                                </a>
+                                            </button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <button class="btn btn-primary">
+                                                <a style="color: #fff;"
+                                                   href="/elearning/addenrolled?id=${p.courseID}">
+
+                                                    Enroll Now
+                                                </a>
+                                            </button>
+                                        </c:otherwise>
+                                    </c:choose>
+
+
+
+
+                                </c:if>
+                                <c:if test="${enrolled ne 'Enrollment not found'}">
+                                    <button class="btn btn-primary">
+
+                                        <a style="color: #fff;"
+                                           href="/elearning/lesson?LessonID=4ca2159d-8ec9-4fb4-ae7a-b601bf64ae7d&CourseID=${p.courseID}">
+
+                                            Lesson
+                                        </a>
+                                    </button>
+                                </c:if>
+                            </div>
+
+                        </c:if>
+
+                        <c:if test="${ empty idUser}">
+                            <div class='info-btn'>
+                                <%-- Kiểm tra enrolled có phải là "Enrollment not found" hay không
+                                --%>
+
+                                <button disabled="" class="btn btn-primary">
                                     <a style="color: #fff;"
-                                       href="/elearning/addenrolled?id=${p.courseID}">
+                                       >
 
                                         Enroll Now
                                     </a>
                                 </button>
 
-                            </c:if>
-                            <c:if test="${enrolled ne 'Enrollment not found'}">
-                                <button class="btn btn-primary">
 
-                                    <a style="color: #fff;"
-                                       href="/elearning/lesson?LessonID=4ca2159d-8ec9-4fb4-ae7a-b601bf64ae7d&CourseID=${p.courseID}">
 
-                                        Lesson
-                                    </a>
-                                </button>
-                            </c:if>
-                        </div>
+                            </div>
+
+                        </c:if>   
+
 
 
                     </div>
@@ -963,112 +1004,6 @@ font-size: calc(1.275rem + 0.3vw);
 
             </div>
         </div>
-
-        <!--        <div class="container">
-
-<div class="left">
-<div class="img">
-    <img src="${p.imageUrl}" alt="alt"/>
-</div>
-<div>
-        ${p.title}
-    </div>
-    <div> 
-        ${p.teacherName}
-    </div>
-    <h3>Description</h3>
-    <span>${p.descriptionCourse}</span>
-    <h3>Review</h3>
-
-    <h4>Add review</h4>
-    <form action="/elearning/addcmt">
-        Nhập bình luận: <input name="description" placeholder="Description" type="text"/>
-        <input name="elseID" hidden="true" value="${p.courseID}"/>
-        <button type="submit">Comment</button>
-    </form>
-
-        <c:forEach var="m" items="${cmtList}">
-            <div class="itemReview">
-                <div class="title">
-                    <div class="imgUser">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png"/>
-                    </div>
-                    <div class="name">${m.user.name}</div>
-                </div>
-                <div class="descUser">
-            ${m.description}
-        </div>
-    </div>
-        </c:forEach>
-
-    </div>
-    <div class="right">
-        <div class="courseinfo">
-            <h1 class="price cg">$${p.price}</h1>
-            <hr />
-            <div class="info">
-                <div class="infoLeft">
-                    <i class="fa-solid fa-person-rifle cg"></i>
-                    <span class="cg">Instructor</span>
-                </div>
-                <div class="infoRight cg">
-        ${p.teacherName}
-    </div>
-</div>
-<hr/>
-<div class="info cg">
-    <div class="infoLeft">
-        <i class="fa-regular fa-clock"></i>
-        <span>Duration</span>
-    </div>
-    <div class="infoRight">
-        ${p.duration}
-    </div>
-</div>
-<hr/>
-<div class="info cg">
-    <div class="infoLeft">
-        <i class="fa-solid fa-photo-film"></i>
-        <span>Lectures</span>
-    </div>
-    <div class="infoRight">
-        10
-    </div>
-</div>
-<hr/>
-<div class="info cg">
-    <div class="infoLeft">
-        <i class="fa-solid fa-book"></i>
-        <span>Level</span>
-    </div>
-    <div class="infoRight">
-        ${p.levelCourse}
-    </div>
-</div>
-<hr/>
-<div class="info cg">
-    <div class="infoLeft">
-        <i class="fa-solid fa-language"></i>
-        <span>Language</span>
-    </div>
-    <div class="infoRight">
-        ${p.languageCourse}
-    </div>
-</div>
-<hr/>
-
-<button class="btn " >
-
-    <a href="/elearning/addenrolled?id=${p.courseID}">
-
-        Checkout
-    </a>
-</button>
-</div>
-</div>
-</div>-->
-
-
         <footer>
             <div class="grid widget wide">
                 <div class="row">
@@ -1165,6 +1100,47 @@ font-size: calc(1.275rem + 0.3vw);
             </div>
         </footer>
     </body>
+
+    <div class="overlay" id="dialog">
+        <div class="modal">
+            <i class="close-icon fa-solid fa-xmark"></i>
+            <h3 class="modal-title">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto, sunt
+                a excepturi vel, eaque est, dicta natus tempora unde esse id corporis
+                maxime. Temporibus architecto repudiandae esse nulla, id accusamus?
+            </h3>
+            <div class="modal-content">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga ullam
+                vitae quisquam repudiandae obcaecati
+            </div>
+            <div class="modal-action">
+                <button class="btn btn-outline-primary">Button 1</button>
+                <button class="btn btn-primary">Button 2</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast-error">
+        <i class="error-icon fa-solid fa-circle-exclamation"></i>
+        <div class="toast-message">
+            <span class="toast-title text-error">Lỗi!</span> Nạp tiền đi con gà
+        </div>
+        <i class="close-icon fa-solid fa-xmark"></i>
+    </div>
+
+
+    <script src="./js/toastAndModel.js"></script>
+    <script>
+        var errBtn = document.querySelector(".btn-error");
+        errBtn.addEventListener("click",function (){
+            
+                    openToast("toast-error");
+   
+        });
+    </script>
+
+
+
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {

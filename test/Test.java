@@ -1,6 +1,8 @@
 
-import dao.EnrollDAO;
-import entity.EnrolledCourse;
+import dao.CourseDAO;
+import java.util.ArrayList;
+import java.util.List;
+import stat.CourseStat;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -11,10 +13,10 @@ import entity.EnrolledCourse;
  *
  * @author Admin
  */
-public class NewClass {
+public class Test {
     public static void main(String[] args) {
-        EnrollDAO edao = new EnrollDAO();
-        EnrolledCourse e = edao.findEnroll("f881e324-2dc8-4d5b-aaa4-3727d63885d7", "c02");
-        System.out.println(e.toString());
+        List<CourseStat> courStat = new ArrayList<>();
+        CourseDAO cdao = new CourseDAO();
+        courStat = cdao.getStatOfCourse();
     }
 }
