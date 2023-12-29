@@ -167,35 +167,7 @@
                 </c:if>
             </main>
         </div>
-        <div class="toast" id="toast-success">
-            <i class="sucess-icon fa-solid fa-circle-check"></i>
-            <div class="toast-message">
-                <span class="toast-title text-success">Thành công!</span> Đã xóa blog !!!
-            </div>
-            <i class="close-icon close-icon fa-solid fa-xmark"></i>
-        </div>
-        <div class="toast" id="toast-error">
-            <i class="error-icon fa-solid fa-circle-exclamation"></i>
-            <div class="toast-message">
-                <span class="toast-title text-error">Lỗi!</span> Xóa blog thất bại !!!
-            </div>
-            <i class="close-icon fa-solid fa-xmark"></i>
-        </div>
-
-        <script src="../js/toastAndModel.js"></script>
-
-        <c:if test="${not empty requestScope.successMessage}">
-            <script>
-                        openToast("toast-success");
-            </script>
-        </c:if>
-
-        <c:if test="${not empty requestScope.errorMessage}">
-            <script>
-                openToast("toast-error");
-            </script>
-        </c:if>
-
+      
     </body>
 
 </html>

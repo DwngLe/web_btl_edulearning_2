@@ -45,7 +45,7 @@
                 <nav>
                     <a class="nav-active" href="/">Trang chủ</a>
                     <a href="/">Khóa học</a>
-                    <a href="/">Blog</a>
+                    <a href="/elearning/listblog">Blog</a>
                     <a href="/elearning/contact.html">Liên hệ</a>
                 </nav>
                 <div class="login-nav">

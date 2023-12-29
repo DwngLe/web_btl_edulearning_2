@@ -42,7 +42,6 @@
             </div>
         </header>
 
-        <div class="overlay"></div>
         <div class="page-banner">
             <img class="shape-1" src="./assets/blog/shape-1.png" alt="Shape">
             <img class="shape-2" src="./assets/blog/shape-2.png" alt="Shape">

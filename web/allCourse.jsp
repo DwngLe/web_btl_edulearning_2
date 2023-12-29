@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <link rel="stylesheet" href="./css/main.css" />
+        <link rel="stylesheet" href="./css/pages/listblog.css" />
 
         <link
             rel="stylesheet"
@@ -295,6 +296,23 @@
             color: #309255;
             font-size: 16px;
         }
+
+        .title-content {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            height: 100%;
+        }
+
+        .read-more {
+            color: black;
+            font-weight: 500;
+            margin-right: 10px;
+        }
+        
+        .read-more:hover{
+            color: green;
+        }
     </style>
 
     <body>
@@ -339,8 +357,8 @@
                         <p>It has survived not only five centuries but also the leap into electronic typesetting.</p>
                         <div class="row">
                             <div class="col l-6">
-                        <button class="btn btn-primary">Start A Course</button>
-                                
+                                <button class="btn btn-primary">Start A Course</button>
+
                             </div>
                         </div>
                     </div>
@@ -375,9 +393,8 @@
                         </button>
                     </div>
                 </div>
-
-
             </div>
+
             <div class="card-display-component">
                 <div class="card-display-component-img">
 
@@ -461,109 +478,171 @@
                 </c:forEach>
             </div>
 
-        </div>
-
-        <footer>
-            <div class="grid widget wide">
-                <div class="row">
-                    <div class="col l-3 m-6 c-12">
-                        <a href="#"><img src="./assets/imgs/logo.png" alt="Logo" /></a>
-
-                        <div class="widget-address">
-                            <h4>Km 10, Trần Phú</h4>
-                            <p>Hà Đông, Hà Nội</p>
-                        </div>
-
-                        <ul class="widget-info">
-                            <li>
-                                <p>
-                                    <i class="fa-solid fa-envelope"></i>
-                                    <a href="mailto:ptit@gmail.com">ptit@gmail.com</a>
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    <i class="fa-solid fa-phone"></i>
-                                    <a href="tel:9702621413">(970) 262-1413</a>
-                                </p>
-                            </li>
-                        </ul>
-
-                        <ul class="widget-social">
-                            <li>
-                                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa-brands fa-skype"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
-                            </li>
-                        </ul>
+            <div class="row">
+                <div class="col l-6 c-12">
+                    <div class="section-title">
+                        <h2>
+                            Danh sách blog
+                        </h2>
                     </div>
-                    <div class="col l-3 m-6 c-12">
-                        <h4 class="footer-widget-title">Loại khóa học</h4>
-                        <ul class="widget-link">
-                            <li><a href="#">Văn bản sáng tạo</a></li>
-                            <li><a href="#">Phim & Video</a></li>
-                            <li><a href="#">Thiết kế đồ họa</a></li>
-                            <li><a href="#">Thiết kế UI/UX</a></li>
-                            <li><a href="#">Phân tích kinh doanh</a></li>
-                            <li><a href="#">Tiếp thị</a></li>
-                        </ul>
-                    </div>
-                    <div class="col l-3 m-6 c-12">
-                        <h4 class="footer-widget-title">Truy cập nhanh</h4>
-                        <ul class="widget-link">
-                            <li><a href="#">Chính sách bảo mật</a></li>
-                            <li><a href="#">Thảo luân</a></li>
-                            <li><a href="#">Điều khoản - điều kiện</a></li>
-                            <li><a href="#">Hỗ trợ khách hàng</a></li>
-                            <li><a href="#">Câu hỏi thường gặp</a></li>
-                        </ul>
-                    </div>
-                    <div class="col l-3 m-6 c-12">
-                        <h4 class="footer-widget-title">Đăng ký</h4>
+                </div>
 
-                        <div>
-                            <p>Đăng ký để được tư vấn miễn phí!</p>
+                <div class="col l-6 c-12">
+                    <div class="title-content">
+                        <a class="read-more" href="/elearning/listblog">Xem thêm</a>
+                    </div>
+                </div>
+            </div>
 
-                            <div class="widget-form">
-                                <form action="#">
-                                    <input class="input" placeholder="Điền email vào đây" />
-                                    <button class="btn btn-primary">Đăng ký ngay</button>
-                                </form>
+            <div class="row">
+                <c:set var="count" value="0" />
+                <c:forEach var="p" items="${listBlog}">
+                    <c:if test="${count lt 3}">
+                        <div class="col l-4 c-6">
+                            <div class="single-blog">
+                                <div class="blog-image">
+                                    <a href="/elearning/blog?id=${p.getBlogID()}">
+                                        <c:choose>
+                                            <c:when test="${not empty p.urlImg}">
+                                                <img src="${p.urlImg}" alt="Picture blog">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="${pageContext.request.contextPath}${ImageUtils.getDefaultImagePath()}" alt="Default Picture blog">
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </a>
+                                </div>
+                                <div class="blog-conten">
+                                    <h3 class="title"> ${p.getTitle()}</h3>
+                                    <div class="blog-meta">
+                                        <span>
+                                            <img src="./assets/icon/date.png" alt="Icon date" />
+                                            <p>${p.getCreatedDate()}</p>
+                                        </span>
+                                        <span>
+                                            <img src="./assets/icon/view.png" alt="Icon date" />
+                                            <p>${p.getTotalView()}</p>
+                                        </span>
+                                    </div>
+                                    <button class="btn btn-secondary"
+                                            onclick="redirectToBlog(`${p.getBlogID()}`)">
+                                        Xem thêm
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        <c:set var="count" value="${count + 1}" />
+                    </c:if>
+                </c:forEach>
             </div>
-            <div class="footer-copyright">
-                <div class="grid wide">
-                    <div class="row">
-                        <div class="copyright-link">
-                            <a href="#">Điều khoản dịch vụ</a>
-                            <a href="#">Chính sách</a>
-                            <a href="#">Sơ đồ trang</a>
-                            <a href="#">Bảo mật</a>
-                        </div>
-                        <div class="copyright-text">
-                            © 2023 <span> Edule </span> Tạo bởi
-                            <a href="#">Nhóm 4 - 9</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
 
-    </body>
-    <script>
+        </div>
+    </div>
+
+    <footer>
+        <div class="grid widget wide">
+            <div class="row">
+                <div class="col l-3 m-6 c-12">
+                    <a href="#"><img src="./assets/imgs/logo.png" alt="Logo" /></a>
+
+                    <div class="widget-address">
+                        <h4>Km 10, Trần Phú</h4>
+                        <p>Hà Đông, Hà Nội</p>
+                    </div>
+
+                    <ul class="widget-info">
+                        <li>
+                            <p>
+                                <i class="fa-solid fa-envelope"></i>
+                                <a href="mailto:ptit@gmail.com">ptit@gmail.com</a>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <i class="fa-solid fa-phone"></i>
+                                <a href="tel:9702621413">(970) 262-1413</a>
+                            </p>
+                        </li>
+                    </ul>
+
+                    <ul class="widget-social">
+                        <li>
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa-brands fa-skype"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col l-3 m-6 c-12">
+                    <h4 class="footer-widget-title">Loại khóa học</h4>
+                    <ul class="widget-link">
+                        <li><a href="#">Văn bản sáng tạo</a></li>
+                        <li><a href="#">Phim & Video</a></li>
+                        <li><a href="#">Thiết kế đồ họa</a></li>
+                        <li><a href="#">Thiết kế UI/UX</a></li>
+                        <li><a href="#">Phân tích kinh doanh</a></li>
+                        <li><a href="#">Tiếp thị</a></li>
+                    </ul>
+                </div>
+                <div class="col l-3 m-6 c-12">
+                    <h4 class="footer-widget-title">Truy cập nhanh</h4>
+                    <ul class="widget-link">
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Thảo luân</a></li>
+                        <li><a href="#">Điều khoản - điều kiện</a></li>
+                        <li><a href="#">Hỗ trợ khách hàng</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                    </ul>
+                </div>
+                <div class="col l-3 m-6 c-12">
+                    <h4 class="footer-widget-title">Đăng ký</h4>
+
+                    <div>
+                        <p>Đăng ký để được tư vấn miễn phí!</p>
+
+                        <div class="widget-form">
+                            <form action="#">
+                                <input class="input" placeholder="Điền email vào đây" />
+                                <button class="btn btn-primary">Đăng ký ngay</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="grid wide">
+                <div class="row">
+                    <div class="copyright-link">
+                        <a href="#">Điều khoản dịch vụ</a>
+                        <a href="#">Chính sách</a>
+                        <a href="#">Sơ đồ trang</a>
+                        <a href="#">Bảo mật</a>
+                    </div>
+                    <div class="copyright-text">
+                        © 2023 <span> Edule </span> Tạo bởi
+                        <a href="#">Nhóm 4 - 9</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+<script>
     function redirectToCourse(courseID) {
         // Thực hiện chuyển hướng khi button được nhấp
-        window.location.href = "/elearning/courseinfoctl?id="+courseID;
+        window.location.href = "/elearning/courseinfoctl?id=" + courseID;
     }
-    </script>
+</script>
+
+<script src="./js/toastAndModel.js"></script>
+<script src="./js/blog.js"></script>
 </html>
