@@ -4,9 +4,7 @@
  */
 package controller.Course;
 
-import dao.BlogDAO;
 import dao.CourseDAO;
-import entity.Blog;
 import entity.Course;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -70,12 +68,6 @@ public class LoadAllCourseController extends HttpServlet {
 //            System.out.println(co.toString());
 //        }
         request.setAttribute("cList", c);
-        
-        List<Blog> listBlog;
-        BlogDAO dao = new BlogDAO();
-        listBlog = dao.getAllBlog();
-        request.setAttribute("listBlog", listBlog);
-        
         RequestDispatcher rd = request.getRequestDispatcher("allCourse.jsp");
         rd.forward(request, response);
         
