@@ -1,6 +1,6 @@
 .avatar {
-  width: var(--height-default);
-  height: var(--height-default);
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
 }
 

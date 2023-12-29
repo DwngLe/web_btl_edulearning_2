@@ -7,7 +7,6 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
         <title>Trang Admin</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
               integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
@@ -49,20 +48,20 @@
 
                 <ul class="sidebar-list">
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/admin/managerAcc">
                             <span class="material-icons-outlined">groups</span> Học viên
                         </a>
                     </li>
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/admin/course/">
                             <span class="material-icons-outlined">library_books</span> Khoá
                             học
                         </a>
                     </li>
 
-                    <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
-                            <span class="material-icons-outlined">newspaper</span> Blog
+                    <li class="sidebar-list-item" style="background-color: whitesmoke">
+                        <a href="/elearning/admin/blog">
+                            <span class="material-icons-outlined">newspaper</span> <span style="color: black">Blog</span>
                         </a>
                     </li>
 
@@ -98,6 +97,13 @@
                 </div>
                 <c:if test="${empty listBlog or listBlog.size() eq 0}">
                     <p>Không tồn tại blog</p>
+                    <div class="btnContainer">
+                        <div class="btnL">
+                            <form action="/elearning/admin/blog/add" method="get">
+                                <button class="btn-backgound" type="submit">Thêm blog</button>
+                            </form>
+                        </div>
+                    </div>
                 </c:if>
                 <c:if test="${not empty listBlog or listBlog.size() gt 0}">
                     <div class="up-table">
@@ -126,7 +132,7 @@
                         <c:forEach var="blog" items="${listBlog}">
                             <tr>
                                 <td>${count + 1}</td>
-                                <td class="td-bold">${blog.title}</td>
+                                <td class="td-bold"> <a href="/elearning/blog?id=${blog.getBlogID()}" style="color: #309255">${blog.title} </a></td>
                                 <td>${blog.createdDate}</td>
                                 <td>${blog.updateAt}</td>
                                 <td>${blog.totalView}</td>
@@ -161,6 +167,7 @@
                 </c:if>
             </main>
         </div>
+      
     </body>
 
 </html>

@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+package controller.Home;
 
-package controller.Blog;
-
-import dao.BlogCommentDAO;
 import dao.BlogDAO;
+import dao.CourseDAO;
 import entity.Blog;
-import entity.BlogComment;
+import entity.Course;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -20,38 +20,41 @@ import java.util.List;
 
 /**
  *
- * @author duong
+ * @author Admin
  */
-@WebServlet(name="blog", urlPatterns={"/blog"})
-public class BlogView extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+@WebServlet(name = "Home", urlPatterns = {"/home"})
+public class HomeController extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BlogView</title>");  
+            out.println("<title>Servlet LoadAllCourseController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BlogView at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet LoadAllCourseController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -59,32 +62,28 @@ public class BlogView extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        String id = request.getParameter("id");
-        List<BlogComment> c;
-        BlogCommentDAO cdao = new BlogCommentDAO();
-        c = cdao.getAllCommentBlogByID(id);
-        request.setAttribute("cmtList", c);
-        
-        Blog b = new Blog();
-        BlogDAO dao = new BlogDAO();
-        b = dao.getBlogByID(id);
-        dao.updateTotal(b);
-        request.setAttribute("b", b);
+            throws ServletException, IOException {
+        List<Course> c;
+        CourseDAO cdao = new CourseDAO();
+        c = cdao.getAllCourse();
+//        for(Course co: c){
+//            System.out.println(co.toString());
+//        }
+        request.setAttribute("cList", c);
         
         List<Blog> listBlog;
+        BlogDAO dao = new BlogDAO();
         listBlog = dao.getAllBlog();
         request.setAttribute("listBlog", listBlog);
         
-        String idUser = (String) request.getSession().getAttribute("id");
-        System.out.println("id user in blog:" + idUser);
-        request.setAttribute("idUser", idUser);
+        RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
+        rd.forward(request, response);
+        
+    }
 
-        request.getRequestDispatcher("blog.jsp").forward(request, response);
-    } 
-
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -92,12 +91,13 @@ public class BlogView extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

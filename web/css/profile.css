@@ -132,7 +132,7 @@ main{
 }
 
 .choose{
-    background-color: rgb(39, 209, 39);
+    background-color: var(--color-secondary);
 }
 
 .btn-container{

@@ -1,8 +1,10 @@
 table {
     border-collapse: collapse;
-    width: 1200px;
+    width: 1100px;
     margin-top: 20px;
     margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 5px;
 }
 
 th, td {
@@ -28,16 +30,12 @@ th {
 
 .btn_flex {
     display: flex;
-    justify-content: center; /* Căn giữa theo chiều ngang */
-    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: center;
+    align-items: center;
 }
 
 .btnContainer form {
     display: flex;
-}
-
-.btn-delete{
-    background-color: red !important;
 }
 
 .btn-backgound {
@@ -93,4 +91,8 @@ th {
 .btnL a{
     text-decoration: none;
     color: white;
+}
+
+.btn-delete:hover {
+    background-color: red;
 }

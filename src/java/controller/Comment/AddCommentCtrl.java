@@ -4,10 +4,10 @@
  */
 package controller.Comment;
 
-import dao.CommentDAO;
+import dao.CourseCommentDAO;
 import dao.CourseDAO;
 import dao.UserDAO;
-import entity.Comment;
+import entity.CourseComment;
 import entity.Course;
 import entity.User;
 import java.io.IOException;
@@ -82,9 +82,9 @@ public class AddCommentCtrl extends HttpServlet {
         java.util.Date utilDate = new java.util.Date();
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
-        Comment c = new Comment(id,desc,sqlDate,user,course);
+        CourseComment c = new CourseComment(id,desc,sqlDate,user,course);
         System.out.println(c);
-        CommentDAO cmdao = new CommentDAO();
+        CourseCommentDAO cmdao = new CourseCommentDAO();
         cmdao.addNewComment(c);
         response.sendRedirect("courseinfoctl?id="+id_course);
     }

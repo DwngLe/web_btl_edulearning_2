@@ -4,11 +4,12 @@
  */
 package controller.Course;
 
-import dao.CommentDAO;
+import dao.CourseCommentDAO;
 import dao.CourseDAO;
 import dao.EnrollDAO;
 import dao.UserDAO;
-import entity.Comment;
+
+import entity.CourseComment;
 import entity.Course;
 import entity.EnrolledCourse;
 import entity.User;
@@ -75,8 +76,8 @@ public class CourseInfoController extends HttpServlet {
         System.out.println("User: " + user.toString());
 
         String id = request.getParameter("id");
-        List<Comment> c;
-        CommentDAO cdao = new CommentDAO();
+        List<CourseComment> c;
+        CourseCommentDAO cdao = new CourseCommentDAO();
         c = cdao.getAllCmtById(id);
         request.setAttribute("cmtList", c);
         CourseDAO dao = new CourseDAO();

@@ -51,7 +51,7 @@
             <aside id="sidebar">
                 <div class="sidebar-title">
                     <div class="sidebar-brand">
-                        <img src="../../assets/logo-icon.png" alt="" />
+                        <img src="../assets/logo-icon.png" alt="" />
                     </div>
                     <span class="material-icons-outlined" onclick="closeSidebar()"
                           >close</span
@@ -66,7 +66,8 @@
                     </li>   
                     <li class="sidebar-list-item" style="background-color: whitesmoke">
                         <a href="/elearning/admin/course/">
-                            <span class="material-icons-outlined">library_books</span> <span style="color: black">Khoá học</span>
+                            <span class="material-icons-outlined">library_books</span> <span style="color: black">Khoá
+                                học</span>
                         </a>
                     </li>
 
@@ -93,7 +94,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/logout">
                             <span class="material-icons-outlined">logout</span> Đăng xuất
                         </a>
                     </li>
@@ -102,67 +103,40 @@
             <!-- End Sidebar -->
 
             <!-- Main -->
-            <div class="grid container wide" style="width: 100%">
-                <h2 id="title" >Edit course</h2>
-                <form action="/elearning/admin/course/update" method="post">
-                    <input name="totalView" hidden="true" value="${p.totalView}"/>
-                    <input name="id" hidden="true" value="${p.courseID}"/>
-                    <div class='row'>
-                        <div class="col l-12 c-12">
-                            <div class="card-display-component">
-                                <div class="card-display-component-img">
-                                    <input name="title" value="${p.title}" class="input" placeholder="Title" type="text" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-12 c-12">
-                            <div class="card-display-component">
-                                <div class="card-display-component-img">
-                                    <input name="level" value="${p.levelCourse}" class="input" placeholder="Level" type="text" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-12 c-12">
-                            <div class="card-display-component">
-                                <div class="card-display-component-img">
-                                    <input name="description" value="${p.descriptionCourse}" class="input" placeholder="Description" type="text" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-12 c-12">
-                            <div class="card-display-component">
-                                <div class="card-display-component-img">
-                                    <input name="language" value="${p.languageCourse}" class="input" placeholder="Language" type="text" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-12 c-12">
-                            <div class="card-display-component">
-                                <div class="card-display-component-img">
-                                    <input name="duration" value="${p.duration}" class="input" placeholder="Duration" type="text" />
-                                </div>
-                            </div>
-                        </div>
+            <main class="main-container" style="width: 100%">
+                <div class="main-title col">
+                    <h1>Danh sách các học viên của khoá học là</h1>
+                </div>
+                <c:if test = "${empty listEnroll or listEnroll.size() eq 0}">
+                    <p>Khoá học chưa có sinh viên nào đăng ký</p>
+                </c:if>
+                <c:if test = "${not empty listEnroll or listEnroll.size() gt 0}">
+                    <table style="width: 100%" >
+                        <tr>
+                            <th>Số thứ tự</th>
+                            <th>Tên tài khoản</th>
+                            <th>Họ và tên</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Ngày đăng ký</th>
+                            <!--<th>Thao Tác</th>-->
+                        </tr>
+                        <c:set var="count" value="0" />
+                        <c:forEach var="u" items="${listEnroll}">
+                            <tr>
+                                <td>${count + 1}</td>
+                                <td class="td-bold"> <a href="/elearning/admin/managerAcc/user?userID=${u.user.userID}" style="color: #309255" >${u.user.username}</a></td>
+                                <td>${u.user.name}</td>
+                                <td>${u.user.email}</td>
+                                <td>${u.user.phoneNumber}</td>
+                                <td>${u.subDate}</td>
+                            </tr>
+                            <c:set var="count" value="${count + 1}" />
+                        </c:forEach>
+                    </table>
+                </c:if>
 
-                        <div class="col l-6 c-12">
-                            <div class="card-display-component">
-                                <div class="card-display-component-img">
-                                    <input name="price" value="${p.price}" class="input" placeholder="Price" type="text" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-6 c-12">
-                            <div class="card-display-component">
-                                <div class="card-display-component-img">
-                                    <input name="imgurl" value="${p.imageUrl}" class="input" placeholder="Url image" type="text" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="btn">Submit</button>
-                </form>
-
-            </div>
+            </main>
             <!-- End Main -->
         </div>
 

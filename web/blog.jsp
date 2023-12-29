@@ -24,25 +24,24 @@
         <div class="main-wrapper">
             <header>
                 <div class="grid wide header">
-                    <a href="/">
-                        <img src="assets/logo.png" alt="Logo" />
+                    <a href="/elearning/home">
+                        <img src="./assets/logo.png" alt="Logo" />
                     </a>
                     <nav>
-                        <a href="/elearning/loadallcourse">Trang chủ</a>
-                        <a href="/">Khóa học</a>
+                        <a href="/elearning/home">Trang chủ</a>
+                        <a href="/elearning/loadallcourse">Khóa học</a>
                         <a class="nav-active" href="/elearning/listblog">Blog</a>
-                        <a href="/">Liên hệ</a>
+                        <a href="/elearning/contact.html">Liên hệ</a>
                     </nav>
                     <div class="login-nav">
-                        <a href="/">
-                            <img class="avatar" src="https://placehold.co/100x100" alt="image" />
+                        <a href="/elearning/user">
+                            <img class="avatar" src="./assets/icon/user.png" alt="image" />
                         </a>
                     </div>
                     <i class="menu-btn fa-solid fa-bars" onclick="openOverlay('header-mobile')"></i>
                 </div>
             </header>
 
-            <div class="overlay"></div>
             <div class="page-banner">
                 <img class="shape-1" src="./assets/blog/shape-1.png" alt="Shape">
                 <img class="shape-2" src="./assets/blog/shape-2.png" alt="Shape">
@@ -92,7 +91,7 @@
                                                             <div class="post-content">
                                                                 <h5 class="title">
                                                                     <a class="title-blog"
-                                                                        href="/elearning/blog?id=${p.getBlogID()}">${p.getTitle()}</a>
+                                                                       href="/elearning/blog?id=${p.getBlogID()}">${p.getTitle()}</a>
                                                                 </h5>
                                                                 <span>
                                                                     <img src="./assets/icon/date.png"
@@ -205,35 +204,36 @@
                             </div>
 
                             <div class="blog-details-comment">
-                                <div class="comment-form">
-                                    <h3 class="title">Bình luận tại đây</h3>
-                                    <div class="form-wrapper">
-                                        <form action="/elearning/blogaddcomment" method="post">
-                                            <input name="elseID" hidden="true"
-                                                   value="${b.getBlogID()}" />
-                                            <div class="row">
-                                                <div class="col l-8">
-                                                    <div class="single-form">
-                                                        <!--<input name="description" placeholder="Nhap binh luan cua ban" type="text"/>-->
-                                                        <textarea name="description" rows="4"
-                                                                  cols="50"
-                                                                  placeholder="Nhập bình luận của bạn"></textarea>
-                                                    </div>
 
-                                                    <div class="col l-8">
-                                                        <div class="single-form text-center">
-                                                            <button class="btn btn-primary"
-                                                                    style="margin-left: 150px;"
-                                                                    type="submit">Bình luận</button>
+                                <c:if test="${not empty idUser}">
+                                    <div class="comment-form">
+                                        <h3 class="title">Bình luận tại đây</h3>
+                                        <div class="form-wrapper">
+                                            <form action="/elearning/blogaddcomment" method="post">
+                                                <input name="elseID" hidden="true"
+                                                       value="${b.getBlogID()}" />
+                                                <div class="row">
+                                                    <div class="col form-comment">
+                                                        <div class="single-form">
+                                                            <!--<input name="description" placeholder="Nhap binh luan cua ban" type="text"/>-->
+                                                            <textarea name="description" rows="4"
+                                                                      cols="50"
+                                                                      placeholder="Nhập bình luận của bạn"></textarea>
                                                         </div>
+
+                                                        <div class="col form-comment">
+                                                            <div class="single-form text-center">
+                                                                <button class="btn btn-primary"
+                                                                        type="submit">Bình luận</button>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
-
                                                 </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-
+                                </c:if>
                                 <div class="comment-wrapper">
                                     <h3 class="title"> Các bình luận </h3>
                                     <ul class="comment-item">
@@ -262,6 +262,7 @@
                                     </ul>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
