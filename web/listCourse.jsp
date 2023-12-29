@@ -15,8 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="./css/pages/listblog.css" />
+        <title>Danh sách khóa hoc</title>
     </head>
 
     <style>

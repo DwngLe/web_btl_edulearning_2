@@ -56,7 +56,7 @@ public class UserLoginController extends HttpServlet {
         
             if (role.equals("GUEST")) {
   
-                response.sendRedirect("loadallcourse");
+                response.sendRedirect("home");
             }
             if(role.equals("ADMIN")){
 
