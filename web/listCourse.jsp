@@ -16,6 +16,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="./css/pages/listblog.css" />
     </head>
 
     <style>
@@ -166,10 +167,10 @@
                             </div>
                         </a>
                     </c:forEach>
-
-
                 </div>
             </div>
+            
+           
         </div>
     </body>
 </html>

@@ -477,3 +477,7 @@ body {
 .time {
     color: #ff8a00 !important;
 }
+
+.form-comment {
+    width: 100%;
+}
