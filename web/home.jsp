@@ -323,28 +323,33 @@ font-size: calc(1.275rem + 0.3vw);
         .read-more:hover {
             color: green;
         }
+        
+        .title-blog{
+            height: 40px;
+            font-size: 20px;
+        }
     </style>
 
     <body>
         <header>
-                <div class="grid wide header">
-                    <a href="/elearning/home">
-                        <img src="./assets/logo.png" alt="Logo" />
+            <div class="grid wide header">
+                <a href="/elearning/home">
+                    <img src="./assets/logo.png" alt="Logo" />
+                </a>
+                <nav>
+                    <a class="nav-active" href="/elearning/home">Trang chủ</a>
+                    <a href="/elearning/loadallcourse">Khóa học</a>
+                    <a href="/elearning/listblog">Blog</a>
+                    <a href="/elearning/contact.html">Liên hệ</a>
+                </nav>
+                <div class="login-nav">
+                    <a href="/elearning/user">
+                        <img class="avatar" src="./assets/icon/user.png" alt="image" />
                     </a>
-                    <nav>
-                        <a class="nav-active" href="/elearning/home">Trang chủ</a>
-                        <a href="/elearning/loadallcourse">Khóa học</a>
-                        <a href="/elearning/listblog">Blog</a>
-                        <a href="/elearning/contact.html">Liên hệ</a>
-                    </nav>
-                    <div class="login-nav">
-                        <a href="/elearning/user">
-                            <img class="avatar" src="./assets/icon/user.png" alt="image" />
-                        </a>
-                    </div>
-                    <i class="menu-btn fa-solid fa-bars" onclick="openOverlay('header-mobile')"></i>
                 </div>
-            </header>
+                <i class="menu-btn fa-solid fa-bars" onclick="openOverlay('header-mobile')"></i>
+            </div>
+        </header>
 
 
         <div class="banner">
@@ -504,19 +509,11 @@ font-size: calc(1.275rem + 0.3vw);
                             <div class="single-blog">
                                 <div class="blog-image">
                                     <a href="/elearning/blog?id=${p.getBlogID()}">
-                                        <c:choose>
-                                            <c:when test="${not empty p.urlImg}">
-                                                <img src="${p.urlImg}" alt="Picture blog">
-                                            </c:when>
-                                            <c:otherwise>
-                                                <img src="${pageContext.request.contextPath}${ImageUtils.getDefaultImagePath()}"
-                                                     alt="Default Picture blog">
-                                            </c:otherwise>
-                                        </c:choose>
+                                        <img src="${p.getUrlImg()}" alt="Picture blog">
                                     </a>
                                 </div>
                                 <div class="blog-conten">
-                                    <h3 class="title"> ${p.getTitle()}</h3>
+                                    <h3 class="title-blog"> ${p.getTitle()}</h3>
                                     <div class="blog-meta">
                                         <span>
                                             <img src="./assets/icon/date.png" alt="Icon date" />
