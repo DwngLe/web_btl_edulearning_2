@@ -35,107 +35,6 @@
     </head>
 
     <style>
-        
-        
-        #container {
-
-            padding-top: 100px;
-            width: 1200px;
-            margin: auto;
-        }
-
-        #header {
-            display: flex;
-            align-items: center;
-            flex-direction: row;
-            gap: 10px;
-            justify-content: flex-end;
-        }
-
-        #btn {
-            background-color: blue;
-            text-decoration: none;
-            color: white;
-            border: none;
-            padding: 8px 6px;
-            border-radius: 4px;
-        }
-
-        #btn:hover {
-            background-color: #3366ff;
-            cursor: pointer;
-        }
-
-        #title {
-            margin-bottom: 10px
-        }
-
-        #list-courses {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 10px;
-        }
-
-        #course {
-            cursor: pointer;
-            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-            border-radius: 10px;
-            text-decoration: none;
-
-        }
-
-        #course-info p,
-        h3 {
-            margin: 0;
-
-        }
-
-        #course-info {
-            height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-        }
-
-        #course-info h3 {
-            color: black;
-        }
-
-
-        #course-info p {
-            color: gray;
-        }
-
-        #course-info img {
-            width: 200px;
-            height: 100px;
-            border-radius: 10px;
-        }
-
-        #img {
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: center;
-        }
-
-
-
-        #course-info {
-            padding: 10px;
-            text-decoration: none;
-        }
-
-        #desc-price {
-            margin: 4px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        #price {
-            font-size: 12px;
-        }
-
         input {
             width: 100%;
             padding: 8px;
@@ -389,6 +288,7 @@ font-size: calc(1.275rem + 0.3vw);
         }
 
         .main-title {
+            display: block;
             color:
                 #1d2733;
             font-family:
@@ -861,7 +761,7 @@ font-size: calc(1.275rem + 0.3vw);
                 <div class="col col-lg-4 c-12">
                     <div class="sidebar-widget widget-information">
                         <div class="info-price">
-                            <span class="price">$${p.price}</span>
+                            <span class="price">${p.price} VND</span>
                         </div>
                         <div class="info-list">
                             <ul>
