@@ -469,7 +469,7 @@ font-size: calc(1.275rem + 0.3vw);
                                     </div>
 
                                     <div class="courses-price-review">
-                                        $${p.price}
+                                        ${p.price} VND
                                     </div>
                                 </div>
                             </div>

@@ -441,7 +441,7 @@
                                     </div>
 
                                     <div class="courses-price-review">
-                                        $${p.price}
+                                        ${p.price} VND
                                     </div>
                                 </div>
                             </div>
