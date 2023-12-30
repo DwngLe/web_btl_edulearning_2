@@ -75,18 +75,11 @@
                             <div class="single-blog">
                                 <div class="blog-image">
                                     <a href="/elearning/blog?id=${p.getBlogID()}">
-                                        <c:choose>
-                                            <c:when test="${not empty p.urlImg}">
-                                                <img src="${p.urlImg}" alt="Picture blog">
-                                            </c:when>
-                                            <c:otherwise>
-                                                <img src="${pageContext.request.contextPath}${ImageUtils.getDefaultImagePath()}" alt="Default Picture blog">
-                                            </c:otherwise>
-                                        </c:choose>
+                                        <img src="${p.urlImg}" alt="Picture blog">
                                     </a>
                                 </div>
                                 <div class="blog-conten">
-                                    <h3 class="title"> ${p.getTitle()}</h3>
+                                    <h3 class="title" style="font-size: 20px;"> ${p.getTitle()}</h3>
                                     <div class="blog-meta">
                                         <span>
                                             <img src="./assets/icon/date.png" alt="Icon date" />
