@@ -389,12 +389,12 @@ font-size: calc(1.275rem + 0.3vw);
                 </div>
                 <div class="col l-6 c-12">
 
-                    <div class="input-container">
-                        <input class="input" placeholder="Search here" type="text" />
-                        <button class="btn input-ic btn-icon">
+                    <form class="input-container" action="home-search" method="POST">
+                        <input class="input" placeholder="Search here" type="text" name="s-query" id="s-query"/>
+                        <button class="btn input-ic btn-icon" type="submit">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
-                    </div>
+                    </form>
                 </div>
             </div>
 
