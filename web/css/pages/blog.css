@@ -323,7 +323,7 @@ body {
     height: 50px;
 }
 
-.blog-details .title {
+.title {
     font-size: 25px;
     font-weight: 500;
     color: #212832;
@@ -344,6 +344,7 @@ body {
     margin-top: 15px;
     color: #52565b;
     line-height: 1.8;
+    text-align: justify;
 }
 
 .blog-details-label {
@@ -476,4 +477,13 @@ body {
 
 .time {
     color: #ff8a00 !important;
+}
+
+.form-comment {
+    width: 100%;
+}
+
+
+.description {
+    text-align: justify;
 }

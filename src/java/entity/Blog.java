@@ -35,6 +35,11 @@ public class Blog {
         this.createdDate = dateNow();
         this.updateAt = this.createdDate;
     }
+    
+    public Blog(String blogID, String title){
+        this.blogID = blogID;
+        this.title = title;
+    }
 
     public Blog(String blogID, String title, String content, Date createdDate, int totalView) {
         this.blogID = blogID;

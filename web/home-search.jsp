@@ -1,21 +1,33 @@
-<%-- Document : lesson Created on : Dec 25, 2023, 2:14:50 PM Author : My Asus --%>
+<%-- 
+    Document   : home-search
+    Created on : Dec 31, 2023, 10:30:36 AM
+    Author     : TGDD
+--%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="enity.*" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page contentType="text/html" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page language="java" contentType="text/html" %>
 <!DOCTYPE html>
 <html>
-
     <head>
-        <title>Bài học</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Search</title>
+        <link rel="stylesheet" href="./css/pages/home-search.css" />
         <link rel="stylesheet" href="./css/main.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
               integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="./css/pages/lesson.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,200&display=swap"
+            rel="stylesheet" />
     </head>
-
     <body>
         <header>
             <div class="grid wide header">
@@ -24,7 +36,7 @@
                 </a>
                 <nav>
                     <a href="/elearning/home">Trang chủ</a>
-                    <a class="nav-active" href="/elearning/loadallcourse">Khóa học</a>
+                    <a href="/elearning/loadallcourse">Khóa học</a>
                     <a href="/elearning/listblog">Blog</a>
                     <a href="/elearning/contact.html">Liên hệ</a>
                 </nav>
@@ -36,81 +48,60 @@
                 <i class="menu-btn fa-solid fa-bars" onclick="openOverlay('header-mobile')"></i>
             </div>
         </header>
-        <div id="header-mobile" class="overlay">
-            <div class="header-mobile">
-                <div class="login-nav avatar-container">
-                    <img class="avatar" src="https://placehold.co/100x100" alt="image" />
-                    <div>
-                        <div>
-                            Trần Doãn Đô
-                        </div>
-                        <a href="/">Xem trang cá nhân</a>
+        <div class="container">
+            <div class="mid">
+                <h1 style="margin: 1rem 0; font-size: 2.5rem; color: var(--color-primary)">Kết quả tìm kiếm cho: ${query}</h1>
+                <div class="itemsContainer">
+                    <div class="title">
+                        <h3>Khóa Học</h3>
                     </div>
-                </div>
-                <!-- <div class="login-nav">
-          <a href="/">
-            <button class="btn btn-fullwidth btn-primary">Đăng nhập</button>
-          </a>
-          <a href="/">
-            <button class="btn btn-fullwidth btn-outline-primary">
-              Đăng ký
-            </button>
-          </a>
-        </div> -->
-                <nav>
-                    <a class="nav-active" href="/">Trang chủ</a>
-                    <a href="/">Khóa học</a>
-                    <a href="/">Blog</a>
-                    <a href="/">Liên hệ</a>
-                </nav>
-            </div>
-        </div>
-        <div class="row no-gutters">
-            <div class="col m-8 c-12">
-                <video controls width="100%">
-                    <source src="./assets/videos/${lesson.getVideoURL()}">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="video-content">
-                    <h1 class="video-title">
-                        ${lesson.getName()}
-                    </h1>
-                    <p>
-                        ${lesson.getDesctiption()}
-                    </p>
-                </div>
-            </div>
-            <div class="col m-4 c-12">
-                <div class="courses-video-playlist">
-                    <h3 class="playlist-title">
-                        Tổng số: <span>${ListLessonPart.size()} chương học
-                    </h3>
-
-                    <!-- Video Playlist Start  -->
-                    <div class="video-playlist">
-                        <div class="accordion" id="videoPlaylist">
-                            <c:forEach var="lessonPart" items="${ListLessonPart}" varStatus="loop">
-                                <div class="accordion-item">
-                                    <button class="collapsed" type="button">
-                                        ${lessonPart.getTitle()}
-                                    </button>
-                                    <div class="accordion-collapse collapse">
-                                        <nav class="vids">
-                                            <c:forEach var="lesson" items="${lessonPart.getListLesson()}"
-                                                       varStatus="loop">
-                                                <a class="link"
-                                                   href="/elearning/lesson?LessonID=${lesson.getLessonID()}&CourseID=${CourseID}">
-                                                    ${lesson.getName()}
-                                                </a>
-                                            </c:forEach>
-                                        </nav>
+                    <div class="items">
+                        <c:choose>
+                            <c:when test="${not empty cList}">
+                                <c:forEach var="eCourse" items="${cList}">
+                                    <div class="item">
+                                        <div class="course-img">
+                                            <img src=${eCourse.imageUrl} alt="" />
+                                        </div>
+                                        <div class="course-detail">
+                                            <span>${eCourse.title}</span>
+                                            <h3
+                                                style="font-size: 20px; font-weight: normal; margin-bottom: 10px">
+                                                ${eCourse.price} vnd</h3>
+                                            <a href="courseinfoctl?id=${eCourse.courseID}"
+                                               class="btn btn-link">Xem chi tiết</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </c:forEach>
-                        </div>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <p>Không tìm thấy khóa học nào phù hợp với từ khóa ${query}. Vui lòng tìm kiếm từ khóa khác!</p>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
-                    <!-- Video Playlist End  -->
-
+                </div>
+                <div class="itemsContainer">
+                    <div class="title">
+                        <h3>Blog</h3>
+                    </div>
+                    <div class="items">
+                        <c:choose>
+                            <c:when test="${not empty cList}">
+                                <c:forEach var="blog" items="${bList}">
+                                    <div class="item">
+                                        <div class="detail">
+                                            <span>${blog.title}</span>
+                                            <a href="blog?id=${blog.blogID}"
+                                               class="btn btn-link">Xem chi tiết</a>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <p>Không tìm thấy blog nào phù hợp với từ khóa ${query}. Vui lòng tìm kiếm từ khóa khác!</p>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
                 </div>
             </div>
         </div>
@@ -151,7 +142,8 @@
                                 <a href="#"><i class="fa-brands fa-skype"></i></a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+                                <a href="#"><i
+                                        class="fa-brands fa-square-instagram"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -210,6 +202,4 @@
             </div>
         </footer>
     </body>
-    <script src="./js/lesson/lesson.js"></script>
-
 </html>

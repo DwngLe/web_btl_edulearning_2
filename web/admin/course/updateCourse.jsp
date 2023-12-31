@@ -144,23 +144,29 @@
                             </div>
                         </div>
 
-                        <div class="col l-6 c-12">
-                            <div class="card-display-component">
-                                <div class="card-display-component-img">
-                                    <input name="price" value="${p.price}" class="input" placeholder="Price" type="text" />
+                        <div style="display: flex; gap: 4px;">
+                            <div class="col l-6 c-12">
+                                <div class="card-display-component">
+                                    <div class="card-display-component-img">
+                                        <input name="price" value="${p.price}" class="input" placeholder="Price" type="text" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-6 c-12">
+                                <div class="card-display-component">
+                                    <div class="card-display-component-img">
+                                        <input name="imgurl" value="${p.imageUrl}" class="input" placeholder="Url image" type="text" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col l-6 c-12">
-                            <div class="card-display-component">
-                                <div class="card-display-component-img">
-                                    <input name="imgurl" value="${p.imageUrl}" class="input" placeholder="Url image" type="text" />
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
-                    <button type="submit" class="btn btn-primary" id="btn">Submit</button>
+                    <button type="submit" class="btn btn-primary" id="btn">Submit</button>           
+
                 </form>
+                <button onclick="window.location.href = '/elearning/admin/lesson?CourseID=${p.courseID}'" class="btn btn-primary" style="margin-top: 8px;" id="btn">Thêm bài học</button>
+
 
             </div>
             <!-- End Main -->
