@@ -66,8 +66,6 @@ public class AdminManagerAccountController extends HttpServlet {
         request.setAttribute("listUser", listUser);
         System.out.println("Do dai danh sach tai khoan la: " + listUser.size());
         request.getRequestDispatcher("managerAcc.jsp").forward(request, response);
-//        response.sendRedirect("managerAcc.jsp");
-        
     } 
 
     /** 
