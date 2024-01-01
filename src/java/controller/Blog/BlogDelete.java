@@ -81,6 +81,10 @@ public class BlogDelete extends HttpServlet {
         String id = request.getParameter("blogID");
         BlogDAO dao = new BlogDAO();
         dao.deleteBlog(id);
+        
+        BlogCommentDAO cdao = new BlogCommentDAO();
+        cdao.deleteAllCommentBlogByID(id);
+        
         System.out.println("Da xoa blog thanh cong");
         response.sendRedirect("/elearning/admin/blog");
     }

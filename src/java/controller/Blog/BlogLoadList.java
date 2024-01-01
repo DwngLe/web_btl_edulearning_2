@@ -66,8 +66,9 @@ public class BlogLoadList extends HttpServlet {
         listBlog = dao.getAllBlog();
         Collections.sort(listBlog, Collections.reverseOrder(Comparator.comparing(Blog::getCreatedDate)));
         request.setAttribute("listBlog", listBlog);
-        RequestDispatcher rd = request.getRequestDispatcher("listblog.jsp");
-        rd.forward(request, response);
+//        RequestDispatcher rd = request.getRequestDispatcher("listblog.jsp");
+//        rd.forward(request, response);
+        request.getRequestDispatcher("listblog.jsp").forward(request, response);
     } 
 
     /** 
