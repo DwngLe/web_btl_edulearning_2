@@ -426,7 +426,7 @@
                                         </div>
                                     </div>
                                     <h4 class="title">
-                                        <a>${p.descriptionCourse}</a>
+                                        <a>${p.title}</a>
                                     </h4>
 
                                     <div class="course-meta">

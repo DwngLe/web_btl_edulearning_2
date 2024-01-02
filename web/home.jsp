@@ -459,7 +459,7 @@ font-size: calc(1.275rem + 0.3vw);
                                         </div>
                                     </div>
                                     <h4 class="title">
-                                        <a>${p.descriptionCourse}</a>
+                                        <a>${p.title}</a>
                                     </h4>
 
                                     <div class="course-meta">
