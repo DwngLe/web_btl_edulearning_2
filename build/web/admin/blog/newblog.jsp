@@ -41,7 +41,7 @@
             <aside id="sidebar">
                 <div class="sidebar-title">
                     <div class="sidebar-brand">
-                        <img src="../assets/logo-icon.png" alt="" />
+                        <img src="../../assets/logo-icon.png" alt="" />
                     </div>
                     <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
                 </div>
@@ -53,14 +53,14 @@
                         </a>
                     </li>
                     <li class="sidebar-list-item">
-                        <a href="/elearning/admin/course/">
+                        <a href="#" target="_blank">
                             <span class="material-icons-outlined">library_books</span> Khoá
                             học
                         </a>
                     </li>
 
                     <li class="sidebar-list-item" style="background-color: whitesmoke">
-                        <a href="/elearning/admin/blog">
+                        <a href="#" target="_blank">
                             <span class="material-icons-outlined">newspaper</span> <span style="color: black">Blog</span>
                         </a>
                     </li>

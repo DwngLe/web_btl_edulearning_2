@@ -13,14 +13,8 @@ hs_err_pid*
 
 # netbeans
 nbproject/private/
-<<<<<<< Updated upstream
 build/
-=======
-build/*
-!build/web
->>>>>>> Stashed changes
 nbbuild/
-nbproject/build-impl.xml
 
 # the dist file could make some problems
 # dist/
@@ -51,4 +45,3 @@ pom.xml.versionsBackup
 pom.xml.next
 release.properties
 dependency-reduced-pom.xml
-/dist/

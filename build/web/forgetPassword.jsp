@@ -26,14 +26,14 @@
   <body>
     <header>
       <div class="grid wide header">
-        <a href="/elearning/home">
+        <a href="/">
           <img src="./assets/logo.png" alt="Logo" />
         </a>
         <nav>
-          <a class="nav-active" href="/elearning/home">Trang chủ</a>
-          <a href="/elearning/loadallcourse">Khóa học</a>
-          <a href="/elearning/listblog">Blog</a>
-          <a href="/elearning/contact.html">Liên hệ</a>
+          <a class="nav-active" href="/">Trang chủ</a>
+          <a href="/">Khóa học</a>
+          <a href="/">Blog</a>
+          <a href="/">Liên hệ</a>
         </nav>
         <div class="login-nav">
           <a href="/elearning/login">
