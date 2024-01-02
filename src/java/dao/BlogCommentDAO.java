@@ -84,50 +84,6 @@ public class BlogCommentDAO {
         }
     }
 
-//    public List<Blog> getAllCommentByUser(String id) {
-//        List<Blog> listBlog = new ArrayList<>();
-//        try {
-//            List<BlogComment> listComment = new ArrayList<>();
-//            BlogComment comment = new BlogComment();
-//            Blog blog = new Blog();
-//
-//            String query = "SELECT blog.id, blog.title, blogcomment.description, blogcomment.created_date\n"
-//                    + "FROM blog\n"
-//                    + "JOIN blogcomment ON blog.id = blogcomment.id_blog\n"
-//                    + "JOIN user ON user.id = blogcomment.id_user\n"
-//                    + "WHERE user.id = ?";
-//            conn = new DBContext().getConnection();
-//            ps = conn.prepareStatement(query);
-//            ps.setString(1, id);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                comment.setDescription(rs.getString("description"));
-//                comment.setCreatedDate(rs.getDate("created_date"));
-//
-//                if (blog.getBlogID() == null || !blog.getBlogID().equals(rs.getString("id"))) {
-//                    System.out.println(blog);
-//                    System.out.println("id: " + rs.getString("id"));
-//                    blog = new Blog();
-//                    listComment = new ArrayList<>();
-//                    blog.setBlogID(rs.getString("id"));
-//                    blog.setTitle(rs.getString("title"));
-//                }
-//
-//                listComment.add(comment);
-//                blog.setListComment(listComment);
-//
-//                if (listBlog.size() == 0 || listBlog.get(listBlog.size() - 1).getBlogID() != blog.getBlogID()) {
-//                    listBlog.add(blog);
-//                }
-//            }
-//            System.out.println("Do dai danh sach cac blog ma user da comment la: " + listBlog.size());
-//            System.out.println("Do dai danh sach cac comment cua user la: " + listComment.size());
-//            conn.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return listBlog;
-//    }
     public List<BlogComment> getAllCommentByUserID(String id) {
         List<BlogComment> listComment = new ArrayList<>();
         try {

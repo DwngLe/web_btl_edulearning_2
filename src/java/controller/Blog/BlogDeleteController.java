@@ -4,8 +4,8 @@
  */
 package controller.Blog;
 
+import dao.BlogCommentDAO;
 import dao.BlogDAO;
-import entity.Blog;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,14 +13,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.UUID;
 
 /**
  *
  * @author duong
  */
-@WebServlet(name = "newblog", urlPatterns = {"/admin/blog/add"})
-public class BlogNew extends HttpServlet {
+@WebServlet(name = "deleteblog", urlPatterns = {"/admin/blog/delete"})
+public class BlogDeleteController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +38,10 @@ public class BlogNew extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet NewBlog</title>");
+            out.println("<title>Servlet BlogDelete</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet NewBlog at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BlogDelete at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,8 +59,12 @@ public class BlogNew extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        request.getRequestDispatcher("newblog.jsp").forward(request, response);
-            response.sendRedirect("newblog.jsp");
+//        String id = request.getParameter("id");
+//        BlogDAO bdao = new BlogDAO();
+//        bdao.deleteBlog(id);
+//        BlogCommentDAO cdao = new BlogCommentDAO();
+//        cdao.deleteAllCommentBlogByID(id);
+//        response.sendRedirect("listblog");
     }
 
     /**
@@ -75,14 +78,14 @@ public class BlogNew extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        String id = request.getParameter("id");
-        String id = UUID.randomUUID().toString();
-        String title = request.getParameter("title");
-        String content = request.getParameter("content");
-        Blog b = new Blog(id, title, content);
-//        System.out.println("Blogtest: " + b.toString());
+        String id = request.getParameter("blogID");
         BlogDAO dao = new BlogDAO();
-        dao.addNewBlog(b);
+        dao.deleteBlog(id);
+        
+        BlogCommentDAO cdao = new BlogCommentDAO();
+        cdao.deleteAllCommentBlogByID(id);
+        
+        System.out.println("Da xoa blog thanh cong");
         response.sendRedirect("/elearning/admin/blog");
     }
 

@@ -44,27 +44,27 @@
 
             <div class="page-banner">
                 <img class="shape-1" src="./assets/blog/shape-1.png" alt="Shape">
-                <img class="shape-2" src="./assets/blog/shape-2.png" alt="Shape">
-                <div class="container-banner">
-                    <div class="page-banner-content">
-                        <ul class="breadcrumb">
-                            <li><a href="/elearning/loadallcourse">Elearning</a></li>
-                            <li class="nav-active">Blog</li>
-                        </ul>
-                        <h2 class="title">Our <span>Blog</span></h2>
+                    <img class="shape-2" src="./assets/blog/shape-2.png" alt="Shape">
+                    <div class="container-banner">
+                        <div class="page-banner-content">
+                            <ul class="breadcrumb">
+                                <li><a href="/elearning/loadallcourse">Elearning</a></li>
+                                <li class="nav-active">Blog</li>
+                            </ul>
+                            <h2 class="title">Our <span>Blog</span></h2>
+                        </div>
                     </div>
-                </div>
 
-                <div class="box-badge">
-                    <div class="badge-wrapper">
-                        <img class="badge" src="./assets/blog/badge.png" alt="Badge">
+                    <div class="box-badge">
+                        <div class="badge-wrapper">
+                            <img class="badge" src="./assets/blog/badge.png" alt="Badge">
+                        </div>
+                        <img class="shape-6" src="./assets/blog/shape-6.png" alt="Shape">
+
                     </div>
-                    <img class="shape-6" src="./assets/blog/shape-6.png" alt="Shape">
-
-                </div>
-                <img class="shape-3" src="./assets/blog/shape-3.png" alt="Shape">
-                <img class="shape-4" src="./assets/blog/shape-4.png" alt="Shape">
-                <img class="shape-5" src="./assets/blog/shape-5.png" alt="Shape">
+                    <img class="shape-3" src="./assets/blog/shape-3.png" alt="Shape">
+                    <img class="shape-4" src="./assets/blog/shape-4.png" alt="Shape">
+                    <img class="shape-5" src="./assets/blog/shape-5.png" alt="Shape">
             </div>
 
             <div class="containerer">
@@ -89,7 +89,7 @@
                                                     <li>
                                                         <div class="single-post">
                                                             <div class="post-content">
-                                                                <h5 class="title">
+                                                                <h5>
                                                                     <a class="title-blog"
                                                                        href="/elearning/blog?id=${p.getBlogID()}">${p.getTitle()}</a>
                                                                 </h5>
