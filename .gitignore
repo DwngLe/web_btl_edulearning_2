@@ -13,7 +13,12 @@ hs_err_pid*
 
 # netbeans
 nbproject/private/
+<<<<<<< Updated upstream
 build/
+=======
+build/*
+!build/web
+>>>>>>> Stashed changes
 nbbuild/
 nbproject/build-impl.xml
 
