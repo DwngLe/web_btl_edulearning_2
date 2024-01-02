@@ -151,7 +151,7 @@
                                             <td>${course.totalEnrollment}</td>
                                             <td>${course.totalRevenue}</td>
                                             <td>
-                                                <div class="btnContainer" style="display: flex; gap: 8px;">
+                                                <div class="btnContainer">
                                                     <form action="/elearning/admin/course/delete" method="post">
                                                         <input type="hidden" name="courseID" value="${course.getCourseID()}"/>
                                                         <button class="btn btn-destructive" type ="submit">

@@ -93,17 +93,13 @@ public class AddEnrolled extends HttpServlet {
             EnrollDAO dao = new EnrollDAO();
             dao.addNewEnroll(e);
 
-            
+            String referer = request.getHeader("Referer");
+            response.sendRedirect(referer);
 //            
 //            request.setAttribute("toast", "Tham gia thành công!!!");
 //            request.getRequestDispatcher("courseInfo.jsp").forward(request, response);
-            
-            String referer = request.getHeader("Referer");
-            response.sendRedirect(referer);
         } else {
-            
-
-            request.setAttribute("money", "Nạp tiền đi con gà");
+            request.setAttribute("toast", "Không đủ tiền, vui lòng nạp thêm!!!");
             request.getRequestDispatcher("courseInfo.jsp").forward(request, response);
         }
 

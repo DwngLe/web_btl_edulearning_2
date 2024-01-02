@@ -75,11 +75,6 @@ public class BlogView extends HttpServlet {
         List<Blog> listBlog;
         listBlog = dao.getAllBlog();
         request.setAttribute("listBlog", listBlog);
-        
-        String idUser = (String) request.getSession().getAttribute("id");
-        System.out.println("id user in blog:" + idUser);
-        request.setAttribute("idUser", idUser);
-
         request.getRequestDispatcher("blog.jsp").forward(request, response);
     } 
 

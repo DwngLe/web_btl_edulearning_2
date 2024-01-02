@@ -300,21 +300,30 @@
     <body>
         <header>
             <div class="grid wide header">
-                <a href="/elearning/home">
-                    <img src="./assets/logo.png" alt="Logo" />
+                <a href="/">
+                    <img src="assets/imgs/logo.png" alt="Logo" />
                 </a>
                 <nav>
-                    <a href="/elearning/home">Trang chủ</a>
-                    <a class="nav-active" href="/elearning/loadallcourse">Khóa học</a>
+                    <a class="nav-active" href="/">Trang chủ</a>
+                    <a href="/">Khóa học</a>
                     <a href="/elearning/listblog">Blog</a>
-                    <a href="/elearning/contact.html">Liên hệ</a>
+                    <a href="/">Liên hệ</a>
                 </nav>
                 <div class="login-nav">
-                    <a href="/elearning/user">
-                        <img class="avatar" src="./assets/icon/user.png" alt="image" />
+                    <a href="/">
+                        <img class="avatar" src="https://placehold.co/100x100" alt="image" />
                     </a>
                 </div>
-                <i class="menu-btn fa-solid fa-bars" onclick="openOverlay('header-mobile')"></i>
+                <!-- <div class="login-nav">
+                  <a href="/"> Đăng nhập </a>
+                  <a href="/">
+                    <button class="btn btn-outline-primary">Đăng ký</button>
+                  </a>
+                </div> -->
+                <i
+                    class="menu-btn fa-solid fa-bars"
+                    onclick="openOverlay('header-mobile')"
+                    ></i>
             </div>
         </header>
 
@@ -441,7 +450,7 @@
                                     </div>
 
                                     <div class="courses-price-review">
-                                        ${p.price} VND
+                                        $${p.price}
                                     </div>
                                 </div>
                             </div>

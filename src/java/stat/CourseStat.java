@@ -44,13 +44,6 @@ public class CourseStat extends Course {
     public void setTotalRevenue(int totalRevenue) {
         this.totalRevenue = totalRevenue;
     }
-
-    @Override
-    public String toString() {
-        return "CourseStat{" + "totalView=" + totalView + ", totalEnrollment=" + totalEnrollment + ", totalRevenue=" + totalRevenue + '}';
-    }
-    
-    
     
     
 }

@@ -24,24 +24,25 @@
     <body>
         <header>
             <div class="grid wide header">
-                <a href="/elearning/home">
-                    <img src="./assets/logo.png" alt="Logo" />
+                <a href="/">
+                    <img src="assets/logo.png" alt="Logo" />
                 </a>
                 <nav>
-                    <a href="/elearning/home">Trang chủ</a>
-                    <a href="/elearning/loadallcourse">Khóa học</a>
+                    <a href="/elearning/loadallcourse">Trang chủ</a>
+                    <a href="/">Khóa học</a>
                     <a class="nav-active" href="/elearning/listblog">Blog</a>
                     <a href="/elearning/contact.html">Liên hệ</a>
                 </nav>
                 <div class="login-nav">
                     <a href="/elearning/user">
-                        <img class="avatar" src="./assets/icon/user.png" alt="image" />
+                        <img class="avatar" src="https://placehold.co/100x100" alt="image" />
                     </a>
                 </div>
                 <i class="menu-btn fa-solid fa-bars" onclick="openOverlay('header-mobile')"></i>
             </div>
         </header>
 
+        <div class="overlay"></div>
         <div class="page-banner">
             <img class="shape-1" src="./assets/blog/shape-1.png" alt="Shape">
             <img class="shape-2" src="./assets/blog/shape-2.png" alt="Shape">
@@ -75,11 +76,18 @@
                             <div class="single-blog">
                                 <div class="blog-image">
                                     <a href="/elearning/blog?id=${p.getBlogID()}">
-                                        <img src="${p.urlImg}" alt="Picture blog">
+                                        <c:choose>
+                                            <c:when test="${not empty p.urlImg}">
+                                                <img src="${p.urlImg}" alt="Picture blog">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="${pageContext.request.contextPath}${ImageUtils.getDefaultImagePath()}" alt="Default Picture blog">
+                                            </c:otherwise>
+                                        </c:choose>
                                     </a>
                                 </div>
                                 <div class="blog-conten">
-                                    <h3 class="title" style="font-size: 20px;"> ${p.getTitle()}</h3>
+                                    <h3 class="title"> ${p.getTitle()}</h3>
                                     <div class="blog-meta">
                                         <span>
                                             <img src="./assets/icon/date.png" alt="Icon date" />

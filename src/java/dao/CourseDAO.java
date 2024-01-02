@@ -9,7 +9,6 @@ import entity.Course;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import stat.CourseStat;
@@ -152,58 +151,47 @@ public class CourseDAO {
     }
 
     public List<CourseStat> getStatOfCourse() {
-    List<CourseStat> listCourseStat = null;
-    Connection conn = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
-
-    try {
-        String query = "SELECT\n"
-                + "    c.id AS course_id,\n"
-                + "    c.price AS course_price,\n"
-                + "    c.title,\n"
-                + "    c.teacher_name,\n"
-                + "    c.totalView,\n"
-                + "    COUNT(DISTINCT ec.id_user) AS total_enrollments,\n"
-                + "    IFNULL(SUM(CASE WHEN ec.id_user IS NOT NULL THEN c.price ELSE 0 END), 0) AS total_revenue\n"
-                + "FROM\n"
-                + "    course c\n"
-                + "LEFT JOIN enrolled_course ec ON c.id = ec.id_course\n"
-                + "GROUP BY\n"
-                + "    c.id, c.price, c.title, c.teacher_name, c.totalView;";
-        conn = new DBContext().getConnection();
-        ps = conn.prepareStatement(query);
-        rs = ps.executeQuery();
-
-        listCourseStat = new ArrayList<>();
-
-        while (rs.next()) {
-            CourseStat courseStat = new CourseStat();
-            courseStat.setCourseID(rs.getString("course_id"));
-            courseStat.setPrice(rs.getInt("course_price"));
-            courseStat.setTotalView(rs.getInt("totalView"));
-            courseStat.setTotalEnrollment(rs.getInt("total_enrollments"));
-            courseStat.setTotalRevenue(rs.getInt("total_revenue"));
-            courseStat.setTeacherName(rs.getString("teacher_name"));
-            courseStat.setTitle(rs.getString("title"));
-
-            listCourseStat.add(courseStat);
-        }
-    } catch (Exception e) {
-        System.out.println(e);
-    } finally {
+        List<CourseStat> listCourseStat = null;
         try {
-            if (rs != null) rs.close();
-            if (ps != null) ps.close();
-            if (conn != null) conn.close();
-        } catch (SQLException ex) {
-            System.out.println(ex);
+            String query = "SELECT\n"
+                    + "    c.id AS course_id,\n"
+                    + "    c.price AS course_price,\n"
+                    + "    c.title,\n"
+                    + "    c.teacher_name,\n"
+                    + "    c.totalView,\n"
+                    + "    COUNT(DISTINCT ec.id_user) AS total_enrollments,\n"
+                    + "    IFNULL(SUM(CASE WHEN ec.id_user IS NOT NULL THEN c.price ELSE 0 END), 0) AS total_revenue\n"
+                    + "FROM\n"
+                    + "    course c\n"
+                    + "LEFT JOIN enrolled_course ec ON c.id = ec.id_course\n"
+                    + "GROUP BY\n"
+                    + "    c.id, c.price, c.title, c.teacher_name, c.totalView;";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                if (listCourseStat == null) {
+                    listCourseStat = new ArrayList<>();
+                }
+                CourseStat courseStat = new CourseStat();
+                courseStat.setCourseID(rs.getString("course_id"));
+                courseStat.setPrice(rs.getInt("course_price"));
+                courseStat.setTotalView(rs.getInt("totalView"));
+                courseStat.setTotalEnrollment(rs.getInt("total_enrollments"));
+                courseStat.setTotalRevenue(rs.getInt("total_revenue"));
+                courseStat.setTeacherName(rs.getString("teacher_name"));
+                courseStat.setTitle(rs.getString("title"));
+
+                listCourseStat.add(courseStat);
+                conn.close();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+
         }
+        System.out.println("Do dai danh sach cac khoa hoc la: " + listCourseStat.size());
+        return listCourseStat;
     }
-
-    System.out.println("Do dai danh sach cac khoa hoc la: " + listCourseStat.size());
-    return listCourseStat;
-}
-
 
 }

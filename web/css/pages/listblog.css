@@ -67,8 +67,7 @@ body {
     position: relative;
 }
 
-.title {
-    height: 65px;
+.page-banner-content .title {
     font-size: 40px;
     font-weight: 500;
     margin-bottom: 0;

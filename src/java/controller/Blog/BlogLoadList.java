@@ -15,8 +15,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -64,7 +62,6 @@ public class BlogLoadList extends HttpServlet {
         List<Blog> listBlog;
         BlogDAO dao = new BlogDAO();
         listBlog = dao.getAllBlog();
-        Collections.sort(listBlog, Collections.reverseOrder(Comparator.comparing(Blog::getCreatedDate)));
         request.setAttribute("listBlog", listBlog);
         RequestDispatcher rd = request.getRequestDispatcher("listblog.jsp");
         rd.forward(request, response);

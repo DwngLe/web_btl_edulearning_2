@@ -1,6 +1,10 @@
-<%-- Document : listCourse Created on : Nov 15, 2023, 10:36:38 AM Author : Admin --%>
+<%-- 
+    Document   : listCourse
+    Created on : Nov 15, 2023, 10:36:38 AM
+    Author     : Admin
+--%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="enity.*" %>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -9,77 +13,63 @@
 
 <!DOCTYPE html>
 <html>
-
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-              integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-              integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-              integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-              integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <link rel="stylesheet" href="./css/main.css" />
 
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-              integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+            />
     </head>
 
     <style>
-        #container {
+        #container{
 
             padding-top: 100px;
             width: 1200px;
             margin: auto;
         }
-
-        #header {
+        #header{
             display: flex;
             align-items: center;
             flex-direction: row;
             gap: 10px;
             justify-content: flex-end;
         }
-
-        #btn {
+        #btn{
             background-color: blue;
             text-decoration: none;
             color: white;
-            border: none;
+            border:none;
             padding: 8px 6px;
             border-radius: 4px;
         }
 
-        #btn:hover {
+        #btn:hover{
             background-color: #3366ff;
             cursor: pointer;
         }
 
-        #title {
+        #title{
             margin-bottom: 10px
         }
-
-        #list-courses {
+        #list-courses{
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             grid-gap: 10px;
         }
-
-        #course {
+        #course{
             cursor: pointer;
             box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
             border-radius: 10px;
@@ -87,80 +77,77 @@
 
         }
 
-        #course-info p,
-        h3 {
+        #course-info p,h3{
             margin: 0;
 
         }
 
-        #course-info {
+        #course-info{
             height: 250px;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
         }
 
-        #course-info h3 {
+        #course-info h3{
             color: black;
         }
 
 
-        #course-info p {
+        #course-info p{
             color: gray;
         }
 
-        #course-info img {
+        #course-info img{
             width: 200px;
             height: 100px;
             border-radius: 10px;
         }
 
-        #img {
+        #img{
             margin-bottom: 10px;
             display: flex;
-            justify-content: center;
+            justify-content : center;
         }
 
 
 
-        #course-info {
-            padding: 10px;
+        #course-info{
+            padding:10px;
             text-decoration: none;
         }
 
-        #desc-price {
+        #desc-price{
             margin: 4px 0;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
         }
 
-        #price {
+        #price{
             font-size: 12px;
         }
 
-        input {
+        input{
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
             border-radius: 10px;
             border: 1px solid gray;
         }
-
-        .price-img {
+        .price-img{
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             grid-gap: 30px;
         }
 
-        .btn-price {
+        .btn-price{
             background-color: greenyellow;
             text-align: center;
             padding: 6px 0;
             border-radius: 8px;
         }
-
-        .nav {
+        .nav{
             padding: 8px 0;
             width: 1400px;
             margin: auto;
@@ -175,8 +162,8 @@
 
         .card-display-component-img {
             /*            display: flex;
-justify-content: center;
-align-items: center;*/
+                        justify-content: center;
+                        align-items: center;*/
             /*height: 150px;*/
         }
 
@@ -185,80 +172,75 @@ align-items: center;*/
             text-align: center;
         }
 
-        .input-container {
+        .input-container{
             position: relative;
             width: 100%;
         }
 
-        .btn {
+        .btn{
             width: 100%;
             font-size: 13px;
         }
-
-        .btn-course {
+        .btn-course{
             height: 100%;
         }
 
-        .course-images {
+        .course-images{
             padding-top: 24px;
             position: relative;
         }
 
-        .course-images a img {
+        .course-images a img{
             width: 100%;
             border-radius: 15px;
         }
 
-        img {
+        img{
             max-width: 100%;
         }
 
 
-        .course-content {
+        .course-content{
             padding-top: 25px;
         }
-
-        .courses-author {
+        .courses-author{
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-
-        .auth {
+        .auth{
             display: flex;
             align-items: center;
         }
-
-        .auth-name {
+        .auth-name{
             flex: 1;
             padding-left: 12px;
         }
 
-        .auth-name span {
+        .auth-name span{
             font-size: 13px;
             color: #52565b;
-            font-family: "Montserrat", sans-serif;
+            font-family: "Montserrat",sans-serif;
             font-weight: 400;
         }
 
-        .auth-name .name::before {
+        .auth-name .name::before{
             content: "|| Admin";
             position: relative;
             color: #309255;
-            font-family: "Montserrat", sans-serif;
+            font-family: "Montserrat",sans-serif;
             font-size: 14px;
             font-weight: 400;
         }
 
         /*        h4{
-font-size: calc(1.275rem + 0.3vw);
-}*/
+                    font-size: calc(1.275rem + 0.3vw);
+                }*/
 
-        h4 {
+        h4{
             margin: 4px 0;
         }
-
-        h4 a {
+        h4 a{
             font-size: 14px;
             font-weight: 500;
             color: #212832;
@@ -266,23 +248,23 @@ font-size: calc(1.275rem + 0.3vw);
             line-height: 1.4;
         }
 
-        .title {
+        .title{
             display: flex;
             margin-bottom: 10px;
         }
 
-        .container {
-            padding: 20px 0;
+        .container{
+            padding:  20px 0;
         }
 
-        .section-title h2 {
+        .section-title h2{
             font-size: 35px;
             font-weight: 500;
             margin: 0;
             line-height: 1.4;
         }
 
-        .section-title h2 span {
+        .section-title h2 span{
             color: #309255;
         }
 
@@ -290,7 +272,6 @@ font-size: calc(1.275rem + 0.3vw);
         .swiper-container-pointer-events {
             touch-action: pan-y;
         }
-
         .swiper-container {
             margin-left: auto;
             margin-right: auto;
@@ -301,7 +282,7 @@ font-size: calc(1.275rem + 0.3vw);
             z-index: 1;
         }
 
-        ul {
+        ul{
             transition-duration: 0ms;
             transform: translate3d(0px, 0px, 0px);
             padding: 0;
@@ -309,7 +290,7 @@ font-size: calc(1.275rem + 0.3vw);
             margin: 0;
         }
 
-        .nav {
+        .nav{
             display: flex;
             flex-wrap: nowrap;
             padding-left: 0;
@@ -326,12 +307,10 @@ font-size: calc(1.275rem + 0.3vw);
             transition-property: transform;
             box-sizing: content-box;
         }
-
-        li {
+        li{
             width: 160px;
-            margin-right: 30px;
+            margin-right: 30px ;
         }
-
         .swiper-slide {
             flex-shrink: 0;
             width: 100%;
@@ -340,7 +319,7 @@ font-size: calc(1.275rem + 0.3vw);
             transition-property: transform;
         }
 
-        .tag a {
+        .tag a{
             width: 80px;
             font-size: 13px;
             height: 35px;
@@ -353,14 +332,14 @@ font-size: calc(1.275rem + 0.3vw);
             padding: 0 10px;
         }
 
-        .course-meta {
+        .course-meta{
             display: flex;
 
             justify-content: space-between;
             padding-top: 10px;
         }
 
-        .course-meta span {
+        .course-meta span{
             font-size: 14px;
             font-weight: 400;
             color: #52565b;
@@ -369,7 +348,7 @@ font-size: calc(1.275rem + 0.3vw);
             line-height: 1;
         }
 
-        .course-meta span i {
+        .course-meta span i{
             color: #309255;
             margin-right: 5px;
             font-size: 20px;
@@ -377,21 +356,20 @@ font-size: calc(1.275rem + 0.3vw);
             line-height: 1;
         }
 
-        .courses-price-review {
+        .courses-price-review{
             padding: 10px 10px;
             background-color: #eefbf3;
             border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 20px 0;
+            margin: 20px 0  ;
         }
-
-        .banner {
+        .banner{
             background: #eefbf3;
         }
 
-        .main-title {
+        .main-title{
             color:
                 #1d2733;
             font-family:
@@ -408,42 +386,39 @@ font-size: calc(1.275rem + 0.3vw);
                 25px 0px 0px;
         }
 
-        .sub-title {
+        .sub-title{
             font-weight: 500;
             margin-bottom: 0;
             color: #309255;
             font-size: 16px;
         }
-
-        li {
+        li{
             width: fit-content;
             margin: 0;
         }
-
-        .main-title span {
+        .main-title span{
             color: #309255;
 
         }
 
 
 
-        .shape-author img {
+        .shape-author img{
             border-radius: 100%;
             width: 150px;
             float: right;
         }
 
-        .box-content {
+        .box-content{
             width: 140px;
             height: 140px;
             text-align: center;
-            border: 1px solid rgba(48, 146, 85, 0.2);
+            border: 1px solid rgba(48,146,85,0.2);
             border-radius: 50%;
             margin: 0 auto;
             padding: 10px;
         }
-
-        .box-wrapper {
+        .box-wrapper{
             background-color: #309255;
             display: flex;
             justify-content: center;
@@ -453,14 +428,14 @@ font-size: calc(1.275rem + 0.3vw);
             height: 100%;
         }
 
-        .box-wrapper i {
+        .box-wrapper i{
             font-size: 70px;
             color: #fff;
             display: block;
             line-height: 1;
         }
 
-        .right {
+        .right{
             display: flex;
         }
     </style>
@@ -468,21 +443,30 @@ font-size: calc(1.275rem + 0.3vw);
     <body>
         <header>
             <div class="grid wide header">
-                <a href="/elearning/home">
-                    <img src="./assets/logo.png" alt="Logo" />
+                <a href="/">
+                    <img src="assets/imgs/logo.png" alt="Logo" />
                 </a>
                 <nav>
-                    <a href="/elearning/home">Trang chủ</a>
-                    <a href="/elearning/loadallcourse">Khóa học</a>
-                    <a href="/elearning/listblog">Blog</a>
-                    <a href="/elearning/contact.html">Liên hệ</a>
+                    <a class="nav-active" href="/">Trang chủ</a>
+                    <a href="/">Khóa học</a>
+                    <a href="/">Blog</a>
+                    <a href="/">Liên hệ</a>
                 </nav>
                 <div class="login-nav">
-                    <a href="/elearning/user">
-                        <img class="avatar" src="./assets/icon/user.png" alt="image" />
+                    <a href="/">
+                        <img class="avatar" src="https://placehold.co/100x100" alt="image" />
                     </a>
                 </div>
-                <i class="menu-btn fa-solid fa-bars" onclick="openOverlay('header-mobile')"></i>
+                <!-- <div class="login-nav">
+                  <a href="/"> Đăng nhập </a>
+                  <a href="/">
+                    <button class="btn btn-outline-primary">Đăng ký</button>
+                  </a>
+                </div> -->
+                <i
+                    class="menu-btn fa-solid fa-bars"
+                    onclick="openOverlay('header-mobile')"
+                    ></i>
             </div>
         </header>
 
@@ -515,8 +499,7 @@ font-size: calc(1.275rem + 0.3vw);
                         </div>
 
                         <div class="shape-author">
-                            <img
-                                src="https://htmldemo.net/edule/eduLe/assets/images/author/author-11.jpg" />
+                            <img src="https://htmldemo.net/edule/eduLe/assets/images/author/author-11.jpg"/>
                         </div>
                     </div>
                 </div>
@@ -559,22 +542,23 @@ font-size: calc(1.275rem + 0.3vw);
             <div class="row">
                 <c:forEach var="p" items="${cList}">
                     <div class="col l-4 m-6 c-12">
-                        <button onclick="redirectToCourse('${p.course.courseID}')"
-                                class="btn btn-course btn-outline-secondary">
+                        <button onclick="redirectToCourse('${p.course.courseID}')" class="btn btn-course btn-outline-secondary">
                             <div class="single-courses">
                                 <div class="course-images">
                                     <a href="#">
-                                        <img src=${p.course.imageUrl} alt="alt" />
+                                        <img src=${p.course.imageUrl} alt="alt"/>
                                     </a>
                                     <div class="courses-option dropdown"></div>
-                                </div>
+                                </div>     
                                 <div class="course-content">
                                     <div class="courses-author">
                                         <div class="auth">
                                             <div class="auth-thumb">
-                                                <img class="avatar"
-                                                     src="https://placehold.co/100x100"
-                                                     alt="image" />
+                                                <img
+                                                    class="avatar"
+                                                    src="https://placehold.co/100x100"
+                                                    alt="image"
+                                                    />
                                             </div>
                                             <div class="auth-name">
                                                 <span>${p.course.teacherName}</span>
@@ -601,7 +585,7 @@ font-size: calc(1.275rem + 0.3vw);
             <div class="grid widget wide">
                 <div class="row">
                     <div class="col l-3 m-6 c-12">
-                        <a href="#"><img src="././assets/logo.png" alt="Logo" /></a>
+                        <a href="#"><img src="./assets/imgs/logo.png" alt="Logo" /></a>
 
                         <div class="widget-address">
                             <h4>Km 10, Trần Phú</h4>
@@ -695,19 +679,19 @@ font-size: calc(1.275rem + 0.3vw);
 
 
         <!--        <div class="nav">
-<a href="loadallcourse">Home</a>     
-<a href="loadCourse">Course</a>            
-<a href="loadenrollcourse">Enroll Course</a>
-
-
-</div>
-<div id="container">
-
-
-
-<div>
-<div id="list-courses">
-
+                    <a href="loadallcourse">Home</a>     
+                    <a href="loadCourse">Course</a>            
+                    <a href="loadenrollcourse">Enroll Course</a>
+        
+        
+                </div>
+                <div id="container">
+                    
+           
+                    
+                    <div>
+                        <div id="list-courses">
+        
         <c:forEach var="p" items="${cList}">
             <a href="/elearning/courseinfoctl?id=${p.course.courseID}" id="course">
                 <div id="course-info">
@@ -749,5 +733,4 @@ font-size: calc(1.275rem + 0.3vw);
             window.location.href = "/elearning/courseinfoctl?id=" + courseID;
         }
     </script>
-
 </html>

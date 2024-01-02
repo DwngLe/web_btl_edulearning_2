@@ -1,39 +1,54 @@
-<%-- Document : lesson Created on : Dec 25, 2023, 2:14:50 PM Author : My Asus --%>
+<%-- 
+    Document   : lesson
+    Created on : Dec 25, 2023, 2:14:50 PM
+    Author     : My Asus
+--%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
     <head>
         <title>Bài học</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./css/main.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-              integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+            />
         <link rel="stylesheet" href="./css/pages/lesson.css" />
     </head>
-
     <body>
         <header>
             <div class="grid wide header">
-                <a href="/elearning/home">
-                    <img src="./assets/logo.png" alt="Logo" />
+                <a href="/">
+                    <img src="assets/imgs/logo.png" alt="Logo" />
                 </a>
                 <nav>
-                    <a href="/elearning/home">Trang chủ</a>
-                    <a class="nav-active" href="/elearning/loadallcourse">Khóa học</a>
-                    <a href="/elearning/listblog">Blog</a>
-                    <a href="/elearning/contact.html">Liên hệ</a>
+                    <a class="nav-active" href="/">Trang chủ</a>
+                    <a href="/">Khóa học</a>
+                    <a href="/">Blog</a>
+                    <a href="/">Liên hệ</a>
                 </nav>
                 <div class="login-nav">
-                    <a href="/elearning/user">
-                        <img class="avatar" src="./assets/icon/user.png" alt="image" />
+                    <a href="/">
+                        <img class="avatar" src="https://placehold.co/100x100" alt="image" />
                     </a>
                 </div>
-                <i class="menu-btn fa-solid fa-bars" onclick="openOverlay('header-mobile')"></i>
+                <!-- <div class="login-nav">
+                  <a href="/"> Đăng nhập </a>
+                  <a href="/">
+                    <button class="btn btn-outline-primary">Đăng ký</button>
+                  </a>
+                </div> -->
+                <i
+                    class="menu-btn fa-solid fa-bars"
+                    onclick="openOverlay('header-mobile')"
+                    ></i>
             </div>
         </header>
         <div id="header-mobile" class="overlay">
@@ -48,15 +63,15 @@
                     </div>
                 </div>
                 <!-- <div class="login-nav">
-          <a href="/">
-            <button class="btn btn-fullwidth btn-primary">Đăng nhập</button>
-          </a>
-          <a href="/">
-            <button class="btn btn-fullwidth btn-outline-primary">
-              Đăng ký
-            </button>
-          </a>
-        </div> -->
+                  <a href="/">
+                    <button class="btn btn-fullwidth btn-primary">Đăng nhập</button>
+                  </a>
+                  <a href="/">
+                    <button class="btn btn-fullwidth btn-outline-primary">
+                      Đăng ký
+                    </button>
+                  </a>
+                </div> -->
                 <nav>
                     <a class="nav-active" href="/">Trang chủ</a>
                     <a href="/">Khóa học</a>
@@ -85,7 +100,7 @@
                     <h3 class="playlist-title">
                         Tổng số: <span>${ListLessonPart.size()} chương học
                     </h3>
-
+                        
                     <!-- Video Playlist Start  -->
                     <div class="video-playlist">
                         <div class="accordion" id="videoPlaylist">
@@ -96,10 +111,8 @@
                                     </button>
                                     <div class="accordion-collapse collapse">
                                         <nav class="vids">
-                                            <c:forEach var="lesson" items="${lessonPart.getListLesson()}"
-                                                       varStatus="loop">
-                                                <a class="link"
-                                                   href="/elearning/lesson?LessonID=${lesson.getLessonID()}&CourseID=${CourseID}">
+                                            <c:forEach var="lesson" items="${lessonPart.getListLesson()}" varStatus="loop">
+                                                <a class="link" href="/elearning/lesson?LessonID=${lesson.getLessonID()}&CourseID=${CourseID}">
                                                     ${lesson.getName()}
                                                 </a>
                                             </c:forEach>
@@ -118,7 +131,7 @@
             <div class="grid widget wide">
                 <div class="row">
                     <div class="col l-3 m-6 c-12">
-                        <a href="#"><img src="././assets/logo.png" alt="Logo" /></a>
+                        <a href="#"><img src="./assets/imgs/logo.png" alt="Logo" /></a>
 
                         <div class="widget-address">
                             <h4>Km 10, Trần Phú</h4>
@@ -211,5 +224,4 @@
         </footer>
     </body>
     <script src="./js/lesson/lesson.js"></script>
-
 </html>

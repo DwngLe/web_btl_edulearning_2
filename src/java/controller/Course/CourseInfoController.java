@@ -85,23 +85,12 @@ public class CourseInfoController extends HttpServlet {
 
         EnrollDAO edao = new EnrollDAO();
         EnrolledCourse e = edao.findEnroll(idUser, id);
-        
-        if(user.getMoney()<p.getPrice()){
-            request.setAttribute("money", "Nạp tiền đi con gà");
-        }else{
-            request.setAttribute("money", "Đủ tiền");
-        }
-        
-        
         if (e != null) {
             request.setAttribute("enrolled", e.toString());
         } else {
             request.setAttribute("enrolled", "Enrollment not found");
         }
         dao.updateTotalViewCourse(p);
-        
-        request.setAttribute("idUser", idUser);
-        
         request.setAttribute("p", p);
         request.getRequestDispatcher("courseInfo.jsp").forward(request, response);
     }
