@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,8 @@ public class EnrollDAO {
         } catch (Exception e) {
             System.out.println(e);
             
+        }finally{
+             closeResources();
         }
     }
     
@@ -74,10 +77,12 @@ public class EnrollDAO {
                 a.setSubDate(rs.getDate(4));
                 return a;
             }
-            conn.close();
+           
         } catch (Exception e) {
             System.out.println(e);
             
+        }finally{
+             closeResources();
         }
         return null;
     }
@@ -115,6 +120,8 @@ public class EnrollDAO {
         } catch (Exception e) {
             System.out.println(e);
             
+        }finally{
+             closeResources();
         }
         return null;
     }
@@ -131,6 +138,8 @@ public class EnrollDAO {
         } catch (Exception e) {
             System.out.println(e);
             
+        }finally{
+             closeResources();
         }
     }
     
@@ -166,6 +175,8 @@ public class EnrollDAO {
         } catch (Exception e) {
             System.out.println(e);
             
+        }finally{
+             closeResources();
         }
         return null;
     }
@@ -209,12 +220,31 @@ public class EnrollDAO {
                 
             }
             System.out.println("Do dai danh sach sinh vien dang ky la: " + listEnrollCourse.size());
-            
+             
         } catch (Exception e) {
             System.out.println(e);
+        }finally{
+             closeResources();
         }
+       
         return listEnrollCourse;
         
+    }
+    
+     private void closeResources() {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     
 }

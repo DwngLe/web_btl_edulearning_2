@@ -7,6 +7,7 @@ package dao;
 import context.DBContext;
 import entity.Lesson;
 import entity.LessonPart;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -42,6 +43,8 @@ public class LessonPartDao extends Dao<LessonPart>{
             }
         } catch (Exception e) {
             System.out.println(e);
+        }finally{
+             closeResources();
         }
         return list;
     }
@@ -66,6 +69,8 @@ public class LessonPartDao extends Dao<LessonPart>{
             }
         } catch (Exception e) {
             System.out.println(e);
+        }finally{
+             closeResources();
         }
         return lessonPart;
     }
@@ -87,6 +92,8 @@ public class LessonPartDao extends Dao<LessonPart>{
             return rowsInserted;
         } catch (Exception e) {
             System.out.println(e);
+        }finally{
+             closeResources();
         }
         return 0;
     }
@@ -106,6 +113,8 @@ public class LessonPartDao extends Dao<LessonPart>{
             return rowUpdate;
         } catch (Exception e) {
             System.out.println(e);
+        }finally{
+             closeResources();
         }
         return 0;
     }
@@ -124,8 +133,26 @@ public class LessonPartDao extends Dao<LessonPart>{
             return rowsDelete;
         } catch (Exception e) {
             System.out.println(e);
+        }finally{
+             closeResources();
         }
         return 0;
+    }
+    
+     private void closeResources() {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     
 }

@@ -93,7 +93,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/logout">
                             <span class="material-icons-outlined">logout</span> Đăng xuất
                         </a>
                     </li>
@@ -102,73 +102,57 @@
             <!-- End Sidebar -->
 
             <!-- Main -->
-            <div class="grid container wide" style="width: 100%">
-                <h2 id="title" >Edit course</h2>
-                <form action="/elearning/admin/course/update" method="post">
+
+            <main class="main-container" style="width: 100%;">
+                <div class="main-title">
+                    <h1>Sửa khoá học</h1>
+                    <button onclick="window.location.href = '/elearning/admin/lesson?CourseID=${p.courseID}'" class="btn btn-primary" style="margin-top: 8px;" id="btn">Thêm bài học</button>
+
+                </div>
+
+                <form action="/elearning/admin/course/update" method="post" style="width: 100%;" >
                     <input name="totalView" hidden="true" value="${p.totalView}"/>
                     <input name="id" hidden="true" value="${p.courseID}"/>
-                    <div class='row'>
-                        <div class="col l-12 c-12">
-                            <div class="card-display-component">
-                                <div class="card-display-component-img">
-                                    <input name="title" value="${p.title}" class="input" placeholder="Title" type="text" />
-                                </div>
-                            </div>
+                    <div class='row'  >
+                        <div class="col l-6 c-12" style="width: 100%">
+                            <label>Tiêu đề</label>
+                            <input name="title" placeholder="Tiêu đề" value="${p.title}" class="input input-fullwidth" type="text" />
                         </div>
-                        <div class="col l-12 c-12">
-                            <div class="card-display-component">
-                                <div class="card-display-component-img">
-                                    <input name="level" value="${p.levelCourse}" class="input" placeholder="Level" type="text" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-12 c-12">
-                            <div class="card-display-component">
-                                <div class="card-display-component-img">
-                                    <input name="description" value="${p.descriptionCourse}" class="input" placeholder="Description" type="text" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-12 c-12">
-                            <div class="card-display-component">
-                                <div class="card-display-component-img">
-                                    <input name="language" value="${p.languageCourse}" class="input" placeholder="Language" type="text" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-12 c-12">
-                            <div class="card-display-component">
-                                <div class="card-display-component-img">
-                                    <input name="duration" value="${p.duration}" class="input" placeholder="Duration" type="text" />
-                                </div>
-                            </div>
+                        <div class="col l-6 c-12">
+                            <label>Cấp độ</label>
+                            <input name="level" value="${p.levelCourse}" class="input input-fullwidth" placeholder="Dễ" type="text" />
                         </div>
 
-                        <div style="display: flex; gap: 4px;">
-                            <div class="col l-6 c-12">
-                                <div class="card-display-component">
-                                    <div class="card-display-component-img">
-                                        <input name="price" value="${p.price}" class="input" placeholder="Price" type="text" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-6 c-12">
-                                <div class="card-display-component">
-                                    <div class="card-display-component-img">
-                                        <input name="imgurl" value="${p.imageUrl}" class="input" placeholder="Url image" type="text" />
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col l-6 c-12">
+                            <label>Ngôn ngữ</label>
+                            <input name="language" value="${p.languageCourse}"  class="input input-fullwidth" placeholder="Tiếng Việt" type="text" />
+                        </div>
+                        <div class="col l-6 c-12">
+                            <label>Thời lượng</label>
+                            <input name="duration"  value="${p.duration}" class="input input-fullwidth" placeholder="1:00" type="text" />
                         </div>
 
+                        <div class="col l-6 c-12">
+                            <label>Giá cả</label>
+                            <input name="price"  value="${p.price}"  class="input input-fullwidth" placeholder="1000 vnd" type="text" />
+                        </div>
+                        <div class="col l-6 c-12">
+                            <label>Link ảnh</label>
+                            <input name="imgurl" value="${p.imageUrl}" class="input input-fullwidth" placeholder="https://img" type="text" />
+                        </div>
+                        <div class="col c-12">
+                            <label>Nội dung</label>
+                            <textarea name="description"  class="textarea input-fullwidth" placeholder="" type="text">${p.descriptionCourse}</textarea>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="btn">Submit</button>           
-
+                    <button type="submit" class="btn btn-primary" id="btn" style="margin-top: 40px">Lưu</button>
                 </form>
-                <button onclick="window.location.href = '/elearning/admin/lesson?CourseID=${p.courseID}'" class="btn btn-primary" style="margin-top: 8px;" id="btn">Thêm bài học</button>
 
 
-            </div>
+
+            </main>
+
+
             <!-- End Main -->
         </div>
 

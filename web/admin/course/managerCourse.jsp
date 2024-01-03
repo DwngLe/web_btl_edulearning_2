@@ -93,7 +93,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/logout">
                             <span class="material-icons-outlined">logout</span> Đăng xuất
                         </a>
                     </li>
@@ -103,7 +103,7 @@
 
             <!-- Main -->
             <main class="main-container" style="width: 100%">
-                <div class="main-title col">
+                <div class="main-title">
                     <h1>Quản lý khoá học</h1>
                 </div>
                 <button style="height: 50px; padding: 14px 20px; display: flex; align-items: center; gap: 4px;" onclick="window.location.href = '/elearning/admin/course/add'" class="btn btn-primary">
@@ -125,7 +125,7 @@
                             <table class="unfixed-table" style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <th>Số thứ tự</th>
+                                        <th>STT</th>
                                         <th>Tiêu đề</th>
                                         <th>Tên giảng viên</th>
                                         <th>Giá tiền</th>
@@ -152,15 +152,7 @@
                                             <td>${course.totalRevenue}</td>
                                             <td>
                                                 <div class="btnContainer" style="display: flex; gap: 8px;">
-                                                    <form action="/elearning/admin/course/delete" method="post">
-                                                        <input type="hidden" name="courseID" value="${course.getCourseID()}"/>
-                                                        <button class="btn btn-destructive" type ="submit">
-                                                            <span style="display: flex; align-items: center; gap: 4px;">
-                                                                <i class="fa-solid fa-trash"></i>
-                                                                Xóa
-                                                            </span>
-                                                        </button>
-                                                    </form>
+                                                    
                                                     <form action="/elearning/admin/course/update" method="get">
                                                         <input type="hidden" name="courseID" value="${course.getCourseID()}"/>
                                                         <button class="btn btn-primary" type ="submit">
@@ -181,7 +173,17 @@
                                                             </span>
                                                         </button>
                                                     </form>
-
+                                                        
+                                                        
+                                                        <form action="/elearning/admin/course/delete" method="post">
+                                                        <input type="hidden" name="courseID" value="${course.getCourseID()}"/>
+                                                        <button class="btn btn-destructive" type ="submit">
+                                                            <span style="display: flex; align-items: center; gap: 4px;">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                                Xóa
+                                                            </span>
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>

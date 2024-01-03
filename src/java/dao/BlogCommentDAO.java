@@ -11,6 +11,7 @@ import entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,10 @@ public class BlogCommentDAO {
             ps.setString(4, idUser);
             ps.setString(5, idBlog);
             ps.executeUpdate();
+            closeResources();
         } catch (Exception e) {
+        } finally {
+            closeResources();
         }
     }
 
@@ -60,8 +64,11 @@ public class BlogCommentDAO {
             if (list.isEmpty()) {
                 System.out.println("khong the ket noi duoc");
             }
+            closeResources();
             return list;
         } catch (Exception e) {
+        } finally {
+            closeResources();
         }
         return null;
     }
@@ -79,8 +86,11 @@ public class BlogCommentDAO {
             } else {
                 System.out.println("No rows deleted.");
             }
+
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            closeResources();
         }
     }
 
@@ -140,24 +150,43 @@ public class BlogCommentDAO {
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 BlogComment blogComment = new BlogComment();
                 Blog blog = new Blog();
-                
+
                 blog.setBlogID(rs.getString("id"));
                 blog.setTitle(rs.getString("title"));
-                
+
                 blogComment.setBlog(blog);
                 blogComment.setDescription(rs.getString("description"));
                 blogComment.setCreatedDate(rs.getDate("created_date"));
-                
+
                 listComment.add(blogComment);
             }
-            conn.close();
+
             System.out.println("Do dai danh sach cac comment cua user trong cac blog la: " + listComment.size());
+
         } catch (Exception e) {
+        } finally {
+            closeResources();
         }
         return listComment;
+    }
+
+    private void closeResources() {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

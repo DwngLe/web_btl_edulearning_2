@@ -63,6 +63,8 @@ public class LessonPartDeleteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+                System.out.println("succes");
+
         UUID id = UUID.fromString(request.getParameter("LessonPartID"));
         LessonPartDao dao = new LessonPartDao();
         LessonPart lessonPart = dao.getObject(id);
@@ -72,8 +74,13 @@ public class LessonPartDeleteController extends HttpServlet {
             String videoName = listLeson.get(i).getVideoURL();
             String uploadPath = getServletContext().getRealPath("").replace("build" + File.separator + "web", "web");
             String filePath = uploadPath + "assets" + File.separator + "videos";
-            Files.delete(Paths.get(filePath, videoName));
+            try {
+                Files.delete(Paths.get(filePath, videoName));
+            } catch (Exception e) {
+            }
+            
         }
+        
         int result = dao.deleteObject(id);
         response.sendRedirect(request.getHeader("Referer"));
     } 

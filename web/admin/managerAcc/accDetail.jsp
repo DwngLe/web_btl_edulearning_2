@@ -104,7 +104,7 @@
 
             <!-- Main -->
             <main class="main-container" style="width: 100%">
-                <div class="main-title col">
+                <div class="main-title">
                     <h1>Thông tin tài khoản</h1>
                 </div>
 

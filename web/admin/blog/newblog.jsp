@@ -6,7 +6,7 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>New Blog</title>
+        <title>Thêm Blog</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
               integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -82,36 +82,35 @@
                         </a>
                     </li>
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/logout">
                             <span class="material-icons-outlined">logout</span> Đăng xuất
                         </a>
                     </li>
                 </ul>
             </aside>
             <!-- End Sidebar -->
-            <main class="main-container " style="width: 100%; margin-left: 200px;">
-                <div class="main-title col">
+            <main class="main-container " style="width: 100%;">
+                <div class="main-title">
                     <h1>Thêm Blog</h1>
                 </div>
 
                 <div class="form-wrapper">
                     <form action="/elearning/admin/blog/add" method="post">
                         <div class="row">
-                            <div class="col l-8">
+                            <div class="col c-12">
                                 <div class="single-form">
-                                    <p>Nhập tiêu đề bài viết: </p>
-                                    <textarea class="txt-title" name="title" rows="4" cols="50"
-                                              placeholder="Nhập tiêu đề bài viết tại đây"></textarea>
+                                    <label>Tiêu đề</label>
+                                    <input class="input input-fullwidth" name="title" />
                                 </div>
 
                                 <div class="single-form">
-                                    <p>Nhập nội dung bài viết: </p>
-                                    <textarea name="content" rows="4" cols="50"
+                                    <label>Nội dung</label>
+                                    <textarea class="textarea input-fullwidth" name="content" rows="4" cols="50"
                                               placeholder="Nhập nội dung bài viết tại đây"></textarea>
                                 </div>
 
                                 <div>
-                                    <div class="single-form text-center">
+                                    <div class="single-form">
                                         <button class="btn btn-primary" type="submit">Tạo</button>
                                     </div>
                                 </div>

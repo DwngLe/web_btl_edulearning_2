@@ -109,12 +109,12 @@
                 </div>
                 <table style="width: 100%" >
                     <tr>
-                        <th>Tên tài khoản</th>
+                        <th>Tài khoản</th>
                         <th>Họ và tên</th>
                         <th>Email</th>
                         <th>Số điện thoại</th>
                         <th>Số dư</th>
-                        <th>Ngay sinh</th>
+                        <th>Ngày sinh</th>
                         <th>Ngày tạo tài khoản</th>
                         <!--<th>Thao Tác</th>-->
                     </tr>

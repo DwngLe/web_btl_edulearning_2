@@ -93,7 +93,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/logout">
                             <span class="material-icons-outlined">logout</span> Đăng xuất
                         </a>
                     </li>
@@ -103,76 +103,55 @@
 
             <!-- Main -->
             <main class="main-container" style="width: 100%;">
-                <div class="main-title col">
+                <div class="main-title">
                     <h1>Thêm khoá học mới</h1>
                 </div>
                 <form action="/elearning/admin/course/add" method="post" style="width: 100%;" >
-
                     <div class='row'  >
                         <div class="col l-6 c-12" style="width: 100%">
-                                <div class="card-display-component">
-                                    <div class="card-display-component-img">
-                                        <input name="title" class="input" placeholder="Title" type="text" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-6 c-12">
-                                <div class="card-display-component">
-                                    <div class="card-display-component-img">
-                                        <input name="level" class="input" placeholder="Level" type="text" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-6 c-12">
-                                <div class="card-display-component">
-                                    <div class="card-display-component-img">
-                                        <input name="description" class="input" placeholder="Description" type="text" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-6 c-12">
-                                <div class="card-display-component">
-                                    <div class="card-display-component-img">
-                                        <input name="language" class="input" placeholder="Language" type="text" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-6 c-12">
-                                <div class="card-display-component">
-                                    <div class="card-display-component-img">
-                                        <input name="duration" class="input" placeholder="Duration" type="text" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col l-6 c-12">
-                                <div class="card-display-component">
-                                    <div class="card-display-component-img">
-                                        <input name="price" class="input" placeholder="Price" type="text" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-6 c-12">
-                                <div class="card-display-component">
-                                    <div class="card-display-component-img">
-                                        <input name="imgurl" class="input" placeholder="Url image" type="text" />
-                                    </div>
-                                </div>
-                            </div>
+                            <label>Tiêu đề</label>
+                            <input name="title" placeholder="Tiêu đề" class="input input-fullwidth" type="text" />
                         </div>
-                    <button type="submit" class="btn btn-primary" id="btn" style="margin-top: 40px">Submit</button>
-                    </form>
-                </div>
+                        <div class="col l-6 c-12">
+                            <label>Cấp độ</label>
+                            <input name="level" class="input input-fullwidth" placeholder="Dễ" type="text" />
+                        </div>
 
-            </main>
-            <!-- End Main -->
+                        <div class="col l-6 c-12">
+                            <label>Ngôn ngữ</label>
+                            <input name="language" class="input input-fullwidth" placeholder="Tiếng Việt" type="text" />
+                        </div>
+                        <div class="col l-6 c-12">
+                            <label>Thời lượng</label>
+                            <input name="duration" class="input input-fullwidth" placeholder="1:00" type="text" />
+                        </div>
+
+                        <div class="col l-6 c-12">
+                            <label>Giá cả</label>
+                            <input name="price" class="input input-fullwidth" placeholder="1000 vnd" type="text" />
+                        </div>
+                        <div class="col l-6 c-12">
+                            <label>Link ảnh</label>
+                            <input name="imgurl" class="input input-fullwidth" placeholder="https://img" type="text" />
+                        </div>
+                        <div class="col c-12">
+                            <label>Nội dung</label>
+                            <textarea name="description" class="textarea input-fullwidth" placeholder="" type="text"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="btn" style="margin-top: 40px">Lưu</button>
+                </form>
         </div>
 
-        <!-- Scripts -->
+    </main>
+    <!-- End Main -->
+</div>
 
-        <!-- Custom JS -->
+<!-- Scripts -->
 
-        <script src="../js/admin.js"></script>
-    </body>
+<!-- Custom JS -->
+
+<script src="../js/admin.js"></script>
+</body>
 </html>
 
