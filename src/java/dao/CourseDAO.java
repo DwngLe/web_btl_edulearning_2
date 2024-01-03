@@ -166,7 +166,7 @@ public class CourseDAO {
             if (list.isEmpty()) {
                 System.out.println("khong the ket noi duoc");
             }
-
+           closeResources();
             return list;
         } catch (Exception e) {
             System.out.println(e);
@@ -190,10 +190,12 @@ public class CourseDAO {
             ps.setString(8, s.getImageUrl());
             ps.setString(9, s.getTitle());
             ps.executeUpdate();
-            conn.close();
+          
         } catch (Exception e) {
             System.out.println(e);
 
+        }finally{
+             closeResources();
         }
     }
 
@@ -211,10 +213,12 @@ public class CourseDAO {
 
                 return a;
             }
-            conn.close();
+           
         } catch (Exception e) {
             System.out.println(e);
 
+        }finally{
+             closeResources();
         }
         return null;
     }
@@ -235,10 +239,12 @@ public class CourseDAO {
             ps.setString(8, s.getTitle());
             ps.setString(9, s.getCourseID());
             ps.executeUpdate();
-            conn.close();
+           
         } catch (Exception e) {
             System.out.println(e);
 
+        }finally{
+             closeResources();
         }
     }
 
@@ -251,10 +257,12 @@ public class CourseDAO {
             ps.setInt(1, s.getTotalView() + 1);
             ps.setString(2, s.getCourseID());
             ps.executeUpdate();
-            conn.close();
+          
         } catch (Exception e) {
             System.out.println(e);
 
+        }finally{
+             closeResources();
         }
     }
 
@@ -266,10 +274,12 @@ public class CourseDAO {
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, courseID);
             ps.executeUpdate();
-            conn.close();
+           
         } catch (Exception e) {
             System.out.println(e);
 
+        }finally{
+             closeResources();
         }
     }
 
@@ -313,6 +323,7 @@ public class CourseDAO {
             }
         } catch (Exception e) {
             System.out.println(e);
+
         } finally {
             try {
                 if (rs != null) {
@@ -327,10 +338,27 @@ public class CourseDAO {
             } catch (SQLException ex) {
                 System.out.println(ex);
             }
+
         }
 
         System.out.println("Do dai danh sach cac khoa hoc la: " + listCourseStat.size());
         return listCourseStat;
+    }
+    
+     private void closeResources() {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

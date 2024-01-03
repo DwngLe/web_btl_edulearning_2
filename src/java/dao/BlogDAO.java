@@ -32,9 +32,11 @@ public class BlogDAO {
                 b = new Blog(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), rs.getInt(6));
                 return b;
             }
-            conn.close();
+         
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+             closeResources();
         }
         return null;
     }
@@ -51,17 +53,18 @@ public class BlogDAO {
                 System.out.println("ID cua Blog: " + b.getBlogID());
                 listBlog.add(b);
             }
-            conn.close();
+           
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        finally{
+             closeResources();
         }
         return listBlog;
     }
 
     public void addNewBlog(Blog b) {
-        Connection conn = null;
-        PreparedStatement ps = null;
         try {
             String query = "INSERT INTO web.blog (id,title, content, created_date, update_at, total_view) VALUES(?,?,?,?,?,?)";
             conn = new DBContext().getConnection();
@@ -73,10 +76,12 @@ public class BlogDAO {
             ps.setDate(5, b.getUpdateAt());
             ps.setInt(6, b.getTotalView());
             ps.executeUpdate();
-            conn.close();
+           
 
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+             closeResources();
         }
     }
 
@@ -88,10 +93,13 @@ public class BlogDAO {
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
             ps.executeUpdate();
-            conn.close();
+           
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        finally{
+             closeResources();
         }
     }
 
@@ -107,11 +115,13 @@ public class BlogDAO {
             ps.setInt(5, b.getTotalView());
             ps.setString(6, b.getBlogID());
             ps.executeUpdate();
-            conn.close();
+            
 
         } catch (Exception e) {
             System.out.println("Loi truy van");
             System.out.println(e);
+        }finally{
+             closeResources();
         }
     }
 
@@ -124,11 +134,29 @@ public class BlogDAO {
             ps.setInt(1, b.getTotalView());
             ps.setString(2, b.getBlogID());
             ps.executeUpdate();
-            conn.close();
+            
 
         } catch (Exception e) {
             System.out.println("Loi truy van");
             System.out.println(e);
+        }finally{
+             closeResources();
+        }
+    }
+    
+     private void closeResources() {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
