@@ -6,12 +6,15 @@ package dao;
 
 import context.DBContext;
 import entity.Course;
+import entity.CourseLessonCount;
+import entity.Lesson;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import stat.CourseStat;
 
 /**
@@ -24,20 +27,139 @@ public class CourseDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public List<Course> getAllCourse() {
+    public int getLessonCountForCourse(String courseId) {
+        int lessonCount = 0;
+
         try {
-            String query = "SELECT * FROM web.course";
+            String query = "SELECT COUNT(l.lesson_id) AS lesson_count "
+                    + "FROM lessonpart lp "
+                    + "JOIN lesson l ON lp.lesson_part_id = l.lesson_part_id "
+                    + "WHERE lp.course_id = ?";
+
+            conn = new DBContext().getConnection();
+
+            ps = conn.prepareStatement(query);
+            ps.setString(1, courseId);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                lessonCount = rs.getInt("lesson_count");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+
+        return lessonCount;
+    }
+
+    public List<Lesson> getLessonByCourseId(String id) {
+        List<Lesson> lessons = new ArrayList<>();
+        try {
+            String query = "SELECT * \n"
+                    + "FROM lesson\n"
+                    + "WHERE lesson_part_id = (\n"
+                    + "SELECT lesson_part_id \n"
+                    + "    FROM lessonpart\n"
+                    + "    WHERE course_id = ?\n"
+                    + " \n"
+                    + "    LIMIT 1\n"
+                    + ")";
+            conn = new DBContext().getConnection();
+
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                UUID lessonID = UUID.fromString(rs.getString("lesson_id"));
+                String name = rs.getString("name");
+                String videoURL = rs.getString("video_url");
+                String description = rs.getString("description");
+                UUID lessonPartID = UUID.fromString(rs.getString("lesson_part_id"));
+
+                Lesson a = new Lesson(lessonID, name, videoURL, description, lessonPartID);
+                lessons.add(a);
+            }
+            conn.close();
+            return lessons;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public Lesson getLessonByCourse(String id) {
+        try {
+            String query = "SELECT * \n"
+                    + "FROM lesson\n"
+                    + "WHERE lesson_part_id = (\n"
+                    + "    SELECT lesson_part_id \n"
+                    + "    FROM lessonpart\n"
+                    + "    WHERE course_id = ?\n"
+                    + "    ORDER BY created_time ASC\n"
+                    + "    LIMIT 1\n"
+                    + ")\n"
+                    + "ORDER BY lesson_id ASC\n"
+                    + "LIMIT 1";
+            conn = new DBContext().getConnection();
+
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                UUID lessonID = UUID.fromString(rs.getString("lesson_id"));
+                String name = rs.getString("name");
+                String videoURL = rs.getString("video_url");
+                String description = rs.getString("description");
+                UUID lessonPartID = UUID.fromString(rs.getString("lesson_part_id"));
+
+                Lesson a = new Lesson(lessonID, name, videoURL, description, lessonPartID);
+
+                return a;
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public List<CourseLessonCount> getAllCourse() {
+        try {
+            String query = "SELECT *, COUNT(l.lesson_id) AS lesson_count \n"
+                    + "FROM course \n"
+                    + "LEFT JOIN lessonpart lp ON course.id = lp.course_id \n"
+                    + "LEFT JOIN lesson l ON lp.lesson_part_id = l.lesson_part_id \n"
+                    + "GROUP BY course.id";
             conn = new DBContext().getConnection();
 
             ps = conn.prepareStatement(query);
 
             rs = ps.executeQuery();
 
-            List<Course> list = new ArrayList<>();
+            List<CourseLessonCount> list = new ArrayList<>();
 
             while (rs.next()) {
-                Course a;
-                a = new Course(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10));
+                CourseLessonCount a;
+                a = new CourseLessonCount(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10), rs.getInt("lesson_count"));
                 list.add(a);
             }
 
@@ -201,8 +323,22 @@ public class CourseDAO {
             }
         } catch (Exception e) {
             System.out.println(e);
-        } finally{
-             closeResources();
+
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+
         }
 
         System.out.println("Do dai danh sach cac khoa hoc la: " + listCourseStat.size());

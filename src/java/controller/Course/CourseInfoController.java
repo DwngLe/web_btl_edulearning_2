@@ -12,6 +12,7 @@ import dao.UserDAO;
 import entity.CourseComment;
 import entity.Course;
 import entity.EnrolledCourse;
+import entity.Lesson;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,6 +21,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -73,7 +75,6 @@ public class CourseInfoController extends HttpServlet {
         UserDAO udao = new UserDAO();
         String idUser = (String) request.getSession().getAttribute("id");
         user = udao.getUserById(idUser);
-        System.out.println("User: " + user.toString());
 
         String id = request.getParameter("id");
         List<CourseComment> c;
@@ -85,23 +86,42 @@ public class CourseInfoController extends HttpServlet {
 
         EnrollDAO edao = new EnrollDAO();
         EnrolledCourse e = edao.findEnroll(idUser, id);
+
+        int i = dao.getLessonCountForCourse(id);
+        request.setAttribute("i", i);
         
-        if(user.getMoney()<p.getPrice()){
+        if (user.getMoney() < p.getPrice()) {
             request.setAttribute("money", "Nạp tiền đi con gà");
-        }else{
+        } else {
             request.setAttribute("money", "Đủ tiền");
         }
-        
-        
+
         if (e != null) {
             request.setAttribute("enrolled", e.toString());
         } else {
             request.setAttribute("enrolled", "Enrollment not found");
         }
         dao.updateTotalViewCourse(p);
+
+        try {
+             Lesson l = new Lesson();
+             l = dao.getLessonByCourse(id);
+        System.out.println(l.toString());
+//            System.out.println(l.getLessonID());
+
+        request.setAttribute("l", l.getLessonID());
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+       
+        List<Lesson> listLesson= new ArrayList<>();
+        listLesson = dao.getLessonByCourseId(id);
         
+//        System.out.println(listLesson.size());
+
+        request.setAttribute("sizeL", listLesson.size());
         request.setAttribute("idUser", idUser);
-        
+
         request.setAttribute("p", p);
         request.getRequestDispatcher("courseInfo.jsp").forward(request, response);
     }

@@ -6,6 +6,7 @@ package controller.Course;
 
 import dao.CourseDAO;
 import entity.Course;
+import entity.CourseLessonCount;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -61,7 +62,7 @@ public class LoadAllCourseController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Course> c;
+        List<CourseLessonCount> c;
         CourseDAO cdao = new CourseDAO();
         c = cdao.getAllCourse();
 //        for(Course co: c){

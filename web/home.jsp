@@ -13,14 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Elearning Home</title>
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-              integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-              integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
 
         <link rel="stylesheet" href="./css/main.css" />
         <link rel="stylesheet" href="./css/pages/listblog.css" />
@@ -459,17 +452,17 @@ font-size: calc(1.275rem + 0.3vw);
                                         </div>
                                     </div>
                                     <h4 class="title">
-                                        <a>${p.descriptionCourse}</a>
+                                        <a>${p.title}</a>
                                     </h4>
 
                                     <div class="course-meta">
                                         <span>
                                             <i class="fa-regular fa-clock"></i>
-                                            8h30p
+                                            ${p.duration}
                                         </span>
                                         <span>
                                             <i class="fa-solid fa-book-open"></i>
-                                            10 Lectures
+                                            ${p.lessonCount} Lectures
                                         </span>
                                     </div>
 

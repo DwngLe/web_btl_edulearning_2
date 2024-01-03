@@ -25,6 +25,16 @@ public class Lesson {
         this.Name = Name;
     }
 
+    public Lesson(UUID LessonID, String Name, String VideoURL, String Desctiption, UUID LessonPartID) {
+        this.LessonID = LessonID;
+        this.Name = Name;
+        this.VideoURL = VideoURL;
+        this.Desctiption = Desctiption;
+        this.LessonPartID = LessonPartID;
+    }
+    
+    
+    
     public Lesson(String Name, String VideoURL, String Desctiption, UUID LessonPartID) {
         this.Name = Name;
         this.VideoURL = VideoURL;
