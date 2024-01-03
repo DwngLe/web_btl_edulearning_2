@@ -82,7 +82,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/logout">
                             <span class="material-icons-outlined">logout</span> Đăng xuất
                         </a>
                     </li>

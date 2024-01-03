@@ -93,7 +93,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list-item">
-                        <a href="#" target="_blank">
+                        <a href="/elearning/logout">
                             <span class="material-icons-outlined">logout</span> Đăng xuất
                         </a>
                     </li>
@@ -103,7 +103,7 @@
 
             <!-- Main -->
             <main class="main-container" style="width: 100%">
-                <div class="main-title col">
+                <div class="main-title">
                     <h1>Quản lý khoá học</h1>
                 </div>
                 <button style="height: 50px; padding: 14px 20px; display: flex; align-items: center; gap: 4px;" onclick="window.location.href = '/elearning/admin/course/add'" class="btn btn-primary">

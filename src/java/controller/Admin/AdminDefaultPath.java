@@ -3,10 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.Lesson;
+package controller.Admin;
 
-import dao.LessonDao;
-import entity.Lesson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,17 +12,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.UUID;
 
 /**
  *
  * @author My Asus
  */
-@WebServlet(name="LessonDeleteController", urlPatterns={"/admin/deletelesson"})
-public class LessonDeleteController extends HttpServlet {
+@WebServlet(name="AdminDefaultPath", urlPatterns={"/admin"})
+public class AdminDefaultPath extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +35,10 @@ public class LessonDeleteController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LessonDeleteController</title>");  
+            out.println("<title>Servlet AdminDefaultPath</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LessonDeleteController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AdminDefaultPath at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,20 +55,7 @@ public class LessonDeleteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        UUID id = UUID.fromString(request.getParameter("LessonID"));
-        
-        LessonDao dao = new LessonDao();
-        Lesson lesson = dao.getObject(id);
-        String videoName = lesson.getVideoURL();
-        String uploadPath = getServletContext().getRealPath("").replace("build" + File.separator + "web", "web");
-        String filePath = uploadPath + "assets" + File.separator + "videos";
-        try {
-            Files.delete(Paths.get(filePath, videoName));
-        } catch (Exception e) {
-        }
-            
-        int result = dao.deleteObject(id);
-        response.sendRedirect(request.getHeader("Referer"));
+        processRequest(request, response);
     } 
 
     /** 
@@ -87,7 +68,7 @@ public class LessonDeleteController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        response.sendRedirect("/elearning/admin/managerAcc");
     }
 
     /** 
