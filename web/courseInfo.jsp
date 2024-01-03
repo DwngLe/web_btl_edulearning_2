@@ -12,19 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Chi tiết khóa học</title>
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-              integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-              integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-              integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <link rel="stylesheet" href="./css/main.css" />
 
@@ -32,6 +20,8 @@
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
               integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
     </head>
 
     <style>
@@ -571,14 +561,14 @@ font-size: calc(1.275rem + 0.3vw);
                         <!--<div class="card-display-component">-->
                         <div class="card-display-component-img">
                             <ul class="breadcrumb">
-                                <li><a href="/">Home</a></li>
+                                <li><a href="/">Trang chủ</a></li>
                                 <li>
-                                    <a class="breadcrumb-active" href="/">Courses Details</a>
+                                    <a class="breadcrumb-active" href="/">Chi tiết khóa học</a>
                                 </li>
                             </ul>
                             <h4 class="main-title">
-                                Courses
-                                <span>Details</span>
+                                <span>Chi tiết</span>
+                                Khóa học
                             </h4>
                         </div>
 
@@ -631,15 +621,15 @@ font-size: calc(1.275rem + 0.3vw);
                                 <div class="row">
                                     <div class="col l-4 m-6 c-12">
                                         <button
-                                            class="btn menu-tab btn-primary">Description</button>
+                                            class="btn menu-tab btn-primary">Mô tả</button>
                                     </div>
                                     <div class="col l-4 m-6 c-12">
                                         <button
-                                            class="btn menu-tab btn-outline-primary">Instructors</button>
+                                            class="btn menu-tab btn-outline-primary">Giảng viên</button>
                                     </div>
                                     <div class="col l-4 m-6 c-12">
                                         <button
-                                            class="btn menu-tab btn-outline-primary">Reviews</button>
+                                            class="btn menu-tab btn-outline-primary">Bình luận</button>
 
                                     </div>
                                 </div>
@@ -651,7 +641,7 @@ font-size: calc(1.275rem + 0.3vw);
                                         <div class="tab-description">
                                             <div class="description-wrapper">
                                                 <h3 class="tab-title">
-                                                    Description:
+                                                    Mô tả
                                                 </h3>
                                                 <p> ${p.descriptionCourse}</p>
                                             </div>
@@ -689,7 +679,7 @@ font-size: calc(1.275rem + 0.3vw);
                                         <div class="tab-description">
                                             <div class="description-wrapper">
                                                 <h3 class="tab-title">
-                                                    Intructor
+                                                    Giảng viên
                                                 </h3>
                                             </div>
 
@@ -705,7 +695,7 @@ font-size: calc(1.275rem + 0.3vw);
                                         <div class="tab-description">
                                             <div class="description-wrapper">
                                                 <h3 class="tab-title">
-                                                    Add Reviews
+                                                    Thêm bình luận
                                                 </h3>
 
                                                 <form action="/elearning/addcmt">
@@ -718,13 +708,13 @@ font-size: calc(1.275rem + 0.3vw);
                                                            value="${p.courseID}" />
                                                     <button style="margin-bottom: 20px;"
                                                             class="btn btn-primary"
-                                                            type="submit">Comment</button>
+                                                            type="submit">Bình luận</button>
                                                 </form>
 
 
 
                                                 <h3 class="tab-title">
-                                                    Student Reviews
+                                                    Bình luận
                                                 </h3>
 
                                                 <c:forEach var="m" items="${cmtList}">
@@ -769,7 +759,7 @@ font-size: calc(1.275rem + 0.3vw);
                                     <div>
 
                                         <i class="fa-solid fa-chalkboard-user"></i>
-                                        Instructor
+                                        Giảng viên
                                     </div>
                                     <span> ${p.teacherName}</span>
                                 </li>
@@ -777,7 +767,7 @@ font-size: calc(1.275rem + 0.3vw);
                                     <div>
 
                                         <i class="fa-regular fa-clock"></i>
-                                        Duration
+                                        Thời lượng
                                     </div>
                                     <span>${p.duration}</span>
                                 </li>
@@ -785,15 +775,15 @@ font-size: calc(1.275rem + 0.3vw);
                                     <div>
 
                                         <i class="fa-solid fa-book-open"></i>
-                                        Lectures
+                                        Số lượng bài học
                                     </div>
-                                    <span>20</span>
+                                    <span>${i}</span>
                                 </li>
                                 <li>
                                     <div>
 
                                         <i class="fa-solid fa-laptop-code"></i>
-                                        Level
+                                        Cấp độ
                                     </div>
                                     <span>${p.levelCourse}</span>
                                 </li>
@@ -801,7 +791,7 @@ font-size: calc(1.275rem + 0.3vw);
                                     <div>
 
                                         <i class="fa-solid fa-language"></i>
-                                        Language
+                                        Ngôn ngữ
                                     </div>
                                     <span> ${p.languageCourse}</span>
 
@@ -820,17 +810,14 @@ font-size: calc(1.275rem + 0.3vw);
                                         <c:when test="${money eq 'Nạp tiền đi con gà'}">
                                             <button class="btn btn-primary btn-error">
                                                 <a style="color: #fff;" href="#">
-                                                    Enroll Now
+                                                    Tham gia ngay
                                                 </a>
                                             </button>
                                         </c:when>
                                         <c:otherwise>
-                                            <button class="btn btn-primary">
-                                                <a style="color: #fff;"
-                                                   href="/elearning/addenrolled?id=${p.courseID}">
+                                            <button onclick="window.location.href = '/elearning/addenrolled?id=${p.courseID}'" class="btn btn-primary">
 
-                                                    Enroll Now
-                                                </a>
+                                                Tham gia ngay
                                             </button>
                                         </c:otherwise>
                                     </c:choose>
@@ -840,13 +827,8 @@ font-size: calc(1.275rem + 0.3vw);
 
                                 </c:if>
                                 <c:if test="${enrolled ne 'Enrollment not found'}">
-                                    <button class="btn btn-primary">
-
-                                        <a style="color: #fff;"
-                                           href="/elearning/lesson?LessonID=4ca2159d-8ec9-4fb4-ae7a-b601bf64ae7d&CourseID=${p.courseID}">
-
-                                            Lesson
-                                        </a>
+                                    <button onclick="window.location.href='/elearning/lesson?LessonID=${l}&CourseID=${p.courseID}'"  class="btn btn-primary" >
+                                        Bài học
                                     </button>
                                 </c:if>
                             </div>
@@ -855,14 +837,12 @@ font-size: calc(1.275rem + 0.3vw);
 
                         <c:if test="${ empty idUser}">
                             <div class='info-btn'>
-                                <%-- Kiểm tra enrolled có phải là "Enrollment not found" hay không
-                                --%>
-
+                                
                                 <button disabled="" class="btn btn-primary">
                                     <a style="color: #fff;"
                                        >
 
-                                        Enroll Now
+                                        Tham gia ngay
                                     </a>
                                 </button>
 
@@ -877,7 +857,7 @@ font-size: calc(1.275rem + 0.3vw);
                     </div>
 
                     <div style="margin-top:50px" class="sidebar-widget">
-                        <h4 class="widget-title">Share course: </h4>
+                        <h4 class="widget-title">Chia sẻ khóa học: </h4>
 
 
                         <ul class="social">
@@ -1023,7 +1003,7 @@ font-size: calc(1.275rem + 0.3vw);
     <div class="toast" id="toast-error">
         <i class="error-icon fa-solid fa-circle-exclamation"></i>
         <div class="toast-message">
-            <span class="toast-title text-error">Lỗi!</span> Nạp tiền đi con gà
+            <span class="toast-title text-error">Lỗi!</span> Số dư không đủ, vui lòng nạp thêm !!!
         </div>
         <i class="close-icon fa-solid fa-xmark"></i>
     </div>
@@ -1038,9 +1018,6 @@ font-size: calc(1.275rem + 0.3vw);
    
         });
     </script>
-
-
-
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
