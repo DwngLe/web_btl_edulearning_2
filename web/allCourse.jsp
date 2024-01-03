@@ -432,11 +432,11 @@
                                     <div class="course-meta">
                                         <span>
                                             <i class="fa-regular fa-clock"></i>
-                                            8h30p
+                                            ${p.duration}
                                         </span>
                                         <span>
                                             <i class="fa-solid fa-book-open"></i>
-                                            10 Lectures
+                                            ${p.lessonCount} Lectures
                                         </span>
                                     </div>
 
