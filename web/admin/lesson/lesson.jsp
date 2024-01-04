@@ -22,39 +22,122 @@
         <link rel="stylesheet" href="../css/pages/lesson-admin.css" />
     </head>
     <body>
-        <div class="grid wide">
-            <h1 class="title">Danh sách bài học</h1>
-            <c:forEach var="lessonPart" items="${ListLessonPart}" varStatus="loop">
-                <div class="lesson-part-container">
-                    <form class="lesson-part" action="updatelessonpart" method="POST">
-                        <input class="input" name="lessonTitle" value="${lessonPart.getTitle()}">
-                        <input name="lessonPartID" type="hidden" value="${lessonPart.getLessonPartID()}">
-                        <button class="btn btn-primary" type="submit">Sửa</button>
-                        <a class="text-error" href="deletelessonpart?LessonPartID=${lessonPart.getLessonPartID()}">Xóa</a>
-                    </form>
+        <div class="grid-container">
+            <!-- Header -->
+            <header class="admin-header" style="padding: 30px">
+                <div class="menu-icon" onclick="openSidebar()">
+                    <span class="material-icons-outlined">menu</span>
+                </div>
+                <div class="header-left">
+                    <span class="material-icons-outlined">search</span>
+                </div>
+                <div class="header-right">
+                    <span class="material-icons-outlined">notifications</span>
+                    <span class="material-icons-outlined">email</span>
+                    <span class="material-icons-outlined">account_circle</span>
+                </div>
+            </header>
+            <!-- End Header -->
 
-                    <ul class="lesson-list">
-                        <c:forEach var="lesson" items="${lessonPart.getListLesson()}" varStatus="loop">
-                            <li>
-                                ${lesson.getName()}
-                                <br>
-                                <a href="updatelesson?LessonID=${lesson.getLessonID()}&CourseID=${CourseID}">Sửa</a>
-                                <a class="text-error" href="deletelesson?LessonID=${lesson.getLessonID()}">Xóa</a>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                    <button onclick="window.location.href = 'addlesson?LessonPartID=${lessonPart.getLessonPartID()}&CourseID=${CourseID}'" class="btn btn-secondary">Thêm bài học</button>
+            <!-- Sidebar -->
+            <aside id="sidebar">
+                <div class="sidebar-title">
+                    <div class="sidebar-brand">
+                        <img src="../assets/logo-icon.png" alt="" />
+                    </div>
+                    <span class="material-icons-outlined" onclick="closeSidebar()"
+                          >close</span
+                    >
                 </div>
-            </c:forEach>
-            <hr>    
-            <h2 class="text-center">Thêm chương học</h2>
-            <form action="/elearning/admin/lesson" method="POST">
-                <div class="lesson-part">
-                    <input class="input input-fullwidth" name="newLessonPart" />
-                    <button class="btn btn-primary" type="submit">Thêm</button>
+
+                <ul class="sidebar-list">
+                    <li class="sidebar-list-item" style="background-color: whitesmoke">
+                        <a href="#" target="_blank">
+                            <span class="material-icons-outlined">groups</span><span style="color: black">Học viên</span>
+                        </a>
+                    </li>   
+                    <li class="sidebar-list-item">
+                        <a href="/elearning/admin/course/">
+                            <span class="material-icons-outlined">library_books</span> Khoá
+                            học
+                        </a>
+                    </li>
+
+                    <li class="sidebar-list-item">
+                        <a href="/elearning/admin/blog">
+                            <span class="material-icons-outlined">newspaper</span> Blog
+                        </a>
+                    </li>
+
+                    <li class="sidebar-list-item">
+                        <a href="#" target="_blank">
+                            <span class="material-icons-outlined">visibility</span>
+                            Lượt truy cập
+                        </a>
+                    </li>
+                    <li class="sidebar-list-item">
+                        <a href="#" target="_blank">
+                            <span class="material-icons-outlined">payments</span> Doanh thu
+                        </a>
+                    </li>
+                    <li class="sidebar-list-item">
+                        <a href="#" target="_blank">
+                            <span class="material-icons-outlined">mail</span> Tin nhắn
+                        </a>
+                    </li>
+                    <li class="sidebar-list-item">
+                        <a href="/elearning/logout">
+                            <span class="material-icons-outlined">logout</span> Đăng xuất
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+            <!-- End Sidebar -->
+
+            <!-- Main -->
+            <main class="main-container" style="width: 100%">
+                <div class="main-title">
+                    <h1>Danh sách bài học</h1>
                 </div>
-                <input name="CourseID" type="hidden" value="${CourseID}">
-            </form>
+                <c:forEach var="lessonPart" items="${ListLessonPart}" varStatus="loop">
+                    <div class="lesson-part-container">
+                        <form class="lesson-part" action="updatelessonpart" method="POST">
+                            <input class="input" name="lessonTitle" value="${lessonPart.getTitle()}">
+                            <input name="lessonPartID" type="hidden" value="${lessonPart.getLessonPartID()}">
+                            <button class="btn btn-primary" type="submit">Sửa</button>
+                            <a class="text-error" href="deletelessonpart?LessonPartID=${lessonPart.getLessonPartID()}">Xóa</a>
+                        </form>
+
+                        <ul class="lesson-list">
+                            <c:forEach var="lesson" items="${lessonPart.getListLesson()}" varStatus="loop">
+                                <li>
+                                    ${lesson.getName()}
+                                    <br>
+                                    <a href="updatelesson?LessonID=${lesson.getLessonID()}&CourseID=${CourseID}">Sửa</a>
+                                    <a class="text-error" href="deletelesson?LessonID=${lesson.getLessonID()}">Xóa</a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                        <button onclick="window.location.href = 'addlesson?LessonPartID=${lessonPart.getLessonPartID()}&CourseID=${CourseID}'" class="btn btn-secondary">Thêm bài học</button>
+                    </div>
+                </c:forEach>
+                <hr>    
+                <h2 class="text-center">Thêm chương học</h2>
+                <form action="/elearning/admin/lesson" method="POST">
+                    <div class="lesson-part">
+                        <input class="input input-fullwidth" name="newLessonPart" />
+                        <button class="btn btn-primary" type="submit">Thêm</button>
+                    </div>
+                    <input name="CourseID" type="hidden" value="${CourseID}">
+                </form>
+            </main>
+            <!-- End Main -->
         </div>
+
+        <!-- Scripts -->
+
+        <!-- Custom JS -->
+
+        <script src="../js/admin.js"></script>
     </body>
 </html>

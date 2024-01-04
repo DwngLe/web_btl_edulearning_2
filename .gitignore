@@ -13,7 +13,8 @@ hs_err_pid*
 
 # netbeans
 nbproject/private/
-build/
+build/*
+!build/web/META-INF/web.xml
 nbbuild/
 nbproject/build-impl.xml
 

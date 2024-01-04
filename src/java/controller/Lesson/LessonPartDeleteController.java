@@ -72,7 +72,11 @@ public class LessonPartDeleteController extends HttpServlet {
             String videoName = listLeson.get(i).getVideoURL();
             String uploadPath = getServletContext().getRealPath("").replace("build" + File.separator + "web", "web");
             String filePath = uploadPath + "assets" + File.separator + "videos";
-            Files.delete(Paths.get(filePath, videoName));
+            try {
+                Files.delete(Paths.get(filePath, videoName));
+            } catch (Exception e) {
+            }
+            
         }
         int result = dao.deleteObject(id);
         response.sendRedirect(request.getHeader("Referer"));

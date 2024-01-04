@@ -1,5 +1,6 @@
 
 import dao.CourseDAO;
+import entity.Lesson;
 import java.util.ArrayList;
 import java.util.List;
 import stat.CourseStat;
@@ -15,8 +16,8 @@ import stat.CourseStat;
  */
 public class Test {
     public static void main(String[] args) {
-        List<CourseStat> courStat = new ArrayList<>();
-        CourseDAO cdao = new CourseDAO();
-        courStat = cdao.getStatOfCourse();
+        CourseDAO c = new CourseDAO();
+        Lesson l = c.getLessonByCourse("185f84ed-4563-51a0-cac7-6c0aeb6ec302");
+        System.out.println(l);
     }
 }

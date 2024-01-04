@@ -104,7 +104,7 @@
 
             <!-- Main -->
             <main class="main-container" style="width: 100%">
-                <div class="main-title col">
+                <div class="main-title">
                     <h1>Danh sách các học viên của khoá học là</h1>
                 </div>
                 <c:if test = "${empty listEnroll or listEnroll.size() eq 0}">

@@ -12,15 +12,8 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Elearning Home</title>
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-              integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-              integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>Trang chủ</title>
+        
 
         <link rel="stylesheet" href="./css/main.css" />
         <link rel="stylesheet" href="./css/pages/listblog.css" />
@@ -356,16 +349,13 @@ font-size: calc(1.275rem + 0.3vw);
             <div class="grid container wide">
                 <div class="row">
                     <div class="col l-6 c-12">
-                        <span class="sub-title">Start your favourite course</span>
-                        <h2 class="main-title">Now learning from anywhere, and build your
-                            <span style="color:#309255">bright career.</span>
+                        <span class="sub-title">Bắt đầu khóa học yêu thích của bạn</span>
+                        <h2 class="main-title">Học ở bất kỳ đâu, xây dựng sự nghiệp
+                            <span style="color:#309255">của bạn.</span>
                         </h2>
-                        <p>It has survived not only five centuries but also the leap into
-                            electronic typesetting.</p>
                         <div class="row">
                             <div class="col l-6">
-                                <button class="btn btn-primary">Start A Course</button>
-
+                                <button class="btn btn-primary">Bắt đầu khóa học</button>
                             </div>
                         </div>
                     </div>
@@ -386,16 +376,15 @@ font-size: calc(1.275rem + 0.3vw);
                 <div class="col l-6 c-12">
                     <div class="section-title">
                         <h2>
-                            All
-                            <span>Courses</span>
-                            Of Edule
+                            Tất cả
+                            <span>khóa học</span>
                         </h2>
                     </div>
                 </div>
                 <div class="col l-6 c-12">
 
                     <form class="input-container" action="home-search" method="POST">
-                        <input class="input" placeholder="Search here" type="text" name="s-query" id="s-query"/>
+                        <input class="input" placeholder="Tìm kiếm" type="text" name="s-query" id="s-query"/>
                         <button class="btn input-ic btn-icon" type="submit">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -409,21 +398,21 @@ font-size: calc(1.275rem + 0.3vw);
 
                     <div class="row">
                         <div class="col l-2-4 m-4 c-6">
-                            <button class="btn btn-primary">UI/UX Design</button>
+                            <button class="btn btn-primary">Thiết kế UI/UX</button>
                         </div>
                         <div class="col l-2-4 m-4 c-6">
-                            <button class="btn btn-outline-primary">Development</button>
+                            <button class="btn btn-outline-primary">Phát triển</button>
 
                         </div>
                         <div class="col l-2-4 m-4 c-6">
-                            <button class="btn btn-outline-primary">Data Science</button>
+                            <button class="btn btn-outline-primary">Khoa học</button>
 
                         </div>
                         <div class="col l-2-4 m-4 c-6">
-                            <button class="btn btn-outline-primary">Business</button>
+                            <button class="btn btn-outline-primary">Kinh doanh</button>
                         </div>
                         <div class="col l-2-4 m-4 c-6">
-                            <button class="btn btn-outline-primary">Financial</button>
+                            <button class="btn btn-outline-primary">Kinh tế</button>
                         </div>
                     </div>
                 </div>
@@ -459,17 +448,17 @@ font-size: calc(1.275rem + 0.3vw);
                                         </div>
                                     </div>
                                     <h4 class="title">
-                                        <a>${p.descriptionCourse}</a>
+                                        <a>${p.title}</a>
                                     </h4>
 
                                     <div class="course-meta">
                                         <span>
                                             <i class="fa-regular fa-clock"></i>
-                                            8h30p
+                                            ${p.duration}
                                         </span>
                                         <span>
                                             <i class="fa-solid fa-book-open"></i>
-                                            10 Lectures
+                                            ${p.lessonCount} Lectures
                                         </span>
                                     </div>
 

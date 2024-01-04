@@ -13,6 +13,7 @@ import entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,9 +59,11 @@ public class CourseCommentDAO {
             }
 
             return list;
-            
+
         } catch (Exception e) {
             System.out.println(e);
+        } finally {
+            closeResources();
         }
         return null;
     }
@@ -80,10 +83,12 @@ public class CourseCommentDAO {
             ps.setString(5, s.getCourse().getCourseID());
 
             ps.executeUpdate();
-            conn.close();
+
         } catch (Exception e) {
             System.out.println(e);
 
+        } finally {
+            closeResources();
         }
     }
 
@@ -95,10 +100,12 @@ public class CourseCommentDAO {
             ps = conn.prepareStatement(sqlString);
             ps.setString(1, courseID);
             ps.executeUpdate();
-            conn.close();
+
         } catch (Exception e) {
             System.out.println(e);
 
+        } finally {
+            closeResources();
         }
     }
 
@@ -128,11 +135,29 @@ public class CourseCommentDAO {
 
                 listComment.add(courseComment);
             }
-            conn.close();
+
             System.out.println("Do dai danh sach cac comment cua user trong cac khoa hoc la: " + listComment.size());
         } catch (Exception e) {
+        } finally {
+            closeResources();
         }
         return listComment;
+    }
+
+    private void closeResources() {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }
