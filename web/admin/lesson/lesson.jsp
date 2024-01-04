@@ -13,6 +13,11 @@
         <title>Quản lý bài học</title>
         <link rel="stylesheet" href="../css/main.css" />
         <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+            rel="stylesheet"
+            />
+
+        <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
@@ -105,7 +110,7 @@
                             <input class="input" name="lessonTitle" value="${lessonPart.getTitle()}">
                             <input name="lessonPartID" type="hidden" value="${lessonPart.getLessonPartID()}">
                             <button class="btn btn-primary" type="submit">Sửa</button>
-                            <a class="text-error" href="deletelessonpart?LessonPartID=${lessonPart.getLessonPartID()}">Xóa</a>
+                            <a class="text-error" href='deletelessonpart?LessonPartID=${lessonPart.getLessonPartID()}'">Xóa</a>
                         </form>
 
                         <ul class="lesson-list">

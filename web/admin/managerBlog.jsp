@@ -14,6 +14,13 @@
 
         <!-- Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+            />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="../css/main.css" />
@@ -91,7 +98,7 @@
             <!-- End Sidebar -->
 
             <main class="main-container" style="width: 100%">
-                <div class="main-title col">
+                <div class="main-title ">
                     <h1>Quản lý Blog</h1>
 
                 </div>
@@ -100,7 +107,9 @@
                     <div class="btnContainer">
                         <div class="btnL">
                             <form action="/elearning/admin/blog/add" method="get">
-                                <button class="btn-backgound" type="submit">Thêm blog</button>
+                                <button class="btn-backgound" type="submit">
+                                    <i class="fa-solid fa-circle-plus"></i>
+                                    Thêm blog</button>
                             </form>
                         </div>
                     </div>
@@ -111,9 +120,14 @@
                             <p>Số lượng bài viết: ${listBlog.size()}</p>
                         </div>
                         <div class="btnContainer">
-                            <div class="btnL">
+                            <div class="">
                                 <form action="/elearning/admin/blog/add" method="get">
-                                    <button class="btn-backgound" type="submit">Thêm blog</button>
+                                    <button style="height: 50px; padding: 14px 20px; display: flex; align-items: center; gap: 4px;"  class="btn btn-primary">
+                                        <i class="fa-solid fa-circle-plus"></i>
+                                        <span>
+                                            Thêm blog
+                                        </span>
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -121,7 +135,7 @@
                     </div>
                     <table style="width: 100%;">
                         <tr>
-                            <th>Số thứ tự</th>
+                            <th>STT</th>
                             <th>Tiêu đề</th>
                             <th>Ngày khởi tạo</th>
                             <th>Ngày cập nhật</th>
@@ -138,25 +152,37 @@
                                 <td>${blog.totalView}</td>
                                 <td class="btn_flex">
                                     <div class="btnContainer">
-                                        <div class="btnL btn-delete">
+                                        <div class="">
+                                            <form action="/elearning/admin/blog/update" method="get">
+                                                <input type="hidden" name="blogID"
+                                                       value="${blog.getBlogID()}" />
+                                                <button class="btn btn-primary" type ="submit">
+                                                    <span style="display: flex; align-items: center; gap: 4px;">
+                                                        <i class="fa-solid fa-sliders"></i>
+
+                                                        Sửa
+                                                    </span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="btnContainer">
+                                        <div class="">
                                             <form action="/elearning/admin/blog/delete" method="post">
                                                 <input type="hidden" name="blogID"
                                                        value="${blog.getBlogID()}" />
-                                                <button class="btn-backgound" type="submit">Xóa Blog</button>
+                                                <button class="btn btn-destructive" type ="submit">
+                                                    <span style="display: flex; align-items: center; gap: 4px;">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                        Xóa
+                                                    </span>
+                                                </button>
                                             </form>
                                         </div>
                                     </div>
 
-                                    <div class="btnContainer">
-                                        <div class="btnL">
-                                            <form action="/elearning/admin/blog/update" method="get">
-                                                <input type="hidden" name="blogID"
-                                                       value="${blog.getBlogID()}" />
-                                                <button class="btn-backgound" type="submit">Cập nhật
-                                                    Blog</button>
-                                            </form>
-                                        </div>
-                                    </div>
+                                    
                                 </td>
                             </tr>
 
@@ -167,7 +193,7 @@
                 </c:if>
             </main>
         </div>
-      
+
     </body>
 
 </html>

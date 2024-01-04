@@ -105,7 +105,7 @@
             <!-- Main -->
             <main class="main-container" style="width: 100%">
                 <div class="main-title">
-                    <h1>Danh sách các học viên của khoá học là</h1>
+                    <h1>Danh sách các học viên của khoá học</h1>
                 </div>
                 <c:if test = "${empty listEnroll or listEnroll.size() eq 0}">
                     <p>Khoá học chưa có sinh viên nào đăng ký</p>
@@ -113,7 +113,7 @@
                 <c:if test = "${not empty listEnroll or listEnroll.size() gt 0}">
                     <table style="width: 100%" >
                         <tr>
-                            <th>Số thứ tự</th>
+                            <th>STT</th>
                             <th>Tên tài khoản</th>
                             <th>Họ và tên</th>
                             <th>Email</th>

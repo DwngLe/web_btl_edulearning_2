@@ -53,3 +53,30 @@ window.onload = () => {
     closeSomething(closeModalBtns, ".overlay")
     closeSomething(toasts, ".toast")
 }
+
+
+// Function to retrieve the value of a specific cookie by name
+// Lấy tất cả các cookie
+var allCookies = document.cookie;
+
+// Chuyển đổi chuỗi cookie thành một mảng các cặp tên giá trị
+var cookiesArray = allCookies.split(";");
+
+console.log(allCookies);
+console.log(cookiesArray);
+// Tìm cookie có tên là "JSESSIONID"
+var jsessionIdCookie;
+for (var i = 0; i < cookiesArray.length; i++) {
+    var cookie = cookiesArray[i].trim();
+    if (cookie.startsWith("JSESSIONID=")) {
+        jsessionIdCookie = cookie;
+        break;
+    }
+}
+
+// Hiển thị giá trị của cookie "JSESSIONID"
+if (jsessionIdCookie) {
+    console.log("Giá trị của cookie JSESSIONID là: " + jsessionIdCookie.split("=")[1]);
+} else {
+    console.log("Không tìm thấy cookie JSESSIONID.");
+}

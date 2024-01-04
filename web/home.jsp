@@ -13,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Trang chủ</title>
-        
+
 
         <link rel="stylesheet" href="./css/main.css" />
         <link rel="stylesheet" href="./css/pages/listblog.css" />
@@ -76,7 +76,7 @@ align-items: center;*/
             width: 100%;
         }
 
-        .btn {
+        .btn-small {
             width: 100%;
             font-size: 13px;
         }
@@ -316,7 +316,7 @@ font-size: calc(1.275rem + 0.3vw);
         .read-more:hover {
             color: green;
         }
-        
+
         .title-blog{
             height: 40px;
             font-size: 20px;
@@ -335,11 +335,18 @@ font-size: calc(1.275rem + 0.3vw);
                     <a href="/elearning/listblog">Blog</a>
                     <a href="/elearning/contact.html">Liên hệ</a>
                 </nav>
+
+
+
                 <div class="login-nav">
                     <a href="/elearning/user">
                         <img class="avatar" src="./assets/icon/user.png" alt="image" />
                     </a>
                 </div>
+
+
+
+
                 <i class="menu-btn fa-solid fa-bars" onclick="openOverlay('header-mobile')"></i>
             </div>
         </header>
@@ -398,21 +405,21 @@ font-size: calc(1.275rem + 0.3vw);
 
                     <div class="row">
                         <div class="col l-2-4 m-4 c-6">
-                            <button class="btn btn-primary">Thiết kế UI/UX</button>
+                            <button class="btn btn-small btn-primary">Thiết kế UI/UX</button>
                         </div>
                         <div class="col l-2-4 m-4 c-6">
-                            <button class="btn btn-outline-primary">Phát triển</button>
+                            <button class="btn btn-small btn-outline-primary">Phát triển</button>
 
                         </div>
                         <div class="col l-2-4 m-4 c-6">
-                            <button class="btn btn-outline-primary">Khoa học</button>
+                            <button class="btn btn-small btn-outline-primary">Khoa học</button>
 
                         </div>
                         <div class="col l-2-4 m-4 c-6">
-                            <button class="btn btn-outline-primary">Kinh doanh</button>
+                            <button class="btn btn-small btn-outline-primary">Kinh doanh</button>
                         </div>
                         <div class="col l-2-4 m-4 c-6">
-                            <button class="btn btn-outline-primary">Kinh tế</button>
+                            <button class="btn btn-small btn-outline-primary">Kinh tế</button>
                         </div>
                     </div>
                 </div>

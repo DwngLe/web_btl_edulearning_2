@@ -109,30 +109,37 @@
                 <form action="/elearning/admin/course/add" method="post" style="width: 100%;" >
                     <div class='row'  >
                         <div class="col l-6 c-12" style="width: 100%">
-                            <input name="title" class="input input-fullwidth" placeholder="Title" type="text" />
+                            <label>Tiêu đề</label>
+                            <input name="title" placeholder="Tiêu đề" class="input input-fullwidth" type="text" />
                         </div>
                         <div class="col l-6 c-12">
-                            <input name="level" class="input input-fullwidth" placeholder="Level" type="text" />
-                        </div>
-
-                        <div class="col l-6 c-12">
-                            <input name="language" class="input input-fullwidth" placeholder="Language" type="text" />
-                        </div>
-                        <div class="col l-6 c-12">
-                            <input name="duration" class="input input-fullwidth" placeholder="Duration" type="text" />
+                            <label>Cấp độ</label>
+                            <input name="level" class="input input-fullwidth" placeholder="Dễ" type="text" />
                         </div>
 
                         <div class="col l-6 c-12">
-                            <input name="price" class="input input-fullwidth" placeholder="Price" type="text" />
+                            <label>Ngôn ngữ</label>
+                            <input name="language" class="input input-fullwidth" placeholder="Tiếng Việt" type="text" />
                         </div>
                         <div class="col l-6 c-12">
-                            <input name="imgurl" class="input input-fullwidth" placeholder="Url image" type="text" />
+                            <label>Thời lượng</label>
+                            <input name="duration" class="input input-fullwidth" placeholder="1:00" type="text" />
+                        </div>
+
+                        <div class="col l-6 c-12">
+                            <label>Giá cả</label>
+                            <input name="price" class="input input-fullwidth" placeholder="1000 vnd" type="text" />
+                        </div>
+                        <div class="col l-6 c-12">
+                            <label>Link ảnh</label>
+                            <input name="imgurl" class="input input-fullwidth" placeholder="https://img" type="text" />
                         </div>
                         <div class="col c-12">
-                            <textarea name="description" class="textarea input-fullwidth" placeholder="Description" type="text"></textarea>
+                            <label>Nội dung</label>
+                            <textarea name="description" class="textarea input-fullwidth" placeholder="" type="text"></textarea>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="btn" style="margin-top: 40px">Submit</button>
+                    <button type="submit" class="btn btn-primary" id="btn" style="margin-top: 40px">Lưu</button>
                 </form>
         </div>
 

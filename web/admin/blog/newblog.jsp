@@ -89,7 +89,7 @@
                 </ul>
             </aside>
             <!-- End Sidebar -->
-            <main class="main-container " style="width: 100%; margin-left: 200px;">
+            <main class="main-container " style="width: 100%;">
                 <div class="main-title">
                     <h1>Thêm Blog</h1>
                 </div>
@@ -110,7 +110,7 @@
                                 </div>
 
                                 <div>
-                                    <div class="single-form text-center">
+                                    <div class="single-form">
                                         <button class="btn btn-primary" type="submit">Tạo</button>
                                     </div>
                                 </div>

@@ -41,7 +41,7 @@
             <aside id="sidebar">
                 <div class="sidebar-title">
                     <div class="sidebar-brand">
-                        <img src="../assets/logo-icon.png" alt="" />
+                        <img src="../../assets/logo-icon.png" alt="" />
                     </div>
                     <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
                 </div>
@@ -90,7 +90,7 @@
             </aside>
             <!-- End Sidebar -->
 
-        <main class="main-container " style="width: 100%; margin-left: 200px;">
+        <main class="main-container " style="width: 100%;">
             <div class="main-title">
                 <h1>Sửa Blog</h1>
             </div>
@@ -101,7 +101,7 @@
                     <input type="hidden" name="createdDate" value="${b.getCreatedDate()}" />
                     <input type="hidden" name="totalView" value="${b.getTotalView()}" />
                     <div class="row">
-                        <div class="col l-8">
+                        <div class="col c-12">
                             <div class="single-form">
                                 <label>Tiêu đề</label>
                                 <input class="input input-fullwidth" name="title" value="${b.getTitle()}"/>
@@ -114,7 +114,7 @@
                             </div>
 
                             <div>
-                                <div class="single-form text-center">
+                                <div class="single-form">
                                     <button class="btn btn-primary" type="submit">Cập nhật</button>
                                 </div>
                             </div>

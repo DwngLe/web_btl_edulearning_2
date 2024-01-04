@@ -63,6 +63,8 @@ public class LessonPartDeleteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+                System.out.println("succes");
+
         UUID id = UUID.fromString(request.getParameter("LessonPartID"));
         LessonPartDao dao = new LessonPartDao();
         LessonPart lessonPart = dao.getObject(id);
@@ -78,6 +80,7 @@ public class LessonPartDeleteController extends HttpServlet {
             }
             
         }
+        
         int result = dao.deleteObject(id);
         response.sendRedirect(request.getHeader("Referer"));
     } 

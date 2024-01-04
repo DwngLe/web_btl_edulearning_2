@@ -55,9 +55,11 @@ public class UserLoginController extends HttpServlet {
             session.setAttribute("id", id);
             session.setAttribute("role", role);
         
+            request.setAttribute("idUser", id);
+            
             if (role.equals("GUEST")) {
-  
                 response.sendRedirect("home");
+//                request.getRequestDispatcher("home.jsp").forward(request, response);
             }
             if(role.equals("ADMIN")){
                 response.sendRedirect("admin/managerAcc");
